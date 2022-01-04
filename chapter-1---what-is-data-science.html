@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 1 - What is data science? | INFO 6270 - Introduction to Data Science</title>
+  <meta name="description" content="Chapter 1 - What is data science? | INFO 6270 - Introduction to Data Science" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 1 - What is data science? | INFO 6270 - Introduction to Data Science" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="pmongeon/info6270" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 1 - What is data science? | INFO 6270 - Introduction to Data Science" />
+  
+  
+  
+
+<meta name="author" content="Philippe Mongeon" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="chapter-2---getting-started-with-r.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><center>INFO6270 - Introduction to Data Science</center></li>
+<li><center>Winter 2022</center></li>
+<li><center>Philippe Mongeon</center></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Course overview</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#schedule"><i class="fa fa-check"></i>Schedule</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#assignments"><i class="fa fa-check"></i>Assignments</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#bibliography"><i class="fa fa-check"></i>Bibliography</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#official-syllabus"><i class="fa fa-check"></i>Official syllabus</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-1---what-is-data-science.html"><a href="chapter-1---what-is-data-science.html"><i class="fa fa-check"></i>Chapter 1 - What is data science?</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-1---what-is-data-science.html"><a href="chapter-1---what-is-data-science.html#learning-objectives"><i class="fa fa-check"></i>Learning objectives</a></li>
+<li class="chapter" data-level="" data-path="chapter-1---what-is-data-science.html"><a href="chapter-1---what-is-data-science.html#what-is-data-science"><i class="fa fa-check"></i>What is data science?</a></li>
+<li class="chapter" data-level="" data-path="chapter-1---what-is-data-science.html"><a href="chapter-1---what-is-data-science.html#the-data-science-process"><i class="fa fa-check"></i>The data science process</a></li>
+<li class="chapter" data-level="" data-path="chapter-1---what-is-data-science.html"><a href="chapter-1---what-is-data-science.html#writing-a-problem-statement"><i class="fa fa-check"></i>Writing a problem statement</a></li>
+<li class="chapter" data-level="" data-path="chapter-1---what-is-data-science.html"><a href="chapter-1---what-is-data-science.html#getting-data"><i class="fa fa-check"></i>Getting data</a></li>
+<li class="chapter" data-level="" data-path="chapter-1---what-is-data-science.html"><a href="chapter-1---what-is-data-science.html#homework"><i class="fa fa-check"></i>Homework</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html"><i class="fa fa-check"></i>Chapter 2 - Getting started with R</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#learning-objectives-1"><i class="fa fa-check"></i>Learning objectives</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#setting-up-r"><i class="fa fa-check"></i>Setting up R</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#installing-r-and-rstudio"><i class="fa fa-check"></i>Installing R and Rstudio</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#explore-rstudio"><i class="fa fa-check"></i>Explore RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#first-steps-in-r"><i class="fa fa-check"></i>First steps in R</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#r-scripts"><i class="fa fa-check"></i>R scripts</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#working-directory"><i class="fa fa-check"></i>Working directory</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#functions"><i class="fa fa-check"></i>Functions</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#executing-code"><i class="fa fa-check"></i>Executing code</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#numbers-and-strings"><i class="fa fa-check"></i>numbers and strings</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#doing-the-math"><i class="fa fa-check"></i>Doing the math</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#objects"><i class="fa fa-check"></i>Objects</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#subsetting-data"><i class="fa fa-check"></i>Subsetting data</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#logical-operators"><i class="fa fa-check"></i>Logical operators</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#conditional-statements"><i class="fa fa-check"></i>Conditional statements</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#loops-and-vectorization"><i class="fa fa-check"></i>Loops and vectorization</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#homework-1"><i class="fa fa-check"></i>Homework</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html"><i class="fa fa-check"></i>Chapter 3 - Reading and tidying data</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html"><i class="fa fa-check"></i>Chapter 4 - Working with strings</a></li>
+<li class="chapter" data-level="" data-path="chapter-5---describing-and-visualizing-data.html"><a href="chapter-5---describing-and-visualizing-data.html"><i class="fa fa-check"></i>Chapter 5 - Describing and visualizing data</a></li>
+<li class="chapter" data-level="" data-path="chapter-6---network-analysis.html"><a href="chapter-6---network-analysis.html"><i class="fa fa-check"></i>Chapter 6 - Network analysis</a></li>
+<li class="chapter" data-level="" data-path="chapter-7---topic-modelling.html"><a href="chapter-7---topic-modelling.html"><i class="fa fa-check"></i>Chapter 7 - Topic modelling</a></li>
+<li class="chapter" data-level="" data-path="chapter-8---k-nearest-neighbors.html"><a href="chapter-8---k-nearest-neighbors.html"><i class="fa fa-check"></i>Chapter 8 - K nearest neighbors</a></li>
+<li class="chapter" data-level="" data-path="chapter-9---logistic-regression.html"><a href="chapter-9---logistic-regression.html"><i class="fa fa-check"></i>Chapter 9 - Logistic regression</a></li>
+<li class="chapter" data-level="" data-path="chapter-10---linear-regression.html"><a href="chapter-10---linear-regression.html"><i class="fa fa-check"></i>Chapter 10 - Linear regression</a></li>
+<li class="chapter" data-level="" data-path="chapter-11---principal-component-analysis.html"><a href="chapter-11---principal-component-analysis.html"><i class="fa fa-check"></i>Chapter 11 - Principal component analysis</a></li>
+<li class="chapter" data-level="" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i>Conclusion</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">INFO 6270 - Introduction to Data Science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="chapter-1---what-is-data-science" class="section level1 unnumbered">
+<h1>Chapter 1 - What is data science?</h1>
+<div id="learning-objectives" class="section level2 unnumbered">
+<h2>Learning objectives</h2>
+<ul>
+<li>What is data science?</li>
+<li>How to draft a problem statement?</li>
+<li>Where to find data?</li>
+</ul>
+</div>
+<div id="what-is-data-science" class="section level2 unnumbered">
+<h2>What is data science?</h2>
+<p>According to a short perspective paper by <span class="citation">(<a href="#ref-blei2017" role="doc-biblioref"><strong>blei2017?</strong></a>)</span>, which I recommend reading, data science:</p>
+<blockquote>
+<p>focuses on exploiting the modern deluge of data for prediction, exploration, understanding, and intervention. It emphasizes the value and necessity of approximation and simplification. It values effective communication of the results of a data analysis and of the understanding about the world that we glean from it. It prioritizes an understanding of the optimization algorithms and transparently managing the inevitable trade-off between accuracy and speed. It promotes domain-specific analyses, where data scientists and domain experts work together to balance appropriate assumptions with computationally efficient methods.</p>
+</blockquote>
+</div>
+<div id="the-data-science-process" class="section level2 unnumbered">
+<h2>The data science process</h2>
+<ul>
+<li><p><strong>Problem statement</strong>: The data science process is filled with decisions. And there is no better way to get lost and frustrated than to not have an adequate and shared understanding of the problem that needs to be solved or the knowledge gap that needs to be filled. Problems are all around us, bu not all of them are good data science problems. Good data science problem are <strong>relevant</strong> (they have a clear purpose) and are solvable with <strong>accessible data</strong>. At the end of this step, you have a clear research objective and clear research questions.</p></li>
+<li><p><strong>Data collection</strong> involves a series of steps aimed at gathering all the data that you will need for your project, such as finding relevant data sources, importing the data, and assessing its suitability for the problem at hand. At the end of this step, you have at hand all the data pieces that you will need for your project.</p></li>
+<li><p><strong>Pre-processing (tidying)</strong> involves structuring your data in a format suitable for analysis, and cleaning your data to remove errors, duplicates, etc. At the end of this step, you have a data set that is ready to produce valid answers to your research questions.</p></li>
+<li><p><strong>Analysis</strong> is about describing, analyzing, and visualizing the data. At the end of this step, you have produced tables and graphs that</p></li>
+<li><p><strong>Interpretation</strong> is about assigning meaning to the analyzed data and draw conclusions from it. At the end of this step you have answers to your research questions.</p></li>
+<li><p><strong>Communication</strong> is about transferring the new knowledge to its intended audience(s). At the end of this step, you have a clear, transparent, and effective report.</p></li>
+</ul>
+</div>
+<div id="writing-a-problem-statement" class="section level2 unnumbered">
+<h2>Writing a problem statement</h2>
+<p>In the context of this course, the problem statement encompasses the identification of a problem/knowledge gap that has some relevance, the project objectives, and the research questions.</p>
+<p><strong>Context</strong></p>
+<p>The context introduces the issue that needs to be solved or the knowledge gap that needs to be filled (what is it?) and an explanation of its relevance (why does it matter?).</p>
+<p>Here is an example:</p>
+<blockquote>
+<p>In Quebec, academic research is supported by national and provincial research councils that select, after peer review, the individuals or teams that receive funding. The number of researchers that are able to receive research funds is constrained by the limited funds available and the size of the grants. Past research showed that 20% to 45% of Quebec’s researchers had no external funding between 1999 and 2006, while 10% of researchers accumulated between 50% and 80% of the available funds. While we know how funding is distributed, we do not know how optimal that distribution is for producing research output and impact. Optimizing our funding policies and programs could increase the production of scientific knowledge required to solve local, national and global issues.</p>
+</blockquote>
+<p><strong>Objectives</strong></p>
+<p>The objective, of course, is to fix the problem or fill the gap identified in the problem statement. But here the goal is expressed <em>as</em> a research objective. It also provides information on the data set, and more details that help delineating the project. here is an example:</p>
+<blockquote>
+<p>The goal of this project is to help determine the optimal distribution of National research funds by applying data science methods to analyze data on the research funding, output and impact of Quebec researchers over a period of 15 years (1998-2012).</p>
+</blockquote>
+<p><strong>Research questions</strong></p>
+<p>The research questions are the expression The best research questions tend to start with the words “how, why, what, which.” Here is an example.</p>
+<blockquote>
+<p>1) What is the relationship between the amount of research funding of individual researchers and their research output?</p>
+<p>2) What is the relationship between the amount of research funding of individual researchers and their research output?</p>
+<p>3) How does the relationship between funding and research impact and output vary between research fields?</p>
+</blockquote>
+<p>Note that depending on your project, your questions may look quite different. For instance, in this example research funding and field are selected as predictors based on past knowledge and theory, while research output and research impact are the predicted variables. You should always know what you are trying to predict, but perhaps you have a lot of potential predictors in your data and your goal is to identify which ones are good predictors. In this case, you could have a question that looks like:</p>
+<blockquote>
+<p>What are the best predictors of X?</p>
+</blockquote>
+<p>What matters most is that:</p>
+<ol style="list-style-type: decimal">
+<li>Your questions are clear.</li>
+<li>Your questions can be answered with data</li>
+<li>You actually provide an answer to the questions in your report.</li>
+</ol>
+</div>
+<div id="getting-data" class="section level2 unnumbered">
+<h2>Getting data</h2>
+<p>If you are working for a company your client or employer will most likely have an internal database storing information related to its activities (e.g., clients, products, inventories, sales, employees, financial performance, etc.) which you may be using for your data science project.</p>
+<p><strong>Open government data</strong></p>
+<p>Governments and public organizations are also increasingly making the data they collect openly accessible for the benefit of the public. Here are some sources:</p>
+<ul>
+<li>Canada: <a href="https://open.canada.ca/en/open-data" class="uri">https://open.canada.ca/en/open-data</a></li>
+<li>Nova Scotia: <a href="https://data.novascotia.ca/" class="uri">https://data.novascotia.ca/</a></li>
+<li>United States: <a href="https://www.data.gov/" class="uri">https://www.data.gov/</a></li>
+<li>World Bank: <a href="https://data.worldbank.org/" class="uri">https://data.worldbank.org</a></li>
+<li>Toronto Public Library <a href="https://opendata.tpl.ca/" class="uri">https://opendata.tpl.ca/</a><a href="https://opendata.tpl.ca/">)</a></li>
+</ul>
+<p><strong>Research data</strong></p>
+<p>The Open Science movement also emphasizes the importance for researchers to share the data that they used for their published work, which can be found in repositories such as:</p>
+<ul>
+<li><p>DataCite (<a href="https://datacite.org/" class="uri">https://datacite.org/</a>). This is an aggregator that allows you to search hundreds of research data repositories.</p></li>
+<li><p>Zenodo (<a href="https://zenodo.org/" class="uri">https://zenodo.org/</a>).</p></li>
+<li><p>Figshare (<a href="https://figshare.com/" class="uri">https://figshare.com/</a>).</p></li>
+</ul>
+<p><strong>Scholarly publications metadata</strong></p>
+<p>Through a partnership with the <a href="https://www.mists-imsts.ca/">Maritime Institute for Science, Technology and Society</a>. Students of the course have access to a MySQL server containing the following databases. Let me know if you are interested in using them:</p>
+<ul>
+<li><p>OpenAlex (<a href="https://openalex.org/" class="uri">https://openalex.org/</a>) (coming soon)</p></li>
+<li><p>Unpaywall (<a href="https://unpaywall.org">&lt;https://unpaywall.org&gt;</a>) (coming soon)</p></li>
+</ul>
+<p><strong>Miscellaneous datasets</strong></p>
+<p>There is an overwhelming amount of data available on the Web. here is a list of useful repositories or potentially interesting datasets.</p>
+<ul>
+<li>Kaggle: <a href="https://www.kaggle.com">&lt;https://www.kaggle.com&gt;</a></li>
+<li>Awesome public datasets: <a href="https://github.com/awesomedata/awesome-public-datasets" class="uri">https://github.com/awesomedata/awesome-public-datasets</a></li>
+<li>Internet Movie Database (IMDb): <a href="https://www.imdb.com/interfaces/">&lt;https://www.imdb.com/interfaces/&gt;</a></li>
+</ul>
+<p>Please note that you are free to use any data that you wish for this course, the only restriction being that you must be able to share the data with me.</p>
+</div>
+<div id="homework" class="section level2 unnumbered">
+<h2>Homework</h2>
+<p>The homework is to slowly start working on your individual project to the ideas and data that will eventually become part of your proposal, which is due on February 11.</p>
+<ol style="list-style-type: decimal">
+<li>Start thinking about a topic for your individual research project.</li>
+<li>Find one or multiple data sources that might be suitable for that topic.</li>
+<li>Start drafting your problem statement.</li>
+</ol>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chapter-2---getting-started-with-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+</body>
+
+</html>
