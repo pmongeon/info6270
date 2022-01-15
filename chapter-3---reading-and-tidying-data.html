@@ -462,15 +462,15 @@ div.csl-indent {
 <pre><code>## # A tibble: 9 x 3
 ##   university funder funding_amount
 ##   &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;
-## 1 DAL        SSHRC               6
-## 2 DAL        NSERC               3
-## 3 DAL        CIHR               14
-## 4 SMU        SSHRC              18
-## 5 SMU        NSERC              45
-## 6 SMU        CIHR               23
-## 7 SFX        SSHRC              50
-## 8 SFX        NSERC              20
-## 9 SFX        CIHR               87</code></pre>
+## 1 DAL        SSHRC              46
+## 2 DAL        NSERC              57
+## 3 DAL        CIHR               85
+## 4 SMU        SSHRC              45
+## 5 SMU        NSERC              14
+## 6 SMU        CIHR               56
+## 7 SFX        SSHRC              23
+## 8 SFX        NSERC               1
+## 9 SFX        CIHR               52</code></pre>
 </div>
 <div id="pivot_wider" class="section level4 unnumbered">
 <h4>pivot_wider()</h4>
@@ -481,9 +481,9 @@ div.csl-indent {
 <pre><code>## # A tibble: 3 x 4
 ##   university SSHRC NSERC  CIHR
 ##   &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 DAL            6     3    14
-## 2 SMU           18    45    23
-## 3 SFX           50    20    87</code></pre>
+## 1 DAL           46    57    85
+## 2 SMU           45    14    56
+## 3 SFX           23     1    52</code></pre>
 </div>
 </div>
 <div id="expand-tables" class="section level3 unnumbered">
@@ -496,13 +496,13 @@ div.csl-indent {
 <pre><code>## # A tibble: 7 x 3
 ##   university funder n_grants
 ##   &lt;chr&gt;      &lt;chr&gt;     &lt;dbl&gt;
-## 1 DAL        SSHRC        84
-## 2 DAL        NSERC        10
-## 3 DAL        CIHR         23
-## 4 SMU        SSHRC        82
-## 5 SMU        CIHR         34
-## 6 SFX        NSERC        43
-## 7 SFX        CIHR          7</code></pre>
+## 1 DAL        SSHRC        90
+## 2 DAL        NSERC        78
+## 3 DAL        CIHR         70
+## 4 SMU        SSHRC        59
+## 5 SMU        CIHR         23
+## 6 SFX        NSERC        61
+## 7 SFX        CIHR         34</code></pre>
 <div id="expand" class="section level4 unnumbered">
 <h4>expand()</h4>
 <p>The expand() function creates all possible combinations of elements contained in a two or more columns indicated in the function’s argument and drops other columns. The example below returns the possible combinations of universities and funders in the funding tibble we created. You can see that the SMU - NSERC combination and the SFX - SSHRC combination appear even though they are not present in the funding tibble.</p>
@@ -528,15 +528,15 @@ div.csl-indent {
 <pre><code>## # A tibble: 9 x 3
 ##   university funder n_grants
 ##   &lt;chr&gt;      &lt;chr&gt;     &lt;dbl&gt;
-## 1 DAL        CIHR         23
-## 2 DAL        NSERC        10
-## 3 DAL        SSHRC        84
-## 4 SFX        CIHR          7
-## 5 SFX        NSERC        43
+## 1 DAL        CIHR         70
+## 2 DAL        NSERC        78
+## 3 DAL        SSHRC        90
+## 4 SFX        CIHR         34
+## 5 SFX        NSERC        61
 ## 6 SFX        SSHRC        NA
-## 7 SMU        CIHR         34
+## 7 SMU        CIHR         23
 ## 8 SMU        NSERC        NA
-## 9 SMU        SSHRC        82</code></pre>
+## 9 SMU        SSHRC        59</code></pre>
 </div>
 </div>
 <div id="handle-missing-values" class="section level3 unnumbered">
@@ -550,26 +550,26 @@ div.csl-indent {
 <pre><code>## # A tibble: 7 x 3
 ##   university funder n_grants
 ##   &lt;chr&gt;      &lt;chr&gt;     &lt;dbl&gt;
-## 1 DAL        CIHR         23
-## 2 DAL        NSERC        10
-## 3 DAL        SSHRC        84
-## 4 SFX        CIHR          7
-## 5 SFX        NSERC        43
-## 6 SMU        CIHR         34
-## 7 SMU        SSHRC        82</code></pre>
+## 1 DAL        CIHR         70
+## 2 DAL        NSERC        78
+## 3 DAL        SSHRC        90
+## 4 SFX        CIHR         34
+## 5 SFX        NSERC        61
+## 6 SMU        CIHR         23
+## 7 SMU        SSHRC        59</code></pre>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="chapter-3---reading-and-tidying-data.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This would remove rows where the n_grants column is null and ignore null values in other</span></span>
 <span id="cb26-2"><a href="chapter-3---reading-and-tidying-data.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"># columns.</span></span>
 <span id="cb26-3"><a href="chapter-3---reading-and-tidying-data.html#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">drop_na</span>(funding, n_grants)</span></code></pre></div>
 <pre><code>## # A tibble: 7 x 3
 ##   university funder n_grants
 ##   &lt;chr&gt;      &lt;chr&gt;     &lt;dbl&gt;
-## 1 DAL        CIHR         23
-## 2 DAL        NSERC        10
-## 3 DAL        SSHRC        84
-## 4 SFX        CIHR          7
-## 5 SFX        NSERC        43
-## 6 SMU        CIHR         34
-## 7 SMU        SSHRC        82</code></pre>
+## 1 DAL        CIHR         70
+## 2 DAL        NSERC        78
+## 3 DAL        SSHRC        90
+## 4 SFX        CIHR         34
+## 5 SFX        NSERC        61
+## 6 SMU        CIHR         23
+## 7 SMU        SSHRC        59</code></pre>
 </div>
 <div id="replace_na" class="section level4 unnumbered">
 <h4>replace_na()</h4>
@@ -579,15 +579,15 @@ div.csl-indent {
 <pre><code>## # A tibble: 9 x 3
 ##   university funder n_grants
 ##   &lt;chr&gt;      &lt;chr&gt;     &lt;dbl&gt;
-## 1 DAL        CIHR         23
-## 2 DAL        NSERC        10
-## 3 DAL        SSHRC        84
-## 4 SFX        CIHR          7
-## 5 SFX        NSERC        43
+## 1 DAL        CIHR         70
+## 2 DAL        NSERC        78
+## 3 DAL        SSHRC        90
+## 4 SFX        CIHR         34
+## 5 SFX        NSERC        61
 ## 6 SFX        SSHRC         0
-## 7 SMU        CIHR         34
+## 7 SMU        CIHR         23
 ## 8 SMU        NSERC         0
-## 9 SMU        SSHRC        82</code></pre>
+## 9 SMU        SSHRC        59</code></pre>
 <p><strong>Note:</strong> that replacing null values with zeros for a numerical variable may seems logical, and it may be appropriate for your intended purpose. However, nulls and zeros are not logically equivalent: null implies the absence of data (somethings that we did not or could not observe), and zeros imply an observed or measured value of 0.</p>
 </div>
 </div>
@@ -1017,7 +1017,7 @@ div.csl-indent {
 </div>
 <div id="homework-2" class="section level2 unnumbered">
 <h2>Homework</h2>
-<p>Your homework for this chapter is to complete lab #2</p>
+<p>Your homework for this chapter is to complete <a href="https://pmongeon.github.io/info6270/files/assignments/info6270_lab2.r">lab #2</a></p>
 
 </div>
 </div>
