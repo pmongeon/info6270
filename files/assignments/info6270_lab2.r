@@ -14,6 +14,10 @@
 # - semester
 # - instructor_name
 # - instructor_email
+#
+# The final tibble nd the exported CSV should look like the one available here:
+# https://pmongeon.github.io/info6270/files/sim_courses_solution.csv
+#
 ###############################################################################
 
 ###############################################################################
