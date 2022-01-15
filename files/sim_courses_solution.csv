@@ -1,0 +1,32 @@
+course_code,course_title,course_type,semester,instructor_name,instructor_email
+INFO5500,Information in Society,core,Fall,Philippe Mongeon,pmongeon@dal.ca
+INFO5515,Organization of Information,core,Fall,Jennifer Grek Martin,jgrekmartin@dal.ca
+INFO5520,Research Methods,core,Winter,Jennifer Grek Martin,jgrekmartin@dal.ca
+INFO5530,"Information Sources, Services, and Retrieval",core,Fall,Deborah Hemming,deborah.hemming@dal.ca
+INFO5570,Organizational Management and Strategy,capstone,Winter,Paulette Skerrett,paulette.skerrett@dal.ca
+INFO5590,Information Management Systems,core,Fall,Luke Russell,luke.russell@dal.ca
+INFO6100,Information in Public Policy and Decision Making,elective,Winter,Bertrum MacDonald,bertrum.macdonald@dal.ca
+INFO6150,History of the Book,elective,Winter,Jennifer Grek Martin,jgrekmartin@dal.ca
+INFO6250,Services and Resources for Young Adults,elective,Winter,Alison Brown,alisonbrown@dal.ca
+INFO6270,Introduction to Data Science,advanced technology,Winter,Colin Conrad,colin.conrad@dal.ca
+INFO6290,Managing Research Data,elective,Fall,Sandi Stewart,Sandi.Stewart@dal.ca
+INFO6310,Resources for Business Intelligence,elective,Hiatus,Sandra Toze,stoze@dal.ca
+INFO6320,Legal Literature and Librarianship,elective,Winter,Hannah Steeves,hannah.steeves@dal.ca
+INFO6330,Cataloguing & Classification,elective,Winter,Louise Spiteri,louise.spiteri@dal.ca
+INFO6370,Records Management,elective,Winter,Louise Spiteri,louise.spiteri@dal.ca
+INFO6400,Knowledge Management,elective,Fall,Marina Pluzhenskaya,marina.pluzhenskaya@dal.ca
+INFO6450,Services and Resources for Children,elective,Winter,Alison Brown,alisonbrown@dal.ca
+INFO6513,Business Analytics and Data Visualization,advanced technology,Fall,Colin Conrad,colin.conrad@dal.ca
+INFO6540,Data Management,core,Winter,Philippe Mongeon,pmongeon@dal.ca
+INFO6560,Information Resources Management,elective,Fall,Joyline Makani,joyline.makani@dal.ca
+INFO6610,Information Policy,elective,Fall,Cheryl Stenstrom,cheryl.stenstrom@dal.ca
+INFO6620,Web Design & Architecture,advanced technology,Winter,Keith Lawson,klawson@dal.ca
+INFO6630,User Experience,elective,Fall,Ryan Deschamps,rddescha@dal.ca
+INFO6640,Expert Searching for Clients,elective,Hiatus,Dominic Silvio,d.silvio@dal.ca
+INFO6681,Geospatial Information Management,advanced technology,Fall,Jennifer Grek Martin,jgrekmartin@dal.ca
+INFO6682,Human Information Interaction,elective,Winter,Cheryl Stenstrom,cheryl.stenstrom@dal.ca
+INFO6750,Health Sciences Literature and Information Sources,elective,Winter,Leah Boulos,Leah.Boulos@dal.ca
+INFO6800,Archives,elective,Winter,Patti Bannister,patti.bannister@dal.ca
+INFO6810,Managing Information Literacy Instruction,elective,Winter,Lindsay McNiff,lindsay.mcniff@dal.ca
+INFO6840,Content Management Systems,advanced technology,Fall,Keith Lawson,klawson@dal.ca
+INFO6860,Archives II,elective,Fall,Patti Bannister,patti.bannister@dal.ca
