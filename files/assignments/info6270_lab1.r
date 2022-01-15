@@ -76,8 +76,7 @@ celcius_to_fahrenheit <- function(c) {
 
 ###############################################################################
 # Challenge #6 (0.5 pts)
-# Print subsets of data from the tibble you just created
-# weather_data with three columns with the same names.
+# Print subsets of data from the tibble you just created.
 ###############################################################################
 
 # 6.1. Print all (and only) the dates
