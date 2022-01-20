@@ -38,7 +38,12 @@ library(tidyverse)
 ###############################################################################
 # Challenge #2 - selecting columns (0.5 pts)
 # Create a subset of the sim_courses tibble with only the columns required
-# according to the specifications provided in the introduction.
+# according to the specifications provided in the introduction. At this point
+# you tibble should only contain the first 4 columns:
+# - course_code
+# - course_title
+# - course_type
+# - semester
 # Store the outcome in a tibble with the same name (sim_courses).
 ###############################################################################
 
