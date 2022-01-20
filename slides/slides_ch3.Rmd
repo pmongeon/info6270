@@ -1,0 +1,264 @@
+---
+title: "<strong>Tidy Data and the Tidyverse</strong>"
+author: "INFO6270 - Chapter 3<br>Philippe Mongeon"
+date: "2022-01-20"
+output: 
+  revealjs::revealjs_presentation:
+    theme: simple
+    highlight: pygments
+    center: true
+    self_contained: false
+    reveal_plugins: ["chalkboard", "menu"]
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+      chalkboard:
+        theme: default
+        toggleNotesButton: true
+      menu:
+        side: right
+---
+
+# Plan
+
+-   Review of lab 1
+
+-   What is the tidyverse?
+
+-   Why the pipe
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(lubridate)
+library(kableExtra)
+```
+
+```{=html}
+<style>
+    .reveal section img { 
+        background:none; 
+        border:none; 
+        box-shadow:none; 
+</style>
+```
+# Review of lab 1
+
+## Challenge #1
+
+Create a numeric vector named max_temp_c containing the max temperatures recorded in Halifax from January 1st to January 7th 2022. You can get historical weather data from <https://climate.weather.gc.ca/>
+
+```{r}
+max_temp_c <- c(8.7,9.0,0.4,-4.5,10.8,11.4,6.8)
+max_temp_c
+```
+
+## **Challenge #2**
+
+Write a function named celcius_to_fahrenheit that takes a single argument (c) and apply the conversion formula to it. The formula is F = (C × 9/5) + 32. do not add additional features to your function.
+
+```{r}
+# with curly brackets.
+celcius_to_fahrenheit <- function(c) {
+  c*9/5+32
+}
+
+# single line without curly brackets.
+celcius_to_fahrenheit <- function(c) c*9/5+32
+
+celcius_to_fahrenheit(17)
+```
+
+## Challenge #3
+
+Use your celcius_to_fahrenheit function to create a new vector named max_temp_f that contains the values of max_temp_c converted to Fahrenheit.
+
+```{r}
+max_temp_f <- celcius_to_fahrenheit(max_temp_c)
+```
+
+## Challenge #4
+
+```{r}
+# Use as_date() to create a date object named start_date and store 
+# the January 1st date in it.
+
+start_date = as_date("2022-01-01")
+
+# Create a vector of numerical values ranging from 0 to 6, named week
+
+week <- c(0:6)
+
+# Add the start_date and the week and store the result in an 
+# object named date
+
+date <- start_date+week
+```
+
+## Challenge #5
+
+Use the 3 vectors (date, max_temp_c, max_temp_f) to create a tibble called weather_data with three columns with the same names.
+
+```{r}
+# Version #1
+weather_data <- tibble(date = date,
+                       max_temp_c = max_temp_c,
+                       max_temp_f = max_temp_f)
+# Version 2
+weather_data <- tibble(date, 
+                       max_temp_c, 
+                       max_temp_f)
+```
+
+## Challenge #6
+
+```{r eval=FALSE}
+# 6.1. Print all (and only) the dates
+weather_data$date
+weather_data[,1]
+
+# 6.2. Print the first date
+weather_data$date[1] 
+weather_data[1,1] 
+
+# 6.3. Print the date and max temp. in Celsius for Jan 3rd.
+weather_data[3,c(1,2)]
+weather_data[3,1:2]
+
+# 6.4. Print the date and max temp. in Fahrenheit for Jan 5th.
+weather_data[5,c(1,3)]
+
+# 6.5. Print the date and max temp. in Celcius from Jan 3th to 7th.
+weather_data[c(3,4,5,6,7),c(1,2)]
+weather_data[3:7,1:2]
+```
+
+## Challenge #7
+
+Improve your celcius_to_fahrenheit function with a conditional statement that checks if the value provided in the function is numeric. If the value is numeric, the function should perform the calculation and print the result. otherwise, the function should print "provided value is not a number".
+
+```{r}
+# Recommended code structure, for clarity
+celcius_to_fahrenheit <- function(c) {
+  if (is.numeric(c)) {
+    (c*9/5)+32
+  } else {
+    print("provided value is not a number")
+  }
+}
+
+# One line version without curly brackets
+celcius_to_fahrenheit <- function(c) if (is.numeric(c)) (c*9/5)+32 else print("provided value is not a number")
+```
+
+# Tidy data
+
+Tidy data meets three criteria:
+
+1.  Each variable must have its own column.
+
+2.  Each observation must have its own row.
+
+3.  Each value must have its own cell.
+
+## Tidy data example
+
+```{r echo = FALSE, message = FALSE, warning=FALSE}
+read_csv("https://pmongeon.github.io/info6270/files/data/titanic.csv")[1:6,c(1:3,5:6,9:10)] %>% 
+  kable()
+```
+
+## Tidy data?
+
+```{r echo = FALSE, message=FALSE, warning=FALSE}
+tibble(course = c("INFO6270","INFO6540","INFO5500"),
+       students = "Francis, Sam, Amy",
+       grades = c("92 (A+), 86 (A), 84 (A-)",
+                  "77 (B+), 100 (A+), 74(B)",
+                  "86 (A), 70 (B-), 99 (A+)")) %>%  
+  kable()
+```
+
+## Tidy data?
+
+```{r echo = FALSE, message=FALSE, warning=FALSE}
+t <- tibble(course = c("INFO6270","INFO6540","INFO5500"),
+       students = "Francis, Sam, Amy",
+       grades = c("92 (A+), 86 (A), 84 (A-)",
+                  "77 (B+), 100 (A+), 74(B)",
+                  "86 (A), 70 (B-), 99 (A+)"))
+
+t %>% 
+  separate_rows(students, sep = ",") %>% 
+  separate_rows(grades, sep = ",") %>% 
+  kable()
+  
+  
+```
+
+## Tidy data!
+
+```{r echo = FALSE, message=FALSE, warning=FALSE}
+t <- tibble(course = c("INFO6270","INFO6540","INFO5500"),
+       students = "Francis, Sam, Amy",
+       grades = c("92 (A+), 86 (A), 84 (A-)",
+                  "77 (B+), 100 (A+), 74 (B)",
+                  "86 (A), 70 (B-), 99 (A+)"))
+
+library(stringr)
+t %>% 
+  separate_rows(students, sep = ",") %>% 
+  separate_rows(grades, sep = ",") %>% 
+  mutate(grades = str_squish(grades)) %>% 
+  separate(grades, c("grade_numeric","grade_letter"), sep=" ") %>%
+  mutate(grade_letter = str_remove_all(grade_letter,"[()]")) %>% 
+  kable()
+```
+
+# The pipe (%>%)
+
+The pipe is a tidy way of writing code by writing steps of a process in a linear sequence rather than from the inside out.
+
+## What does this do?
+
+path \<- "<https://pmongeon.github.io/info6270/files/data/titanic.csv>"
+
+write_csv(select(filter(as_tibble(read_csv(path)),Survived == 1), Name,Sex,Age), "titanic_survivors.csv")
+
+## A better version
+
+Writing code one step a a time
+
+```{r eval=FALSE}
+path <- "https://pmongeon.github.io/info6270/files/data/titanic.csv"
+
+titanic_survivors <- read_csv(path)
+tinatic_survivors <- as_tibble(tinatic_survivors)
+tinatic_survivors <- filter(tinatic_survivors, Survived == 1)
+tinatic_survivors <- select(titanic_survivors, Name, Sex, Age)
+write_csv(titanic_survivors, "titanic_survivors.csv")
+```
+
+## An even better version with the pipe
+
+```{r eval=FALSE}
+path <- "https://pmongeon.github.io/info6270/files/data/titanic.csv"
+
+read_csv(path) %>% 
+  as_tibble() %>% 
+  filter(Survived == 1) %>% 
+  select(Name, Sex, Age) %>% 
+  write_csv("titanic_survivors.csv")
+
+```
+
+## The pipe... it's magic
+
+<iframe src="https://giphy.com/embed/3o84U6421OOWegpQhq" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen>
+
+</iframe>
+
+<p>
+
+<a href="https://giphy.com/gifs/tipsyelves-rainbow-magic-3o84U6421OOWegpQhq">via GIPHY</a>
+
+</p>
