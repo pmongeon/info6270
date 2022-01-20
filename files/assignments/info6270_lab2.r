@@ -33,8 +33,9 @@ library(tidyverse)
 # into a tibble called sim_courses.
 ###############################################################################
 
+x <- as_tibble(read_csv("https://pmongeon.github.io/info6270/files/sim_courses.csv"))
 
-
+x
 ###############################################################################
 # Challenge #2 - selecting columns (0.5 pts)
 # Create a subset of the sim_courses tibble with only the columns required
@@ -67,7 +68,7 @@ library(tidyverse)
 # Challenge #4 - filtering rows (0.5 pts)
 # According to the specifications provided in the introduction, you want to include
 # courses offered in the Fall and Winter semesters only. Write a code that
-# filters out courses offered in the Summer.
+# filters out courses offered not offered in these two semesters.
 ###############################################################################
 
 
