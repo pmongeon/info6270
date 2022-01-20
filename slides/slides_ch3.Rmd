@@ -23,9 +23,9 @@ output:
 
 -   Review of lab 1
 
--   What is the tidyverse?
+-   Tidy data
 
--   Why the pipe
+-   The pipe
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
 library(tidyverse)
