@@ -232,6 +232,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#subsetting-strings"><i class="fa fa-check"></i>Subsetting strings</a></li>
 <li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#testing-strings"><i class="fa fa-check"></i>Testing strings</a></li>
 <li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#regular-expressions-regex"><i class="fa fa-check"></i>Regular expressions (regex)</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#matching-multiple-patterns"><i class="fa fa-check"></i>Matching multiple patterns</a></li>
 <li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#dealing-with-special-characters"><i class="fa fa-check"></i>Dealing with special characters</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#homework-3"><i class="fa fa-check"></i>Homework</a></li>
@@ -357,8 +358,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 </div>
-<div id="replace-part-of-strings" class="section level4" number="0.0.0.2">
-<h4><span class="header-section-number">0.0.0.2</span> Replace part of strings</h4>
+<div id="replacing-parts-of-strings" class="section level4 unnumbered">
+<h4>Replacing parts of strings</h4>
 <p>The functions <strong>str_replace()</strong> and <strong>str_replace_all()</strong> can be used to modify strings by replacing some patterns with some other. The difference between the two is that str_replace() will only replace the first instance of the pattern in the string, while str_replace_all() will replace all the instances.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="chapter-4---working-with-strings.html#cb1-1" aria-hidden="true" tabindex="-1"></a>names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Dr. Mike Smit&quot;</span>,<span class="st">&quot;Dr. Sandra Toze&quot;</span>)</span>
 <span id="cb1-2"><a href="chapter-4---working-with-strings.html#cb1-2" aria-hidden="true" tabindex="-1"></a>names <span class="sc">%&gt;%</span> <span class="fu">str_replace</span>(<span class="st">&quot;Dr.&quot;</span>,<span class="st">&quot;Doctor&quot;</span>)</span></code></pre></div>
@@ -483,8 +484,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="testing-strings" class="section level3 unnumbered">
 <h3>Testing strings</h3>
 <p>Rather than extracting parts of strings, or modifying strings, you may just want to test to see if a strings contains a specific pattern and get a logical (TRUE, FALSE) in return.</p>
-<div id="str_detect" class="section level4" number="0.0.0.3">
-<h4><span class="header-section-number">0.0.0.3</span> str_detect()</h4>
+<div id="str_detect" class="section level4 unnumbered">
+<h4>str_detect()</h4>
+<p>This section is coming up!</p>
 </div>
 </div>
 <div id="regular-expressions-regex" class="section level3 unnumbered">
@@ -505,6 +507,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb32-4"><a href="chapter-4---working-with-strings.html#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_replace_all</span>(<span class="st">&quot;[^[:alnum:]]&quot;</span>,<span class="st">&quot; &quot;</span>) </span></code></pre></div>
 <pre><code>## [1] &quot; what is going on with my keyboard &quot;</code></pre>
 </div>
+</div>
+<div id="matching-multiple-patterns" class="section level3 unnumbered">
+<h3>Matching multiple patterns</h3>
+<p>This section is coming up!</p>
 </div>
 <div id="dealing-with-special-characters" class="section level3 unnumbered">
 <h3>Dealing with special characters</h3>
@@ -571,7 +577,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="homework-3" class="section level2 unnumbered">
 <h2>Homework</h2>
-<p>Your homework for this week is to complete <a href="https://pmongeon.github.io/files/assignments/info6270_lab3.r">lab #3</a>.</p>
+<p>Your homework for this week is to complete <a href="https://pmongeon.github.io/info6270/files/assignments/info6270_lab3.r">lab #3</a>.</p>
 
 </div>
 </div>
