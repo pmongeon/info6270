@@ -1,0 +1,82 @@
+---
+title: "INFO6270 Lab 4"
+author: ""
+date: ""
+output: 
+  html_document:
+    toc: true 
+    toc_float:       
+      collapsed: false
+    toc_depth: 2
+    number_sections: false 
+    theme: lumen
+    highlight: tango
+---
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(kableExtra)
+```
+
+# The dataset
+
+<!--# Introduce your data Load your dataset in a tibble in your environment .5 pts -->
+
+For this lab I'll be using the ... dataset that I found on the Web
+
+```{r message=FALSE, warning=FALSE}
+mpg <- mpg
+```
+
+## Overview
+
+<!--# use head() to print the top lines your tibble. include a caption -->
+
+```{r}
+kbl(head(mpg), 
+    caption = "Table 1. Overview of the mpg dataset",
+    align=c("l","l","r","r","r","l","c","r","r","c","l")) %>% 
+  kable_classic() # classic theme, other options are minimal, material,
+# material dark, and paper.
+```
+
+## Variables
+
+```{r}
+mpg_variables <- tibble(variable = colnames(mpg),
+                        data_type = c("d","d","c","date","d","d","d","c","c","d","d")
+                        )
+mpg_variables
+```
+
+# Descriptive statistics
+
+```{r}
+
+mpg %>% 
+  pivot_longer(c("hwy","cty"), names_to = "variable", values_to = "value") %>% 
+  group_by(variable) %>% 
+  summarize(n = n(),
+            mean = mean(value),
+            sd = sd(value),
+            var = var(value),
+            q1 = quantile(value,0.25),
+            median = median(value),
+            q3 = quantile(value,0.75),
+            min = min(value),
+            max = max(value)
+  ) %>% 
+  kbl(caption = "Table 2. descriptive statistics",
+    align=c("l","r","r","r","r","r","r","r","r","r")) %>% 
+  kable_classic()
+```
+
+```{r}
+mpg %>% 
+  group_by(manufacturer) %>%
+  summarize(n = n()) %>% 
+  kbl(caption = "Table 3. frequency of car manufactuers",
+    align=c("l","r")) %>% 
+  kable_classic()
+
+```
