@@ -1,7 +1,7 @@
 ---
 title: "INFO6270 Lab 4"
-author: ""
-date: ""
+author: "Philippe Mongeon" # Replace my name with yours
+date: "2022-02-04" # Put the date here
 output: 
   html_document:
     toc: true 
@@ -9,9 +9,11 @@ output:
       collapsed: false
     toc_depth: 2
     number_sections: false 
-    theme: lumen
+    kable: lumen
     highlight: tango
 ---
+
+<!--# The following code block loads all the packages I need in this script. The code chunk itself will not be visible in my HTML output because I included the argument echo = FALSE. I also do not whant to display the messages and warnings that R sends when the code executes, so I am including  -->
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
@@ -20,63 +22,189 @@ library(kableExtra)
 
 # The dataset
 
-<!--# Introduce your data Load your dataset in a tibble in your environment .5 pts -->
+<!--# This is my introduction, replace it with your own. -->
 
-For this lab I'll be using the ... dataset that I found on the Web
+For this lab, I have chosen to use the *mpg* dataset that is included in the ggplot2 R package. This dataset contains fuel economy data from 1999 to 2008 for 38 popular models of cars.
 
-```{r message=FALSE, warning=FALSE}
-mpg <- mpg
+<!--# Load your dataset in a tibble in your environment (DO NOT DISPLAY THIS CODE CHUNK IN THE HTML OUTPUT -->
+
+```{r echo = FALSE, message=FALSE, warning=FALSE}
+### This is an example. replace this code with yours###
+
+# you can see a list of datasets included in the packages (only the ones you have loaded) using the data() function. 
+# Even though you don't see them in your environment, these datasets can be called just like other regular objects. Here I'm just creating an object called mpg_data in my environment and storing into it the mpg dataset. I'm calling it mpg_data just to avoid the confusion between the tibble in my environment and the orinigal and invisible mpg dataset.
+
+mpg_data <- tibble(mpg)
 ```
 
-## Overview
+## Overview  <!--# 1 pts -->
 
-<!--# use head() to print the top lines your tibble. include a caption -->
+<!--#INSTRUCTIONS:1. Use head() and the kbl() to print the top 10 rows of your tibble. 2. Use kbl() to format your displayed tibble.3. Include a caption4. Look at the 7 rules for making good looking tables on the website and try to follow them Note: The following code contains an example, replace it with your own code. Do not display the code in the HTML output.-->
 
-```{r}
-kbl(head(mpg), 
-    caption = "Table 1. Overview of the mpg dataset",
-    align=c("l","l","r","r","r","l","c","r","r","c","l")) %>% 
-  kable_classic() # classic theme, other options are minimal, material,
-# material dark, and paper.
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+# This selects the top 10 rows of the mpg_data tibble.
+head(mpg_data) %>% 
+# And then I format it with kbl()
+  kbl(
+# I include my caption
+    caption = "Table 1. Overview of the mpg dataset.",
+# And I specify the alignment of each column l = left, r = rigth, c = center. 
+    align=c("l","l","r","r","r","l","c","r","r","c","l")
+# Then I close my kbl function with the ")"      
+  ) %>% 
+# I then apply the classic theme to my table. some other options are kable_classic_2, kable_minimal(), kable_material(), kable_material_dark(), and kable_paper().
+  kable_classic() 
 ```
 
-## Variables
+<!--# If you find the commented code a bit difficult to read, here it is without comments this code will not be executed (eval = FALSE) or displayed (echo = FALSE) -->
 
-```{r}
-mpg_variables <- tibble(variable = colnames(mpg),
-                        data_type = c("d","d","c","date","d","d","d","c","c","d","d")
-                        )
-mpg_variables
+```{r eval=FALSE, echo=FALSE, message=FALSE, warning=TRUE}
+mpg_data %>% 
+  head() %>% 
+  kbl(
+    caption = "Table 1. Overview of the mpg dataset.",
+    align = c("l","l","r","r","r","l","c","r","r","c","l")
+    ) %>% 
+  kable_classic()
 ```
 
-# Descriptive statistics
+## Variables <!--# 2 pts -->
 
-```{r}
+<!--#  INSTRUCTIONS:1. Create a table that contains the following three columns:   a. Variable (The name of the variable)   b. Type (Continuous or Discrete)   c. Description (a VERY SHORT desription of the variable)2. Use tha same formatting as you did for the previous table.3.Introduce your table with a short text. You can use my example below as you wishNote: The following codes contains an example. The first one creates the tibble, the second code displays it. Replace my code with your own. Do not display the code in the HTML output.-->\
+\
+Table 2 provides a list of the variables included in the dataset, along with the data types and descriptions.
 
-mpg %>% 
-  pivot_longer(c("hwy","cty"), names_to = "variable", values_to = "value") %>% 
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+# I create a tibble 
+mpg_variables <- tibble(
+
+# I name the first column Variable, and put in in the column names of the mpg_data tibbleusing colnames(). 
+    Variable = colnames(mpg_data),
+
+# The second column of my new tibble is "Type", and I put in it the type of each variable.
+    Type = c("Discrete",
+             "Discrete",
+             "Continuous",
+             "Discrete",
+             "Discrete",
+             "Discrete",
+             "Discrete",
+             "Continuous",
+             "Continuous",
+             "Discrete",
+             "Discrete"),
+
+# The third column of my new tibble is "Description", and I put in the description of each variable
+    Description = c("Manufacturer name",
+             "Model name",
+             "Engine displacement, in litres",
+             "Year of manufacture",
+             "Number of cylinders",
+             "Type of transmission",
+             "Type of drive train",
+             "City miles per gallon",
+             "Highway miles per gallon",
+             "Fuel type",
+             "Type of car")
+# Then I close the tibble fonction
+  )
+```
+
+<!--# This is the same code but without the comments -->
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+mpg_variables <- tibble(
+    Variable = colnames(mpg_data),
+    Type = c("Discrete",
+             "Discrete",
+             "Continuous",
+             "Discrete",
+             "Discrete",
+             "Discrete",
+             "Discrete",
+             "Continuous",
+             "Continuous",
+             "Discrete",
+             "Discrete"),
+    Description = c("Manufacturer name",
+             "Model name",
+             "Engine displacement, in litres",
+             "Year of manufacture",
+             "Number of cylinders",
+             "Type of transmission",
+             "Type of drive train",
+             "City miles per gallon",
+             "Highway miles per gallon",
+             "Fuel type",
+             "Type of car")
+  )
+```
+
+<!--# And now I display my table -->
+
+```{r echo = FALSE, message=FALSE, warning=FALSE}
+mpg_variables %>% 
+  kbl(
+    caption = "Table 2. Variables in the mpg dataset.",
+    align = c("l","l","l")
+    ) %>% 
+  kable_classic()
+```
+
+## Descriptive statistics <!--# 2 pts -->
+
+<!--# INSTRUCTIONS:1. Create a descriptive statistics summary for each continuous variables (DO NOT INCLUDE DISCRETE VARIABLES) which includes:   a. the number of observations: n()   b. the mean: mean()   c. the standard deviation: sd()   d. the variance: var()   e. the minimum value: min()   f. the maximum value: max()   g. the first quartile: quantile()   h. the median quartile: median()   i. the third quartile: quantile()2. Use tha same formatting as you did for the previous table.3.Introduce your table with a short text. You can use my example below as you wishNote: The following codes contains an example. Replace my code with your own. Do not display the code in the HTML output. -->
+
+Table 3 presents the summary statistics for the engine displacement, the miles per gallon on the highway, and the miles per gallon in the city.
+
+```{r echo = FALSE, message=FALSE, warning=FALSE}
+
+# I start with my mpg_data tibble
+mpg_data %>% 
+
+# I use pivot_longer to put all my continuous variables (displ, hwy, cty) in one column that I name "variable", and their value in another column that I name "value"
+  pivot_longer(c("displ", "hwy","cty"), names_to = "variable", values_to = "value") %>% 
+
+# I use the group_by() function to specify which column contains the variables I want to calculate my statistics for. In this case, it is the "variable" column I just created.
+  group_by(variable) %>% 
+
+# Then I use the summarize function (it's like a mutate(), that keeps only the groups and the computed values, dropping every other column.
+  summarize(n = n(), # number of observations for each variable
+            mean = mean(value), # mean
+            sd = sd(value), # standard deviation
+            var = var(value), # variance
+            min = min(value), # minimum value
+            max = max(value), # maximum value
+            q1 = quantile(value,0.25), # first quartile
+            median = median(value), # median
+            q3 = quantile(value,0.75) # third quartile
+  ) %>% 
+
+# Then I use the kbl function to do my formating
+  kbl(caption = "Table 3. descriptive statistics",
+    align=c("l","r","r","r","r","r","r","r","r","r")) %>% 
+  kable_classic()
+```
+
+<!--# This is the same code without all the comments, and with eval=FALSE so the table doesn't display twice in the HTML output -->
+
+```{r eval=FALSE, echo = FALSE, message=FALSE, warning=FALSE}
+
+mpg_data %>% 
+  pivot_longer(c("displ", "hwy","cty"), names_to = "variable", values_to = "value") %>% 
   group_by(variable) %>% 
   summarize(n = n(),
             mean = mean(value),
             sd = sd(value),
             var = var(value),
+            min = min(value),
+            max = max(value),
             q1 = quantile(value,0.25),
             median = median(value),
-            q3 = quantile(value,0.75),
-            min = min(value),
-            max = max(value)
+            q3 = quantile(value,0.75)
   ) %>% 
-  kbl(caption = "Table 2. descriptive statistics",
+  kbl(caption = "Table 3. descriptive statistics",
     align=c("l","r","r","r","r","r","r","r","r","r")) %>% 
   kable_classic()
-```
-
-```{r}
-mpg %>% 
-  group_by(manufacturer) %>%
-  summarize(n = n()) %>% 
-  kbl(caption = "Table 3. frequency of car manufactuers",
-    align=c("l","r")) %>% 
-  kable_classic()
-
 ```
