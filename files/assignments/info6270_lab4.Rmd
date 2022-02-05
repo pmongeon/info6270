@@ -9,7 +9,7 @@ output:
       collapsed: false
     toc_depth: 2
     number_sections: false 
-    kable: lumen
+    theme: default
     highlight: tango
 ---
 
@@ -70,8 +70,8 @@ mpg_data %>%
 
 ## Variables <!--# 2 pts -->
 
-<!--#  INSTRUCTIONS:1. Create a table that contains the following three columns:   a. Variable (The name of the variable)   b. Type (Continuous or Discrete)   c. Description (a VERY SHORT desription of the variable)2. Use tha same formatting as you did for the previous table.3.Introduce your table with a short text. You can use my example below as you wishNote: The following codes contains an example. The first one creates the tibble, the second code displays it. Replace my code with your own. Do not display the code in the HTML output.-->\
-\
+<!--#  INSTRUCTIONS:1. Create a table that contains the following three columns:   a. Variable (The name of the variable)   b. Type (Continuous or Discrete)   c. Description (a VERY SHORT desription of the variable)2. Use tha same formatting as you did for the previous table.3.Introduce your table with a short text. You can use my example below as you wishNote: The following codes contains an example. The first one creates the tibble, the second code displays it. Replace my code with your own. Do not display the code in the HTML output.-->
+
 Table 2 provides a list of the variables included in the dataset, along with the data types and descriptions.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
