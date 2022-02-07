@@ -10,7 +10,6 @@ output:
     toc_depth: 2
     number_sections: false 
     theme: default
-    highlight: tango
 ---
 
 <!--# The following code block loads all the packages I need in this script. The code chunk itself will not be visible in my HTML output because I included the argument echo = FALSE. I also do not whant to display the messages and warnings that R sends when the code executes, so I am including  -->
