@@ -36,7 +36,7 @@ For this lab, I have chosen to use the *mpg* dataset that is included in the ggp
 mpg_data <- tibble(mpg)
 ```
 
-## Overview  <!--# 1 pts -->
+## Overview <!--# 1 pts -->
 
 <!--#INSTRUCTIONS:1. Use head() and the kbl() to print the top 10 rows of your tibble. 2. Use kbl() to format your displayed tibble.3. Include a caption4. Look at the 7 rules for making good looking tables on the website and try to follow them Note: The following code contains an example, replace it with your own code. Do not display the code in the HTML output.-->
 
