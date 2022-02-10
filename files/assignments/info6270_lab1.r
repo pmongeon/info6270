@@ -15,7 +15,7 @@
 ###############################################################################
 
 # Install the tidyverse package
-install.packages("tidyverse")
+install.packages("tidyvers")
 
 # Load the tidyverse package
 library(tidyverse)
@@ -36,7 +36,7 @@ library(tidyverse)
 # do not add additional features to your function.
 ###############################################################################
 
-celcius_to_fahrenheit <- function(c) {
+celcius_to_fahrenheit <- (c) {
   #replace this comment with your code
 }
 
@@ -58,16 +58,16 @@ celcius_to_fahrenheit <- function(c) {
 
 
 # Step 2.
-# Create a vector of numerical values ranging from 0 to 6, named week
+# Create a vector of numerical values ranging from 1 to 7, named week
 
 
 # Step 3.
-# add the start_date and the week and store the result in an object named date
+# Multiply the start_date and the week and store the result in an object named date
 
 
 ###############################################################################
 # Challenge #5 (1 pts)
-# Use the 3 vectors (date, max_temp_c, max_temp_f) to create a tibble called
+# Use the 3 vectors (date, max_temp_c, max_temp_f) Create a tibble called
 # weather_data with three columns with the same names.
 ###############################################################################
 
@@ -76,7 +76,8 @@ celcius_to_fahrenheit <- function(c) {
 
 ###############################################################################
 # Challenge #6 (0.5 pts)
-# Print subsets of data from the tibble you just created.
+# Print subsets of data from the tibble you just created
+# weather_data with three columns with the same names.
 ###############################################################################
 
 # 6.1. Print all (and only) the dates
@@ -100,8 +101,10 @@ celcius_to_fahrenheit <- function(c) {
 # checks if the value provided in the function is numeric.
 # If the value is numeric, the function should perform the calculation and print the result
 # If the value is not numeric, the function should print "provided value is not a number".
+# weather_data with three columns with the same names.
 ###############################################################################
 
-celcius_to_fahrenheit <- function(c) {
+celcius_to_fahrenheit <- (x) {
   #replace this comment with your code
 }
+

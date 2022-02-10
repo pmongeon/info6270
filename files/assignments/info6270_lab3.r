@@ -24,7 +24,7 @@ library(tidyverse)
 # file located at the following URL:"https://pmongeon.github.io/info6270/files/sim_courses_messy.csv"
 ###############################################################################
 
-
+x <- read_csv("https://pmongeon.github.io/info6270/files/sim_courses_messy.csv")
 
 ###############################################################################
 # Challenge #2 (1.5 pts)
@@ -64,5 +64,5 @@ library(tidyverse)
 
 
 
-# 2. Print a tibble containing all the courses for which the term "data" is mentioned
+# 2. Print a tibble containing all the course_codes, course_title, and summary for which the term "data" is mentioned
 # in the summary

@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 - Describing and visualizing data | INFO 6270 - Introduction to Data Science</title>
+  <meta name="description" content="Chapter 5 - Describing and visualizing data | INFO 6270 - Introduction to Data Science" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 - Describing and visualizing data | INFO 6270 - Introduction to Data Science" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="pmongeon/info6270" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 - Describing and visualizing data | INFO 6270 - Introduction to Data Science" />
+  
+  
+  
+
+<meta name="author" content="Philippe Mongeon" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="chapter-4---working-with-strings.html"/>
+<link rel="next" href="chapter-6---network-analysis.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><center>INFO6270 - Introduction to Data Science</center></li>
+<li><center>Winter 2022</center></li>
+<li><center>Philippe Mongeon</center></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Course overview</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#schedule"><i class="fa fa-check"></i>Schedule</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#assignments"><i class="fa fa-check"></i>Assignments</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#bibliography"><i class="fa fa-check"></i>Bibliography</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#official-syllabus"><i class="fa fa-check"></i>Official syllabus</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-1---what-is-data-science.html"><a href="chapter-1---what-is-data-science.html"><i class="fa fa-check"></i>Chapter 1 - What is data science?</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-1---what-is-data-science.html"><a href="chapter-1---what-is-data-science.html#learning-objectives"><i class="fa fa-check"></i>Learning objectives</a></li>
+<li class="chapter" data-level="" data-path="chapter-1---what-is-data-science.html"><a href="chapter-1---what-is-data-science.html#what-is-data-science"><i class="fa fa-check"></i>What is data science?</a></li>
+<li class="chapter" data-level="" data-path="chapter-1---what-is-data-science.html"><a href="chapter-1---what-is-data-science.html#the-data-science-process"><i class="fa fa-check"></i>The data science process</a></li>
+<li class="chapter" data-level="" data-path="chapter-1---what-is-data-science.html"><a href="chapter-1---what-is-data-science.html#writing-a-problem-statement"><i class="fa fa-check"></i>Writing a problem statement</a></li>
+<li class="chapter" data-level="" data-path="chapter-1---what-is-data-science.html"><a href="chapter-1---what-is-data-science.html#getting-data"><i class="fa fa-check"></i>Getting data</a></li>
+<li class="chapter" data-level="" data-path="chapter-1---what-is-data-science.html"><a href="chapter-1---what-is-data-science.html#homework"><i class="fa fa-check"></i>Homework</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html"><i class="fa fa-check"></i>Chapter 2 - Getting started with R</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#learning-objectives-1"><i class="fa fa-check"></i>Learning objectives</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#setting-up-r"><i class="fa fa-check"></i>Setting up R</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#installing-r-and-rstudio"><i class="fa fa-check"></i>Installing R and Rstudio</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#explore-rstudio"><i class="fa fa-check"></i>Explore RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#first-steps-in-r"><i class="fa fa-check"></i>First steps in R</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#r-scripts"><i class="fa fa-check"></i>R scripts</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#working-directory"><i class="fa fa-check"></i>Working directory</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#functions"><i class="fa fa-check"></i>Functions</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#executing-code"><i class="fa fa-check"></i>Executing code</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#numbers-and-strings"><i class="fa fa-check"></i>numbers and strings</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#doing-the-math"><i class="fa fa-check"></i>Doing the math</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#objects"><i class="fa fa-check"></i>Objects</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#subsetting-data"><i class="fa fa-check"></i>Subsetting data</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#logical-operators"><i class="fa fa-check"></i>Logical operators</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#conditional-statements"><i class="fa fa-check"></i>Conditional statements</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#loops-and-vectorization"><i class="fa fa-check"></i>Loops and vectorization</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#homework-1"><i class="fa fa-check"></i>Homework</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html"><i class="fa fa-check"></i>Chapter 3 - Reading and tidying data</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#learning-objectives-2"><i class="fa fa-check"></i>Learning objectives</a>
+<ul>
+<li><a href="chapter-3---reading-and-tidying-data.html#slides"><strong>Slides</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#tidy-data"><i class="fa fa-check"></i>Tidy data</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#the-tidyverse"><i class="fa fa-check"></i>The tidyverse</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#import-data"><i class="fa fa-check"></i>Import data</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#delimited-file-formats"><i class="fa fa-check"></i>Delimited file formats</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#json-files"><i class="fa fa-check"></i>JSON files</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#application-programming-interface-api"><i class="fa fa-check"></i>Application programming interface (API)</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#xml-files"><i class="fa fa-check"></i>XML files</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#connections"><i class="fa fa-check"></i>Connections</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#tidy-your-data"><i class="fa fa-check"></i>Tidy your data</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#reshape-data"><i class="fa fa-check"></i>Reshape data</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#expand-tables"><i class="fa fa-check"></i>Expand tables</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#handle-missing-values"><i class="fa fa-check"></i>Handle missing values</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#merge-and-split-cells"><i class="fa fa-check"></i>Merge and split cells</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#nested-data"><i class="fa fa-check"></i>Nested data</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#combine-dataframes"><i class="fa fa-check"></i>Combine dataframes</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#join-dataframes"><i class="fa fa-check"></i>Join dataframes</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#rename-variables"><i class="fa fa-check"></i>Rename variables</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#export-data"><i class="fa fa-check"></i>Export data</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#export-dataframes"><i class="fa fa-check"></i>Export dataframes</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#json"><i class="fa fa-check"></i>JSON</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#the-pipe"><i class="fa fa-check"></i>The Pipe</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#additional-resources"><i class="fa fa-check"></i>Additional resources</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#homework-2"><i class="fa fa-check"></i>Homework</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html"><i class="fa fa-check"></i>Chapter 4 - Working with strings</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#learning-objectives-3"><i class="fa fa-check"></i>Learning objectives</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#dealing-with-messy-or-unstructured-data"><i class="fa fa-check"></i>Dealing with messy or unstructured data</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#cleaning-messy-data"><i class="fa fa-check"></i>Cleaning messy data</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#filtering-rows-based-on-string-matches"><i class="fa fa-check"></i>Filtering rows based on string matches</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#extracting-data-from-text"><i class="fa fa-check"></i>Extracting data from text</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#the-stringr-package"><i class="fa fa-check"></i>The stringr package</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#transforming-strings"><i class="fa fa-check"></i>Transforming strings</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#clean-up-a-string"><i class="fa fa-check"></i>Clean up a string</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#combine-strings"><i class="fa fa-check"></i>Combine strings</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#splitting-strings"><i class="fa fa-check"></i>Splitting strings</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#subsetting-strings"><i class="fa fa-check"></i>Subsetting strings</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#locating-a-pattern-in-a-string"><i class="fa fa-check"></i>Locating a pattern in a string</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#testing-strings"><i class="fa fa-check"></i>Testing strings</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#regular-expressions-regex"><i class="fa fa-check"></i>Regular expressions (regex)</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#dealing-with-special-characters-in-strings"><i class="fa fa-check"></i>Dealing with special characters in strings</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#summary"><i class="fa fa-check"></i>Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#homework-3"><i class="fa fa-check"></i>Homework</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-5---describing-and-visualizing-data.html"><a href="chapter-5---describing-and-visualizing-data.html"><i class="fa fa-check"></i>Chapter 5 - Describing and visualizing data</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-5---describing-and-visualizing-data.html"><a href="chapter-5---describing-and-visualizing-data.html#learning-objectives-4"><i class="fa fa-check"></i>Learning objectives</a></li>
+<li class="chapter" data-level="" data-path="chapter-5---describing-and-visualizing-data.html"><a href="chapter-5---describing-and-visualizing-data.html#exploring-with-numbers"><i class="fa fa-check"></i>Exploring with numbers</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-5---describing-and-visualizing-data.html"><a href="chapter-5---describing-and-visualizing-data.html#measures-of-central-tendency"><i class="fa fa-check"></i>Measures of central tendency</a></li>
+<li><a href="chapter-5---describing-and-visualizing-data.html#measures-of-dispersion"><strong>Measures of dispersion</strong></a></li>
+<li class="chapter" data-level="" data-path="chapter-5---describing-and-visualizing-data.html"><a href="chapter-5---describing-and-visualizing-data.html#contingency-tables"><i class="fa fa-check"></i>Contingency tables</a></li>
+<li class="chapter" data-level="" data-path="chapter-5---describing-and-visualizing-data.html"><a href="chapter-5---describing-and-visualizing-data.html#reporting-descriptive-statistics"><i class="fa fa-check"></i>Reporting descriptive statistics</a></li>
+<li class="chapter" data-level="" data-path="chapter-5---describing-and-visualizing-data.html"><a href="chapter-5---describing-and-visualizing-data.html#making-beautiful-tables"><i class="fa fa-check"></i>Making beautiful tables</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-6---network-analysis.html"><a href="chapter-6---network-analysis.html"><i class="fa fa-check"></i>Chapter 6 - Network analysis</a></li>
+<li class="chapter" data-level="" data-path="chapter-7---topic-modelling.html"><a href="chapter-7---topic-modelling.html"><i class="fa fa-check"></i>Chapter 7 - Topic modelling</a></li>
+<li class="chapter" data-level="" data-path="chapter-8---k-nearest-neighbors.html"><a href="chapter-8---k-nearest-neighbors.html"><i class="fa fa-check"></i>Chapter 8 - K nearest neighbors</a></li>
+<li class="chapter" data-level="" data-path="chapter-9---logistic-regression.html"><a href="chapter-9---logistic-regression.html"><i class="fa fa-check"></i>Chapter 9 - Logistic regression</a></li>
+<li class="chapter" data-level="" data-path="chapter-10---linear-regression.html"><a href="chapter-10---linear-regression.html"><i class="fa fa-check"></i>Chapter 10 - Linear regression</a></li>
+<li class="chapter" data-level="" data-path="chapter-11---principal-component-analysis.html"><a href="chapter-11---principal-component-analysis.html"><i class="fa fa-check"></i>Chapter 11 - Principal component analysis</a></li>
+<li class="chapter" data-level="" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i>Conclusion</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">INFO 6270 - Introduction to Data Science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="chapter-5---describing-and-visualizing-data" class="section level1 unnumbered">
+<h1>Chapter 5 - Describing and visualizing data</h1>
+<div id="learning-objectives-4" class="section level2 unnumbered">
+<h2>Learning objectives</h2>
+<ul>
+<li>Descriptive statistics</li>
+<li>Distributions</li>
+<li>Associations</li>
+<li>Visualizing data with ggplot2.</li>
+</ul>
+</div>
+<div id="exploring-with-numbers" class="section level2 unnumbered">
+<h2>Exploring with numbers</h2>
+<div id="measures-of-central-tendency" class="section level3 unnumbered">
+<h3>Measures of central tendency</h3>
+<div id="mean" class="section level4 unnumbered">
+<h4>Mean</h4>
+<p>The mean (or average) is obtained by dividing the sum of all values for a variable by the total number of observations.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="chapter-5---describing-and-visualizing-data.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">7</span>,<span class="dv">9</span>))</span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+</div>
+<div id="median" class="section level4 unnumbered">
+<h4>Median</h4>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="chapter-5---describing-and-visualizing-data.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">7</span>,<span class="dv">9</span>))</span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+</div>
+<div id="mode" class="section level4 unnumbered">
+<h4>Mode</h4>
+<p>The more is the most frequent value for the variable. It appears</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="chapter-5---describing-and-visualizing-data.html#cb5-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="chapter-5---describing-and-visualizing-data.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(hwy) <span class="sc">%&gt;%</span> <span class="co"># select only the hwy column</span></span>
+<span id="cb5-3"><a href="chapter-5---describing-and-visualizing-data.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(hwy) <span class="sc">%&gt;%</span> <span class="co"># create a group for each value of hwy</span></span>
+<span id="cb5-4"><a href="chapter-5---describing-and-visualizing-data.html#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">freq =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> <span class="co"># get the number of obs. in each grouo. </span></span>
+<span id="cb5-5"><a href="chapter-5---describing-and-visualizing-data.html#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> <span class="co"># stop considering the hwy values as groups</span></span>
+<span id="cb5-6"><a href="chapter-5---describing-and-visualizing-data.html#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>() <span class="sc">%&gt;%</span> <span class="co"># eliminate duplicates</span></span>
+<span id="cb5-7"><a href="chapter-5---describing-and-visualizing-data.html#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rank =</span> <span class="fu">rank</span>(<span class="fu">desc</span>(freq), <span class="at">ties.method =</span> <span class="st">&quot;min&quot;</span>)) <span class="sc">%&gt;%</span> <span class="co"># add a new column with the rank from the highest frequency to the lowest.</span></span>
+<span id="cb5-8"><a href="chapter-5---describing-and-visualizing-data.html#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(rank <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="co">#keep only the hwy value with the highest frequency</span></span>
+<span id="cb5-9"><a href="chapter-5---describing-and-visualizing-data.html#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">mode =</span> hwy) <span class="co"># select only the hwy column and rename it to &quot;mode&quot;</span></span></code></pre></div>
+<pre><code>## # A tibble: 1 x 1
+##    mode
+##   &lt;int&gt;
+## 1    26</code></pre>
+</div>
+</div>
+<div id="measures-of-dispersion" class="section level3 unnumbered">
+<h3><strong>Measures of dispersion</strong></h3>
+<div id="variance" class="section level4 unnumbered">
+<h4>Variance</h4>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="chapter-5---describing-and-visualizing-data.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(mpg<span class="sc">$</span>hwy)</span></code></pre></div>
+<pre><code>## [1] 35.45778</code></pre>
+</div>
+<div id="standard-deviation" class="section level4 unnumbered">
+<h4>Standard deviation</h4>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="chapter-5---describing-and-visualizing-data.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(mpg<span class="sc">$</span>hwy)</span></code></pre></div>
+<pre><code>## [1] 5.954643</code></pre>
+</div>
+<div id="range" class="section level4 unnumbered">
+<h4>Range</h4>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="chapter-5---describing-and-visualizing-data.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the minimum value of the cty variable</span></span>
+<span id="cb11-2"><a href="chapter-5---describing-and-visualizing-data.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(mpg<span class="sc">$</span>cty)</span></code></pre></div>
+<pre><code>## [1] 9</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="chapter-5---describing-and-visualizing-data.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the maxium value of the cty variable</span></span>
+<span id="cb13-2"><a href="chapter-5---describing-and-visualizing-data.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(mpg<span class="sc">$</span>cty)</span></code></pre></div>
+<pre><code>## [1] 35</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="chapter-5---describing-and-visualizing-data.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the two values at once</span></span>
+<span id="cb15-2"><a href="chapter-5---describing-and-visualizing-data.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(mpg<span class="sc">$</span>cty)</span></code></pre></div>
+<pre><code>## [1]  9 35</code></pre>
+</div>
+<div id="quantiles" class="section level4 unnumbered">
+<h4>Quantiles</h4>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="chapter-5---describing-and-visualizing-data.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># quartiles</span></span>
+<span id="cb17-2"><a href="chapter-5---describing-and-visualizing-data.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(mpg<span class="sc">$</span>hwy, <span class="fu">c</span>(<span class="fl">0.25</span>,<span class="fl">0.75</span>))</span></code></pre></div>
+<pre><code>## 25% 75% 
+##  18  27</code></pre>
+</div>
+</div>
+<div id="contingency-tables" class="section level3 unnumbered">
+<h3>Contingency tables</h3>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="chapter-5---describing-and-visualizing-data.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a contingency table with the manufacturer and class.</span></span>
+<span id="cb19-2"><a href="chapter-5---describing-and-visualizing-data.html#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(mpg<span class="sc">$</span>manufacturer,mpg<span class="sc">$</span>class)</span></code></pre></div>
+<pre><code>##             
+##              2seater compact midsize minivan pickup subcompact suv
+##   audi             0      15       3       0      0          0   0
+##   chevrolet        5       0       5       0      0          0   9
+##   dodge            0       0       0      11     19          0   7
+##   ford             0       0       0       0      7          9   9
+##   honda            0       0       0       0      0          9   0
+##   hyundai          0       0       7       0      0          7   0
+##   jeep             0       0       0       0      0          0   8
+##   land rover       0       0       0       0      0          0   4
+##   lincoln          0       0       0       0      0          0   3
+##   mercury          0       0       0       0      0          0   4
+##   nissan           0       2       7       0      0          0   4
+##   pontiac          0       0       5       0      0          0   0
+##   subaru           0       4       0       0      0          4   6
+##   toyota           0      12       7       0      7          0   8
+##   volkswagen       0      14       7       0      0          6   0</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="chapter-5---describing-and-visualizing-data.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is the same contingency table using proportions.</span></span>
+<span id="cb21-2"><a href="chapter-5---describing-and-visualizing-data.html#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">prop.table</span>(<span class="fu">table</span>(mpg<span class="sc">$</span>manufacturer, mpg<span class="sc">$</span>class),<span class="dv">2</span>),<span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##             
+##              2seater compact midsize minivan pickup subcompact  suv
+##   audi          0.00    0.32    0.07    0.00   0.00       0.00 0.00
+##   chevrolet     1.00    0.00    0.12    0.00   0.00       0.00 0.15
+##   dodge         0.00    0.00    0.00    1.00   0.58       0.00 0.11
+##   ford          0.00    0.00    0.00    0.00   0.21       0.26 0.15
+##   honda         0.00    0.00    0.00    0.00   0.00       0.26 0.00
+##   hyundai       0.00    0.00    0.17    0.00   0.00       0.20 0.00
+##   jeep          0.00    0.00    0.00    0.00   0.00       0.00 0.13
+##   land rover    0.00    0.00    0.00    0.00   0.00       0.00 0.06
+##   lincoln       0.00    0.00    0.00    0.00   0.00       0.00 0.05
+##   mercury       0.00    0.00    0.00    0.00   0.00       0.00 0.06
+##   nissan        0.00    0.04    0.17    0.00   0.00       0.00 0.06
+##   pontiac       0.00    0.00    0.12    0.00   0.00       0.00 0.00
+##   subaru        0.00    0.09    0.00    0.00   0.00       0.11 0.10
+##   toyota        0.00    0.26    0.17    0.00   0.21       0.00 0.13
+##   volkswagen    0.00    0.30    0.17    0.00   0.00       0.17 0.00</code></pre>
+</div>
+<div id="reporting-descriptive-statistics" class="section level3 unnumbered">
+<h3>Reporting descriptive statistics</h3>
+<div id="descriptive-summary-table" class="section level4 unnumbered">
+<h4>Descriptive summary table</h4>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="chapter-5---describing-and-visualizing-data.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych) <span class="co"># For the skew() and kurtosi() functions</span></span>
+<span id="cb23-2"><a href="chapter-5---describing-and-visualizing-data.html#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="chapter-5---describing-and-visualizing-data.html#cb23-3" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">%&gt;%</span></span>
+<span id="cb23-4"><a href="chapter-5---describing-and-visualizing-data.html#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(<span class="st">&quot;hwy&quot;</span>,<span class="st">&quot;cty&quot;</span>),<span class="st">&quot;variable&quot;</span>, <span class="st">&quot;value&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-5"><a href="chapter-5---describing-and-visualizing-data.html#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(variable) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-6"><a href="chapter-5---describing-and-visualizing-data.html#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb23-7"><a href="chapter-5---describing-and-visualizing-data.html#cb23-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean =</span> <span class="fu">mean</span>(value),</span>
+<span id="cb23-8"><a href="chapter-5---describing-and-visualizing-data.html#cb23-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(value),</span>
+<span id="cb23-9"><a href="chapter-5---describing-and-visualizing-data.html#cb23-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">var =</span> <span class="fu">var</span>(value),</span>
+<span id="cb23-10"><a href="chapter-5---describing-and-visualizing-data.html#cb23-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">q1 =</span> <span class="fu">quantile</span>(value,<span class="fl">0.25</span>),</span>
+<span id="cb23-11"><a href="chapter-5---describing-and-visualizing-data.html#cb23-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">median =</span> <span class="fu">median</span>(value),</span>
+<span id="cb23-12"><a href="chapter-5---describing-and-visualizing-data.html#cb23-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">q3 =</span> <span class="fu">quantile</span>(value,<span class="fl">0.75</span>),</span>
+<span id="cb23-13"><a href="chapter-5---describing-and-visualizing-data.html#cb23-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">min =</span> <span class="fu">min</span>(value),</span>
+<span id="cb23-14"><a href="chapter-5---describing-and-visualizing-data.html#cb23-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(value),</span>
+<span id="cb23-15"><a href="chapter-5---describing-and-visualizing-data.html#cb23-15" aria-hidden="true" tabindex="-1"></a>            <span class="at">skew =</span> <span class="fu">skew</span>(value),</span>
+<span id="cb23-16"><a href="chapter-5---describing-and-visualizing-data.html#cb23-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">kurtosis =</span> <span class="fu">kurtosi</span>(value)</span>
+<span id="cb23-17"><a href="chapter-5---describing-and-visualizing-data.html#cb23-17" aria-hidden="true" tabindex="-1"></a>            )</span></code></pre></div>
+<pre><code>## # A tibble: 2 x 12
+##   variable     n  mean    sd   var    q1 median    q3   min   max  skew kurtosis
+##   &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt;
+## 1 cty        234  16.9  4.26  18.1    14     17    19     9    35 0.786    1.43 
+## 2 hwy        234  23.4  5.95  35.5    18     24    27    12    44 0.365    0.137</code></pre>
+</div>
+</div>
+<div id="making-beautiful-tables" class="section level3 unnumbered">
+<h3>Making beautiful tables</h3>
+<p>Here are the key rules for table layout proposed by <span class="citation">(<a href="#ref-wilke2019" role="doc-biblioref"><strong>wilke2019?</strong></a>)</span> :</p>
+<ol style="list-style-type: decimal">
+<li><p>Do not use vertical lines.</p></li>
+<li><p>Do not use horizontal lines between data rows. (Horizontal lines as separator between the title row and the first data row or as frame for the entire table are fine.)</p></li>
+<li><p>Text columns should be left aligned.</p></li>
+<li><p>Number columns should be right aligned and should use the same number of decimal digits throughout.</p></li>
+<li><p>Columns containing single characters are centered.</p></li>
+<li><p>The header fields are aligned with their data, i.e., the heading for a text column will be left aligned and the heading for a number column will be right aligned.</p></li>
+<li><p>Captions are placed above the table.</p></li>
+</ol>
+<p>There are a bunch of popular packages that you can explore to make really nice tables. The <em>kableExtra</em> package is very versatile and I recommend it as a start. You can find all the information you need to fully exploit the package in the official vignette: <a href="https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html">&lt;https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html&gt;</a>.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="chapter-5---describing-and-visualizing-data.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb25-2"><a href="chapter-5---describing-and-visualizing-data.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(<span class="fu">head</span>(mpg))</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+manufacturer
+</th>
+<th style="text-align:left;">
+model
+</th>
+<th style="text-align:right;">
+displ
+</th>
+<th style="text-align:right;">
+year
+</th>
+<th style="text-align:right;">
+cyl
+</th>
+<th style="text-align:left;">
+trans
+</th>
+<th style="text-align:left;">
+drv
+</th>
+<th style="text-align:right;">
+cty
+</th>
+<th style="text-align:right;">
+hwy
+</th>
+<th style="text-align:left;">
+fl
+</th>
+<th style="text-align:left;">
+class
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+audi
+</td>
+<td style="text-align:left;">
+a4
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+1999
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+auto(l5)
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:right;">
+29
+</td>
+<td style="text-align:left;">
+p
+</td>
+<td style="text-align:left;">
+compact
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+audi
+</td>
+<td style="text-align:left;">
+a4
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+1999
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+manual(m5)
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:right;">
+21
+</td>
+<td style="text-align:right;">
+29
+</td>
+<td style="text-align:left;">
+p
+</td>
+<td style="text-align:left;">
+compact
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+audi
+</td>
+<td style="text-align:left;">
+a4
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+2008
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+manual(m6)
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:right;">
+31
+</td>
+<td style="text-align:left;">
+p
+</td>
+<td style="text-align:left;">
+compact
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+audi
+</td>
+<td style="text-align:left;">
+a4
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+2008
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+auto(av)
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:right;">
+21
+</td>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:left;">
+p
+</td>
+<td style="text-align:left;">
+compact
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+audi
+</td>
+<td style="text-align:left;">
+a4
+</td>
+<td style="text-align:right;">
+2.8
+</td>
+<td style="text-align:right;">
+1999
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+auto(l5)
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:left;">
+p
+</td>
+<td style="text-align:left;">
+compact
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+audi
+</td>
+<td style="text-align:left;">
+a4
+</td>
+<td style="text-align:right;">
+2.8
+</td>
+<td style="text-align:right;">
+1999
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+manual(m5)
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:left;">
+p
+</td>
+<td style="text-align:left;">
+compact
+</td>
+</tr>
+</tbody>
+</table>
+<p>As you can see, the table meets most of the criteria listed above. Our table only lacks a caption, and the <em>drv</em> column should be centered. We can fix that by using the <em>caption</em> arguments and manually setting the columns alignment. Let’s also apply of the the basic kable themes to make our table look a bit better.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="chapter-5---describing-and-visualizing-data.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kbl</span>(<span class="fu">head</span>(mpg), </span>
+<span id="cb26-2"><a href="chapter-5---describing-and-visualizing-data.html#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;This is the caption of the table&quot;</span>,</span>
+<span id="cb26-3"><a href="chapter-5---describing-and-visualizing-data.html#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">align=</span><span class="fu">c</span>(<span class="st">&quot;l&quot;</span>,<span class="st">&quot;l&quot;</span>,<span class="st">&quot;r&quot;</span>,<span class="st">&quot;r&quot;</span>,<span class="st">&quot;r&quot;</span>,<span class="st">&quot;l&quot;</span>,<span class="st">&quot;c&quot;</span>,<span class="st">&quot;r&quot;</span>,<span class="st">&quot;r&quot;</span>,<span class="st">&quot;c&quot;</span>,<span class="st">&quot;l&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-4"><a href="chapter-5---describing-and-visualizing-data.html#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>() <span class="co"># classic theme, other options are minimal, material,</span></span></code></pre></div>
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-12">Table 1: </span>This is the caption of the table
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+manufacturer
+</th>
+<th style="text-align:left;">
+model
+</th>
+<th style="text-align:right;">
+displ
+</th>
+<th style="text-align:right;">
+year
+</th>
+<th style="text-align:right;">
+cyl
+</th>
+<th style="text-align:left;">
+trans
+</th>
+<th style="text-align:center;">
+drv
+</th>
+<th style="text-align:right;">
+cty
+</th>
+<th style="text-align:right;">
+hwy
+</th>
+<th style="text-align:center;">
+fl
+</th>
+<th style="text-align:left;">
+class
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+audi
+</td>
+<td style="text-align:left;">
+a4
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+1999
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+auto(l5)
+</td>
+<td style="text-align:center;">
+f
+</td>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:right;">
+29
+</td>
+<td style="text-align:center;">
+p
+</td>
+<td style="text-align:left;">
+compact
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+audi
+</td>
+<td style="text-align:left;">
+a4
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+1999
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+manual(m5)
+</td>
+<td style="text-align:center;">
+f
+</td>
+<td style="text-align:right;">
+21
+</td>
+<td style="text-align:right;">
+29
+</td>
+<td style="text-align:center;">
+p
+</td>
+<td style="text-align:left;">
+compact
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+audi
+</td>
+<td style="text-align:left;">
+a4
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+2008
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+manual(m6)
+</td>
+<td style="text-align:center;">
+f
+</td>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:right;">
+31
+</td>
+<td style="text-align:center;">
+p
+</td>
+<td style="text-align:left;">
+compact
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+audi
+</td>
+<td style="text-align:left;">
+a4
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+2008
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+auto(av)
+</td>
+<td style="text-align:center;">
+f
+</td>
+<td style="text-align:right;">
+21
+</td>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:center;">
+p
+</td>
+<td style="text-align:left;">
+compact
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+audi
+</td>
+<td style="text-align:left;">
+a4
+</td>
+<td style="text-align:right;">
+2.8
+</td>
+<td style="text-align:right;">
+1999
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+auto(l5)
+</td>
+<td style="text-align:center;">
+f
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:center;">
+p
+</td>
+<td style="text-align:left;">
+compact
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+audi
+</td>
+<td style="text-align:left;">
+a4
+</td>
+<td style="text-align:right;">
+2.8
+</td>
+<td style="text-align:right;">
+1999
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+manual(m5)
+</td>
+<td style="text-align:center;">
+f
+</td>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:center;">
+p
+</td>
+<td style="text-align:left;">
+compact
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="chapter-5---describing-and-visualizing-data.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># material dark, and paper.</span></span></code></pre></div>
+<div id="keeping-it-simple" class="section level4 unnumbered">
+<h4>Keeping it simple</h4>
+<p>My main advice with tables is to keep them clean, simple, and informative. Usually simple tables are enough to convey the message efficiently. That said, if you want to impress with fancy tables, this can certainly be done with kableExtra or some of the other table packages (an overview of some of the main packages is available on this <a href="https://rfortherestofus.com/2019/11/how-to-make-beautiful-tables-in-r/">website</a>).</p>
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="chapter-4---working-with-strings.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chapter-6---network-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+</body>
+
+</html>

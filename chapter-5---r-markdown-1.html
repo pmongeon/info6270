@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 - R Markdown | INFO 6270 - Introduction to Data Science</title>
+  <meta name="description" content="Chapter 5 - R Markdown | INFO 6270 - Introduction to Data Science" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 - R Markdown | INFO 6270 - Introduction to Data Science" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="pmongeon/info6270" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 - R Markdown | INFO 6270 - Introduction to Data Science" />
+  
+  
+  
+
+<meta name="author" content="Philippe Mongeon" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="chapter-5---r-markdown.html"/>
+<link rel="next" href="chapter-6---network-analysis.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><center>INFO6270 - Introduction to Data Science</center></li>
+<li><center>Winter 2022</center></li>
+<li><center>Philippe Mongeon</center></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Course overview</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#schedule"><i class="fa fa-check"></i>Schedule</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#assignments"><i class="fa fa-check"></i>Assignments</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#bibliography"><i class="fa fa-check"></i>Bibliography</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#official-syllabus"><i class="fa fa-check"></i>Official syllabus</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-1---what-is-data-science.html"><a href="chapter-1---what-is-data-science.html"><i class="fa fa-check"></i>Chapter 1 - What is data science?</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-1---what-is-data-science.html"><a href="chapter-1---what-is-data-science.html#learning-objectives"><i class="fa fa-check"></i>Learning objectives</a></li>
+<li class="chapter" data-level="" data-path="chapter-1---what-is-data-science.html"><a href="chapter-1---what-is-data-science.html#what-is-data-science"><i class="fa fa-check"></i>What is data science?</a></li>
+<li class="chapter" data-level="" data-path="chapter-1---what-is-data-science.html"><a href="chapter-1---what-is-data-science.html#the-data-science-process"><i class="fa fa-check"></i>The data science process</a></li>
+<li class="chapter" data-level="" data-path="chapter-1---what-is-data-science.html"><a href="chapter-1---what-is-data-science.html#writing-a-problem-statement"><i class="fa fa-check"></i>Writing a problem statement</a></li>
+<li class="chapter" data-level="" data-path="chapter-1---what-is-data-science.html"><a href="chapter-1---what-is-data-science.html#getting-data"><i class="fa fa-check"></i>Getting data</a></li>
+<li class="chapter" data-level="" data-path="chapter-1---what-is-data-science.html"><a href="chapter-1---what-is-data-science.html#homework"><i class="fa fa-check"></i>Homework</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html"><i class="fa fa-check"></i>Chapter 2 - Getting started with R</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#learning-objectives-1"><i class="fa fa-check"></i>Learning objectives</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#setting-up-r"><i class="fa fa-check"></i>Setting up R</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#installing-r-and-rstudio"><i class="fa fa-check"></i>Installing R and Rstudio</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#explore-rstudio"><i class="fa fa-check"></i>Explore RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#first-steps-in-r"><i class="fa fa-check"></i>First steps in R</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#r-scripts"><i class="fa fa-check"></i>R scripts</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#working-directory"><i class="fa fa-check"></i>Working directory</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#functions"><i class="fa fa-check"></i>Functions</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#executing-code"><i class="fa fa-check"></i>Executing code</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#numbers-and-strings"><i class="fa fa-check"></i>numbers and strings</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#doing-the-math"><i class="fa fa-check"></i>Doing the math</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#objects"><i class="fa fa-check"></i>Objects</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#subsetting-data"><i class="fa fa-check"></i>Subsetting data</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#logical-operators"><i class="fa fa-check"></i>Logical operators</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#conditional-statements"><i class="fa fa-check"></i>Conditional statements</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#loops-and-vectorization"><i class="fa fa-check"></i>Loops and vectorization</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#homework-1"><i class="fa fa-check"></i>Homework</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html"><i class="fa fa-check"></i>Chapter 3 - Reading and tidying data</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#learning-objectives-2"><i class="fa fa-check"></i>Learning objectives</a>
+<ul>
+<li><a href="chapter-3---reading-and-tidying-data.html#slides"><strong>Slides</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#tidy-data"><i class="fa fa-check"></i>Tidy data</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#the-tidyverse"><i class="fa fa-check"></i>The tidyverse</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#import-data"><i class="fa fa-check"></i>Import data</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#delimited-file-formats"><i class="fa fa-check"></i>Delimited file formats</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#json-files"><i class="fa fa-check"></i>JSON files</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#application-programming-interface-api"><i class="fa fa-check"></i>Application programming interface (API)</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#xml-files"><i class="fa fa-check"></i>XML files</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#connections"><i class="fa fa-check"></i>Connections</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#tidy-your-data"><i class="fa fa-check"></i>Tidy your data</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#reshape-data"><i class="fa fa-check"></i>Reshape data</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#expand-tables"><i class="fa fa-check"></i>Expand tables</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#handle-missing-values"><i class="fa fa-check"></i>Handle missing values</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#merge-and-split-cells"><i class="fa fa-check"></i>Merge and split cells</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#nested-data"><i class="fa fa-check"></i>Nested data</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#combine-dataframes"><i class="fa fa-check"></i>Combine dataframes</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#join-dataframes"><i class="fa fa-check"></i>Join dataframes</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#rename-variables"><i class="fa fa-check"></i>Rename variables</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#export-data"><i class="fa fa-check"></i>Export data</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#export-dataframes"><i class="fa fa-check"></i>Export dataframes</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#json"><i class="fa fa-check"></i>JSON</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#the-pipe"><i class="fa fa-check"></i>The Pipe</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#additional-resources"><i class="fa fa-check"></i>Additional resources</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#homework-2"><i class="fa fa-check"></i>Homework</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html"><i class="fa fa-check"></i>Chapter 4 - Working with strings</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#learning-objectives-3"><i class="fa fa-check"></i>Learning objectives</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#dealing-with-messy-or-unstructured-data"><i class="fa fa-check"></i>Dealing with messy or unstructured data</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#cleaning-messy-data"><i class="fa fa-check"></i>Cleaning messy data</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#filtering-rows-based-on-string-matches"><i class="fa fa-check"></i>Filtering rows based on string matches</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#extracting-data-from-text"><i class="fa fa-check"></i>Extracting data from text</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#the-stringr-package"><i class="fa fa-check"></i>The stringr package</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#transforming-strings"><i class="fa fa-check"></i>Transforming strings</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#clean-up-a-string"><i class="fa fa-check"></i>Clean up a string</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#combine-strings"><i class="fa fa-check"></i>Combine strings</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#splitting-strings"><i class="fa fa-check"></i>Splitting strings</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#subsetting-strings"><i class="fa fa-check"></i>Subsetting strings</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#locating-a-pattern-in-a-string"><i class="fa fa-check"></i>Locating a pattern in a string</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#testing-strings"><i class="fa fa-check"></i>Testing strings</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#regular-expressions-regex"><i class="fa fa-check"></i>Regular expressions (regex)</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#dealing-with-special-characters-in-strings"><i class="fa fa-check"></i>Dealing with special characters in strings</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#summary"><i class="fa fa-check"></i>Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#homework-3"><i class="fa fa-check"></i>Homework</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-5---r-markdown.html"><a href="chapter-5---r-markdown.html"><i class="fa fa-check"></i>Chapter 5 - R Markdown</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-5---r-markdown.html"><a href="chapter-5---r-markdown.html#learning-objectives-4"><i class="fa fa-check"></i>Learning objectives</a></li>
+<li class="chapter" data-level="0.1" data-path="chapter-5---r-markdown.html"><a href="chapter-5---r-markdown.html#getting-to-know-your-data"><i class="fa fa-check"></i><b>0.1</b> Getting to know your data</a></li>
+<li class="chapter" data-level="0.2" data-path="chapter-5---r-markdown.html"><a href="chapter-5---r-markdown.html#introducing-r-markdown"><i class="fa fa-check"></i><b>0.2</b> Introducing R Markdown</a>
+<ul>
+<li class="chapter" data-level="0.2.1" data-path="chapter-5---r-markdown.html"><a href="chapter-5---r-markdown.html#creating-a-r-markdown-file-in-rstudio"><i class="fa fa-check"></i><b>0.2.1</b> Creating a R Markdown file in RStudio</a></li>
+<li class="chapter" data-level="0.2.2" data-path="chapter-5---r-markdown.html"><a href="chapter-5---r-markdown.html#three-components-of-a-r-markdown-file"><i class="fa fa-check"></i><b>0.2.2</b> Three components of a R Markdown file</a></li>
+<li class="chapter" data-level="0.2.3" data-path="chapter-5---r-markdown.html"><a href="chapter-5---r-markdown.html#visual-mode"><i class="fa fa-check"></i><b>0.2.3</b> Visual mode</a></li>
+<li class="chapter" data-level="0.2.4" data-path="chapter-5---r-markdown.html"><a href="chapter-5---r-markdown.html#rendering-knitting-your-document"><i class="fa fa-check"></i><b>0.2.4</b> Rendering (knitting) your document</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-5---r-markdown.html"><a href="chapter-5---r-markdown.html#exploring-with-numbers"><i class="fa fa-check"></i>Exploring with numbers</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-5---r-markdown.html"><a href="chapter-5---r-markdown.html#measures-of-central-tendency"><i class="fa fa-check"></i>Measures of central tendency</a></li>
+<li><a href="chapter-5---r-markdown.html#measures-of-dispersion"><strong>Measures of dispersion</strong></a></li>
+<li class="chapter" data-level="" data-path="chapter-5---r-markdown.html"><a href="chapter-5---r-markdown.html#contingency-tables"><i class="fa fa-check"></i>Contingency tables</a></li>
+<li class="chapter" data-level="" data-path="chapter-5---r-markdown.html"><a href="chapter-5---r-markdown.html#reporting-descriptive-statistics"><i class="fa fa-check"></i>Reporting descriptive statistics</a></li>
+<li class="chapter" data-level="" data-path="chapter-5---r-markdown.html"><a href="chapter-5---r-markdown.html#making-beautiful-tables"><i class="fa fa-check"></i>Making beautiful tables</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-5---r-markdown-1.html"><a href="chapter-5---r-markdown-1.html"><i class="fa fa-check"></i>Chapter 5 - R Markdown</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-5---r-markdown-1.html"><a href="chapter-5---r-markdown-1.html#learning-objectives-5"><i class="fa fa-check"></i>Learning objectives</a></li>
+<li class="chapter" data-level="0.3" data-path="chapter-5---r-markdown-1.html"><a href="chapter-5---r-markdown-1.html#introduction"><i class="fa fa-check"></i><b>0.3</b> Introduction</a></li>
+<li class="chapter" data-level="" data-path="chapter-5---r-markdown-1.html"><a href="chapter-5---r-markdown-1.html#r-markdown"><i class="fa fa-check"></i>R Markdown</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-5---r-markdown-1.html"><a href="chapter-5---r-markdown-1.html#creating-a-r-markdown-file-in-rstudio-1"><i class="fa fa-check"></i>Creating a R Markdown file in RStudio</a></li>
+<li class="chapter" data-level="" data-path="chapter-5---r-markdown-1.html"><a href="chapter-5---r-markdown-1.html#three-components-of-a-r-markdown-file-1"><i class="fa fa-check"></i>Three components of a R Markdown file</a></li>
+<li class="chapter" data-level="" data-path="chapter-5---r-markdown-1.html"><a href="chapter-5---r-markdown-1.html#visual-mode-1"><i class="fa fa-check"></i>Visual mode</a></li>
+<li class="chapter" data-level="" data-path="chapter-5---r-markdown-1.html"><a href="chapter-5---r-markdown-1.html#rendering-knitting-your-document-1"><i class="fa fa-check"></i>Rendering (knitting) your document</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-5---r-markdown-1.html"><a href="chapter-5---r-markdown-1.html#summary-1"><i class="fa fa-check"></i>Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-6---network-analysis.html"><a href="chapter-6---network-analysis.html"><i class="fa fa-check"></i>Chapter 6 - Network analysis</a></li>
+<li class="chapter" data-level="" data-path="chapter-7---topic-modelling.html"><a href="chapter-7---topic-modelling.html"><i class="fa fa-check"></i>Chapter 7 - Topic modelling</a></li>
+<li class="chapter" data-level="" data-path="chapter-8---k-nearest-neighbors.html"><a href="chapter-8---k-nearest-neighbors.html"><i class="fa fa-check"></i>Chapter 8 - K nearest neighbors</a></li>
+<li class="chapter" data-level="" data-path="chapter-9---logistic-regression.html"><a href="chapter-9---logistic-regression.html"><i class="fa fa-check"></i>Chapter 9 - Logistic regression</a></li>
+<li class="chapter" data-level="" data-path="chapter-10---linear-regression.html"><a href="chapter-10---linear-regression.html"><i class="fa fa-check"></i>Chapter 10 - Linear regression</a></li>
+<li class="chapter" data-level="" data-path="chapter-11---principal-component-analysis.html"><a href="chapter-11---principal-component-analysis.html"><i class="fa fa-check"></i>Chapter 11 - Principal component analysis</a></li>
+<li class="chapter" data-level="" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i>Conclusion</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">INFO 6270 - Introduction to Data Science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="chapter-5---r-markdown-1" class="section level1 unnumbered">
+<h1>Chapter 5 - R Markdown</h1>
+<div id="learning-objectives-5" class="section level2 unnumbered">
+<h2>Learning objectives</h2>
+<ul>
+<li>R Markdown</li>
+</ul>
+</div>
+<div id="introduction" class="section level2" number="0.3">
+<h2><span class="header-section-number">0.3</span> Introduction</h2>
+<p>So far, we learned how to import data in all kinds of format into R, convert it into a tibble that follow the the first two tidy principles (one observation per row, one variable per column), and clean up messy strings with the stringr package. These steps are the 80 in the 80/20 rules of data science, which states that 80% of the time is spent preparing the data, and 20% is spent analyzing it.</p>
+<p>We are embark on our journal to draw insights from the data and write clear and compelling data stories. This chapter introduces R Markdown documents. A tool that will enable you to perform all the data processing AND produce beautiful reports in one simple, yet powerful, interface.</p>
+</div>
+<div id="r-markdown" class="section level2 unnumbered">
+<h2>R Markdown</h2>
+<p>So far we have been working with R scripts (.r files, like the ones we used for Labs 1 to 3). In R scripts, everything is interpreted by R as code unless we specify that we are writing a comment with #. This works fine and there is no limit to what we can do with these kinds of R scripts in terms of data processing and analysis. However, R scripts are not a great tool for making sharing our data stories with the world.</p>
+<p>R Markdown (<a href="https://rmarkdown.rstudio.com/" class="uri">https://rmarkdown.rstudio.com/</a>) brings coding, writing, and formatting together by allowing you to write nicely formatted HTML, Word or PDF documents, with embedded chunks of code that are executed to process the data and create beautiful tables and figures for your document. It uses the <strong>markdown</strong> (<a href="https://en.wikipedia.org/wiki/Markdown" class="uri">https://en.wikipedia.org/wiki/Markdown</a>) syntax. This course website is an example of the type of output that you can produce with R Markdown.</p>
+<p>There is a lot that you can do with R Markdown that is beyond the scope of this course, but if you want to explore the possibilities I recommend the <em>R Markdown: The Definitive Guide</em> book by <span class="citation"><a href="#ref-xie_r_2018" role="doc-biblioref">Xie, Allaire, and Grolemund</a> (<a href="#ref-xie_r_2018" role="doc-biblioref">2018</a>)</span>. You can also use this <a href="https://pmongeon.github.io/info6270/files/rmarkdown.pdf">R Markdown cheatsheet</a> for a quicker reference that covers most of the basics.</p>
+<div id="creating-a-r-markdown-file-in-rstudio-1" class="section level3 unnumbered">
+<h3>Creating a R Markdown file in RStudio</h3>
+<p>To create a new R Markdown file (.Rmd), you can click on file, then new file, then select the third option (RMarkdown…). Or you can do this:</p>
+<div style="text-align:center">
+<div>
+<p><img src="files/new_rmd.jpg" width="156" /></p>
+</div>
+</div>
+<p>Then RStudio will give you an opportunity to provide some information about the document you are creating.</p>
+<div style="text-align:center">
+<p><img src="files/rmd_options.jpg" width="406" /></p>
+</div>
+<p>You can select different types of outputs, like documents, presentations, and Shiny applications. In this course, we will use R Markdown to make <strong>documents</strong>. You can choose to output an HTML document, a PDF document, or a Word document. I recommend sticking with the default HTML function. Word is also a good option if you want to be able to modify the format or add text in Word. The PDF format requires additional packages and a LaTeX installation, so I recommend sticking to HTML documents and Word documents for this course.</p>
+<p>When you create a new R Markdown file, it comes with some content that can get you started with the components of the document and the syntax. This can give you a quick overview of how R Markdown works.</p>
+</div>
+<div id="three-components-of-a-r-markdown-file-1" class="section level3 unnumbered">
+<h3>Three components of a R Markdown file</h3>
+<p>There are three components to a R Markdown file: Metadata, text, and code. All components are <strong>optional</strong>. So you can write a R Markdown document without metadata, or include only code or text.</p>
+<div id="metadata-1" class="section level4 unnumbered">
+<h4>Metadata</h4>
+<p>The metadata is located at the top of the RMarkdown document and is delineated by three dashes <code>---</code> at the beginning and the end. When you create a new Rmarkdown file in RStudio, the metadata will look like this:</p>
+<pre class="unnumbered unnumbered unnumbered"><code>---
+title: &quot;This is the title of the document&quot;
+author: &quot;Philippe Mongeon&quot;
+date: &quot;05/02/2022&quot;
+output: html_document
+---</code></pre>
+<p>When working with HTML documents, you can add a table of content and use themes for fonts and colors. This is the metadata of the R Markdown file for Lab 4. Aside from the basics, it indicates that I want my HTML file to use the default style, include a floating and collapsed table of content, and not use numbering for my headings. Feel free to use this as a template for your own documents. You can read more about how to construct the metadata section of your documents in Chapter 3 of <span class="citation"><a href="#ref-xie_r_2018" role="doc-biblioref">Xie, Allaire, and Grolemund</a> (<a href="#ref-xie_r_2018" role="doc-biblioref">2018</a>)</span>.</p>
+<pre class="unnumbered unnumbered unnumbered"><code>---
+title: &quot;INFO6270 Lab 4&quot;
+author: &quot;Philippe Mongeon&quot; 
+date: &quot;2022-02-04&quot;
+output: 
+  html_document:
+    toc: true 
+    toc_float:       
+      collapsed: false
+    toc_depth: 2
+    number_sections: false 
+    theme: default
+---</code></pre>
+</div>
+<div id="text-1" class="section level4 unnumbered">
+<h4>Text</h4>
+<p>What ever you write after the metadata statement is text, which can be formatted using markdown syntax. Here is an example, with the code on the left and the HTML output on the right.</p>
+<p><img src="files/rmd_syntax.jpg" /></p>
+<div id="comment-1" class="section level5 unnumbered">
+<h5>Comment</h5>
+<p>You can also insert comments in your text like this: `&lt;!– comment here –&gt;</p>
+</div>
+</div>
+<div id="code-1" class="section level4 unnumbered">
+<h4>Code</h4>
+<p>What makes R Markdown so great is that you can embed code chunks into your document. You have seen a lot of those code chunks throughout this website so far. Code chunks start with three back ticks followed by curly brackets with the coding language used in the chunk, and end with three back ticks.</p>
+<p><code>```{r}</code></p>
+<p><code>some r code</code></p>
+<p><code>```</code></p>
+<p>In the curly brackets, you can also set options that allow you tell R whether to display the code itself, it’s output, or both. <code>{r echo = FALSE}</code> tells R tells R not to display the chunk in the output. <code>{r eval = FALSE}</code> tells R not to execute the code (so the output will not be displayed because there is no output). Here is an example of each option. The code is on the left, and the HTML output is on the right.</p>
+<p><img src="files/rmd_codechunks.jpg" /></p>
+</div>
+</div>
+<div id="visual-mode-1" class="section level3 unnumbered">
+<h3>Visual mode</h3>
+<p>RStudio recently introduced the visual mode that provides a lot of tools to make writing and formatting your R Markdown document easier.</p>
+<p><img src="files/rmd_swith_to_visual.jpg" /></p>
+<p>Here is the same Rmd file edited in normal mode (left) and visual mode (right).</p>
+<p><img src="files/rmd_visual_combined.jpg" /></p>
+</div>
+<div id="rendering-knitting-your-document-1" class="section level3 unnumbered">
+<h3>Rendering (knitting) your document</h3>
+<p>When you are ready to produce your HTML, Word or PDF document, you click the <strong>knit</strong> button in RStudio. This will execute all the code and output the HTML, Word or PDF file in your working directory. You can also choose, in the settings, to preview the output in a pop up window or in the viewer pane (as in the screenshots above).</p>
+<div style="text-align:center">
+<p><img src="files/rmd_knit.jpg" width="523" /></p>
+</div>
+</div>
+</div>
+<div id="summary-1" class="section level2 unnumbered">
+<h2>Summary</h2>
+<p>R Markdown documents bring together the data processing, analysis and reporting elements of the data science workflow in a single location. And the visual tool brings the R Markdown document writing experience closer to writing in Word or by hiding the code and letting you visualize the format of your document as you are write them.</p>
+<p>To get you used to R Markdown, we will be using it for the remaining labs of the course. You are also encouraged to use it to produce your individual project report.</p>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-xie_r_2018" class="csl-entry">
+Xie, Yihui, J. J. Allaire, and Garrett Grolemund. 2018. <em>R <span>Markdown</span>: The Definitive Guide</em>. Boca Raton: Taylor &amp; Francis, CRC Press. <a href="https://bookdown.org/yihui/rmarkdown/">https://bookdown.org/yihui/rmarkdown/</a>.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="chapter-5---r-markdown.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chapter-6---network-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+</body>
+
+</html>

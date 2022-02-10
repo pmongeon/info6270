@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 6 - Visualizing data | INFO 6270 - Introduction to Data Science</title>
+  <meta name="description" content="Chapter 6 - Visualizing data | INFO 6270 - Introduction to Data Science" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 6 - Visualizing data | INFO 6270 - Introduction to Data Science" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="pmongeon/info6270" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 - Visualizing data | INFO 6270 - Introduction to Data Science" />
+  
+  
+  
+
+<meta name="author" content="Philippe Mongeon" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="chapter-6---summarizing-data.html"/>
+<link rel="next" href="chapter-7---topic-modelling.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><center>INFO6270 - Introduction to Data Science</center></li>
+<li><center>Winter 2022</center></li>
+<li><center>Philippe Mongeon</center></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Course overview</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#schedule"><i class="fa fa-check"></i>Schedule</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#assignments"><i class="fa fa-check"></i>Assignments</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#bibliography"><i class="fa fa-check"></i>Bibliography</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#official-syllabus"><i class="fa fa-check"></i>Official syllabus</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-1---what-is-data-science.html"><a href="chapter-1---what-is-data-science.html"><i class="fa fa-check"></i>Chapter 1 - What is data science?</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-1---what-is-data-science.html"><a href="chapter-1---what-is-data-science.html#learning-objectives"><i class="fa fa-check"></i>Learning objectives</a></li>
+<li class="chapter" data-level="" data-path="chapter-1---what-is-data-science.html"><a href="chapter-1---what-is-data-science.html#what-is-data-science"><i class="fa fa-check"></i>What is data science?</a></li>
+<li class="chapter" data-level="" data-path="chapter-1---what-is-data-science.html"><a href="chapter-1---what-is-data-science.html#the-data-science-process"><i class="fa fa-check"></i>The data science process</a></li>
+<li class="chapter" data-level="" data-path="chapter-1---what-is-data-science.html"><a href="chapter-1---what-is-data-science.html#writing-a-problem-statement"><i class="fa fa-check"></i>Writing a problem statement</a></li>
+<li class="chapter" data-level="" data-path="chapter-1---what-is-data-science.html"><a href="chapter-1---what-is-data-science.html#getting-data"><i class="fa fa-check"></i>Getting data</a></li>
+<li class="chapter" data-level="" data-path="chapter-1---what-is-data-science.html"><a href="chapter-1---what-is-data-science.html#homework"><i class="fa fa-check"></i>Homework</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html"><i class="fa fa-check"></i>Chapter 2 - Getting started with R</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#learning-objectives-1"><i class="fa fa-check"></i>Learning objectives</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#setting-up-r"><i class="fa fa-check"></i>Setting up R</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#installing-r-and-rstudio"><i class="fa fa-check"></i>Installing R and Rstudio</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#explore-rstudio"><i class="fa fa-check"></i>Explore RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#first-steps-in-r"><i class="fa fa-check"></i>First steps in R</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#r-scripts"><i class="fa fa-check"></i>R scripts</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#working-directory"><i class="fa fa-check"></i>Working directory</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#functions"><i class="fa fa-check"></i>Functions</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#executing-code"><i class="fa fa-check"></i>Executing code</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#numbers-and-strings"><i class="fa fa-check"></i>numbers and strings</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#doing-the-math"><i class="fa fa-check"></i>Doing the math</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#objects"><i class="fa fa-check"></i>Objects</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#subsetting-data"><i class="fa fa-check"></i>Subsetting data</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#logical-operators"><i class="fa fa-check"></i>Logical operators</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#conditional-statements"><i class="fa fa-check"></i>Conditional statements</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#loops-and-vectorization"><i class="fa fa-check"></i>Loops and vectorization</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#homework-1"><i class="fa fa-check"></i>Homework</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html"><i class="fa fa-check"></i>Chapter 3 - Reading and tidying data</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#learning-objectives-2"><i class="fa fa-check"></i>Learning objectives</a>
+<ul>
+<li><a href="chapter-3---reading-and-tidying-data.html#slides"><strong>Slides</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#tidy-data"><i class="fa fa-check"></i>Tidy data</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#the-tidyverse"><i class="fa fa-check"></i>The tidyverse</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#import-data"><i class="fa fa-check"></i>Import data</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#delimited-file-formats"><i class="fa fa-check"></i>Delimited file formats</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#json-files"><i class="fa fa-check"></i>JSON files</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#application-programming-interface-api"><i class="fa fa-check"></i>Application programming interface (API)</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#xml-files"><i class="fa fa-check"></i>XML files</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#connections"><i class="fa fa-check"></i>Connections</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#tidy-your-data"><i class="fa fa-check"></i>Tidy your data</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#reshape-data"><i class="fa fa-check"></i>Reshape data</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#expand-tables"><i class="fa fa-check"></i>Expand tables</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#handle-missing-values"><i class="fa fa-check"></i>Handle missing values</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#merge-and-split-cells"><i class="fa fa-check"></i>Merge and split cells</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#nested-data"><i class="fa fa-check"></i>Nested data</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#combine-dataframes"><i class="fa fa-check"></i>Combine dataframes</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#join-dataframes"><i class="fa fa-check"></i>Join dataframes</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#rename-variables"><i class="fa fa-check"></i>Rename variables</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#export-data"><i class="fa fa-check"></i>Export data</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#export-dataframes"><i class="fa fa-check"></i>Export dataframes</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#json"><i class="fa fa-check"></i>JSON</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#the-pipe"><i class="fa fa-check"></i>The Pipe</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#additional-resources"><i class="fa fa-check"></i>Additional resources</a></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html#homework-2"><i class="fa fa-check"></i>Homework</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html"><i class="fa fa-check"></i>Chapter 4 - Working with strings</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#learning-objectives-3"><i class="fa fa-check"></i>Learning objectives</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#dealing-with-messy-or-unstructured-data"><i class="fa fa-check"></i>Dealing with messy or unstructured data</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#cleaning-messy-data"><i class="fa fa-check"></i>Cleaning messy data</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#filtering-rows-based-on-string-matches"><i class="fa fa-check"></i>Filtering rows based on string matches</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#extracting-data-from-text"><i class="fa fa-check"></i>Extracting data from text</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#the-stringr-package"><i class="fa fa-check"></i>The stringr package</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#transforming-strings"><i class="fa fa-check"></i>Transforming strings</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#clean-up-a-string"><i class="fa fa-check"></i>Clean up a string</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#combine-strings"><i class="fa fa-check"></i>Combine strings</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#splitting-strings"><i class="fa fa-check"></i>Splitting strings</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#subsetting-strings"><i class="fa fa-check"></i>Subsetting strings</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#locating-a-pattern-in-a-string"><i class="fa fa-check"></i>Locating a pattern in a string</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#testing-strings"><i class="fa fa-check"></i>Testing strings</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#regular-expressions-regex"><i class="fa fa-check"></i>Regular expressions (regex)</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#dealing-with-special-characters-in-strings"><i class="fa fa-check"></i>Dealing with special characters in strings</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#summary"><i class="fa fa-check"></i>Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html#homework-3"><i class="fa fa-check"></i>Homework</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-5---r-markdown.html"><a href="chapter-5---r-markdown.html"><i class="fa fa-check"></i>Chapter 5 - R Markdown</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-5---r-markdown.html"><a href="chapter-5---r-markdown.html#learning-objectives-4"><i class="fa fa-check"></i>Learning objectives</a></li>
+<li class="chapter" data-level="" data-path="chapter-5---r-markdown.html"><a href="chapter-5---r-markdown.html#introduction"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="chapter-5---r-markdown.html"><a href="chapter-5---r-markdown.html#r-markdown"><i class="fa fa-check"></i>R Markdown</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-5---r-markdown.html"><a href="chapter-5---r-markdown.html#creating-a-r-markdown-file-in-rstudio"><i class="fa fa-check"></i>Creating a R Markdown file in RStudio</a></li>
+<li class="chapter" data-level="" data-path="chapter-5---r-markdown.html"><a href="chapter-5---r-markdown.html#three-components-of-a-r-markdown-file"><i class="fa fa-check"></i>Three components of a R Markdown file</a></li>
+<li class="chapter" data-level="" data-path="chapter-5---r-markdown.html"><a href="chapter-5---r-markdown.html#visual-mode"><i class="fa fa-check"></i>Visual mode</a></li>
+<li class="chapter" data-level="" data-path="chapter-5---r-markdown.html"><a href="chapter-5---r-markdown.html#rendering-knitting-your-document"><i class="fa fa-check"></i>Rendering (knitting) your document</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-5---r-markdown.html"><a href="chapter-5---r-markdown.html#making-beautiful-tables-with-r-markdown"><i class="fa fa-check"></i>Making beautiful tables with R Markdown</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-5---r-markdown.html"><a href="chapter-5---r-markdown.html#the-kableextra-package"><i class="fa fa-check"></i>the kableExtra package</a></li>
+<li class="chapter" data-level="" data-path="chapter-5---r-markdown.html"><a href="chapter-5---r-markdown.html#keeping-it-simple"><i class="fa fa-check"></i>keeping it simple</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-5---r-markdown.html"><a href="chapter-5---r-markdown.html#summary-1"><i class="fa fa-check"></i>Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-6---summarizing-data.html"><a href="chapter-6---summarizing-data.html"><i class="fa fa-check"></i>Chapter 6 - Summarizing data</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-6---summarizing-data.html"><a href="chapter-6---summarizing-data.html#learning-objectives-5"><i class="fa fa-check"></i>Learning objectives</a></li>
+<li class="chapter" data-level="" data-path="chapter-6---summarizing-data.html"><a href="chapter-6---summarizing-data.html#introduction-1"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="chapter-6---summarizing-data.html"><a href="chapter-6---summarizing-data.html#types-of-variables"><i class="fa fa-check"></i>Types of variables</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-6---summarizing-data.html"><a href="chapter-6---summarizing-data.html#categorical"><i class="fa fa-check"></i>Categorical</a></li>
+<li class="chapter" data-level="" data-path="chapter-6---summarizing-data.html"><a href="chapter-6---summarizing-data.html#numerical-variables"><i class="fa fa-check"></i>Numerical variables</a></li>
+<li class="chapter" data-level="" data-path="chapter-6---summarizing-data.html"><a href="chapter-6---summarizing-data.html#categories-represented-with-numbers"><i class="fa fa-check"></i>Categories represented with numbers</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-6---summarizing-data.html"><a href="chapter-6---summarizing-data.html#summarizing-categorical-data"><i class="fa fa-check"></i>Summarizing categorical data</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-6---summarizing-data.html"><a href="chapter-6---summarizing-data.html#frequency"><i class="fa fa-check"></i>Frequency</a></li>
+<li class="chapter" data-level="" data-path="chapter-6---summarizing-data.html"><a href="chapter-6---summarizing-data.html#relative-frequency"><i class="fa fa-check"></i>Relative frequency</a></li>
+<li class="chapter" data-level="" data-path="chapter-6---summarizing-data.html"><a href="chapter-6---summarizing-data.html#adding-a-total"><i class="fa fa-check"></i>Adding a total</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-6---summarizing-data.html"><a href="chapter-6---summarizing-data.html#summarizing-numerical-data"><i class="fa fa-check"></i>Summarizing numerical data</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-6---summarizing-data.html"><a href="chapter-6---summarizing-data.html#measures-of-centrality"><i class="fa fa-check"></i>Measures of centrality</a></li>
+<li class="chapter" data-level="" data-path="chapter-6---summarizing-data.html"><a href="chapter-6---summarizing-data.html#measures-of-dispersion"><i class="fa fa-check"></i>Measures of dispersion</a></li>
+<li class="chapter" data-level="" data-path="chapter-6---summarizing-data.html"><a href="chapter-6---summarizing-data.html#measures-of-symmetry"><i class="fa fa-check"></i>Measures of symmetry</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-6---summarizing-data.html"><a href="chapter-6---summarizing-data.html#creating-a-descriptive-statistics-summary"><i class="fa fa-check"></i>Creating a descriptive statistics summary</a></li>
+<li class="chapter" data-level="" data-path="chapter-6---summarizing-data.html"><a href="chapter-6---summarizing-data.html#homework-4"><i class="fa fa-check"></i>Homework</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-6---visualizing-data.html"><a href="chapter-6---visualizing-data.html"><i class="fa fa-check"></i>Chapter 6 - Visualizing data</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-6---visualizing-data.html"><a href="chapter-6---visualizing-data.html#exploring-with-visualizations"><i class="fa fa-check"></i>Exploring with visualizations</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-6---visualizing-data.html"><a href="chapter-6---visualizing-data.html#the-ggplot-syntax"><i class="fa fa-check"></i>the ggplot syntax</a></li>
+<li class="chapter" data-level="" data-path="chapter-6---visualizing-data.html"><a href="chapter-6---visualizing-data.html#choosing-the-right-visualization-for-your-data"><i class="fa fa-check"></i>Choosing the right visualization for your data</a></li>
+<li class="chapter" data-level="" data-path="chapter-6---visualizing-data.html"><a href="chapter-6---visualizing-data.html#facets"><i class="fa fa-check"></i>Facets</a></li>
+<li class="chapter" data-level="" data-path="chapter-6---visualizing-data.html"><a href="chapter-6---visualizing-data.html#making-pretty-figures"><i class="fa fa-check"></i>Making pretty figures</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-7---topic-modelling.html"><a href="chapter-7---topic-modelling.html"><i class="fa fa-check"></i>Chapter 7 - Topic modelling</a></li>
+<li class="chapter" data-level="" data-path="chapter-8---k-nearest-neighbors.html"><a href="chapter-8---k-nearest-neighbors.html"><i class="fa fa-check"></i>Chapter 8 - K nearest neighbors</a></li>
+<li class="chapter" data-level="" data-path="chapter-9---logistic-regression.html"><a href="chapter-9---logistic-regression.html"><i class="fa fa-check"></i>Chapter 9 - Logistic regression</a></li>
+<li class="chapter" data-level="" data-path="chapter-10---linear-regression.html"><a href="chapter-10---linear-regression.html"><i class="fa fa-check"></i>Chapter 10 - Linear regression</a></li>
+<li class="chapter" data-level="" data-path="chapter-11---principal-component-analysis.html"><a href="chapter-11---principal-component-analysis.html"><i class="fa fa-check"></i>Chapter 11 - Principal component analysis</a></li>
+<li class="chapter" data-level="" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i>Conclusion</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">INFO 6270 - Introduction to Data Science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="chapter-6---visualizing-data" class="section level1 unnumbered">
+<h1>Chapter 6 - Visualizing data</h1>
+<div id="exploring-with-visualizations" class="section level2 unnumbered">
+<h2>Exploring with visualizations</h2>
+<p>One of the most widely used package for data visualization in R is called <strong>ggplot2</strong> (<a href="https://ggplot2.tidyverse.org/">https://ggplot2.tidyverse.org</a>). It has a bit of a learning curve but it is extremely powerful and can visualize almost anything. The <em>R for data science</em> book by <span class="citation">(<a href="#ref-wickham2016b" role="doc-biblioref"><strong>wickham2016b?</strong></a>)</span> has a chapter on ggplot2, and the same author also wrote an entire book on ggplot2 <span class="citation">(<a href="#ref-wickham2016a" role="doc-biblioref"><strong>wickham2016a?</strong></a>)</span>, which I also recommend. The book <em>Data visualization: a practical introduction</em> book by <span class="citation">(<a href="#ref-healy2018" role="doc-biblioref"><strong>healy2018?</strong></a>)</span> is another good resource. These books cover a lot of ground on how to write code to visualize data in R, but ultimately, an understanding of of the fundamentals of data visualization (what does a good visualization look like?) is also an invaluable asset for you as a data scientist. For that, I recommend the <em>Fundamentals of data visualization</em> book by <span class="citation">(<a href="#ref-wilke2019" role="doc-biblioref"><strong>wilke2019?</strong></a>)</span>.</p>
+<p>This chapter draws from these resources to provide a short introduction to visualizing data with ggplot2. First we will explore the ggplot syntax, and then explore different types of visualizations with some example and some exercises.</p>
+<div id="the-ggplot-syntax" class="section level3 unnumbered">
+<h3>the ggplot syntax</h3>
+<p>The minimum requirements to make a plot is data, an aesthetic argument <strong>aes()</strong>, and a geometric object <strong>geom()</strong>. Just like the pipe (%&gt;% ) is used to build R statements layer by layer, ggplot uses the same principle, but using the plus sign “+” to add layers to the plot. Let’s construct a basic dot plot to see how it works.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="chapter-6---visualizing-data.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># if tell R to just plot the data, it produces nothing </span></span>
+<span id="cb1-2"><a href="chapter-6---visualizing-data.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># because we did not provide information on the dimensions of the graph (x and y axis) </span></span>
+<span id="cb1-3"><a href="chapter-6---visualizing-data.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># or how to show the data in the graph.</span></span>
+<span id="cb1-4"><a href="chapter-6---visualizing-data.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg)</span></code></pre></div>
+<p><img src="INFO6270_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="chapter-6---visualizing-data.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># So now we use aes() to tell R what variables we want to use for the x and y axes.</span></span>
+<span id="cb2-2"><a href="chapter-6---visualizing-data.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span></span>
+<span id="cb2-3"><a href="chapter-6---visualizing-data.html#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>displ, <span class="at">y=</span>hwy)</span></code></pre></div>
+<p><img src="INFO6270_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="chapter-6---visualizing-data.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The provided aes() were used by ggplot to generate a blank plot. </span></span>
+<span id="cb3-2"><a href="chapter-6---visualizing-data.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># We now need to tell how we want the data to be visualized in this plot with a geom() layer.</span></span>
+<span id="cb3-3"><a href="chapter-6---visualizing-data.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span></span>
+<span id="cb3-4"><a href="chapter-6---visualizing-data.html#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>displ, <span class="at">y=</span>hwy) <span class="sc">+</span> </span>
+<span id="cb3-5"><a href="chapter-6---visualizing-data.html#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="INFO6270_files/figure-html/unnamed-chunk-2-3.png" width="672" /></p>
+<p>That’s it! Now you know how to make a plot in R. Let’s look at a few more useful examples to add layers to make our graph prettier. First let’s add a second geom() layer on top of this graph to make it more informative.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="chapter-6---visualizing-data.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add a geom() </span></span>
+<span id="cb4-2"><a href="chapter-6---visualizing-data.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span></span>
+<span id="cb4-3"><a href="chapter-6---visualizing-data.html#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>displ, <span class="at">y=</span>hwy) <span class="sc">+</span> </span>
+<span id="cb4-4"><a href="chapter-6---visualizing-data.html#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb4-5"><a href="chapter-6---visualizing-data.html#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()</span></code></pre></div>
+<p><img src="INFO6270_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="chapter-6---visualizing-data.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># let&#39;s add a color for the dots</span></span>
+<span id="cb5-2"><a href="chapter-6---visualizing-data.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span></span>
+<span id="cb5-3"><a href="chapter-6---visualizing-data.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>displ, <span class="at">y=</span>hwy) <span class="sc">+</span> </span>
+<span id="cb5-4"><a href="chapter-6---visualizing-data.html#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">&quot;green&quot;</span>) <span class="sc">+</span></span>
+<span id="cb5-5"><a href="chapter-6---visualizing-data.html#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">colour =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p><img src="INFO6270_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="chapter-6---visualizing-data.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># perhaps we&#39;d rather have the colour be based on a variable in the dataset. </span></span>
+<span id="cb6-2"><a href="chapter-6---visualizing-data.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># In this case the colour goes into an aes() function within the geom_point() function. like this:</span></span>
+<span id="cb6-3"><a href="chapter-6---visualizing-data.html#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="chapter-6---visualizing-data.html#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>displ, <span class="at">y=</span>hwy) <span class="sc">+</span> </span>
+<span id="cb6-5"><a href="chapter-6---visualizing-data.html#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour=</span>class)) <span class="sc">+</span></span>
+<span id="cb6-6"><a href="chapter-6---visualizing-data.html#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()</span></code></pre></div>
+<p><img src="INFO6270_files/figure-html/unnamed-chunk-3-3.png" width="672" /></p>
+</div>
+<div id="choosing-the-right-visualization-for-your-data" class="section level3 unnumbered">
+<h3>Choosing the right visualization for your data</h3>
+<p>The ggplot2 <a href="https://ggplot2.tidyverse.org/reference/">website</a> provides a comprehensive list of the geoms and all the other functions that you can use with ggplot. You can can also click on any function listed to get more information, including the arguments that the function accepts or requires, as well as an example.</p>
+<p>As you will see, there is a <strong>lot</strong> of things that you can do with ggplot. That’s because ggplot is meant to fulfill the needs of a large community of users working in completely different industries with completely different kinds of data and completely different objectives. Ideally, when you are attempting to visualize your data, you already have a pretty clear idea of what the data looks like and what you are trying to accomplish, so you can start by asking these few questions, so that you can identify the limited set of options that are relevant for your data and your goals. Figuring out your options “on paper” before jumping in the code will help guide you and protect you from information overload and potentially a lot of wasted time trying to create plots using geoms that simply do not work for you data. Here are the questions:</p>
+<ol style="list-style-type: decimal">
+<li><p>What question am I trying to answer with this plot?</p></li>
+<li><p>How many variables do I want to visualize?</p></li>
+<li><p>What type of variables do I want to visualize?</p></li>
+</ol>
+<p>The <a href="https://clauswilke.com/dataviz/directory-of-visualizations.html">directory of visualizations</a> proposed by <span class="citation">(<a href="#ref-wilke2019a" role="doc-biblioref"><strong>wilke2019a?</strong></a>)</span> is a great resource to help you think about this. You can also use the following table that lists geoms based on the number and types of data to be plotted.</p>
+<table>
+<caption><strong>Table 1. Mapping of graph types to data number and types</strong></caption>
+<thead>
+<tr class="header">
+<th>Variables</th>
+<th>Typical graph</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Single discrete</td>
+<td>Bar chart</td>
+</tr>
+<tr class="even">
+<td>Single continuous</td>
+<td>Histogram</td>
+</tr>
+<tr class="odd">
+<td>two continuous</td>
+<td>Scatter plot, line graph</td>
+</tr>
+<tr class="even">
+<td>Two discrete</td>
+<td>Bar chart</td>
+</tr>
+<tr class="odd">
+<td>One discrete, one continuous</td>
+<td>Bar chart, box plot, dot plot</td>
+</tr>
+</tbody>
+</table>
+<div id="bar-chart" class="section level4 unnumbered">
+<h4>Bar chart</h4>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="chapter-6---visualizing-data.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span></span>
+<span id="cb7-2"><a href="chapter-6---visualizing-data.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(manufacturer) <span class="sc">+</span></span>
+<span id="cb7-3"><a href="chapter-6---visualizing-data.html#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div>
+<p><img src="INFO6270_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>We can see that the names of the manufacturers overlap, so let’s fix that by giving a 45 degree angle to these labels.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="chapter-6---visualizing-data.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span></span>
+<span id="cb8-2"><a href="chapter-6---visualizing-data.html#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(manufacturer) <span class="sc">+</span></span>
+<span id="cb8-3"><a href="chapter-6---visualizing-data.html#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb8-4"><a href="chapter-6---visualizing-data.html#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>))</span></code></pre></div>
+<p><img src="INFO6270_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="histogram" class="section level4 unnumbered">
+<h4>Histogram</h4>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="chapter-6---visualizing-data.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span></span>
+<span id="cb9-2"><a href="chapter-6---visualizing-data.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(hwy) <span class="sc">+</span></span>
+<span id="cb9-3"><a href="chapter-6---visualizing-data.html#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code></pre></div>
+<p><img src="INFO6270_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="scatter-plot" class="section level4 unnumbered">
+<h4>Scatter plot</h4>
+<p>The example we used earlier happens to be a good example of a scatter plot on which we added a trend line with the geom_smooth function.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="chapter-6---visualizing-data.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span></span>
+<span id="cb10-2"><a href="chapter-6---visualizing-data.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>displ, <span class="at">y=</span>hwy) <span class="sc">+</span> </span>
+<span id="cb10-3"><a href="chapter-6---visualizing-data.html#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour=</span>class)) <span class="sc">+</span></span>
+<span id="cb10-4"><a href="chapter-6---visualizing-data.html#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;loess&quot;</span>)</span></code></pre></div>
+<p><img src="INFO6270_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div id="line-graph" class="section level4 unnumbered">
+<h4>Line graph</h4>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="chapter-6---visualizing-data.html#cb11-1" aria-hidden="true" tabindex="-1"></a>xValue <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb11-2"><a href="chapter-6---visualizing-data.html#cb11-2" aria-hidden="true" tabindex="-1"></a>yValue <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(<span class="fu">rnorm</span>(<span class="dv">10</span>))</span>
+<span id="cb11-3"><a href="chapter-6---visualizing-data.html#cb11-3" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(xValue,yValue)</span>
+<span id="cb11-4"><a href="chapter-6---visualizing-data.html#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="chapter-6---visualizing-data.html#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data) <span class="sc">+</span></span>
+<span id="cb11-6"><a href="chapter-6---visualizing-data.html#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>xValue, <span class="at">y=</span>yValue) <span class="sc">+</span></span>
+<span id="cb11-7"><a href="chapter-6---visualizing-data.html#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div>
+<p><img src="INFO6270_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+<div id="box-plot" class="section level4 unnumbered">
+<h4>Box plot</h4>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="chapter-6---visualizing-data.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span></span>
+<span id="cb12-2"><a href="chapter-6---visualizing-data.html#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>manufacturer, <span class="at">y =</span> hwy) <span class="sc">+</span></span>
+<span id="cb12-3"><a href="chapter-6---visualizing-data.html#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb12-4"><a href="chapter-6---visualizing-data.html#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>))</span></code></pre></div>
+<p><img src="INFO6270_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+</div>
+<div id="jitter-plot" class="section level4 unnumbered">
+<h4>Jitter plot</h4>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="chapter-6---visualizing-data.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span></span>
+<span id="cb13-2"><a href="chapter-6---visualizing-data.html#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>manufacturer, <span class="at">y =</span> hwy) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="chapter-6---visualizing-data.html#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width=</span><span class="fl">0.2</span>)</span></code></pre></div>
+<p><img src="INFO6270_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="chapter-6---visualizing-data.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># you can also add the jitter plot on top of a box plot</span></span>
+<span id="cb14-2"><a href="chapter-6---visualizing-data.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span></span>
+<span id="cb14-3"><a href="chapter-6---visualizing-data.html#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>manufacturer, <span class="at">y =</span> hwy) <span class="sc">+</span></span>
+<span id="cb14-4"><a href="chapter-6---visualizing-data.html#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb14-5"><a href="chapter-6---visualizing-data.html#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>)) <span class="sc">+</span></span>
+<span id="cb14-6"><a href="chapter-6---visualizing-data.html#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width=</span><span class="fl">0.2</span>)</span></code></pre></div>
+<p><img src="INFO6270_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
+</div>
+</div>
+<div id="facets" class="section level3 unnumbered">
+<h3>Facets</h3>
+<p>You may want to produce a distinct plot for each of your groups in order to have more space to show your data. For instance, the plot above is a vertical display of 15 different distributions. It’s space efficient and makes it easy to compare the distributions, but maybe you have space and would rather show a panel of 15 distributions using histograms, for instance. This is done with the facet_grid() and facet_wrap() functions.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="chapter-6---visualizing-data.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(hwy)) <span class="sc">+</span></span>
+<span id="cb15-2"><a href="chapter-6---visualizing-data.html#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb15-3"><a href="chapter-6---visualizing-data.html#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="at">facets =</span> <span class="st">&quot;class&quot;</span>, <span class="at">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
+<p><img src="INFO6270_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+</div>
+<div id="making-pretty-figures" class="section level3 unnumbered">
+<h3>Making pretty figures</h3>
+<div id="labels" class="section level4 unnumbered">
+<h4>labels</h4>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="chapter-6---visualizing-data.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span></span>
+<span id="cb16-2"><a href="chapter-6---visualizing-data.html#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>displ, <span class="at">y=</span>hwy, <span class="at">colour=</span>class) <span class="sc">+</span> </span>
+<span id="cb16-3"><a href="chapter-6---visualizing-data.html#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb16-4"><a href="chapter-6---visualizing-data.html#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb16-5"><a href="chapter-6---visualizing-data.html#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Engine displacement (litres)&quot;</span>, </span>
+<span id="cb16-6"><a href="chapter-6---visualizing-data.html#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Highway miles per gallon&quot;</span>, </span>
+<span id="cb16-7"><a href="chapter-6---visualizing-data.html#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Mileage by engine size and cylinders&quot;</span>,</span>
+<span id="cb16-8"><a href="chapter-6---visualizing-data.html#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Source: http://fueleconomy.gov&quot;</span></span>
+<span id="cb16-9"><a href="chapter-6---visualizing-data.html#cb16-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="INFO6270_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+</div>
+<div id="themes" class="section level4 unnumbered">
+<h4>Themes</h4>
+<p>When trying to design a graph that you like, you don’t have to start from scratch!</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="chapter-6---visualizing-data.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hrbrthemes)</span>
+<span id="cb17-2"><a href="chapter-6---visualizing-data.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes) </span>
+<span id="cb17-3"><a href="chapter-6---visualizing-data.html#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span></span>
+<span id="cb17-4"><a href="chapter-6---visualizing-data.html#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>displ, <span class="at">y=</span>hwy, <span class="at">colour=</span>class) <span class="sc">+</span> </span>
+<span id="cb17-5"><a href="chapter-6---visualizing-data.html#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb17-6"><a href="chapter-6---visualizing-data.html#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(    <span class="at">x =</span> <span class="st">&quot;Engine displacement (litres)&quot;</span>, </span>
+<span id="cb17-7"><a href="chapter-6---visualizing-data.html#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Highway miles per gallon&quot;</span>, </span>
+<span id="cb17-8"><a href="chapter-6---visualizing-data.html#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Mileage by engine size and cylinders&quot;</span>,</span>
+<span id="cb17-9"><a href="chapter-6---visualizing-data.html#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Source: http://fueleconomy.gov&quot;</span></span>
+<span id="cb17-10"><a href="chapter-6---visualizing-data.html#cb17-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb17-11"><a href="chapter-6---visualizing-data.html#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_clean</span>() <span class="sc">+</span></span>
+<span id="cb17-12"><a href="chapter-6---visualizing-data.html#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb17-13"><a href="chapter-6---visualizing-data.html#cb17-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.background =</span> <span class="fu">element_rect</span>(<span class="at">color =</span> <span class="cn">NA</span>), <span class="co"># removes the legend border</span></span>
+<span id="cb17-14"><a href="chapter-6---visualizing-data.html#cb17-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title.align =</span> <span class="fl">0.5</span> <span class="co"># centres the legend title</span></span>
+<span id="cb17-15"><a href="chapter-6---visualizing-data.html#cb17-15" aria-hidden="true" tabindex="-1"></a>    ) </span></code></pre></div>
+<p><img src="INFO6270_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+</div>
+<div id="adjusting-axes-scales-and-breaks" class="section level4 unnumbered">
+<h4>Adjusting axes scales and breaks</h4>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="chapter-6---visualizing-data.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span></span>
+<span id="cb18-2"><a href="chapter-6---visualizing-data.html#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>displ, <span class="at">y=</span>hwy, <span class="at">colour=</span>class) <span class="sc">+</span> </span>
+<span id="cb18-3"><a href="chapter-6---visualizing-data.html#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb18-4"><a href="chapter-6---visualizing-data.html#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(    <span class="at">x =</span> <span class="st">&quot;Engine displacement (litres)&quot;</span>, </span>
+<span id="cb18-5"><a href="chapter-6---visualizing-data.html#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Highway miles per gallon&quot;</span>, </span>
+<span id="cb18-6"><a href="chapter-6---visualizing-data.html#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Mileage by engine size and cylinders&quot;</span>,</span>
+<span id="cb18-7"><a href="chapter-6---visualizing-data.html#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Source: http://fueleconomy.gov&quot;</span></span>
+<span id="cb18-8"><a href="chapter-6---visualizing-data.html#cb18-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-9"><a href="chapter-6---visualizing-data.html#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_clean</span>() <span class="sc">+</span></span>
+<span id="cb18-10"><a href="chapter-6---visualizing-data.html#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb18-11"><a href="chapter-6---visualizing-data.html#cb18-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.background =</span> <span class="fu">element_rect</span>(<span class="at">color =</span> <span class="cn">NA</span>), <span class="co"># removes the legend border</span></span>
+<span id="cb18-12"><a href="chapter-6---visualizing-data.html#cb18-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title.align =</span> <span class="fl">0.5</span> <span class="co"># centres the legend title</span></span>
+<span id="cb18-13"><a href="chapter-6---visualizing-data.html#cb18-13" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb18-14"><a href="chapter-6---visualizing-data.html#cb18-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">8</span>), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>))</span></code></pre></div>
+<p><img src="INFO6270_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+</div>
+<div id="colours" class="section level4 unnumbered">
+<h4>Colours</h4>
+<p>You can customize the colours in your graphs by using one of many available palettes or by setting the colours manually. Here is a great place to explore palettes and where to get them: <a href="https://emilhvitfeldt.github.io/r-color-palettes/discrete.html" class="uri">https://emilhvitfeldt.github.io/r-color-palettes/discrete.html</a>.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="chapter-6---visualizing-data.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span></span>
+<span id="cb19-2"><a href="chapter-6---visualizing-data.html#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>displ, <span class="at">y=</span>hwy, <span class="at">colour=</span>class) <span class="sc">+</span> </span>
+<span id="cb19-3"><a href="chapter-6---visualizing-data.html#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb19-4"><a href="chapter-6---visualizing-data.html#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(    <span class="at">x =</span> <span class="st">&quot;Engine displacement (litres)&quot;</span>, </span>
+<span id="cb19-5"><a href="chapter-6---visualizing-data.html#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Highway miles per gallon&quot;</span>, </span>
+<span id="cb19-6"><a href="chapter-6---visualizing-data.html#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Mileage by engine size and cylinders&quot;</span>,</span>
+<span id="cb19-7"><a href="chapter-6---visualizing-data.html#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Source: http://fueleconomy.gov&quot;</span></span>
+<span id="cb19-8"><a href="chapter-6---visualizing-data.html#cb19-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-9"><a href="chapter-6---visualizing-data.html#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_clean</span>() <span class="sc">+</span></span>
+<span id="cb19-10"><a href="chapter-6---visualizing-data.html#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb19-11"><a href="chapter-6---visualizing-data.html#cb19-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.background =</span> <span class="fu">element_rect</span>(<span class="at">color =</span> <span class="cn">NA</span>), <span class="co"># removes the legend border</span></span>
+<span id="cb19-12"><a href="chapter-6---visualizing-data.html#cb19-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title.align =</span> <span class="fl">0.5</span> <span class="co"># centres the legend title</span></span>
+<span id="cb19-13"><a href="chapter-6---visualizing-data.html#cb19-13" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb19-14"><a href="chapter-6---visualizing-data.html#cb19-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">7</span>), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>)) <span class="sc">+</span></span>
+<span id="cb19-15"><a href="chapter-6---visualizing-data.html#cb19-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_colorblind</span>()</span></code></pre></div>
+<p><img src="INFO6270_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>Here’s how you can specify the colours using scale_colour_manual(), or scale_fill_manual when working with continuous variables.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="chapter-6---visualizing-data.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span></span>
+<span id="cb20-2"><a href="chapter-6---visualizing-data.html#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>displ, <span class="at">y=</span>hwy, <span class="at">colour=</span>class) <span class="sc">+</span> </span>
+<span id="cb20-3"><a href="chapter-6---visualizing-data.html#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb20-4"><a href="chapter-6---visualizing-data.html#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(    <span class="at">x =</span> <span class="st">&quot;Engine displacement (litres)&quot;</span>, </span>
+<span id="cb20-5"><a href="chapter-6---visualizing-data.html#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Highway miles per gallon&quot;</span>, </span>
+<span id="cb20-6"><a href="chapter-6---visualizing-data.html#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Mileage by engine size and cylinders&quot;</span>,</span>
+<span id="cb20-7"><a href="chapter-6---visualizing-data.html#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Source: http://fueleconomy.gov&quot;</span></span>
+<span id="cb20-8"><a href="chapter-6---visualizing-data.html#cb20-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb20-9"><a href="chapter-6---visualizing-data.html#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_clean</span>() <span class="sc">+</span></span>
+<span id="cb20-10"><a href="chapter-6---visualizing-data.html#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb20-11"><a href="chapter-6---visualizing-data.html#cb20-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.background =</span> <span class="fu">element_rect</span>(<span class="at">color =</span> <span class="cn">NA</span>), <span class="co"># removes the legend border</span></span>
+<span id="cb20-12"><a href="chapter-6---visualizing-data.html#cb20-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title.align =</span> <span class="fl">0.5</span> <span class="co"># centres the legend title</span></span>
+<span id="cb20-13"><a href="chapter-6---visualizing-data.html#cb20-13" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb20-14"><a href="chapter-6---visualizing-data.html#cb20-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">7</span>), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>)) <span class="sc">+</span></span>
+<span id="cb20-15"><a href="chapter-6---visualizing-data.html#cb20-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>,<span class="st">&quot;red&quot;</span>,<span class="st">&quot;green&quot;</span>,<span class="st">&quot;yellow&quot;</span>,<span class="st">&quot;purple&quot;</span>,<span class="st">&quot;orange&quot;</span>,<span class="st">&quot;pink&quot;</span>))</span></code></pre></div>
+<p><img src="INFO6270_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p>The code above assigned assigned the colors in order (first group has first colour, second group as second colour, etc.). You can also specify the group colors like this:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="chapter-6---visualizing-data.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg) <span class="sc">+</span></span>
+<span id="cb21-2"><a href="chapter-6---visualizing-data.html#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>displ, <span class="at">y=</span>hwy, <span class="at">colour=</span>class) <span class="sc">+</span> </span>
+<span id="cb21-3"><a href="chapter-6---visualizing-data.html#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb21-4"><a href="chapter-6---visualizing-data.html#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(    <span class="at">x =</span> <span class="st">&quot;Engine displacement (litres)&quot;</span>, </span>
+<span id="cb21-5"><a href="chapter-6---visualizing-data.html#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Highway miles per gallon&quot;</span>, </span>
+<span id="cb21-6"><a href="chapter-6---visualizing-data.html#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Mileage by engine size and cylinders&quot;</span>,</span>
+<span id="cb21-7"><a href="chapter-6---visualizing-data.html#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Source: http://fueleconomy.gov&quot;</span></span>
+<span id="cb21-8"><a href="chapter-6---visualizing-data.html#cb21-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb21-9"><a href="chapter-6---visualizing-data.html#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_clean</span>() <span class="sc">+</span></span>
+<span id="cb21-10"><a href="chapter-6---visualizing-data.html#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb21-11"><a href="chapter-6---visualizing-data.html#cb21-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.background =</span> <span class="fu">element_rect</span>(<span class="at">color =</span> <span class="cn">NA</span>), <span class="co"># removes the legend border</span></span>
+<span id="cb21-12"><a href="chapter-6---visualizing-data.html#cb21-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title.align =</span> <span class="fl">0.5</span> <span class="co"># centres the legend title</span></span>
+<span id="cb21-13"><a href="chapter-6---visualizing-data.html#cb21-13" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb21-14"><a href="chapter-6---visualizing-data.html#cb21-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">7</span>), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>)) <span class="sc">+</span></span>
+<span id="cb21-15"><a href="chapter-6---visualizing-data.html#cb21-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;2seater&quot;</span> <span class="ot">=</span> <span class="st">&quot;pink&quot;</span>,</span>
+<span id="cb21-16"><a href="chapter-6---visualizing-data.html#cb21-16" aria-hidden="true" tabindex="-1"></a>                                <span class="st">&quot;suv&quot;</span><span class="ot">=</span><span class="st">&quot;red&quot;</span>,</span>
+<span id="cb21-17"><a href="chapter-6---visualizing-data.html#cb21-17" aria-hidden="true" tabindex="-1"></a>                                <span class="st">&quot;minivan&quot;</span> <span class="ot">=</span> <span class="st">&quot;green&quot;</span>,</span>
+<span id="cb21-18"><a href="chapter-6---visualizing-data.html#cb21-18" aria-hidden="true" tabindex="-1"></a>                                <span class="st">&quot;pickup&quot;</span> <span class="ot">=</span> <span class="st">&quot;yellow&quot;</span>,</span>
+<span id="cb21-19"><a href="chapter-6---visualizing-data.html#cb21-19" aria-hidden="true" tabindex="-1"></a>                                <span class="st">&quot;compact&quot;</span> <span class="ot">=</span> <span class="st">&quot;blue&quot;</span>,</span>
+<span id="cb21-20"><a href="chapter-6---visualizing-data.html#cb21-20" aria-hidden="true" tabindex="-1"></a>                                <span class="st">&quot;subcompact&quot;</span> <span class="ot">=</span> <span class="st">&quot;orange&quot;</span>,</span>
+<span id="cb21-21"><a href="chapter-6---visualizing-data.html#cb21-21" aria-hidden="true" tabindex="-1"></a>                                <span class="st">&quot;midsize&quot;</span><span class="ot">=</span><span class="st">&quot;purple&quot;</span>))</span></code></pre></div>
+<p><img src="INFO6270_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="chapter-6---summarizing-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chapter-7---topic-modelling.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+</body>
+
+</html>

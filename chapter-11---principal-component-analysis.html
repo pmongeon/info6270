@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 11 - Principal component analysis | INFO 6270 - Introduction to Data Science</title>
+  <meta name="description" content="Chapter 11 - Principal component analysis | INFO 6270 - Introduction to Data Science" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 11 - Principal component analysis | INFO 6270 - Introduction to Data Science" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="pmongeon/info6270" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 11 - Principal component analysis | INFO 6270 - Introduction to Data Science" />
+  
+  
+  
+
+<meta name="author" content="Philippe Mongeon" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="chapter-10---linear-regression.html"/>
+<link rel="next" href="conclusion.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><center>INFO6270 - Introduction to Data Science</center></li>
+<li><center>Winter 2022</center></li>
+<li><center>Philippe Mongeon</center></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Course overview</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#schedule"><i class="fa fa-check"></i>Schedule</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#assignments"><i class="fa fa-check"></i>Assignments</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#bibliography"><i class="fa fa-check"></i>Bibliography</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#official-syllabus"><i class="fa fa-check"></i>Official syllabus</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-1---what-is-data-science.html"><a href="chapter-1---what-is-data-science.html"><i class="fa fa-check"></i>Chapter 1 - What is data science?</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-1---what-is-data-science.html"><a href="chapter-1---what-is-data-science.html#learning-objectives"><i class="fa fa-check"></i>Learning objectives</a></li>
+<li class="chapter" data-level="" data-path="chapter-1---what-is-data-science.html"><a href="chapter-1---what-is-data-science.html#what-is-data-science"><i class="fa fa-check"></i>What is data science?</a></li>
+<li class="chapter" data-level="" data-path="chapter-1---what-is-data-science.html"><a href="chapter-1---what-is-data-science.html#the-data-science-process"><i class="fa fa-check"></i>The data science process</a></li>
+<li class="chapter" data-level="" data-path="chapter-1---what-is-data-science.html"><a href="chapter-1---what-is-data-science.html#writing-a-problem-statement"><i class="fa fa-check"></i>Writing a problem statement</a></li>
+<li class="chapter" data-level="" data-path="chapter-1---what-is-data-science.html"><a href="chapter-1---what-is-data-science.html#getting-data"><i class="fa fa-check"></i>Getting data</a></li>
+<li class="chapter" data-level="" data-path="chapter-1---what-is-data-science.html"><a href="chapter-1---what-is-data-science.html#homework"><i class="fa fa-check"></i>Homework</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html"><i class="fa fa-check"></i>Chapter 2 - Getting started with R</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#learning-objectives-1"><i class="fa fa-check"></i>Learning objectives</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#setting-up-r"><i class="fa fa-check"></i>Setting up R</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#installing-r-and-rstudio"><i class="fa fa-check"></i>Installing R and Rstudio</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#explore-rstudio"><i class="fa fa-check"></i>Explore RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#first-steps-in-r"><i class="fa fa-check"></i>First steps in R</a>
+<ul>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#r-scripts"><i class="fa fa-check"></i>R scripts</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#working-directory"><i class="fa fa-check"></i>Working directory</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#functions"><i class="fa fa-check"></i>Functions</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#executing-code"><i class="fa fa-check"></i>Executing code</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#numbers-and-strings"><i class="fa fa-check"></i>numbers and strings</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#doing-the-math"><i class="fa fa-check"></i>Doing the math</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#objects"><i class="fa fa-check"></i>Objects</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#subsetting-data"><i class="fa fa-check"></i>Subsetting data</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#logical-operators"><i class="fa fa-check"></i>Logical operators</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#conditional-statements"><i class="fa fa-check"></i>Conditional statements</a></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#loops-and-vectorization"><i class="fa fa-check"></i>Loops and vectorization</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-2---getting-started-with-r.html"><a href="chapter-2---getting-started-with-r.html#homework-1"><i class="fa fa-check"></i>Homework</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="chapter-3---reading-and-tidying-data.html"><a href="chapter-3---reading-and-tidying-data.html"><i class="fa fa-check"></i>Chapter 3 - Reading and tidying data</a></li>
+<li class="chapter" data-level="" data-path="chapter-4---working-with-strings.html"><a href="chapter-4---working-with-strings.html"><i class="fa fa-check"></i>Chapter 4 - Working with strings</a></li>
+<li class="chapter" data-level="" data-path="chapter-5---describing-and-visualizing-data.html"><a href="chapter-5---describing-and-visualizing-data.html"><i class="fa fa-check"></i>Chapter 5 - Describing and visualizing data</a></li>
+<li class="chapter" data-level="" data-path="chapter-6---network-analysis.html"><a href="chapter-6---network-analysis.html"><i class="fa fa-check"></i>Chapter 6 - Network analysis</a></li>
+<li class="chapter" data-level="" data-path="chapter-7---topic-modelling.html"><a href="chapter-7---topic-modelling.html"><i class="fa fa-check"></i>Chapter 7 - Topic modelling</a></li>
+<li class="chapter" data-level="" data-path="chapter-8---k-nearest-neighbors.html"><a href="chapter-8---k-nearest-neighbors.html"><i class="fa fa-check"></i>Chapter 8 - K nearest neighbors</a></li>
+<li class="chapter" data-level="" data-path="chapter-9---logistic-regression.html"><a href="chapter-9---logistic-regression.html"><i class="fa fa-check"></i>Chapter 9 - Logistic regression</a></li>
+<li class="chapter" data-level="" data-path="chapter-10---linear-regression.html"><a href="chapter-10---linear-regression.html"><i class="fa fa-check"></i>Chapter 10 - Linear regression</a></li>
+<li class="chapter" data-level="" data-path="chapter-11---principal-component-analysis.html"><a href="chapter-11---principal-component-analysis.html"><i class="fa fa-check"></i>Chapter 11 - Principal component analysis</a></li>
+<li class="chapter" data-level="" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i>Conclusion</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">INFO 6270 - Introduction to Data Science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="chapter-11---principal-component-analysis" class="section level1 unnumbered">
+<h1>Chapter 11 - Principal component analysis</h1>
+<p>Coming soon…</p>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="chapter-10---linear-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="conclusion.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+</body>
+
+</html>

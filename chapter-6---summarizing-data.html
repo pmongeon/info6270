@@ -353,11 +353,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="categories-represented-with-numbers" class="section level3 unnumbered">
 <h3>Categories represented with numbers</h3>
 <p>It is important to look at your data to understand what the values represent. Sometimes you may have groups that are represented with numbers. When making decisions about what type of statistical analysis is adequate for a given variable, you most likely will want to consider treat those variables as categorical and not numerical.</p>
-</div>
-</div>
-<div id="summarizing-categorical-data" class="section level2 unnumbered">
-<h2>Summarizing categorical data</h2>
-<p>There is not a lot that you can do with a single categorical variable other than reporting the frequency (number) and relative frequency (percentage) of observations for each category.</p>
 <p>The following table describes different variables included in the mpg dataset.</p>
 <table>
 <caption>
@@ -382,7 +377,7 @@ Description
 manufacturer
 </td>
 <td style="text-align:left;">
-Discrete
+Nominal
 </td>
 <td style="text-align:left;">
 Manufacturer name
@@ -393,7 +388,7 @@ Manufacturer name
 model
 </td>
 <td style="text-align:left;">
-Discrete
+Nominal
 </td>
 <td style="text-align:left;">
 Model name
@@ -437,7 +432,7 @@ Number of cylinders
 trans
 </td>
 <td style="text-align:left;">
-Discrete
+Nominal
 </td>
 <td style="text-align:left;">
 Type of transmission
@@ -448,7 +443,7 @@ Type of transmission
 drv
 </td>
 <td style="text-align:left;">
-Discrete
+Nominal
 </td>
 <td style="text-align:left;">
 Type of drive train
@@ -481,7 +476,7 @@ Highway miles per gallon
 fl
 </td>
 <td style="text-align:left;">
-Discrete
+Nominal
 </td>
 <td style="text-align:left;">
 Fuel type
@@ -492,7 +487,7 @@ Fuel type
 class
 </td>
 <td style="text-align:left;">
-Discrete
+Nominal
 </td>
 <td style="text-align:left;">
 Type of car
@@ -500,6 +495,11 @@ Type of car
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div id="summarizing-categorical-data" class="section level2 unnumbered">
+<h2>Summarizing categorical data</h2>
+<p>There is not a lot that you can do with a single categorical variable other than reporting the frequency (number) and relative frequency (percentage) of observations for each category.</p>
 <div id="frequency" class="section level3 unnumbered">
 <h3>Frequency</h3>
 <p>I can use the <strong>summarize()</strong> and <strong>n()</strong> function of the dplyr package (included in the tidyverse) to create a table of frequencies for the manufacturer variable. the <strong>group_by()</strong> function specifies which categorical variable I want to summarize. If you don’t use the group_by() function, you will get the summary for the whole tibble.</p>
