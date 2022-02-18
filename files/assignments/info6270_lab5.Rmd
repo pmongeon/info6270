@@ -26,7 +26,7 @@ library(topicmodels) # for topic modelling
 
 ```{r message=FALSE, warning=FALSE}
 
-mpg_data <- tibble(mpg)
+
 ```
 
 ## Overview <!--# 1 pts -->
