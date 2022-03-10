@@ -12,7 +12,7 @@ output:
     theme: default
 ---
 
-# introduction
+# Introduction
 
 In this lab you will build a logistic regression model that predicts a categorical variable based on other variables in your dataset.
 
@@ -129,7 +129,7 @@ mean(data$NAME_OF_YOUR_DEPENDENT_VARIABLE == data$Prediction)
 
 #### Answer the following questions
 
-1.  How succesful was your model at predicting the data (success rate)?
+1.  How successful was your model at predicting the data (success rate)?
 2.  What variables are the strongest predictor of your dependent variable?
 3.  What is the direction (positive or negative) of the relationship between those strong predictors and the dependent variable?
 4.  Are all predictors statistically significant (P \< 0.05)?
