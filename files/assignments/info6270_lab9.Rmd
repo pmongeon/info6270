@@ -1,3 +1,17 @@
+---
+title: "INFO6270 Lab 9"
+author: "Philippe Mongeon" # Replace my name with yours
+date: "2022-03-10" # Put the date here
+output: 
+  html_document:
+    toc: true 
+    toc_float:       
+      collapsed: false
+    toc_depth: 2
+    number_sections: true 
+    theme: default
+---
+
 # Introduction
 
 In this lab you will build a logistic regression model that predicts a categorical variable based on other variables in your dataset.
@@ -23,7 +37,7 @@ For this lab, you can use a dataset of your choice. The criteria are:
 
 #### Load your dataset
 
-Make sure to use the name "data" for your dataset, so that some codes below will work without requiring changes. 
+Make sure to use the name "data" for your dataset, so that some codes below will work without requiring changes.
 
 ```{r message=FALSE, warning=FALSE}
 data <- Insert code to read data here
@@ -121,3 +135,4 @@ mean(data$NAME_OF_YOUR_DEPENDENT_VARIABLE == data$Prediction)
 2.  What variables are the strongest predictor of your dependent variable?
 3.  What is the direction (positive or negative) of the relationship between those strong predictors and the dependent variable?
 4.  Are all predictors statistically significant (P \< 0.05)?
+
