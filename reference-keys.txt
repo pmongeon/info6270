@@ -248,3 +248,7 @@ term-frequency-by-document
 word-clouds
 topic-modelling
 other-resources
+logisitic-regression
+logistic-regression-example
+load-and-prepare-data
+convert-categorical-variables-into-factors
