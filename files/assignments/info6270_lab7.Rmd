@@ -13,7 +13,7 @@ output:
     highlight: tango
 ---
 
-# introduction
+# Introduction
 
 In this lab you will perform some text-mining and topic modelling using the same abstracts dataset that was used for the example in the course website, but choosing different journals from the dataset. Each of the empty code chunks and questions below are worth .5 pts. There are 9 empty chunks and 2 questions, so the last one is a bonus.
 
@@ -40,7 +40,8 @@ abstracts <- read_tsv("https://pmongeon.github.io/info6270/files/abstracts.txt")
 Note: Options are E, F, G, H, I, J. Do not choose A, B, C, D since they were used for the examples in the course website.
 
 ```{r}
-
+abstracts <- abstracts %>% 
+  filter(journal %in% c("E","F","H"))
 ```
 
 # Creating you tidy text tibble
@@ -48,40 +49,66 @@ Note: Options are E, F, G, H, I, J. Do not choose A, B, C, D since they were use
 ## Tokenize the article abstract by word
 
 ```{r}
-
+abstracts <- abstracts %>% 
+  unnest_tokens(output = word,
+               input = abstract,
+               token = "words")
 ```
 
 ## Remove stop words from your tokens
 
 ```{r}
-
+abstracts <- abstracts %>% 
+  anti_join(stop_words, by="word")
 ```
 
 ## Lemmatize the remaining tokens
 
 ```{r}
-
+abstracts <- abstracts %>% 
+  mutate(word = lemmatize_words(word))
 ```
 
 # Calculate token frequency for each journals
 
-```{r}
+**Note:** I'm saving this into a new object because I want to keep my tibble with the tokens for each abstracts in my environment
 
+```{r}
+journals_words <- abstracts %>% 
+  group_by(journal, word) %>% 
+  summarize(n = n())
 ```
 
 Show, for each journal the ten most frequent tokens, along with their total frequency. You have two options. You can choose to do it with tables or with graphs.
 
 ```{r}
-
+journals_words %>% 
+  group_by(journal) %>% 
+  arrange(-n) %>% 
+  slice(1:10) %>% 
+  ggplot() + 
+  aes(x=n, y=reorder(word,n)) +
+  geom_col() +
+  facet_wrap(facet = ~journal, 
+             ncol=3, 
+             scale="free") +
+  theme_minimal() +
+  labs(y = "Word", x="Frequency") +
+  scale_y_reordered()
 ```
 
 # Topic model
 
 ## Convert your tibble into a document-term matrix
 
-name your document-term matrix abstracts_dtm so that the next bit of code works.
+Name your document-term matrix abstracts_dtm so that the next bit of code works.
 
 ```{r}
+abstracts_words <- abstracts %>% 
+  group_by(id, word) %>% 
+  summarize(n = n()) %>% 
+
+  
 abstracts_dtm <- abstracts_words %>% # replace abstracts_words with your tibble.
   cast_dtm(document = id, # name of the column with your document id 
            term = word, # name of the column with your tokens
