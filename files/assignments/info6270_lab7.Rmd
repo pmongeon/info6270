@@ -1,20 +1,21 @@
 ---
-title: "INFO6270 Lab 9"
-author: "Philippe Mongeon" # Replace my name with yours
-date: "2022-03-10" # Put the date here
+title: "INFO6270 - Lab 7"
+author: "Philippe Mongeon"
+date: ""
 output: 
   html_document:
     toc: true 
     toc_float:       
       collapsed: false
     toc_depth: 2
-    number_sections: true 
-    theme: default
+    number_sections: false 
+    theme: lumen
+    highlight: tango
 ---
 
 # introduction
 
-In this lab you will build a logistic regression model that predicts a categorical variable based on other variables in your dataset.
+In this lab you will perform some text-mining and topic modelling using the same abstracts dataset that was used for the example in the course website, but choosing different journals from the dataset. Each of the empty code chunks and questions below are worth .5 pts. There are 9 empty chunks and 2 questions, so the last one is a bonus.
 
 # Setup
 
@@ -23,113 +24,140 @@ In this lab you will build a logistic regression model that predicts a categoric
 ```{r message=FALSE, warning=FALSE}
 library(tidyverse) # for all the tidyverse goodies
 library(kableExtra) # If you feel like printing pretty tables
+library(tidytext) # for all the tidytext goodies
+library(textstem) # for the lemmatization and the stemming functions
+library(topicmodels) # for topic modelling
 ```
 
-## Data preparation
-
-#### Choose a dataset
-
-For this lab, you can use a dataset of your choice. The criteria are:
-
--   The dataset must contain a dichotomous categorical variable that you will use as the dependent variable.
-
--   The dataset must contain at least two other variables (of any type) that will be used as predictors.
-
-#### Load your dataset
+## Load abstract dataset
 
 ```{r message=FALSE, warning=FALSE}
 abstracts <- read_tsv("https://pmongeon.github.io/info6270/files/abstracts.txt")
 ```
 
-#### Tidy your dataset
+## Use filter() to select between 2 and 4 journals
 
-perform whatever steps are necessary to convert your dataset in a tidy format, if it is not already in a tidy format.
-
-```{r}
-
-```
-
-#### Choose variables for the model
-
-You want to update your tibble so that it contains only the variables of interest (including the dependent variable of course).
+Note: Options are E, F, G, H, I, J. Do not choose A, B, C, D since they were used for the examples in the course website.
 
 ```{r}
 
 ```
 
-#### Set you categorical variables as factors
+# Creating you tidy text tibble
 
-Here you want to use the mutate() and as_factor() functions to modify your categorical variables and make them factors.
-
-```{r}
-
-```
-
-#### Identify missing data
+## Tokenize the article abstract by word
 
 ```{r}
 
 ```
 
-#### Deal with missing data
-
-You have to choices 1) do nothing and drop the incomplete observations from your model, or use some rule to assign an estimated value to the missing ones (e.g. using the average for numeric variables).
+## Remove stop words from your tokens
 
 ```{r}
 
 ```
 
-## Logistic regression model
-
-#### Create the model
+## Lemmatize the remaining tokens
 
 ```{r}
-model <- glm(your code here)
+
 ```
 
-#### Print the summary of the model
+# Calculate token frequency for each journals
 
 ```{r}
-summary(model)
+
 ```
 
-#### Create a tibble with the odds ratio and the confidence intervals
-
-Use level = .95 for your confidence intervals.
+Show, for each journal the ten most frequent tokens, along with their total frequency. You have two options. You can choose to do it with tables or with graphs.
 
 ```{r}
-odds_ratio <- cbind(Odds_Ratio = exp(model$coefficients), exp(confint(model, level = .95)))
+
 ```
 
-#### Add a probability column to your dataset 
+# Topic model
+
+## Convert your tibble into a document-term matrix
+
+name your document-term matrix abstracts_dtm so that the next bit of code works.
 
 ```{r}
-data <- tibble(data,
-               Probability = model$fitted.values)
+abstracts_dtm <- abstracts_words %>% # replace abstracts_words with your tibble.
+  cast_dtm(document = id, # name of the column with your document id 
+           term = word, # name of the column with your tokens
+           value = n) # name of the column with your token frequencies
 ```
 
-#### Add a prediction column to your dataset
+## Generate your topic models with LDA
+
+You can use the code below, and use your document-term matrix object as input and change the value of k to the number of topics that you want.
 
 ```{r}
-data <- data %>% 
-  mutate(Prediction = if_else(Probability > 0.5,1,0))
+abstracts_dtm %>% 
+  LDA(k = , # Number of topics desired
+      control = list(seed = 1234)) # Just leave this on as is
 ```
 
-#### Create a table that compares the predictions of your model to the real data
+## Top tokens per topic
 
 ```{r}
-table(Survived = data$NAME_OF_YOUR_DEPENDENT_VARIABLE, Predicted = data$Prediction)
+# This codes creates a tibble with the beta of each token for each topic
+topic_token_beta <- abstract_lda %>% 
+  tidy(matrix = "beta")
 ```
 
-#### Calculate the success rate of your model
+Use tables or graphs to show, for each topics, the 10 tokens with the highest beta.
 
 ```{r}
-mean(data$NAME_OF_YOUR_DEPENDENT_VARIABLE == data$Prediction)
+
 ```
 
-#### Answer the following questions
+## Associate documents to topics
 
-1.  How succesful was your model at predicting the data (success rate)?
-2.  What variables are the strongest predictor of your dependent variable?
-3.  What is the direction (positive or negative) of the relationship between those strong predictors and the dependent variable?
-4.  Are all predictors statistically significant (P \< 0.05)?
+Create a tibble with the gamma of each abstract-topic combination
+
+```{r}
+# This codes creates a tibble with the gamma of each document-topic combination
+abstracts_topic <- abstracts_lda %>% 
+  tidy(matrix = "gamma")
+```
+
+Create a tibble called journal_topic that contains for each, journal, the average gamma for each topic. Note that your abstracts_topics tibble doesn't have the journal column, so that it needs to be brought in from the original dataset with the inner_join function. Then you'll need to group the data by journal and topic and use summarize to calculate the mean(gamma) for each group.
+
+```{r}
+
+```
+
+Use ggplot to make a series of graphs (use facet_wrap()) showing the distribution of mean gamma across topics for each journal.
+
+```{r}
+
+```
+
+Which of your topics is most strongly associated which each journals (e.g., journal E is most strongly related to topic 1, journal F is most strongly associated to topic 2, etc.)?
+
+\[write your answer here in text, you can also make a table if you prefer\]
+
+# Bonus question
+
+Can you tell which journals from this list your selected journals are?
+
+-   American Journal of International Law
+
+-   Food Security
+
+-   Journal of Business Economics and Management
+
+-   Journal of Child Psychology and Psychiatry
+
+-   Journal of Mathematics
+
+-   Journal of the Association for Information Science and Technology
+
+-   Nature Astronomy
+
+-   Organic & Biomolecular Chemistry
+
+-   Public Health
+
+-   Solar Energy
