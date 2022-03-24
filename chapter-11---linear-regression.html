@@ -432,7 +432,7 @@ div.csl-indent {
 <p><img src="files/linear_regression_1.jpg" style="text-align:center" width="343" /></p>
 <p>We can see in this figure that the intercept is where the line crosses the y-axis. The slope is calculate by dividing the difference in the predicted value of y by the difference in the value of x.</p>
 <p>When working with categorical predictors, the intercept is the mean value of the base category and the slope is the difference between the means of each categories. Here’s an example taken again from <span class="citation"><a href="#ref-rhys_machine_2020" role="doc-biblioref">Rhys</a> (<a href="#ref-rhys_machine_2020" role="doc-biblioref">2020</a>)</span>.</p>
-<p><img src="C:/Users/Philippe/AppData/Local/RStudio/tmp/paste-24ECCA83.png" style="text-align:center" width="343" /></p>
+<p><img src="files/linear_regression_2.jpg" style="text-align:center" width="343" /></p>
 <div id="example-predicting-flight-delays" class="section level3 unnumbered">
 <h3>Example: predicting flight delays</h3>
 <p>Let’s use on-time data for all flights that departed NYC (i.e. JFK, LGA or EWR) in 2013 to try to build a model that will predicted delayed arrival. For this we will use the flights dataset included in the nycflights13 package. We will consider the following variables in our model:</p>
@@ -541,21 +541,21 @@ div.csl-indent {
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -66.415 -19.679  -7.500   8.973 235.506 
+## -59.471 -20.395  -8.375   9.467 310.470 
 ## 
 ## Coefficients:
-##               Estimate Std. Error t value Pr(&gt;|t|)  
-## (Intercept)  3.041e+00  3.995e+00   0.761   0.4469  
-## distance    -3.865e-04  2.302e-03  -0.168   0.8668  
-## carrierAA   -1.067e+01  4.403e+00  -2.423   0.0158 *
-## originLGA    3.001e+00  4.587e+00   0.654   0.5133  
-## originJFK    6.157e+00  5.168e+00   1.191   0.2341  
+##               Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept)   5.649806   4.108669   1.375  0.16972   
+## distance     -0.002925   0.002271  -1.288  0.19824   
+## carrierAA   -13.236864   4.593706  -2.882  0.00413 **
+## originLGA     4.143979   4.695726   0.883  0.37793   
+## originJFK    14.486048   5.596356   2.588  0.00992 **
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 34.87 on 495 degrees of freedom
-## Multiple R-squared:  0.01305,    Adjusted R-squared:  0.005072 
-## F-statistic: 1.636 on 4 and 495 DF,  p-value: 0.1639</code></pre>
+## Residual standard error: 36.08 on 495 degrees of freedom
+## Multiple R-squared:  0.02082,    Adjusted R-squared:  0.0129 
+## F-statistic: 2.631 on 4 and 495 DF,  p-value: 0.03372</code></pre>
 <p>We see that the model still does a terrible job at predicting arrival delays, and that none of the predictors are statistically significant (at the p &lt; 0.05 level).</p>
 </div>
 <div id="adding-departure-delay-to-the-model" class="section level4 unnumbered">
@@ -571,22 +571,22 @@ div.csl-indent {
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -53.893 -10.964  -1.329   9.623  89.327 
+## -48.724 -12.588  -0.944   9.846 119.725 
 ## 
 ## Coefficients:
 ##              Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) -9.829769   2.111852  -4.655 4.18e-06 ***
-## distance    -0.001003   0.001144  -0.876    0.381    
-## carrierAA    2.119528   2.307885   0.918    0.359    
-## originLGA    3.652790   2.395077   1.525    0.128    
-## originJFK   -1.742734   2.733115  -0.638    0.524    
-## dep_delay    1.038524   0.021441  48.436  &lt; 2e-16 ***
+## (Intercept) -9.361112   2.216456  -4.223 2.86e-05 ***
+## distance    -0.000598   0.001227  -0.487    0.626    
+## carrierAA   -0.326978   2.437660  -0.134    0.893    
+## originLGA    0.853386   2.586331   0.330    0.742    
+## originJFK    2.476063   2.847907   0.869    0.385    
+## dep_delay    1.052191   0.023771  44.264  &lt; 2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 17.85 on 494 degrees of freedom
-## Multiple R-squared:  0.8269, Adjusted R-squared:  0.8252 
-## F-statistic:   472 on 5 and 494 DF,  p-value: &lt; 2.2e-16</code></pre>
+## Residual standard error: 19.49 on 494 degrees of freedom
+## Multiple R-squared:  0.8001, Adjusted R-squared:  0.798 
+## F-statistic: 395.4 on 5 and 494 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>We can see that when we consider the delay in the departure, we can more accurately predict the delay at arrival, with about 80% of the variance explained by our model!</p>
 </div>
 </div>
