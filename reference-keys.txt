@@ -252,3 +252,10 @@ logisitic-regression
 logistic-regression-example
 load-and-prepare-data
 convert-categorical-variables-into-factors
+example-predicting-flight-delays
+fitting-the-regression-line-on-data
+continuous-dependent-variables
+categorical-dependent-variables
+beware-of-too-large-sample
+adding-departure-delay-to-the-model
+homework-6
