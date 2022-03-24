@@ -1,0 +1,105 @@
+---
+title: "INFO6270 Lab 10"
+author: "Philippe Mongeon" # Replace my name with yours
+date: "2022-03-24" # Put the date here
+output: 
+  html_document:
+    toc: true 
+    toc_float:       
+      collapsed: false
+    toc_depth: 2
+    number_sections: true 
+    theme: default
+---
+
+# Introduction
+
+In this lab you will build a linear regression model that predicts a categorical variable based on other variables in your dataset.
+
+# Setup
+
+## Load libraries
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse) # for all the tidyverse goodies
+library(kableExtra) # If you feel like printing pretty tables
+```
+
+## Data preparation
+
+#### Choose a dataset
+
+For this lab, you can use a dataset of your choice. The criteria are:
+
+-   The dataset must contain a numerical variable that you will use as the dependent variable.
+
+-   The dataset must contain at least two other variables (of any type) that will be used as predictors.
+
+#### Load your dataset
+
+Make sure to use the name "data" for your dataset, so that some codes below will work without requiring changes.
+
+```{r message=FALSE, warning=FALSE}
+# Replace this with your own code if you want to
+data <- insert code to read data here data
+```
+
+#### Tidy your dataset
+
+perform whatever steps are necessary to convert your dataset in a tidy format, if it is not already in a tidy format.
+
+```{r}
+
+```
+
+#### Choose variables for the model
+
+You want to update your tibble so that it contains only the variables of interest (including the dependent variable of course).
+
+```{r}
+
+```
+
+#### Set you categorical variables as factors
+
+Here you want to use the mutate() and as_factor() functions to modify your categorical variables and make them factors.
+
+```{r}
+
+```
+
+#### Identify missing data
+
+```{r}
+
+```
+
+#### Deal with missing data
+
+You have to choices 1) drop the incomplete observations (this will be done automatically if you do nothing), or use some rule to assign an estimated value to the missing ones (e.g. using the average for numeric variables).
+
+```{r}
+
+```
+
+## Linear regression model
+
+#### Create the model
+
+```{r}
+model <- lm()
+```
+
+#### Print the summary of the model
+
+```{r}
+summary(model)
+```
+
+#### Answer the following questions
+
+1.  How well does the model perform overall according to the adjusted R-squared?
+2.  What variables are the strongest predictor of your dependent variable?
+3.  What is the direction (positive or negative) of the relationship between those strong predictors and the dependent variable?
+4.  Are all predictors statistically significant (P \< 0.05)?
+
