@@ -35,6 +35,12 @@ For this lab, you can use a dataset of your choice. The criteria are:
 
 -   The dataset must contain at least two other variables (of any type) that will be used as predictors.
 
+If you want, you can use the ozone dataset from the mlbench package, which contains Los Angeles ozone pollution data from 1976. It can be downloaded here: [<https://pmongeon.github.io/info6270/files/data/ozone.csv>](https://pmongeon.github.io/info6270/files/data/ozone.csv")).
+
+Details about the variables can be found here: [<https://www.rdocumentation.org/packages/mlbench/versions/2.1-3/topics/Ozone>](https://www.rdocumentation.org/packages/mlbench/versions/2.1-3/topics/Ozone "https://www.rdocumentation.org/packages/mlbench/versions/2.1-3/topics/ozone")
+
+The variable to predict would be **ozone**.
+
 #### Load your dataset
 
 Make sure to use the name "data" for your dataset, so that some codes below will work without requiring changes.
@@ -102,4 +108,3 @@ summary(model)
 2.  What variables are the strongest predictor of your dependent variable?
 3.  What is the direction (positive or negative) of the relationship between those strong predictors and the dependent variable?
 4.  Are all predictors statistically significant (P \< 0.05)?
-
