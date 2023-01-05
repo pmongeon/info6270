@@ -1,0 +1,2053 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Introduction to Data Science - 3&nbsp; Reading and tidying data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./working_with_strings.html" rel="next">
+<link href="./getting_started_with_R.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Reading and tidying data</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introduction to Data Science</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Course overview</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">What is data science?</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./getting_started_with_R.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting started with R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reading_and_tidying_data.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Reading and tidying data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./working_with_strings.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with strings</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./publishing_with_r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Publishing with R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summarizing_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summarizing data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visualizing_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualizing data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./topic_modelling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Topic Modelling</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="toc-section-number">3.1</span>  Learning objectives</a></li>
+  <li><a href="#tidy-data" id="toc-tidy-data" class="nav-link" data-scroll-target="#tidy-data"><span class="toc-section-number">3.2</span>  Tidy data</a></li>
+  <li><a href="#the-tidyverse" id="toc-the-tidyverse" class="nav-link" data-scroll-target="#the-tidyverse"><span class="toc-section-number">3.3</span>  The tidyverse</a></li>
+  <li><a href="#import-data" id="toc-import-data" class="nav-link" data-scroll-target="#import-data"><span class="toc-section-number">3.4</span>  Import data</a>
+  <ul class="collapse">
+  <li><a href="#delimited-file-formats" id="toc-delimited-file-formats" class="nav-link" data-scroll-target="#delimited-file-formats"><span class="toc-section-number">3.4.1</span>  Delimited file formats</a></li>
+  <li><a href="#json-files" id="toc-json-files" class="nav-link" data-scroll-target="#json-files"><span class="toc-section-number">3.4.2</span>  JSON files</a></li>
+  <li><a href="#application-programming-interface-api" id="toc-application-programming-interface-api" class="nav-link" data-scroll-target="#application-programming-interface-api"><span class="toc-section-number">3.4.3</span>  Application programming interface (API)</a></li>
+  <li><a href="#xml-files" id="toc-xml-files" class="nav-link" data-scroll-target="#xml-files"><span class="toc-section-number">3.4.4</span>  XML files</a></li>
+  <li><a href="#connections" id="toc-connections" class="nav-link" data-scroll-target="#connections"><span class="toc-section-number">3.4.5</span>  Connections</a></li>
+  </ul></li>
+  <li><a href="#tidy-your-data" id="toc-tidy-your-data" class="nav-link" data-scroll-target="#tidy-your-data"><span class="toc-section-number">3.5</span>  Tidy your data</a>
+  <ul class="collapse">
+  <li><a href="#reshape-data" id="toc-reshape-data" class="nav-link" data-scroll-target="#reshape-data"><span class="toc-section-number">3.5.1</span>  Reshape data</a></li>
+  <li><a href="#expand-tables" id="toc-expand-tables" class="nav-link" data-scroll-target="#expand-tables"><span class="toc-section-number">3.5.2</span>  Expand tables</a></li>
+  <li><a href="#handle-missing-values" id="toc-handle-missing-values" class="nav-link" data-scroll-target="#handle-missing-values"><span class="toc-section-number">3.5.3</span>  Handle missing values</a></li>
+  <li><a href="#merge-and-split-cells" id="toc-merge-and-split-cells" class="nav-link" data-scroll-target="#merge-and-split-cells"><span class="toc-section-number">3.5.4</span>  Merge and split cells</a></li>
+  <li><a href="#nested-data" id="toc-nested-data" class="nav-link" data-scroll-target="#nested-data"><span class="toc-section-number">3.5.5</span>  Nested data</a></li>
+  <li><a href="#combine-data-frames" id="toc-combine-data-frames" class="nav-link" data-scroll-target="#combine-data-frames"><span class="toc-section-number">3.5.6</span>  Combine data frames</a></li>
+  <li><a href="#join-data-frames" id="toc-join-data-frames" class="nav-link" data-scroll-target="#join-data-frames"><span class="toc-section-number">3.5.7</span>  Join data frames</a></li>
+  <li><a href="#rename-columns" id="toc-rename-columns" class="nav-link" data-scroll-target="#rename-columns"><span class="toc-section-number">3.5.8</span>  Rename columns</a></li>
+  <li><a href="#select-columns" id="toc-select-columns" class="nav-link" data-scroll-target="#select-columns"><span class="toc-section-number">3.5.9</span>  Select columns</a></li>
+  <li><a href="#filter-rows" id="toc-filter-rows" class="nav-link" data-scroll-target="#filter-rows"><span class="toc-section-number">3.5.10</span>  Filter rows</a></li>
+  <li><a href="#modify-or-create-new-variables" id="toc-modify-or-create-new-variables" class="nav-link" data-scroll-target="#modify-or-create-new-variables"><span class="toc-section-number">3.5.11</span>  Modify or create new variables</a></li>
+  </ul></li>
+  <li><a href="#export-data" id="toc-export-data" class="nav-link" data-scroll-target="#export-data"><span class="toc-section-number">3.6</span>  Export data</a>
+  <ul class="collapse">
+  <li><a href="#export-data-frames" id="toc-export-data-frames" class="nav-link" data-scroll-target="#export-data-frames"><span class="toc-section-number">3.6.1</span>  Export data frames</a></li>
+  <li><a href="#json" id="toc-json" class="nav-link" data-scroll-target="#json"><span class="toc-section-number">3.6.2</span>  JSON</a></li>
+  </ul></li>
+  <li><a href="#writing-readable-code" id="toc-writing-readable-code" class="nav-link" data-scroll-target="#writing-readable-code"><span class="toc-section-number">3.7</span>  Writing readable code</a>
+  <ul class="collapse">
+  <li><a href="#the-pipe" id="toc-the-pipe" class="nav-link" data-scroll-target="#the-pipe"><span class="toc-section-number">3.7.1</span>  The pipe</a></li>
+  </ul></li>
+  <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources"><span class="toc-section-number">3.8</span>  Additional resources</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Reading and tidying data</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="cell">
+
+</div>
+<section id="learning-objectives" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">3.1</span> Learning objectives</h2>
+<ul>
+<li>Import data in R</li>
+<li>Make data tidy with the tidyverse</li>
+<li>Export data</li>
+<li>Use the pipe to write clearer code</li>
+</ul>
+</section>
+<section id="tidy-data" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="tidy-data"><span class="header-section-number">3.2</span> Tidy data</h2>
+<p>Data is stored in all kinds or places, can be accessed in many different ways, and comes in all kinds of shapes and forms. Therefore, much of the data scientist’s work is related to collecting, processing, and cleaning data to get it ready for analysis.</p>
+<p>Tidy data a set of principles adapted from the relational model (those of you who took my data management course will be familiar with the relational model). According to <span class="citation" data-cites="wickham2014">Wickham (<a href="references.html#ref-wickham2014" role="doc-biblioref">2014</a>)</span>, those principles are:</p>
+<ol type="1">
+<li><p>Each variable forms a column.</p></li>
+<li><p>Each observation forms a row.</p></li>
+<li><p>Each type of observational unit forms a table.</p></li>
+</ol>
+<p>While it may be implicit in principles 1 and 2, it is perhaps worth adding as a fourth principle that each cell should contain a single value. For example, comma-separated strings are not tidy.</p>
+<p>Here’s an example of what tidy data looks like taken from the Titanic dataset.</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:right;"> PassengerId </th>
+   <th style="text-align:right;"> Survived </th>
+   <th style="text-align:right;"> Pclass </th>
+   <th style="text-align:left;"> Sex </th>
+   <th style="text-align:right;"> Age </th>
+   <th style="text-align:left;"> Ticket </th>
+   <th style="text-align:right;"> Fare </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:left;"> male </td>
+   <td style="text-align:right;"> 22 </td>
+   <td style="text-align:left;"> A/5 21171 </td>
+   <td style="text-align:right;"> 7.2500 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> female </td>
+   <td style="text-align:right;"> 38 </td>
+   <td style="text-align:left;"> PC 17599 </td>
+   <td style="text-align:right;"> 71.2833 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:left;"> female </td>
+   <td style="text-align:right;"> 26 </td>
+   <td style="text-align:left;"> STON/O2. 3101282 </td>
+   <td style="text-align:right;"> 7.9250 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> female </td>
+   <td style="text-align:right;"> 35 </td>
+   <td style="text-align:left;"> 113803 </td>
+   <td style="text-align:right;"> 53.1000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:left;"> male </td>
+   <td style="text-align:right;"> 35 </td>
+   <td style="text-align:left;"> 373450 </td>
+   <td style="text-align:right;"> 8.0500 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:left;"> male </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> 330877 </td>
+   <td style="text-align:right;"> 8.4583 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<p>We can see that each row is a single observation (a passenger) and that each column is a single variable, and that no cell contains multiple values.</p>
+<p>Now let’s take a look at a dataset that is <strong>not</strong> tidy.</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> course </th>
+   <th style="text-align:left;"> students </th>
+   <th style="text-align:left;"> grades </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> INFO6270 </td>
+   <td style="text-align:left;"> Francis, Sam, Amy </td>
+   <td style="text-align:left;"> 92 (A+), 86 (A), 84 (A-) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO6540 </td>
+   <td style="text-align:left;"> Francis, Sam, Amy </td>
+   <td style="text-align:left;"> 77 (B+), 100 (A+), 74(B) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO5500 </td>
+   <td style="text-align:left;"> Francis, Sam, Amy </td>
+   <td style="text-align:left;"> 86 (A), 70 (B-), 99 (A+) </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<p>We can see that for each course, students are listed in a single cell, and their grades as well. To make this data tidy, a first thing we might might to do is separate students and their grades so that they each occupy a row, and cells contains only one student or grade.</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> course </th>
+   <th style="text-align:left;"> students </th>
+   <th style="text-align:left;"> grades </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> INFO6270 </td>
+   <td style="text-align:left;"> Francis </td>
+   <td style="text-align:left;"> 92 (A+) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO6270 </td>
+   <td style="text-align:left;"> Francis </td>
+   <td style="text-align:left;"> 86 (A) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO6270 </td>
+   <td style="text-align:left;"> Francis </td>
+   <td style="text-align:left;"> 84 (A-) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO6270 </td>
+   <td style="text-align:left;"> Sam </td>
+   <td style="text-align:left;"> 92 (A+) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO6270 </td>
+   <td style="text-align:left;"> Sam </td>
+   <td style="text-align:left;"> 86 (A) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO6270 </td>
+   <td style="text-align:left;"> Sam </td>
+   <td style="text-align:left;"> 84 (A-) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO6270 </td>
+   <td style="text-align:left;"> Amy </td>
+   <td style="text-align:left;"> 92 (A+) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO6270 </td>
+   <td style="text-align:left;"> Amy </td>
+   <td style="text-align:left;"> 86 (A) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO6270 </td>
+   <td style="text-align:left;"> Amy </td>
+   <td style="text-align:left;"> 84 (A-) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO6540 </td>
+   <td style="text-align:left;"> Francis </td>
+   <td style="text-align:left;"> 77 (B+) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO6540 </td>
+   <td style="text-align:left;"> Francis </td>
+   <td style="text-align:left;"> 100 (A+) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO6540 </td>
+   <td style="text-align:left;"> Francis </td>
+   <td style="text-align:left;"> 74(B) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO6540 </td>
+   <td style="text-align:left;"> Sam </td>
+   <td style="text-align:left;"> 77 (B+) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO6540 </td>
+   <td style="text-align:left;"> Sam </td>
+   <td style="text-align:left;"> 100 (A+) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO6540 </td>
+   <td style="text-align:left;"> Sam </td>
+   <td style="text-align:left;"> 74(B) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO6540 </td>
+   <td style="text-align:left;"> Amy </td>
+   <td style="text-align:left;"> 77 (B+) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO6540 </td>
+   <td style="text-align:left;"> Amy </td>
+   <td style="text-align:left;"> 100 (A+) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO6540 </td>
+   <td style="text-align:left;"> Amy </td>
+   <td style="text-align:left;"> 74(B) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO5500 </td>
+   <td style="text-align:left;"> Francis </td>
+   <td style="text-align:left;"> 86 (A) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO5500 </td>
+   <td style="text-align:left;"> Francis </td>
+   <td style="text-align:left;"> 70 (B-) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO5500 </td>
+   <td style="text-align:left;"> Francis </td>
+   <td style="text-align:left;"> 99 (A+) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO5500 </td>
+   <td style="text-align:left;"> Sam </td>
+   <td style="text-align:left;"> 86 (A) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO5500 </td>
+   <td style="text-align:left;"> Sam </td>
+   <td style="text-align:left;"> 70 (B-) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO5500 </td>
+   <td style="text-align:left;"> Sam </td>
+   <td style="text-align:left;"> 99 (A+) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO5500 </td>
+   <td style="text-align:left;"> Amy </td>
+   <td style="text-align:left;"> 86 (A) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO5500 </td>
+   <td style="text-align:left;"> Amy </td>
+   <td style="text-align:left;"> 70 (B-) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO5500 </td>
+   <td style="text-align:left;"> Amy </td>
+   <td style="text-align:left;"> 99 (A+) </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<p>This is much better, although we still have the issue of the numeric and letter grades being lumped together in a cell. To make this data truly tidy, we want to separate the numeric and the letter grades, like this:</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> course </th>
+   <th style="text-align:left;"> students </th>
+   <th style="text-align:left;"> grade_numeric </th>
+   <th style="text-align:left;"> grade_letter </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> INFO6270 </td>
+   <td style="text-align:left;"> Francis </td>
+   <td style="text-align:left;"> 92 </td>
+   <td style="text-align:left;"> A+ </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO6270 </td>
+   <td style="text-align:left;"> Francis </td>
+   <td style="text-align:left;"> 86 </td>
+   <td style="text-align:left;"> A </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO6270 </td>
+   <td style="text-align:left;"> Francis </td>
+   <td style="text-align:left;"> 84 </td>
+   <td style="text-align:left;"> A- </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO6270 </td>
+   <td style="text-align:left;"> Sam </td>
+   <td style="text-align:left;"> 92 </td>
+   <td style="text-align:left;"> A+ </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO6270 </td>
+   <td style="text-align:left;"> Sam </td>
+   <td style="text-align:left;"> 86 </td>
+   <td style="text-align:left;"> A </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO6270 </td>
+   <td style="text-align:left;"> Sam </td>
+   <td style="text-align:left;"> 84 </td>
+   <td style="text-align:left;"> A- </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO6270 </td>
+   <td style="text-align:left;"> Amy </td>
+   <td style="text-align:left;"> 92 </td>
+   <td style="text-align:left;"> A+ </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO6270 </td>
+   <td style="text-align:left;"> Amy </td>
+   <td style="text-align:left;"> 86 </td>
+   <td style="text-align:left;"> A </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO6270 </td>
+   <td style="text-align:left;"> Amy </td>
+   <td style="text-align:left;"> 84 </td>
+   <td style="text-align:left;"> A- </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO6540 </td>
+   <td style="text-align:left;"> Francis </td>
+   <td style="text-align:left;"> 77 </td>
+   <td style="text-align:left;"> B+ </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO6540 </td>
+   <td style="text-align:left;"> Francis </td>
+   <td style="text-align:left;"> 100 </td>
+   <td style="text-align:left;"> A+ </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO6540 </td>
+   <td style="text-align:left;"> Francis </td>
+   <td style="text-align:left;"> 74 </td>
+   <td style="text-align:left;"> B </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO6540 </td>
+   <td style="text-align:left;"> Sam </td>
+   <td style="text-align:left;"> 77 </td>
+   <td style="text-align:left;"> B+ </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO6540 </td>
+   <td style="text-align:left;"> Sam </td>
+   <td style="text-align:left;"> 100 </td>
+   <td style="text-align:left;"> A+ </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO6540 </td>
+   <td style="text-align:left;"> Sam </td>
+   <td style="text-align:left;"> 74 </td>
+   <td style="text-align:left;"> B </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO6540 </td>
+   <td style="text-align:left;"> Amy </td>
+   <td style="text-align:left;"> 77 </td>
+   <td style="text-align:left;"> B+ </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO6540 </td>
+   <td style="text-align:left;"> Amy </td>
+   <td style="text-align:left;"> 100 </td>
+   <td style="text-align:left;"> A+ </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO6540 </td>
+   <td style="text-align:left;"> Amy </td>
+   <td style="text-align:left;"> 74 </td>
+   <td style="text-align:left;"> B </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO5500 </td>
+   <td style="text-align:left;"> Francis </td>
+   <td style="text-align:left;"> 86 </td>
+   <td style="text-align:left;"> A </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO5500 </td>
+   <td style="text-align:left;"> Francis </td>
+   <td style="text-align:left;"> 70 </td>
+   <td style="text-align:left;"> B- </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO5500 </td>
+   <td style="text-align:left;"> Francis </td>
+   <td style="text-align:left;"> 99 </td>
+   <td style="text-align:left;"> A+ </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO5500 </td>
+   <td style="text-align:left;"> Sam </td>
+   <td style="text-align:left;"> 86 </td>
+   <td style="text-align:left;"> A </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO5500 </td>
+   <td style="text-align:left;"> Sam </td>
+   <td style="text-align:left;"> 70 </td>
+   <td style="text-align:left;"> B- </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO5500 </td>
+   <td style="text-align:left;"> Sam </td>
+   <td style="text-align:left;"> 99 </td>
+   <td style="text-align:left;"> A+ </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO5500 </td>
+   <td style="text-align:left;"> Amy </td>
+   <td style="text-align:left;"> 86 </td>
+   <td style="text-align:left;"> A </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO5500 </td>
+   <td style="text-align:left;"> Amy </td>
+   <td style="text-align:left;"> 70 </td>
+   <td style="text-align:left;"> B- </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> INFO5500 </td>
+   <td style="text-align:left;"> Amy </td>
+   <td style="text-align:left;"> 99 </td>
+   <td style="text-align:left;"> A+ </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<p>That’s it, now we have a tidy data set of grades! You can read more about tidy data the R for Data Science book <span class="citation" data-cites="wickham2016">Wickham and Grolemund (<a href="references.html#ref-wickham2016" role="doc-biblioref">2016</a>)</span> , or the journal article by <span class="citation" data-cites="wickham2014">Wickham (<a href="references.html#ref-wickham2014" role="doc-biblioref">2014</a>)</span>.</p>
+</section>
+<section id="the-tidyverse" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="the-tidyverse"><span class="header-section-number">3.3</span> The tidyverse</h2>
+<p>The tidyverse is a collection of R packages and functions designed to help you make data tidy and work with tidy data. You can read more about the tidy verse and its packages here: <a href="https://www.tidyverse.org" class="uri">https://www.tidyverse.org</a>. The code below loads the tidyverse and returns the list of packages it includes.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tidyverse_packages</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "broom"         "cli"           "crayon"        "dbplyr"       
+ [5] "dplyr"         "dtplyr"        "forcats"       "ggplot2"      
+ [9] "googledrive"   "googlesheets4" "haven"         "hms"          
+[13] "httr"          "jsonlite"      "lubridate"     "magrittr"     
+[17] "modelr"        "pillar"        "purrr"         "readr"        
+[21] "readxl"        "reprex"        "rlang"         "rstudioapi"   
+[25] "rvest"         "stringr"       "tibble"        "tidyr"        
+[29] "xml2"          "tidyverse"    </code></pre>
+</div>
+</div>
+<p>In the next sections, we will use a few of the tidyverse packages (but not exclusively) to import data into R from multiple types of source. Because the tidy format is pretty standard and not R-specific, you might often find that the data sets that you will work with are already respecting the tidy principles. But you’ll also come across different data structures and formats, and so we’ll learn how to tidy up data.</p>
+</section>
+<section id="import-data" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="import-data"><span class="header-section-number">3.4</span> Import data</h2>
+<p>The following sections show how to load data from different sources and format into R.</p>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Some of the processes and codes in this section are beyond the level of R proficiency that you are expected to have at this point, and even at the end of the course. They were included here so that:</p>
+<ol type="1">
+<li>You can gain awareness of the different ways in which data can be access through R.</li>
+<li>You can gain awareness of the different file formats and data structure that R can handle.</li>
+<li>You can have access to working pieces of code that you can use to get whatever data you need into R.</li>
+</ol>
+<p>So if you feel like you are thoroughly understanding all the codes and processes that are show in section 3.4 and its subsections. Do not worry, and focus on the general tasks that these codes are accomplishing.</p>
+</div>
+</div>
+<section id="delimited-file-formats" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="delimited-file-formats"><span class="header-section-number">3.4.1</span> Delimited file formats</h3>
+<p>The readr package (<a href="https://readr.tidyverse.org/" class="uri">https://readr.tidyverse.org/</a>) has a few useful functions for reading delimited file formats like comma-separated values (.csv) and tab-delimited values (.tsv) or any other type of delimiter. Here are a few examples (if you want to run the examples on your computer, you can download the titanic dataset in different formats <a href="https://pmongeon.github.io/info6270/files/data/titanic.zip">here</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imports a comma-separated file and saves it into a data frame called titanic</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>titanic <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"titanic.csv"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Same, but with a tab-separated file (works with tab-separated .txt files also)</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>titanic <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"titanic.tsv"</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Same, but with a txt file in which the columns are separated with a vertical bar.</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>titanic <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"titatic.txt"</span>, <span class="at">delim=</span><span class="st">"|"</span>) </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Same, but reading the file directly from a URL.</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>titanic <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://pmongeon.github.io/info6270/files/data/titanic.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>As you can see from the third example above, you can specify any delimiter using the <strong>delim</strong> argument of the <code>read_delim()</code> function. You should also note that tab-delimited text files (.txt) are extremely common. You can read these files with the <code>read_tsv()</code> function even if the file as the .txt extension. Alternatively, you can use the <code>read_delim()</code> function and use <strong><code>delim = "\t"</code></strong>.</p>
+<p>Often, you will see examples where the path to a file is first stored in an object, so the object name, rather than the whole path, can be used in a function. Like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="st">"https://pmongeon.github.io/info6270/files/data/titanic.csv"</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>titanic <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Another useful package is <strong>readxl (</strong><a href="https://readxl.tidyverse.org/" class="uri">https://readxl.tidyverse.org/</a>), which has functions to help you read data from Excel files, such as <code>read_xlsx()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="st">"https://pmongeon.github.io/info6270/files/data/halifax_weather.xlsx"</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># This will read the first sheet of the Excel file</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>halifax_weather <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(path)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># This will read the second sheet of the Excel file</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>halifax_weather <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(path, <span class="at">sheet =</span> <span class="dv">2</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># This will also read the second sheet of the Excel file </span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>halifax_weather <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(path, <span class="at">sheet =</span> <span class="st">"out"</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co"># If you don't know what the names of the sheets are, you can read them like this </span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="fu">excel_sheets</span>(path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="json-files" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="json-files"><span class="header-section-number">3.4.2</span> JSON files</h3>
+<p>The JSON format is very popular for exchanging information on the web, and is the typical format of the data that we retrieve from APIs (next). However the process for reading a JSON file and reading JSON data from an Application programming interface (API) are slightly different. This is how to convert a JSON file into a data frame using the <code>fromJSON()</code> function from the jsonlite package (included in the tidyverse).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="st">"https://pmongeon.github.io/info6270/files/data/public_houing_ns.json"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Important note:</strong> importing and working with JSON files with simple structures is relatively easy. However, reading more complex JSON files might require a little more work. Reading complex JSON structures is beyond the scope of this chapter.</p>
+</section>
+<section id="application-programming-interface-api" class="level3" data-number="3.4.3">
+<h3 data-number="3.4.3" class="anchored" data-anchor-id="application-programming-interface-api"><span class="header-section-number">3.4.3</span> Application programming interface (API)</h3>
+<p>APIs allow you to interact with computers, servers or software by making making different request such as sending or retrieving data through the web. Some APIs can be used for free and anonymously, others might require that you identify your self with your email, for instance. Finally, some APIs will require that you create an account to obtain an API key for you to use in your code. Fully understanding how APIs work and being proficient with them is beyond the scope of this course, but you should at least know that they exist and that they can be used to collect data for your data science projects. The R package that helps you work with APIs is <strong>httr</strong>. Below is an example of a request to retrieve data from a free anonymous API.</p>
+<p><strong>Important note:</strong> You do not need to understand how all of the code works. I mainly want you to have a working piece of code that you can use as a template if you ever need to retrieve data from an API.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the httr package</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(httr)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a request to an API to GET data</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">GET</span>(<span class="st">"https://openlibrary.org/api/books?bibkeys=OLID:OL22123296M&amp;format=json"</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Isolate the content part of the information received from the API. This step is</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># necessary because the GET request returns additional information about the request </span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># along with the requested data </span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">content</span>(data)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data.table package for the rbindlist() function use in the code below.</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># You may need to install the package first if you don't have it installed already.</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Converts the data retrieved from the API call to a tibble</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">as_tibble</span>(<span class="fu">rbindlist</span>(data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="xml-files" class="level3" data-number="3.4.4">
+<h3 data-number="3.4.4" class="anchored" data-anchor-id="xml-files"><span class="header-section-number">3.4.4</span> XML files</h3>
+<p>The <strong>xml2</strong> package (also included in the tidyverse) provides a set of functions to work with data in the XML format. The conversion of XML data into a data frame is not so straightforward because of the nested structure of the XML. If you need to import XML data in R, the following code performs a series of steps that convert a XML file from <a href="https://data.novascotia.ca">data.novascotia.ca</a> website data into a tibble. We will explore this code in more details further in this chapter, when we look more closely at the <code>unnest()</code> function.</p>
+<p><strong>Important note</strong>: the goal here is mainly to provide you with a piece of code that works, so that you can use it as a template to read XML files if you need to and convert them into data frames.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(xml2)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="st">"https://data.novascotia.ca/api/views/2d4m-9e6x/rows.xml"</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>public_housing_xml <span class="ot">=</span> <span class="fu">as_list</span>(<span class="fu">read_xml</span>(path))</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>public_housing <span class="ot">=</span> <span class="fu">as_tibble</span>(public_housing_xml) </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>public_housing <span class="ot">=</span> <span class="fu">unnest_longer</span>(public_housing, <span class="fu">colnames</span>(public_housing)[<span class="dv">1</span>])</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>public_housing <span class="ot">=</span> <span class="fu">unnest_wider</span>(public_housing, <span class="fu">colnames</span>(public_housing)[<span class="dv">1</span>]) </span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>public_housing <span class="ot">=</span> <span class="fu">unnest</span>(public_housing, <span class="at">cols =</span> <span class="fu">names</span>(public_housing))  </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>public_housing <span class="ot">=</span> <span class="fu">unnest</span>(public_housing, <span class="at">cols =</span> <span class="fu">names</span>(public_housing))</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>public_housing <span class="ot">=</span> <span class="fu">type_convert</span>(public_housing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="connections" class="level3" data-number="3.4.5">
+<h3 data-number="3.4.5" class="anchored" data-anchor-id="connections"><span class="header-section-number">3.4.5</span> Connections</h3>
+<p><strong>Important note</strong>: This section is a little bit advanced, so please do not feel like you need to master database and file connections at this point in your R journey. Again, I include this here to raise your awareness of connection and give you some working pieces of code you can use if you ever want or need to access data stored in a large file or database.</p>
+<section id="connect-to-a-file" class="level4" data-number="3.4.5.1">
+<h4 data-number="3.4.5.1" class="anchored" data-anchor-id="connect-to-a-file"><span class="header-section-number">3.4.5.1</span> Connect to a file</h4>
+<p>If you are trying to read a very large file, you may run into issues because the object in your environment are stored in your computer’s memory (RAM). So if your computer has 4GB of RAM, then files larger than 4GB can’t be imported into a data frame. One solution is to create a <strong>connection</strong> to the file using the <code>file()</code> function, and then processing the data a certain number of lines at a time with the <code>readLines()</code> function. Here is an example.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># open the connection to a text file containing data</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="st">"https://pmongeon.github.io/info6270/files/data/titanic.txt"</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># open a connection to the file (note that connections are stored as objects)</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">file</span>(path, <span class="at">open=</span><span class="st">"rb"</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the first 5 lines and print them</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">readLines</span>(con, <span class="at">n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "PassengerId|Survived|Pclass|Name|Sex|Age|SibSp|Parch|Ticket|Fare|Cabin|Embarked"               
+[2] "1|0|3|Braund, Mr. Owen Harris|male|22|1|0|A/5 21171|7.25|NA|S"                                 
+[3] "2|1|1|Cumings, Mrs. John Bradley (Florence Briggs Thayer)|female|38|1|0|PC 17599|71.2833|C85|C"
+[4] "3|1|3|Heikkinen, Miss. Laina|female|26|0|0|STON/O2. 3101282|7.925|NA|S"                        
+[5] "4|1|1|Futrelle, Mrs. Jacques Heath (Lily May Peel)|female|35|1|0|113803|53.1|C123|S"           </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the NEXT 5 lines and print them.</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">readLines</span>(con, <span class="at">n=</span><span class="dv">5</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "5|0|3|Allen, Mr. William Henry|male|35|0|0|373450|8.05|NA|S"                              
+[2] "6|0|3|Moran, Mr. James|male|NA|0|0|330877|8.4583|NA|Q"                                    
+[3] "7|0|1|McCarthy, Mr. Timothy J|male|54|0|0|17463|51.8625|E46|S"                            
+[4] "8|0|3|Palsson, Master. Gosta Leonard|male|2|3|1|349909|21.075|NA|S"                       
+[5] "9|1|3|Johnson, Mrs. Oscar W (Elisabeth Vilhelmina Berg)|female|27|0|2|347742|11.1333|NA|S"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Close the connection to the file.</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">close</span>(con)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If you wanted to go through the entire file, 50 lines at a time, and do something.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># open the connection to a text file containing data.</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="st">"https://pmongeon.github.io/info6270/files/data/titanic.txt"</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">file</span>(path, <span class="at">open=</span><span class="st">"rb"</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># this will read 50 lines and print them until the end of the file has been reached.</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="cf">repeat</span> { </span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  x<span class="ot">&lt;-</span><span class="fu">readLines</span>(con, <span class="at">n =</span> <span class="dv">50</span>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is_empty</span>(x) <span class="sc">==</span> <span class="cn">TRUE</span>) {</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">break</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> { </span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">print</span>(x)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>} </span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Close the connection to the file.</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="fu">close</span>(con)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="connect-to-a-database" class="level4" data-number="3.4.5.2">
+<h4 data-number="3.4.5.2" class="anchored" data-anchor-id="connect-to-a-database"><span class="header-section-number">3.4.5.2</span> Connect to a database</h4>
+<p>You can also connect to practically all types of local or remote databases and servers as long as you have the required credentials. For example, the RMySQL package is great to work with MySQL databases. You can connect to a MySQL database (provided that you have a user name and password and the other information required by the <code>dbConnect()</code> function). With the RSQLite package, you can also work with local SQL databases stored in a single file on your computer with <a href="https://www.sqlite.org/index.html">SQLite</a>. The code below shows you how to connect to MySQL or SQLite databases in R.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="do">## This creates a connection to a MySQL database for which you would need </span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="do">## access credentials.</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RMySQL)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>con <span class="ot">=</span> <span class="fu">dbConnect</span>(<span class="fu">MySQL</span>(),</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">user =</span> <span class="st">"username"</span>,</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">password =</span> <span class="st">"password"</span>,</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">host =</span> <span class="st">"host"</span>,</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>               <span class="at">port =</span> port_number, </span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">dbname =</span> <span class="st">"database name"</span>)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co"># This opens a connection called db to the info6270 SQLite database.</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co"># If the database doesn't exist, this code will also create it.</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RSQLite)</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(<span class="at">drv =</span> <span class="fu">SQLite</span>(), <span class="at">dbname=</span> <span class="st">"C:/info6270.db"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Once the connection is established, you can interact with the database with a set of functions, some of which are presented in the following code:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># lists table in the database access through the db connection.</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dbListTables</span>(con)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># liste fields from a table</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dbListFields</span>(con,<span class="st">"table_name"</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># import the results of a SQL query </span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">dbGetQuery</span>(con, <span class="st">"SQL query"</span>)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co"># import all the data from a table</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">dbReadTable</span>(con, <span class="st">"table name"</span>)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="co"># upload a data frame to a table (change options as needed)</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con, data, <span class="st">"table name"</span>, <span class="at">row.names=</span><span class="cn">FALSE</span>, <span class="at">overwrite =</span> <span class="cn">FALSE</span>, <span class="at">append =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="tidy-your-data" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="tidy-your-data"><span class="header-section-number">3.5</span> Tidy your data</h2>
+<p>Now we know how to import data into R. However, not all data comes in a nice and tidy shape, even if the data is already shaped like a table. In this section, we’ll explore how to change the structure of your data frames with <strong>tidyr</strong> (<a href="https://tidyr.tidyverse.org/" class="uri">https://tidyr.tidyverse.org/</a>).</p>
+<section id="reshape-data" class="level3" data-number="3.5.1">
+<h3 data-number="3.5.1" class="anchored" data-anchor-id="reshape-data"><span class="header-section-number">3.5.1</span> Reshape data</h3>
+<p>The reshape functions include <code>pivot_longer()</code> and its opposite, <code>pivot_wider()</code>. Let’s look at how they work. First we create a tibble with fictional amounts of funding received from the Canadian Tri-Council by some Nova Scotian universities.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This creates a funding tibble with 4 columns and some data.</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>funding <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">university =</span> <span class="fu">as.character</span>(<span class="fu">c</span>(<span class="st">"DAL"</span>,<span class="st">"SMU"</span>,<span class="st">"SFX"</span>)),</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">SSHRC =</span> <span class="fu">as.numeric</span>(<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>,<span class="dv">3</span>)),</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">NSERC =</span> <span class="fu">as.numeric</span>(<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>,<span class="dv">3</span>)),</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">CIHR =</span> <span class="fu">as.numeric</span>(<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>,<span class="dv">3</span>)))</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Note: the sample(1:100,3) function randomly chooses three values between 1 and 100.</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>funding</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  university SSHRC NSERC  CIHR
+  &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 DAL           91    20    51
+2 SMU           33    92    62
+3 SFX            5    38     6</code></pre>
+</div>
+</div>
+<section id="pivot_longer" class="level4" data-number="3.5.1.1">
+<h4 data-number="3.5.1.1" class="anchored" data-anchor-id="pivot_longer"><span class="header-section-number">3.5.1.1</span> <strong>pivot_longer</strong></h4>
+<p>The <code>pivot_longer()</code> function makes your data longer by appending multiple columns together in two column.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>funding <span class="ot">=</span> <span class="fu">pivot_longer</span>(funding, <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"SSHRC"</span>,<span class="st">"NSERC"</span>,<span class="st">"CIHR"</span>), <span class="at">names_to =</span> <span class="st">"funder"</span>, <span class="at">values_to =</span> <span class="st">"funding_amount"</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>funding</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 3
+  university funder funding_amount
+  &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;
+1 DAL        SSHRC              91
+2 DAL        NSERC              20
+3 DAL        CIHR               51
+4 SMU        SSHRC              33
+5 SMU        NSERC              92
+6 SMU        CIHR               62
+7 SFX        SSHRC               5
+8 SFX        NSERC              38
+9 SFX        CIHR                6</code></pre>
+</div>
+</div>
+</section>
+<section id="pivot_wider" class="level4" data-number="3.5.1.2">
+<h4 data-number="3.5.1.2" class="anchored" data-anchor-id="pivot_wider"><span class="header-section-number">3.5.1.2</span> pivot_wider</h4>
+<p>The <code>pivot_wider()</code> function does the opposite of <code>pivot_longer()</code> and takes a column with names and another with values and creates a new column for each name and storing the value in it. The following example will perhaps make this clearer.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>funding <span class="ot">=</span> <span class="fu">pivot_wider</span>(funding, <span class="at">names_from =</span> funder, <span class="at">values_from =</span> funding_amount)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>funding</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  university SSHRC NSERC  CIHR
+  &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 DAL           91    20    51
+2 SMU           33    92    62
+3 SFX            5    38     6</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="expand-tables" class="level3" data-number="3.5.2">
+<h3 data-number="3.5.2" class="anchored" data-anchor-id="expand-tables"><span class="header-section-number">3.5.2</span> Expand tables</h3>
+<p>Let’s create a new funding tibble to explore some more tidyr functions.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>funding <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">university =</span> <span class="fu">as.character</span>(<span class="fu">c</span>(<span class="st">"DAL"</span>,<span class="st">"DAL"</span>,<span class="st">"DAL"</span>,<span class="st">"SMU"</span>,<span class="st">"SMU"</span>,<span class="st">"SFX"</span>,<span class="st">"SFX"</span>)),</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">funder =</span> <span class="fu">as.character</span>(<span class="fu">c</span>(<span class="st">"SSHRC"</span>,<span class="st">"NSERC"</span>,<span class="st">"CIHR"</span>,<span class="st">"SSHRC"</span>,<span class="st">"CIHR"</span>,<span class="st">"NSERC"</span>,<span class="st">"CIHR"</span>)),</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">n_grants =</span> <span class="fu">as.numeric</span>(<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">7</span>))) </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(funding)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 3
+  university funder n_grants
+  &lt;chr&gt;      &lt;chr&gt;     &lt;dbl&gt;
+1 DAL        SSHRC        62
+2 DAL        NSERC        85
+3 DAL        CIHR         79
+4 SMU        SSHRC       100
+5 SMU        CIHR         72
+6 SFX        NSERC        49
+7 SFX        CIHR         45</code></pre>
+</div>
+</div>
+<section id="expand" class="level4" data-number="3.5.2.1">
+<h4 data-number="3.5.2.1" class="anchored" data-anchor-id="expand"><span class="header-section-number">3.5.2.1</span> expand</h4>
+<p>The <code>expand()</code> function creates all possible combinations of the data in two or more columns indicated in the function’s argument and drops other columns. The example below returns the possible combinations of universities and funders in the funding tibble we created. You can see that the SMU - NSERC combination and the SFX - SSHRC combination appear even though they are not present in the original funding tibble.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">expand</span>(funding, university, funder)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 2
+  university funder
+  &lt;chr&gt;      &lt;chr&gt; 
+1 DAL        CIHR  
+2 DAL        NSERC 
+3 DAL        SSHRC 
+4 SFX        CIHR  
+5 SFX        NSERC 
+6 SFX        SSHRC 
+7 SMU        CIHR  
+8 SMU        NSERC 
+9 SMU        SSHRC </code></pre>
+</div>
+</div>
+</section>
+<section id="complete" class="level4" data-number="3.5.2.2">
+<h4 data-number="3.5.2.2" class="anchored" data-anchor-id="complete"><span class="header-section-number">3.5.2.2</span> complete</h4>
+<p>The <code>complete()</code> function does the same thing as the <code>expand()</code> function but it <strong>keeps</strong> all the columns of the original tibble.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>funding <span class="ot">=</span> <span class="fu">complete</span>(funding, university, funder)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(funding)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 3
+  university funder n_grants
+  &lt;chr&gt;      &lt;chr&gt;     &lt;dbl&gt;
+1 DAL        CIHR         79
+2 DAL        NSERC        85
+3 DAL        SSHRC        62
+4 SFX        CIHR         45
+5 SFX        NSERC        49
+6 SFX        SSHRC        NA
+7 SMU        CIHR         72
+8 SMU        NSERC        NA
+9 SMU        SSHRC       100</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="handle-missing-values" class="level3" data-number="3.5.3">
+<h3 data-number="3.5.3" class="anchored" data-anchor-id="handle-missing-values"><span class="header-section-number">3.5.3</span> Handle missing values</h3>
+<p>Sometimes your dataset is incomplete for one reason or another. Such a reason could be a participant to a survey that did not complete the survey or answer all the questions. What to do with the missing values or incomplete records depends on the nature of the data and the goal of your analysis.</p>
+<section id="drop_na" class="level4" data-number="3.5.3.1">
+<h4 data-number="3.5.3.1" class="anchored" data-anchor-id="drop_na"><span class="header-section-number">3.5.3.1</span> drop_na</h4>
+<p>The <code>drop_na()</code> function is useful to remove incomplete observations in the data (i.e., rows for which one of the column contains no value. The code below includes a statement that removes all incomplete observations, and one where we specify the columns names that should be scanned for NA values (the rows won’t be deleted if there are NAs in the other columns).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This removes all incomplete observations</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">drop_na</span>(funding) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 3
+  university funder n_grants
+  &lt;chr&gt;      &lt;chr&gt;     &lt;dbl&gt;
+1 DAL        CIHR         79
+2 DAL        NSERC        85
+3 DAL        SSHRC        62
+4 SFX        CIHR         45
+5 SFX        NSERC        49
+6 SMU        CIHR         72
+7 SMU        SSHRC       100</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This would remove rows where the n_grants column is NA and leave NA values in other</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># columns.</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">drop_na</span>(funding, n_grants)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 3
+  university funder n_grants
+  &lt;chr&gt;      &lt;chr&gt;     &lt;dbl&gt;
+1 DAL        CIHR         79
+2 DAL        NSERC        85
+3 DAL        SSHRC        62
+4 SFX        CIHR         45
+5 SFX        NSERC        49
+6 SMU        CIHR         72
+7 SMU        SSHRC       100</code></pre>
+</div>
+</div>
+</section>
+<section id="replace_na" class="level4" data-number="3.5.3.2">
+<h4 data-number="3.5.3.2" class="anchored" data-anchor-id="replace_na"><span class="header-section-number">3.5.3.2</span> replace_na</h4>
+<p>Instead of deleting rows with missing values, we me may wish to replace NAs with some other value (e.g., 0). We can do that with <code>replace_na()</code>. You have to provide the columns for which you want to replace NAs and the values to replace the NAs with <strong>in a list</strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">replace_na</span>(funding, <span class="fu">list</span>(<span class="at">n_grants =</span> <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 3
+  university funder n_grants
+  &lt;chr&gt;      &lt;chr&gt;     &lt;dbl&gt;
+1 DAL        CIHR         79
+2 DAL        NSERC        85
+3 DAL        SSHRC        62
+4 SFX        CIHR         45
+5 SFX        NSERC        49
+6 SFX        SSHRC         0
+7 SMU        CIHR         72
+8 SMU        NSERC         0
+9 SMU        SSHRC       100</code></pre>
+</div>
+</div>
+<p>If we want to replace NAs in multiple columns, we simply need to put additional column names and values to replace NAs with in the list. The code below replaces the NAs with 0 in two columns of some tibble.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">replace_na</span>(some_tibble, <span class="fu">list</span>(<span class="at">some_column =</span> <span class="dv">0</span>, <span class="at">some_other_column =</span> <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Replacing null values with zeros for a numerical variable may seems logical, and it may be appropriate for your intended purpose. However, NA and 0 are not logically equivalent: NAs implies the absence of data (somethings that we did not or could not observe), and zeros imply an observed or measured value of 0.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="merge-and-split-cells" class="level3" data-number="3.5.4">
+<h3 data-number="3.5.4" class="anchored" data-anchor-id="merge-and-split-cells"><span class="header-section-number">3.5.4</span> Merge and split cells</h3>
+<p>Let’s create a simple tibble with some names.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">first_name =</span> <span class="fu">c</span>(<span class="st">"Jos"</span>,<span class="st">"May"</span>),</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">last_name =</span> <span class="fu">c</span>(<span class="st">"Louis"</span>,<span class="st">"West"</span>))</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_tibble)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  first_name last_name
+  &lt;chr&gt;      &lt;chr&gt;    
+1 Jos        Louis    
+2 May        West     </code></pre>
+</div>
+</div>
+<section id="unite" class="level4" data-number="3.5.4.1">
+<h4 data-number="3.5.4.1" class="anchored" data-anchor-id="unite"><span class="header-section-number">3.5.4.1</span> unite</h4>
+<p>In some scenario, it may be more useful to have the first names and last names combined into a full_name column. This can be achieved with the <code>unite()</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="ot">=</span> <span class="fu">unite</span>(my_tibble,</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"first_name"</span>,<span class="st">"last_name"</span>, <span class="co"># columns to unite.</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">col =</span> <span class="st">"full_name"</span>, <span class="co"># name of the new column.</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">sep =</span> <span class="st">" "</span>) <span class="co"># Tells R to seperate the first and last name with a space.</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_tibble)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 1
+  full_name
+  &lt;chr&gt;    
+1 Jos Louis
+2 May West </code></pre>
+</div>
+</div>
+</section>
+<section id="separate" class="level4" data-number="3.5.4.2">
+<h4 data-number="3.5.4.2" class="anchored" data-anchor-id="separate"><span class="header-section-number">3.5.4.2</span> separate</h4>
+<p>In the opposite scenario where you have a full_name column but would rather have a first_name and a last_name column, you can use the <code>separate()</code> function to do that.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="ot">=</span> <span class="fu">separate</span>(my_tibble,</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>                     full_name, <span class="co"># column to separate.</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">sep =</span> <span class="st">" "</span>, <span class="co"># character string to use as separator.</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"first_name"</span>, <span class="st">"last_name"</span>)) <span class="co"># names of the new columns.</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_tibble)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  first_name last_name
+  &lt;chr&gt;      &lt;chr&gt;    
+1 Jos        Louis    
+2 May        West     </code></pre>
+</div>
+</div>
+</section>
+<section id="separate_rows" class="level4" data-number="3.5.4.3">
+<h4 data-number="3.5.4.3" class="anchored" data-anchor-id="separate_rows"><span class="header-section-number">3.5.4.3</span> separate_rows</h4>
+<p>The <code>separate_row()</code> function is similar to the <code>separate()</code> function, but instead of creating new columns it creates new rows. In the following example, we have a tibble containing two articles for which we have a column title and an authors column in which the authors are separated with a semi-colon.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This creates some tibble contain names of authors in a single cell with a separator.</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="ot">=</span> <span class="fu">tibble</span>(<span class="at">title =</span> <span class="fu">c</span>(<span class="st">"awesome article"</span>,<span class="st">"boring article"</span>),</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">authors =</span> <span class="fu">c</span>(<span class="st">"Toze, S.; Brown, A."</span>,<span class="st">"Smith, J.; Roberts, J."</span>))</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_tibble)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  title           authors               
+  &lt;chr&gt;           &lt;chr&gt;                 
+1 awesome article Toze, S.; Brown, A.   
+2 boring article  Smith, J.; Roberts, J.</code></pre>
+</div>
+</div>
+<p>This is not tidy data, so we want to separate the authors so that there is only one author per cell. This will create a tidy associative table between articles and authors. Let’s use <code>separate_rows()</code> to do that.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="ot">=</span> <span class="fu">separate_rows</span>(my_tibble, authors, <span class="at">sep =</span> <span class="st">"; "</span>)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_tibble)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 2
+  title           authors    
+  &lt;chr&gt;           &lt;chr&gt;      
+1 awesome article Toze, S.   
+2 awesome article Brown, A.  
+3 boring article  Smith, J.  
+4 boring article  Roberts, J.</code></pre>
+</div>
+</div>
+<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Choose your separator carefully
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Notice how our separator in the code above was not just a semi-colon, but a semi-colon followed by a space. That is because in the original tibble, there were two characters between the end of an author’s name and the beginning of the other: a semi-colon and a space. If we had just used the semi-colon as our separator in the <code>separate_rows()</code>, the space would have been kept as the first character of the names of all authors except the first one.</p>
+</div>
+</div>
+<div class="cell">
+
+</div>
+</section>
+</section>
+<section id="nested-data" class="level3" data-number="3.5.5">
+<h3 data-number="3.5.5" class="anchored" data-anchor-id="nested-data"><span class="header-section-number">3.5.5</span> Nested data</h3>
+<p>The XML file import mentioned earlier is a good opportunity to explore the process of tidying nested data. converting an XML file to the tidy format requires quite a few steps. Here is a pretty standard, step by step process that you can follow whenever you are dealing with XML files.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load the xml2 package</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(xml2)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="co"># read an xml file </span></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>xml <span class="ot">=</span> <span class="fu">read_xml</span>(<span class="st">"https://data.novascotia.ca/api/views/2d4m-9e6x/rows.xml"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The xml object is storing the data in its original xml format. You can verify that indeed the file is in XML by writing the xml object to a file and looking at it.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_xml</span>(xml, <span class="at">file=</span><span class="st">"c:/data/xml.xml"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The xml2 package provides a function (as_list) to convert XML documents into an equivalent R list. Beware: <code>as_list()</code> should not be confused with <code>as.list()</code>, which is a completely different, base R, function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>list <span class="ot">&lt;-</span> <span class="fu">as_list</span>(xml)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The next step is converting that list into a tibble. So let’s do that.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>public_housing <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(list)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(public_housing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  response          
+  &lt;named list&gt;      
+1 &lt;named list [342]&gt;</code></pre>
+</div>
+</div>
+<p>At the moment it has only one column called “response” of the “named_list” type, containing a single cell with 342 named list. This is a <strong>nested</strong> structure, where a single cell contains a list that contains other lists that contain other lists.</p>
+<section id="unnest_longer" class="level4" data-number="3.5.5.1">
+<h4 data-number="3.5.5.1" class="anchored" data-anchor-id="unnest_longer"><span class="header-section-number">3.5.5.1</span> unnest_longer</h4>
+<p>So, let’s <strong>unnest</strong> the data in the response column using the <code>unnest_longer()</code> function. This function makes the tibble <strong>longer</strong> by expaning it vertically (adding rows) with the unnested data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>public_housing <span class="ot">&lt;-</span> <span class="fu">unnest_longer</span>(public_housing, response)</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(public_housing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 342 × 2
+   response          response_id
+   &lt;named list&gt;      &lt;chr&gt;      
+ 1 &lt;named list [22]&gt; row        
+ 2 &lt;named list [22]&gt; row        
+ 3 &lt;named list [21]&gt; row        
+ 4 &lt;named list [22]&gt; row        
+ 5 &lt;named list [22]&gt; row        
+ 6 &lt;named list [21]&gt; row        
+ 7 &lt;named list [22]&gt; row        
+ 8 &lt;named list [22]&gt; row        
+ 9 &lt;named list [22]&gt; row        
+10 &lt;named list [22]&gt; row        
+# … with 332 more rows</code></pre>
+</div>
+</div>
+<p>Now we’re making progress. We have 342 observations each occupying one line. This is one of the tidy criteria! However, the columns are not right. We can see that there are two columns. The first one appears to contain 342 list of 22 elements, which are probably the 22 variables that we want as our columns.</p>
+</section>
+<section id="unnest_wider" class="level4" data-number="3.5.5.2">
+<h4 data-number="3.5.5.2" class="anchored" data-anchor-id="unnest_wider"><span class="header-section-number">3.5.5.2</span> unnest_wider</h4>
+<p>Let’s unnest these 342 lists using the <code>unnest_wider()</code> function. This function makes the tibble <strong>wider</strong> by expaning it horizontally (adding columns) with the unnested data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>public_housing <span class="ot">&lt;-</span> <span class="fu">unnest_wider</span>(public_housing, response)</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(public_housing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 342 × 23
+   id     propert…¹ pid    name   address city   posta…² numbe…³ resid…⁴ housi…⁵
+   &lt;list&gt; &lt;list&gt;    &lt;list&gt; &lt;list&gt; &lt;list&gt;  &lt;list&gt; &lt;list&gt;  &lt;list&gt;  &lt;list&gt;  &lt;list&gt; 
+ 1 &lt;list&gt; &lt;list&gt;    &lt;list&gt; &lt;list&gt; &lt;list&gt;  &lt;list&gt; &lt;list&gt;  &lt;list&gt;  &lt;list&gt;  &lt;list&gt; 
+ 2 &lt;list&gt; &lt;list&gt;    &lt;list&gt; &lt;list&gt; &lt;list&gt;  &lt;list&gt; &lt;list&gt;  &lt;list&gt;  &lt;list&gt;  &lt;list&gt; 
+ 3 &lt;list&gt; &lt;list&gt;    &lt;list&gt; &lt;list&gt; &lt;list&gt;  &lt;list&gt; &lt;NULL&gt;  &lt;list&gt;  &lt;list&gt;  &lt;list&gt; 
+ 4 &lt;list&gt; &lt;list&gt;    &lt;list&gt; &lt;list&gt; &lt;list&gt;  &lt;list&gt; &lt;list&gt;  &lt;list&gt;  &lt;list&gt;  &lt;list&gt; 
+ 5 &lt;list&gt; &lt;list&gt;    &lt;list&gt; &lt;list&gt; &lt;list&gt;  &lt;list&gt; &lt;list&gt;  &lt;list&gt;  &lt;list&gt;  &lt;list&gt; 
+ 6 &lt;list&gt; &lt;list&gt;    &lt;list&gt; &lt;list&gt; &lt;NULL&gt;  &lt;list&gt; &lt;list&gt;  &lt;list&gt;  &lt;list&gt;  &lt;list&gt; 
+ 7 &lt;list&gt; &lt;list&gt;    &lt;list&gt; &lt;list&gt; &lt;list&gt;  &lt;list&gt; &lt;list&gt;  &lt;list&gt;  &lt;list&gt;  &lt;list&gt; 
+ 8 &lt;list&gt; &lt;list&gt;    &lt;list&gt; &lt;list&gt; &lt;list&gt;  &lt;list&gt; &lt;list&gt;  &lt;list&gt;  &lt;list&gt;  &lt;list&gt; 
+ 9 &lt;list&gt; &lt;list&gt;    &lt;list&gt; &lt;list&gt; &lt;list&gt;  &lt;list&gt; &lt;list&gt;  &lt;list&gt;  &lt;list&gt;  &lt;list&gt; 
+10 &lt;list&gt; &lt;list&gt;    &lt;list&gt; &lt;list&gt; &lt;list&gt;  &lt;list&gt; &lt;list&gt;  &lt;list&gt;  &lt;list&gt;  &lt;list&gt; 
+# … with 332 more rows, 13 more variables: county &lt;list&gt;, elevator &lt;list&gt;,
+#   oil_heat &lt;list&gt;, electric_heat &lt;list&gt;, public_water &lt;list&gt;, well &lt;list&gt;,
+#   sewer &lt;list&gt;, onsite_septic &lt;list&gt;, municipality &lt;list&gt;, x_coordina &lt;list&gt;,
+#   y_coordina &lt;list&gt;, location &lt;lgl&gt;, response_id &lt;chr&gt;, and abbreviated
+#   variable names ¹​property_project, ²​postal_code, ³​number_of_floors,
+#   ⁴​residential_units, ⁵​housing_authority</code></pre>
+</div>
+</div>
+<p>we can now see that each cell is a list of 1 element.</p>
+</section>
+<section id="unnest" class="level4" data-number="3.5.5.3">
+<h4 data-number="3.5.5.3" class="anchored" data-anchor-id="unnest"><span class="header-section-number">3.5.5.3</span> unnest</h4>
+<p>Now let’s unnest the data contained in each cell with the <code>unnest()</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unnest</span>()</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>public_housing <span class="ot">=</span> <span class="fu">unnest</span>(public_housing, <span class="at">cols =</span> <span class="fu">c</span>(id, property_project, pid, name, address, city, postal_code, number_of_floors, residential_units, housing_authority, county, elevator, oil_heat, electric_heat, public_water, well, sewer, onsite_septic, municipality, x_coordina, y_coordina))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This seems silly… there has to be a leaner way of writing this. Yes, there is. The <code>names()</code> returns a vector of the column names of a data frame. So we can use this much leaner code:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co">#create the vector with the column names</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>colnames <span class="ot">=</span> <span class="fu">names</span>(public_housing)</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="co">#use that vector for the cols argument of the unnest() function.</span></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>public_housing <span class="ot">=</span> <span class="fu">unnest</span>(public_housing, <span class="at">cols =</span> colnames)</span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(public_housing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 342 × 23
+   id        propert…¹ pid   name  address city  posta…² numbe…³ resid…⁴ housi…⁵
+   &lt;list&gt;    &lt;list&gt;    &lt;lis&gt; &lt;lis&gt; &lt;list&gt;  &lt;lis&gt; &lt;list&gt;  &lt;list&gt;  &lt;list&gt;  &lt;list&gt; 
+ 1 &lt;chr [1]&gt; &lt;chr [1]&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
+ 2 &lt;chr [1]&gt; &lt;chr [1]&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
+ 3 &lt;chr [1]&gt; &lt;chr [1]&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;NULL&gt;  &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
+ 4 &lt;chr [1]&gt; &lt;chr [1]&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
+ 5 &lt;chr [1]&gt; &lt;chr [1]&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
+ 6 &lt;chr [1]&gt; &lt;chr [1]&gt; &lt;chr&gt; &lt;chr&gt; &lt;NULL&gt;  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
+ 7 &lt;chr [1]&gt; &lt;chr [1]&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
+ 8 &lt;chr [1]&gt; &lt;chr [1]&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
+ 9 &lt;chr [1]&gt; &lt;chr [1]&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
+10 &lt;chr [1]&gt; &lt;chr [1]&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
+# … with 332 more rows, 13 more variables: county &lt;list&gt;, elevator &lt;list&gt;,
+#   oil_heat &lt;list&gt;, electric_heat &lt;list&gt;, public_water &lt;list&gt;, well &lt;list&gt;,
+#   sewer &lt;list&gt;, onsite_septic &lt;list&gt;, municipality &lt;list&gt;, x_coordina &lt;list&gt;,
+#   y_coordina &lt;list&gt;, location &lt;lgl&gt;, response_id &lt;chr&gt;, and abbreviated
+#   variable names ¹​property_project, ²​postal_code, ³​number_of_floors,
+#   ⁴​residential_units, ⁵​housing_authority</code></pre>
+</div>
+</div>
+<p>We now have a tibble with 342 observation of 22 variables. Looks good! But the values in the cells still don’t look right. There’s just one more round of unnesting to apply to all the cell using the same code as in the last step.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>public_housing <span class="ot">=</span> <span class="fu">unnest</span>(public_housing, <span class="at">cols =</span> colnames)</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(public_housing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 342 × 23
+   id    property_pr…¹ pid   name  address city  posta…² numbe…³ resid…⁴ housi…⁵
+   &lt;chr&gt; &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
+ 1 117   330101X       6503… Rive… 19/27/… Pict… B0K 1S0 2       20      Easter…
+ 2 324   200214X       5006… Bell… 10 Gra… Gran… B0E 1L0 2       15      Cape B…
+ 3 247   100215X       1511… Sydn… 77 Ain… Sydn… &lt;NA&gt;    1       2       Cape B…
+ 4 337   390201X       2522… Elgi… 22 Elg… Spri… B0M 1X0 1       17      Cobequ…
+ 5 224   100201X       1513… Will… 10 Wil… Sydn… B1N 1R4 2       20      Cape B…
+ 6 289   150226X       1524… 198 … &lt;NA&gt;    Flor… B0C 1J0 2       15      Cape B…
+ 7 214   612301        9021… Trin… 3 Trin… Yarm… B5A 1P3 2       16      Wester…
+ 8 143   350801        2017… Youn… 130 Yo… Truro B2N 3X4 2       16      Cobequ…
+ 9 104   740101        6018… Ritc… 3809 H… Rive… B0J 2W0 2       15      Wester…
+10 174   430901        4017… Dr. … 3792 N… Hali… B3K 3G5 9       135     Metrop…
+# … with 332 more rows, 13 more variables: county &lt;chr&gt;, elevator &lt;chr&gt;,
+#   oil_heat &lt;chr&gt;, electric_heat &lt;chr&gt;, public_water &lt;chr&gt;, well &lt;chr&gt;,
+#   sewer &lt;chr&gt;, onsite_septic &lt;chr&gt;, municipality &lt;chr&gt;, x_coordina &lt;chr&gt;,
+#   y_coordina &lt;chr&gt;, location &lt;lgl&gt;, response_id &lt;chr&gt;, and abbreviated
+#   variable names ¹​property_project, ²​postal_code, ³​number_of_floors,
+#   ⁴​residential_units, ⁵​housing_authority</code></pre>
+</div>
+</div>
+<p>Wow. Now it looks really good! But wait… there’s one more thing. Look at the data types of the columns. They are all characters, which doesn’t seem right because some of our columns appear to contain only numerical data. The <strong>readr</strong> package comes to the rescue with its easy to use <code>type_convert()</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>public_housing <span class="ot">=</span> <span class="fu">type_convert</span>(public_housing)</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(public_housing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 342 × 23
+      id property_p…¹    pid name  address city  posta…² numbe…³ resid…⁴ housi…⁵
+   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;  
+ 1   117 330101X      6.50e7 Rive… 19/27/… Pict… B0K 1S0       2      20 Easter…
+ 2   324 200214X      5.01e7 Bell… 10 Gra… Gran… B0E 1L0       2      15 Cape B…
+ 3   247 100215X      1.51e7 Sydn… 77 Ain… Sydn… &lt;NA&gt;          1       2 Cape B…
+ 4   337 390201X      2.52e7 Elgi… 22 Elg… Spri… B0M 1X0       1      17 Cobequ…
+ 5   224 100201X      1.51e7 Will… 10 Wil… Sydn… B1N 1R4       2      20 Cape B…
+ 6   289 150226X      1.52e7 198 … &lt;NA&gt;    Flor… B0C 1J0       2      15 Cape B…
+ 7   214 612301       9.02e7 Trin… 3 Trin… Yarm… B5A 1P3       2      16 Wester…
+ 8   143 350801       2.02e7 Youn… 130 Yo… Truro B2N 3X4       2      16 Cobequ…
+ 9   104 740101       6.02e7 Ritc… 3809 H… Rive… B0J 2W0       2      15 Wester…
+10   174 430901       4.02e7 Dr. … 3792 N… Hali… B3K 3G5       9     135 Metrop…
+# … with 332 more rows, 13 more variables: county &lt;chr&gt;, elevator &lt;chr&gt;,
+#   oil_heat &lt;chr&gt;, electric_heat &lt;chr&gt;, public_water &lt;chr&gt;, well &lt;chr&gt;,
+#   sewer &lt;chr&gt;, onsite_septic &lt;chr&gt;, municipality &lt;chr&gt;, x_coordina &lt;dbl&gt;,
+#   y_coordina &lt;dbl&gt;, location &lt;lgl&gt;, response_id &lt;chr&gt;, and abbreviated
+#   variable names ¹​property_project, ²​postal_code, ³​number_of_floors,
+#   ⁴​residential_units, ⁵​housing_authority</code></pre>
+</div>
+</div>
+<p>We have now converted an XML document into an easy to use tidy dataset! Here is the entire process that we just went through in a single chunk of code.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>xml <span class="ot">=</span> <span class="fu">read_xml</span>(<span class="st">"https://data.novascotia.ca/api/views/2d4m-9e6x/rows.xml"</span>)</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>list <span class="ot">=</span> <span class="fu">as_list</span>(xml)</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>public_housing <span class="ot">=</span> <span class="fu">as_tibble</span>(list) </span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>public_housing <span class="ot">=</span> <span class="fu">unnest_longer</span>(public_housing, <span class="at">col =</span> response)</span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>public_housing <span class="ot">=</span> <span class="fu">unnest_wider</span>(public_housing, <span class="at">col =</span> response) </span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>public_housing <span class="ot">=</span> <span class="fu">unnest</span>(public_housing, <span class="at">cols =</span> <span class="fu">names</span>(public_housing))  </span>
+<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>public_housing <span class="ot">=</span> <span class="fu">unnest</span>(public_housing, <span class="at">cols =</span> <span class="fu">names</span>(public_housing))</span>
+<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a>public_housing <span class="ot">=</span> <span class="fu">type_convert</span>(public_housing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="combine-data-frames" class="level3" data-number="3.5.6">
+<h3 data-number="3.5.6" class="anchored" data-anchor-id="combine-data-frames"><span class="header-section-number">3.5.6</span> Combine data frames</h3>
+<p>Sometimes the data will come in separate files so you will have to combine the pieces into a single and tidy dataset.</p>
+<section id="bind_rows" class="level4" data-number="3.5.6.1">
+<h4 data-number="3.5.6.1" class="anchored" data-anchor-id="bind_rows"><span class="header-section-number">3.5.6.1</span> bind_rows</h4>
+<p>The <code>bind_rows()</code> function concatenates data frames vertically, adding new columns when column names differ between data frames.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create two tibbles with student info</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>students1 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">student_id =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>),</span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">name =</span> <span class="fu">c</span>(<span class="st">"Francis"</span>,<span class="st">"Sam"</span>,<span class="st">"Amy"</span>))</span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>students2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="st">"Sue"</span>,<span class="st">"Bill"</span>,<span class="st">"Lucy"</span>),</span>
+<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">email =</span> <span class="fu">c</span>(<span class="st">"Sue123@fakemail.com"</span>,<span class="st">"bill@info620.com"</span>,<span class="st">"lucy@lucy.org"</span>))</span>
+<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply bind_rows function</span></span>
+<span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(students1, students2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  student_id name    email              
+       &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;              
+1          1 Francis &lt;NA&gt;               
+2          2 Sam     &lt;NA&gt;               
+3          3 Amy     &lt;NA&gt;               
+4         NA Sue     Sue123@fakemail.com
+5         NA Bill    bill@info620.com   
+6         NA Lucy    lucy@lucy.org      </code></pre>
+</div>
+</div>
+</section>
+<section id="bind_cols" class="level4" data-number="3.5.6.2">
+<h4 data-number="3.5.6.2" class="anchored" data-anchor-id="bind_cols"><span class="header-section-number">3.5.6.2</span> bind_cols</h4>
+<p>The <code>bind_cols()</code> function concatenates the entire data frames horizontally. The number of rows in the two databases must be the same.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a tibble with student info</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>students3 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">student_id =</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>),</span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">name =</span> <span class="fu">c</span>(<span class="st">"Bill"</span>,<span class="st">"Lucy"</span>,<span class="st">"Sue"</span>))</span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply bind_rows function</span></span>
+<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_cols</span>(students3, students2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  student_id name...2 name...3 email              
+       &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;              
+1          4 Bill     Sue      Sue123@fakemail.com
+2          5 Lucy     Bill     bill@info620.com   
+3          6 Sue      Lucy     lucy@lucy.org      </code></pre>
+</div>
+</div>
+<p>The result is a tibble with four columns, the two columns from the <em>students2</em> tibble and the two columns from the <em>students3</em> tibble. So the function did it’s job. However, notice how the order of the students were not the same in both tibble? Also notice how there are now two columns with the names of the students? That’s because <code>bind_col()</code> does nothing more than sticking the two tibbles together without making any attempts to connect the data from one tibble to the data in the other tibble (e.g.&nbsp;matching the name so that the student_id and the emails are accurately paired). This also means that <code>bind_cols()</code> requires that both tibbles have the same number of rows, otherwise we get an error.</p>
+<p>An often better way of bringing together two tibbles is to use <strong>joins</strong>.</p>
+</section>
+</section>
+<section id="join-data-frames" class="level3" data-number="3.5.7">
+<h3 data-number="3.5.7" class="anchored" data-anchor-id="join-data-frames"><span class="header-section-number">3.5.7</span> Join data frames</h3>
+<p>The join family of functions is used to combine rows <strong>and</strong> columns of data frames based on a matching criteria. This means that the number of rows and their order in the joined tibbles does not matter.</p>
+<p>Let’s create two new tibble to illustrate how the joins work</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>instructors_schools <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="st">"Colin"</span>,<span class="st">"Sam"</span>,<span class="st">"Dominika"</span>,<span class="st">"Alana"</span>),</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">school =</span> <span class="fu">c</span>(<span class="st">"SIM"</span>,<span class="st">"RSB"</span>,<span class="st">"SPA"</span>,<span class="st">"SRES"</span>))</span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>instructors_emails <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="st">"Colin"</span>, <span class="st">"Sam"</span>, <span class="st">"Sandy"</span>, <span class="st">"Lindsey"</span>),</span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>                             <span class="at">email =</span> <span class="fu">c</span>(<span class="st">"cc@dalhousie.uni"</span>,<span class="st">"st@dalhousie.uni"</span>,<span class="st">"ss@dalhousie.uni"</span>,<span class="st">"lm@dalhousie.uni"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="left_join" class="level4" data-number="3.5.7.1">
+<h4 data-number="3.5.7.1" class="anchored" data-anchor-id="left_join"><span class="header-section-number">3.5.7.1</span> left_join</h4>
+<p>The <code>left_join()</code> function returns all records from the first data frame and only records from the second data frame for which the matching condition is TRUE. Here is an example where we start with a list of instructors and their school (<em>instructors_schools</em> tibble) and want to obtain their email (<em>instructors_emails</em> tibble).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">left_join</span>(instructors_schools, instructors_emails, <span class="at">by=</span><span class="st">"name"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  name     school email           
+  &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;           
+1 Colin    SIM    cc@dalhousie.uni
+2 Sam      RSB    st@dalhousie.uni
+3 Dominika SPA    &lt;NA&gt;            
+4 Alana    SRES   &lt;NA&gt;            </code></pre>
+</div>
+</div>
+<p>Notice how the name column is not duplicated? That is because the name is the key used for the matching of the two tibbles.</p>
+</section>
+<section id="right_join" class="level4" data-number="3.5.7.2">
+<h4 data-number="3.5.7.2" class="anchored" data-anchor-id="right_join"><span class="header-section-number">3.5.7.2</span> right_join</h4>
+<p>The <code>right_join()</code> function is returns all records from the second data frame and only records from the first data frame for which the matching condition is TRUE. Here is an example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">right_join</span>(instructors_schools, instructors_emails, <span class="at">by=</span><span class="st">"name"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  name    school email           
+  &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;           
+1 Colin   SIM    cc@dalhousie.uni
+2 Sam     RSB    st@dalhousie.uni
+3 Sandy   &lt;NA&gt;   ss@dalhousie.uni
+4 Lindsey &lt;NA&gt;   lm@dalhousie.uni</code></pre>
+</div>
+</div>
+<p>Since we used a <code>right_join()</code> here, R kept all rows from the right table (the second one listed in the function’s body), and kept only the names and schools of the instructors that were found in the <em>instructors_emails</em> tibble.</p>
+</section>
+<section id="inner_join" class="level4" data-number="3.5.7.3">
+<h4 data-number="3.5.7.3" class="anchored" data-anchor-id="inner_join"><span class="header-section-number">3.5.7.3</span> inner_join</h4>
+<p>The <code>inner_join()</code> function returns only records for which the matching condition is TRUE. It excludes all records that were not matched from both tibbles. Here is an example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_join</span>(instructors_schools, instructors_emails, <span class="at">by=</span><span class="st">"name"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  name  school email           
+  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;           
+1 Colin SIM    cc@dalhousie.uni
+2 Sam   RSB    st@dalhousie.uni</code></pre>
+</div>
+</div>
+<p>Colin and Sam were the only instructors for which we had both a school and an email.</p>
+</section>
+<section id="anti_join" class="level4" data-number="3.5.7.4">
+<h4 data-number="3.5.7.4" class="anchored" data-anchor-id="anti_join"><span class="header-section-number">3.5.7.4</span> anti_join</h4>
+<p>The <code>anti_join()</code> function is useful if you want to exclude observations (rows) in your tibble when the matching condition is TRUE.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anti_join</span>(instructors_schools, instructors_emails, <span class="at">by=</span><span class="st">"name"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  name     school
+  &lt;chr&gt;    &lt;chr&gt; 
+1 Dominika SPA   
+2 Alana    SRES  </code></pre>
+</div>
+</div>
+</section>
+<section id="full_join" class="level4" data-number="3.5.7.5">
+<h4 data-number="3.5.7.5" class="anchored" data-anchor-id="full_join"><span class="header-section-number">3.5.7.5</span> full_join</h4>
+<p>The <code>full_join()</code> function is essentially a combination of the <code>left_join()</code> and <code>right_join()</code> functions. It will keep all the rows from both tibbles that are being joined.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">full_join</span>(instructors_schools, instructors_emails, <span class="at">by=</span><span class="st">"name"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  name     school email           
+  &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;           
+1 Colin    SIM    cc@dalhousie.uni
+2 Sam      RSB    st@dalhousie.uni
+3 Dominika SPA    &lt;NA&gt;            
+4 Alana    SRES   &lt;NA&gt;            
+5 Sandy    &lt;NA&gt;   ss@dalhousie.uni
+6 Lindsey  &lt;NA&gt;   lm@dalhousie.uni</code></pre>
+</div>
+</div>
+<p><strong>Note</strong>: You can use the functions without specifying the column(s) to use for the matching. In this case, all columns with the same names will be used for the matching. Because te <em>name</em> column is the only one that exists in both the tibbles used in this example, the result of the following code is the same as in our <code>inner_join()</code> example above.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_join</span>(instructors_schools, instructors_emails)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  name  school email           
+  &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;           
+1 Colin SIM    cc@dalhousie.uni
+2 Sam   RSB    st@dalhousie.uni</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="rename-columns" class="level3" data-number="3.5.8">
+<h3 data-number="3.5.8" class="anchored" data-anchor-id="rename-columns"><span class="header-section-number">3.5.8</span> Rename columns</h3>
+<p>For various reasons, we may want to rename columns in our tibble. We can do this with the <code>rename()</code> function. Let’s capitalize the first letter of the column names from our <em>instructors_schools</em>&nbsp;tibble.</p>
+<p><strong>Important</strong>: The syntax of the <code>rename()</code> function goes <em><code>new_column_name = orginal_column_name</code></em>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>instructors_schools <span class="ot">&lt;-</span> <span class="fu">rename</span>(instructors_schools, <span class="at">Name =</span> name, <span class="at">School =</span> school)</span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(instructors_schools)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 2
+  Name     School
+  &lt;chr&gt;    &lt;chr&gt; 
+1 Colin    SIM   
+2 Sam      RSB   
+3 Dominika SPA   
+4 Alana    SRES  </code></pre>
+</div>
+</div>
+</section>
+<section id="select-columns" class="level3" data-number="3.5.9">
+<h3 data-number="3.5.9" class="anchored" data-anchor-id="select-columns"><span class="header-section-number">3.5.9</span> Select columns</h3>
+<p>The <code>select()</code> variable is used to retrieve a subset of <strong>columns</strong> from a data frame or tibble.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select the School column from the instructors_schools tibble.</span></span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(instructors_schools, School)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 1
+  School
+  &lt;chr&gt; 
+1 SIM   
+2 RSB   
+3 SPA   
+4 SRES  </code></pre>
+</div>
+</div>
+<p>We can select and rename columns at the same time, like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select the School column from the instructors_schools tibble </span></span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a><span class="co"># and rename it to Department.</span></span>
+<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(instructors_schools, <span class="at">Department =</span> School)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 1
+  Department
+  &lt;chr&gt;     
+1 SIM       
+2 RSB       
+3 SPA       
+4 SRES      </code></pre>
+</div>
+</div>
+</section>
+<section id="filter-rows" class="level3" data-number="3.5.10">
+<h3 data-number="3.5.10" class="anchored" data-anchor-id="filter-rows"><span class="header-section-number">3.5.10</span> Filter rows</h3>
+<p>The <code>filter()</code> functions is used to retrieve a subset of <strong>rows</strong> from a data frame or tibble based on some criteria. For example, we could filter a tibble and include only the rows here x1 is lower than 3.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(instructors_schools, School <span class="sc">==</span> <span class="st">"RSB"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  Name  School
+  &lt;chr&gt; &lt;chr&gt; 
+1 Sam   RSB   </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="co"># you can use the %in% operator to select observations for which the value is in a list.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can also use the %in% operator to select observations for which the value is in a vector.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(instructors_schools, School <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"RSB"</span>,<span class="st">"SPA"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  Name     School
+  &lt;chr&gt;    &lt;chr&gt; 
+1 Sam      RSB   
+2 Dominika SPA   </code></pre>
+</div>
+</div>
+</section>
+<section id="modify-or-create-new-variables" class="level3" data-number="3.5.11">
+<h3 data-number="3.5.11" class="anchored" data-anchor-id="modify-or-create-new-variables"><span class="header-section-number">3.5.11</span> Modify or create new variables</h3>
+<p>The <code>mutate()</code> function is used to <strong>create</strong> a new variable or <strong>update</strong> an existing one.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This adds a column called Faculty that contains the string "Faculty of Management".</span></span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(instructors_schools, <span class="at">Faculty =</span> <span class="st">"Faculty of Management"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  Name     School Faculty              
+  &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;                
+1 Colin    SIM    Faculty of Management
+2 Sam      RSB    Faculty of Management
+3 Dominika SPA    Faculty of Management
+4 Alana    SRES   Faculty of Management</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This updates the already existing variable Faculty with the new value "FoM".</span></span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(instructors_schools, <span class="at">Faculty =</span> <span class="st">"FoM"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  Name     School Faculty
+  &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;  
+1 Colin    SIM    FoM    
+2 Sam      RSB    FoM    
+3 Dominika SPA    FoM    
+4 Alana    SRES   FoM    </code></pre>
+</div>
+</div>
+<p>Note that you can also calculate the value assign to a variable with the <code>mutate()</code> function.</p>
+<p>You can also use conditional statements in the <code>mutate()</code> function. For example, say we want to add a new column with the name of the schools spelled out. Of course, the values in that new column will depend on the value in the <em>School</em> column. Since there are more than two schools, we should use the <code>case_when()</code> function, like in the following example.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>instructors_schools <span class="ot">&lt;-</span> <span class="fu">mutate</span>(instructors_schools, </span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">school_name =</span> <span class="fu">case_when</span>(School <span class="sc">==</span> <span class="st">"RSB"</span> <span class="sc">~</span> <span class="st">"Rowe School of Business"</span>,</span>
+<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a>                                                      School <span class="sc">==</span> <span class="st">"SIM"</span> <span class="sc">~</span> <span class="st">"School of Information Management"</span>,</span>
+<span id="cb95-4"><a href="#cb95-4" aria-hidden="true" tabindex="-1"></a>                                                      School <span class="sc">==</span> <span class="st">"SPA"</span> <span class="sc">~</span> <span class="st">"School of Public Administration"</span>,</span>
+<span id="cb95-5"><a href="#cb95-5" aria-hidden="true" tabindex="-1"></a>                                                      School <span class="sc">==</span> <span class="st">"SRES"</span> <span class="sc">~</span> <span class="st">"School for Resources and Environmental Studies"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can also use <code>ifelse(condition, value if TRUE, value if FALSE)</code> when there is only two possible outcomes. For example, say some of our instructors are on leave, and we want to add a column to our <em>instructors_schools</em> tibble that indicates whether the instructor is on leave or not. We could do it this way.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co"># vector of people on leave</span></span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>instructors_on_leave <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Dominika"</span>,<span class="st">"Colin"</span>)</span>
+<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-4"><a href="#cb96-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Creates a variable called on_leave that is 1 if the person is on leave and 0 otherwise</span></span>
+<span id="cb96-5"><a href="#cb96-5" aria-hidden="true" tabindex="-1"></a>instructors_schools <span class="ot">&lt;-</span> <span class="fu">mutate</span>(instructors_schools, </span>
+<span id="cb96-6"><a href="#cb96-6" aria-hidden="true" tabindex="-1"></a>                              <span class="at">on_leave =</span> <span class="fu">ifelse</span>(Name <span class="sc">%in%</span> instructors_on_leave,<span class="dv">1</span>,<span class="dv">0</span>))</span>
+<span id="cb96-7"><a href="#cb96-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-8"><a href="#cb96-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(instructors_schools)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 4
+  Name     School school_name                                    on_leave
+  &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;                                             &lt;dbl&gt;
+1 Colin    SIM    School of Information Management                      1
+2 Sam      RSB    Rowe School of Business                               0
+3 Dominika SPA    School of Public Administration                       1
+4 Alana    SRES   School for Resources and Environmental Studies        0</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="export-data" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="export-data"><span class="header-section-number">3.6</span> Export data</h2>
+<p>Now that you have a nice tidy data set, you may want to export it so you can save it for future use and not have to repeat the data collection and tidying process, or maybe because you want to share it with others.</p>
+<section id="export-data-frames" class="level3" data-number="3.6.1">
+<h3 data-number="3.6.1" class="anchored" data-anchor-id="export-data-frames"><span class="header-section-number">3.6.1</span> Export data frames</h3>
+<p>Exporting data frames is very easy in R (the hardest part was getting there). The <strong>readr</strong> package has a bunch of functions to write files. The most common are:</p>
+<ul>
+<li><p><code>write_csv()</code> for comma-separated files (and it’s cousin <code>write_csv2()</code> that uses the european format (commas instead of dot for decimals, and semicolon as delimiter);</p></li>
+<li><p><code>write_tsv()</code> for tab-delimited files;</p></li>
+<li><p><code>write_delim()</code> which allows you to specify the separator (it can be anything you want, even the word “banana”)</p></li>
+<li><p><code>write_xlsx()</code> from the <strong>writexl</strong> package can be used to write Excel files.</p></li>
+</ul>
+<p>Here’s how we would use these functions to write data to a file. Note that, in the example, we use the <code>col_names = TRUE</code> argument to ensure that the first line of the created files will contain the column names. the default setting of <code>write_xlsx()</code> bolds and centers the column names. In the example below, we chose to disable this feature with the <code>format_headers = FALSE</code> argument.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(my_tibble, <span class="at">file =</span> <span class="st">"my_data.csv"</span>, <span class="at">col_names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-4"><a href="#cb98-4" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv2</span>(my_tibble, <span class="at">file =</span> <span class="st">"my_data.csv"</span>, <span class="at">col_names =</span> <span class="cn">TRUE</span>) </span>
+<span id="cb98-5"><a href="#cb98-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-6"><a href="#cb98-6" aria-hidden="true" tabindex="-1"></a><span class="fu">write_tsv</span>(my_tibble, <span class="at">file =</span> <span class="st">"my_data.tsv"</span>, <span class="at">col_names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb98-7"><a href="#cb98-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-8"><a href="#cb98-8" aria-hidden="true" tabindex="-1"></a><span class="fu">write_delim</span>(my_tibble, <span class="at">file =</span> <span class="st">"my_data.txt"</span>, <span class="at">delim =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">col_names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb98-9"><a href="#cb98-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-10"><a href="#cb98-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(writexl)</span>
+<span id="cb98-11"><a href="#cb98-11" aria-hidden="true" tabindex="-1"></a><span class="fu">write_xlsx</span>(my_tibble, <span class="at">path =</span> <span class="st">"my_data.xlsx"</span>, <span class="at">col_names =</span> <span class="cn">TRUE</span>, <span class="at">format_headers =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The <code>write_xlsx()</code> function can also write multiple tibbles into different sheets of a single Excel file, which can be quite useful. To do that, we need to provide a list of tibbles rather than a single tibble as the intput to the function.</p>
+<p>Assuming that we have already created several tibbles and named them <em>my_tibble1</em>, <em>my_tibble2</em>, and <em>my_tibble3</em>. Here’s how we would create a list containing the three tibbles and export it into an Excel file.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a list of tibbles tibbles</span></span>
+<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a>my_tibble_list <span class="ot">&lt;-</span> <span class="fu">list</span>(my_tibble1, my_tibble2, my_tibble3)</span>
+<span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-4"><a href="#cb99-4" aria-hidden="true" tabindex="-1"></a><span class="fu">write_xlsx</span>(my_tibble_list, <span class="at">path=</span><span class="st">"my_data.xlsx"</span>, <span class="at">col_names =</span> <span class="cn">TRUE</span>, <span class="at">format_headers =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="json" class="level3" data-number="3.6.2">
+<h3 data-number="3.6.2" class="anchored" data-anchor-id="json"><span class="header-section-number">3.6.2</span> JSON</h3>
+<p>Writing JSON files from a data frame with the <code>toJSON()</code> function is just as easy as reading them with the <code>fromJSON()</code> function. The following code reads a CSV file containing the Titanic dataset, and then exports the data to a JSON file. Note the that <code>pretty=TRUE</code> argument spaces out the JSON file so it is more readable for humans.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reads the CSV file into a data frame.</span></span>
+<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a>titanic <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://pmongeon.github.io/info6270/files/data/titanic.csv"</span>)</span>
+<span id="cb100-3"><a href="#cb100-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-4"><a href="#cb100-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Writes the data frame to a JSON file.</span></span>
+<span id="cb100-5"><a href="#cb100-5" aria-hidden="true" tabindex="-1"></a><span class="fu">write_file</span>(<span class="fu">toJSON</span>(titanic, <span class="at">pretty=</span><span class="cn">TRUE</span>), <span class="st">"titanic.json"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="writing-readable-code" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="writing-readable-code"><span class="header-section-number">3.7</span> Writing readable code</h2>
+<p>There are many ways of writing code to achieve the same process. You can structure the data in different ways, use different functions from different packages, but we can also use the exact same functions in exactly the same way but with very different code. Most of our examples so far were relatively simple and the processes did not involve a large number of steps. However, when they did, most of the steps were coded sequentially, one statement at a time. This makes all the steps explicit and clear, but it also makes the code longer than it needs to be. We can also write our code so that the entire process is in a single statement that contains other statements, that contain other statements, an so on. Let’s use an example to compare the two approaches. Say we want to use the Titanic dataset to create a CSV file that contains only the name, sex, age of the survivors. The steps would be:</p>
+<ol type="1">
+<li>Load the Titanic dataset.</li>
+<li>Convert it into a tibble (this step is not actually necessary, we use it to add an extra step to the process).</li>
+<li>Filter the dataset to include only the survivors.</li>
+<li>Select only the Name, Sex, and Age columns.</li>
+<li>Write the tibble to a .csv file.</li>
+</ol>
+<p>We can write this in a single statement, like this.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(<span class="fu">select</span>(<span class="fu">filter</span>(<span class="fu">as_tibble</span>(<span class="fu">read_csv</span>(<span class="st">"https://pmongeon.github.io/info6270/files/data/titanic.csv"</span>)),Survived <span class="sc">==</span> <span class="dv">1</span>), Name,Sex,Age), <span class="at">file =</span> <span class="st">"titanic_survivors.csv"</span>, <span class="at">col_names =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Just like in mathematical equations, the operations are completed from the inside out. So the first step, <code>read_csv("titanic")</code> is in the middle, and it is <strong>inside</strong> the statement for the second step, <code>as_tibble()</code>, which is <strong>inside</strong> the third statemnt, <code>filter(, Survived == 1)</code>, and so on. The outer statement is the <code>write_csv()</code> function with its argument, <code>file = "titanic_survivors.csv, col_names = TRUE</code>, appearing at the very end of the code.</p>
+<p>This may be efficient in terms of the number of characters needed to write the code, but perhaps a little difficult to read.</p>
+<p>Now lets do the same thing by writing distinct statements for each step.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the Titanic dataset.</span></span>
+<span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://pmongeon.github.io/info6270/files/data/titanic.csv"</span>)</span>
+<span id="cb102-3"><a href="#cb102-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb102-4"><a href="#cb102-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert it into a tibble</span></span>
+<span id="cb102-5"><a href="#cb102-5" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(data)</span>
+<span id="cb102-6"><a href="#cb102-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb102-7"><a href="#cb102-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the dataset to include only the survivors.</span></span>
+<span id="cb102-8"><a href="#cb102-8" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">filter</span>(data, Survived <span class="sc">==</span> <span class="dv">1</span>)</span>
+<span id="cb102-9"><a href="#cb102-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb102-10"><a href="#cb102-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Select only the Name, Sex, and Age columns.</span></span>
+<span id="cb102-11"><a href="#cb102-11" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">select</span>(data, Name, Sex, Age)</span>
+<span id="cb102-12"><a href="#cb102-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb102-13"><a href="#cb102-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Write the tibble to a .csv file.</span></span>
+<span id="cb102-14"><a href="#cb102-14" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(data, <span class="st">"titanic_survivors.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This is very clear but perhaps not so efficient in terms of characters (the name of the tibble gets repeated many times). Also, all five statement will need to be executed one by one, or we will need to select all the code to run it all at once. This is perhaps not such a big deal, but the single statement version does have an edge there.</p>
+<section id="the-pipe" class="level3" data-number="3.7.1">
+<h3 data-number="3.7.1" class="anchored" data-anchor-id="the-pipe"><span class="header-section-number">3.7.1</span> The pipe</h3>
+<p>The <strong>dplyr</strong> and <strong>maggritr</strong> packages (automatically loaded with the tidyverse) include an extremely useful and popular operator called the <strong>pipe</strong> which looks like this in R: <code>%&gt;%</code>. The keyboard shortcut is <code>CTRL+SHIFT+M</code>. The pipe is a wonderful tool for building lean code that are easier to read and to debug. It allows you to write multiple steps <strong>sequentially</strong> into a single statement. It combines the readability of the step by step approach with the efficiency of the single “embedded statement” approach. Here’s the same process written with the pipe.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">"https://pmongeon.github.io/info6270/files/data/titanic.csv"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb103-3"><a href="#cb103-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Survived <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb103-4"><a href="#cb103-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Name, Sex, Age) <span class="sc">%&gt;%</span> </span>
+<span id="cb103-5"><a href="#cb103-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(<span class="st">"titanic_survivors.csv"</span>, <span class="at">col_names =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>When reading this code, I like to read the <code>%&gt;%</code> as “<strong>and then</strong>”. So this would read, read the CSV, and then make it a tibble, and then limit the tibble to rows for which the Survived column contains 1, and then select only the Name, Sex, and Age columns, and then write the tibble to a file named “titanic_survivors.csv”.</p>
+<p>As you can see, this is a lean and easily readable process which doesn’t require to create an object and explicitly read it, process it, and overwrite it for each step of the process. Note that having each step on a separate line is common and good practice but it is not required. In fact, R does not care about extra spaces, indentations, or line breaks in the code. We could have written this statement in a single line like this.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">"https://pmongeon.github.io/info6270/files/data/titanic.csv"</span>) <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Survived <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Name, Sex, Age) <span class="sc">%&gt;%</span> <span class="fu">write_csv</span>(<span class="st">"titanic_survivors.csv"</span>, <span class="at">col_names =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="additional-resources" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="additional-resources"><span class="header-section-number">3.8</span> Additional resources</h2>
+<p>There are many <a href="https://www.rstudio.com/resources/cheatsheets/">cheatsheets</a> available for R packages that can be very useful to quickly see what the different functions of the packages can do.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-wickham2014" class="csl-entry" role="doc-biblioentry">
+Wickham, Hadley. 2014. <span>“Tidy Data.”</span> <em>Journal of Statistical Software</em> 59 (September): 1–23. <a href="https://doi.org/10.18637/jss.v059.i10">https://doi.org/10.18637/jss.v059.i10</a>.
+</div>
+<div id="ref-wickham2016" class="csl-entry" role="doc-biblioentry">
+Wickham, Hadley, and Garrett Grolemund. 2016. <em>R for Data Science: Import, Tidy, Transform, Visualize, and Model Data</em>. First edition. Sebastopol, CA: O’Reilly.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./getting_started_with_R.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting started with R</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./working_with_strings.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with strings</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

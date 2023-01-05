@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Introduction to Data Science - 5&nbsp; Publishing with R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./summarizing_data.html" rel="next">
+<link href="./working_with_strings.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Publishing with R</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introduction to Data Science</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Course overview</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">What is data science?</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./getting_started_with_R.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting started with R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reading_and_tidying_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Reading and tidying data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./working_with_strings.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with strings</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./publishing_with_r.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Publishing with R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summarizing_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summarizing data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visualizing_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualizing data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./topic_modelling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Topic Modelling</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="toc-section-number">5.1</span>  Learning objectives</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><span class="toc-section-number">5.2</span>  Introduction</a></li>
+  <li><a href="#quarto-documents" id="toc-quarto-documents" class="nav-link" data-scroll-target="#quarto-documents"><span class="toc-section-number">5.3</span>  Quarto documents</a>
+  <ul class="collapse">
+  <li><a href="#creating-a-quarto-document-in-rstudio" id="toc-creating-a-quarto-document-in-rstudio" class="nav-link" data-scroll-target="#creating-a-quarto-document-in-rstudio"><span class="toc-section-number">5.3.1</span>  Creating a Quarto document in RStudio</a></li>
+  <li><a href="#three-components-of-a-quarto-document" id="toc-three-components-of-a-quarto-document" class="nav-link" data-scroll-target="#three-components-of-a-quarto-document"><span class="toc-section-number">5.3.2</span>  Three components of a Quarto document</a></li>
+  <li><a href="#visual-mode" id="toc-visual-mode" class="nav-link" data-scroll-target="#visual-mode"><span class="toc-section-number">5.3.3</span>  Visual mode</a></li>
+  <li><a href="#rendering-your-document" id="toc-rendering-your-document" class="nav-link" data-scroll-target="#rendering-your-document"><span class="toc-section-number">5.3.4</span>  Rendering your document</a></li>
+  </ul></li>
+  <li><a href="#making-beautiful-tables" id="toc-making-beautiful-tables" class="nav-link" data-scroll-target="#making-beautiful-tables"><span class="toc-section-number">5.4</span>  Making beautiful tables</a>
+  <ul class="collapse">
+  <li><a href="#the-kableextra-package" id="toc-the-kableextra-package" class="nav-link" data-scroll-target="#the-kableextra-package"><span class="toc-section-number">5.4.1</span>  the kableExtra package</a></li>
+  <li><a href="#keeping-it-simple" id="toc-keeping-it-simple" class="nav-link" data-scroll-target="#keeping-it-simple"><span class="toc-section-number">5.4.2</span>  keeping it simple</a></li>
+  </ul></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="toc-section-number">5.5</span>  Summary</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Publishing with R</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="cell">
+
+</div>
+<section id="learning-objectives" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">5.1</span> Learning objectives</h2>
+<ul>
+<li>Quarto documents</li>
+</ul>
+</section>
+<section id="introduction" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="introduction"><span class="header-section-number">5.2</span> Introduction</h2>
+<p>So far, we learned how to import data in all kinds of format into R, convert it into a tibble that follow the the first two tidy principles (one observation per row, one variable per column), and clean up messy strings with the stringr package. These steps are the 80 in the 80/20 rules of data science, which states that 80% of the time is spent preparing the data, and 20% is spent analyzing it.</p>
+<p>We are embark on our journal to draw insights from the data and write clear and compelling data stories. This chapter introduces Quarto, a suite of tools that will enable you to perform all the data processing AND produce beautiful reports in one simple, yet powerful, interface: RStudio.</p>
+</section>
+<section id="quarto-documents" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="quarto-documents"><span class="header-section-number">5.3</span> Quarto documents</h2>
+<p>So far we have been working with R scripts (.r files, like the ones we used for Labs 1 to 3). In R scripts, everything is interpreted by R as code unless we specify that we are writing a comment with #. This works fine and there is no limit to what we can do with these kinds of R scripts in terms of data processing and analysis. However, R scripts are not a great tool for making sharing our data stories with the world.</p>
+<p><a href="https://quarto.org/docs/computations/r.html">Quarto</a> brings coding, writing, and formatting together by allowing you to write nicely formatted HTML, Word or PDF documents, with embedded chunks of code that are executed to process the data and create beautiful tables and figures for your document. It uses the <strong>markdown</strong> (<a href="https://en.wikipedia.org/wiki/Markdown" class="uri">https://en.wikipedia.org/wiki/Markdown</a>) syntax. This course website is an example of the type of output that you can produce with Quarto. It’s actually a <a href="https://quarto.org/docs/books/">Quarto book</a>.</p>
+<p>There is a lot that you can do with Quarto that is beyond the scope of this course, but if you want to explore the possibilities I recommend that you consult the Quarto website, which contains plenty of documentation.</p>
+<section id="creating-a-quarto-document-in-rstudio" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="creating-a-quarto-document-in-rstudio"><span class="header-section-number">5.3.1</span> Creating a Quarto document in RStudio</h3>
+<p>To create a new Quarto document (.qmd), you can click on file, then new file, then select the second option (Quarto Document…). Then RStudio will give you an opportunity to provide some information about the document you are creating.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="files/create_quarto_doc.jpg" class="img-fluid figure-img" width="505"></p>
+</figure>
+</div>
+<p>You can select different types of outputs, like documents, presentations, and Shiny applications. In this course, we will use R Markdown to make <strong>documents</strong>. You can choose to output an HTML document, a PDF document, or a Word document. I recommend sticking with the default (HTML). Word is also a good option if you want to be able to modify the format or add text in Word. The PDF format requires additional packages and a LaTeX installation, so I recommend sticking to HTML documents and Word documents for this course.</p>
+<p>When you create a new Quarto document, it comes with some content that can get you started with the components of the document and the syntax. This can give you a quick overview of Quarto and the markdown syntax.</p>
+</section>
+<section id="three-components-of-a-quarto-document" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="three-components-of-a-quarto-document"><span class="header-section-number">5.3.2</span> Three components of a Quarto document</h3>
+<p>There are three components to a Quarto document: Metadata, text, and code. All components are <strong>optional</strong>. So you can write a R Markdown document without metadata, or include only code or text.</p>
+<section id="metadata" class="level4" data-number="5.3.2.1">
+<h4 data-number="5.3.2.1" class="anchored" data-anchor-id="metadata"><span class="header-section-number">5.3.2.1</span> Metadata</h4>
+<p>The metadata is located at the top of the Quarto document and is delineated by three dashes <code>---</code> at the beginning and the end. When you create a new Quarto document in RStudio, the metadata will look like this:</p>
+<pre class="unnumbered unnumbered unnumbered"><code>---
+title: "My document"
+author: "Philippe Mongeon"
+format: html
+editor: visual
+---</code></pre>
+<p>To change the type of output to a PDF or a word document, we simply need to replace <code>html</code> with <code>docx</code> or <code>pdf</code>. We can also add features such as a table of content, and specify where on the page we want it to appear. Note that <code>toc-location</code> does not work for PDFs and Word documents, which always put the table of content on top of the document in the main body of the document. The <code>number-sections: true</code> numbers the sections. Here’s what this looks like.</p>
+<pre><code>---
+title: "My document"
+author: "Philippe Mongeon"
+format: 
+  html:
+    toc: true
+    toc-location: left 
+    number-sections: true
+editor: visual
+---</code></pre>
+<p><strong>Important</strong>: note the <code>html</code> tag was moved to a new line and is now followed by a colon. Also, pay attention to the indentation of the different parts, which is essential to follow. When facing errors, it is always a good idea to fall back on a working example like the one above or to consult the Quarto documentation.</p>
+</section>
+<section id="text" class="level4" data-number="5.3.2.2">
+<h4 data-number="5.3.2.2" class="anchored" data-anchor-id="text"><span class="header-section-number">5.3.2.2</span> Text</h4>
+<p>What ever you write after the metadata statement is text, which can be formatted using markdown syntax. Here is an example, with the code on the left and the HTML output on the right.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="files/markdown.jpg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="code" class="level4" data-number="5.3.2.3">
+<h4 data-number="5.3.2.3" class="anchored" data-anchor-id="code"><span class="header-section-number">5.3.2.3</span> Code</h4>
+<p>What makes Quarto so great is that we can embed code chunks into our document. We have seen a lot of those code chunks throughout this website so far. They start with three back ticks (<code>`</code>) followed by curly brackets with the coding language used in the chunk, and end with three back ticks.</p>
+<p><code>```{r}</code></p>
+<p><code>some r code</code></p>
+<p><code>```</code></p>
+<p>We can also set options for the code chunks to tell R whether to display the code itself, its output, or both. <code>#| echo : FALSE</code> tells R not to display the code in the published document. <code>#| eval : FALSE</code> tells R not to execute the code (so the output of the code will not be displayed in the published document because there will be no output). Here is an example of each option. The code is on the left, and the HTML output is on the right.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="files/code_chunks.jpg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<p>Other useful code chunks options are <code>#| message : FALSE</code>, <code>#| message : FALSE</code>, and <code>#| message : FALSE</code>. Sometimes your code will produce error messages, warnings, or other messages. Typically, we do not want these to show in our documents, so setting these options to FALSE is the way to go.</p>
+</section>
+</section>
+<section id="visual-mode" class="level3" data-number="5.3.3">
+<h3 data-number="5.3.3" class="anchored" data-anchor-id="visual-mode"><span class="header-section-number">5.3.3</span> Visual mode</h3>
+<p>The visual mode provides an interface and tools to make writing and formatting your Quarto document easier. Here is the same Rmd file edited in normal mode (left) and visual mode (right).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="files/visual_mode_dual.jpg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</section>
+<section id="rendering-your-document" class="level3" data-number="5.3.4">
+<h3 data-number="5.3.4" class="anchored" data-anchor-id="rendering-your-document"><span class="header-section-number">5.3.4</span> Rendering your document</h3>
+<p>When you are ready to produce your HTML, Word or PDF document, you click the <strong>Render</strong> button in RStudio. This will execute all the code and output the HTML, Word or PDF file in your working directory. You can also choose, in the settings, to preview the output in a popup window or the viewer pane (as in the screenshots above).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="files/render.jpg" class="img-fluid figure-img" width="547"></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="making-beautiful-tables" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="making-beautiful-tables"><span class="header-section-number">5.4</span> Making beautiful tables</h2>
+<p>A lot of times, we write statements that print tibbles as their output. So part of making beautiful documents is learning how to print our tibbles as nicely formatted tables.</p>
+<p>Here are the key rules for table layout proposed by <span class="citation" data-cites="wilke2019">Wilke (<a href="references.html#ref-wilke2019" role="doc-biblioref">2019</a>)</span>:</p>
+<ol type="1">
+<li>Do not use vertical lines.</li>
+<li>Do not use horizontal lines between data rows. (Horizontal lines as the separator between the title row and the first data row or as a frame for the entire table are fine.)</li>
+<li>Text columns should be left aligned.</li>
+<li>Number columns should be right-aligned and use the same number of decimal digits throughout.</li>
+<li>Columns containing single characters are centred.</li>
+<li>The header fields are aligned with their data, i.e., the heading for a text column will be left aligned, and the heading for a number column will be right aligned.</li>
+<li>Captions are placed above the table.</li>
+</ol>
+<section id="the-kableextra-package" class="level3" data-number="5.4.1">
+<h3 data-number="5.4.1" class="anchored" data-anchor-id="the-kableextra-package"><span class="header-section-number">5.4.1</span> the kableExtra package</h3>
+<p>There are a bunch of popular packages that you can explore to make nice tables. The <em>kableExtra</em> package is very versatile, and I recommend it as a start. You can find all the information you need to fully exploit the package in the <a href="https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html">official vignette</a>.</p>
+<p>The following code uses the <code>kbl()</code> function to print the first 6 rows (this is done with the <code>head()</code> function) of the mpg dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">%&gt;%</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> manufacturer </th>
+   <th style="text-align:left;"> model </th>
+   <th style="text-align:right;"> displ </th>
+   <th style="text-align:right;"> year </th>
+   <th style="text-align:right;"> cyl </th>
+   <th style="text-align:left;"> trans </th>
+   <th style="text-align:left;"> drv </th>
+   <th style="text-align:right;"> cty </th>
+   <th style="text-align:right;"> hwy </th>
+   <th style="text-align:left;"> fl </th>
+   <th style="text-align:left;"> class </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> audi </td>
+   <td style="text-align:left;"> a4 </td>
+   <td style="text-align:right;"> 1.8 </td>
+   <td style="text-align:right;"> 1999 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:left;"> auto(l5) </td>
+   <td style="text-align:left;"> f </td>
+   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:right;"> 29 </td>
+   <td style="text-align:left;"> p </td>
+   <td style="text-align:left;"> compact </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> audi </td>
+   <td style="text-align:left;"> a4 </td>
+   <td style="text-align:right;"> 1.8 </td>
+   <td style="text-align:right;"> 1999 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:left;"> manual(m5) </td>
+   <td style="text-align:left;"> f </td>
+   <td style="text-align:right;"> 21 </td>
+   <td style="text-align:right;"> 29 </td>
+   <td style="text-align:left;"> p </td>
+   <td style="text-align:left;"> compact </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> audi </td>
+   <td style="text-align:left;"> a4 </td>
+   <td style="text-align:right;"> 2.0 </td>
+   <td style="text-align:right;"> 2008 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:left;"> manual(m6) </td>
+   <td style="text-align:left;"> f </td>
+   <td style="text-align:right;"> 20 </td>
+   <td style="text-align:right;"> 31 </td>
+   <td style="text-align:left;"> p </td>
+   <td style="text-align:left;"> compact </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> audi </td>
+   <td style="text-align:left;"> a4 </td>
+   <td style="text-align:right;"> 2.0 </td>
+   <td style="text-align:right;"> 2008 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:left;"> auto(av) </td>
+   <td style="text-align:left;"> f </td>
+   <td style="text-align:right;"> 21 </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:left;"> p </td>
+   <td style="text-align:left;"> compact </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> audi </td>
+   <td style="text-align:left;"> a4 </td>
+   <td style="text-align:right;"> 2.8 </td>
+   <td style="text-align:right;"> 1999 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:left;"> auto(l5) </td>
+   <td style="text-align:left;"> f </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:right;"> 26 </td>
+   <td style="text-align:left;"> p </td>
+   <td style="text-align:left;"> compact </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> audi </td>
+   <td style="text-align:left;"> a4 </td>
+   <td style="text-align:right;"> 2.8 </td>
+   <td style="text-align:right;"> 1999 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:left;"> manual(m5) </td>
+   <td style="text-align:left;"> f </td>
+   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:right;"> 26 </td>
+   <td style="text-align:left;"> p </td>
+   <td style="text-align:left;"> compact </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<p>As you can see, the table meets most of the criteria listed above. Our table lacks a caption, and the <em>drv</em> column should be centred. We can fix that by using the <code>caption</code> arguments and manually setting the columns’ alignment with the <code>align</code> argument (“l” = left, “r” = right, and “c” = centre).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">%&gt;%</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>(<span class="at">caption =</span> <span class="st">"This is the caption of the table"</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">align=</span><span class="fu">c</span>(<span class="st">"l"</span>,<span class="st">"l"</span>,<span class="st">"r"</span>,<span class="st">"r"</span>,<span class="st">"r"</span>,<span class="st">"l"</span>,<span class="st">"c"</span>,<span class="st">"r"</span>,<span class="st">"r"</span>,<span class="st">"c"</span>,<span class="st">"l"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<table>
+<caption>This is the caption of the table</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> manufacturer </th>
+   <th style="text-align:left;"> model </th>
+   <th style="text-align:right;"> displ </th>
+   <th style="text-align:right;"> year </th>
+   <th style="text-align:right;"> cyl </th>
+   <th style="text-align:left;"> trans </th>
+   <th style="text-align:center;"> drv </th>
+   <th style="text-align:right;"> cty </th>
+   <th style="text-align:right;"> hwy </th>
+   <th style="text-align:center;"> fl </th>
+   <th style="text-align:left;"> class </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> audi </td>
+   <td style="text-align:left;"> a4 </td>
+   <td style="text-align:right;"> 1.8 </td>
+   <td style="text-align:right;"> 1999 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:left;"> auto(l5) </td>
+   <td style="text-align:center;"> f </td>
+   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:right;"> 29 </td>
+   <td style="text-align:center;"> p </td>
+   <td style="text-align:left;"> compact </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> audi </td>
+   <td style="text-align:left;"> a4 </td>
+   <td style="text-align:right;"> 1.8 </td>
+   <td style="text-align:right;"> 1999 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:left;"> manual(m5) </td>
+   <td style="text-align:center;"> f </td>
+   <td style="text-align:right;"> 21 </td>
+   <td style="text-align:right;"> 29 </td>
+   <td style="text-align:center;"> p </td>
+   <td style="text-align:left;"> compact </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> audi </td>
+   <td style="text-align:left;"> a4 </td>
+   <td style="text-align:right;"> 2.0 </td>
+   <td style="text-align:right;"> 2008 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:left;"> manual(m6) </td>
+   <td style="text-align:center;"> f </td>
+   <td style="text-align:right;"> 20 </td>
+   <td style="text-align:right;"> 31 </td>
+   <td style="text-align:center;"> p </td>
+   <td style="text-align:left;"> compact </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> audi </td>
+   <td style="text-align:left;"> a4 </td>
+   <td style="text-align:right;"> 2.0 </td>
+   <td style="text-align:right;"> 2008 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:left;"> auto(av) </td>
+   <td style="text-align:center;"> f </td>
+   <td style="text-align:right;"> 21 </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:center;"> p </td>
+   <td style="text-align:left;"> compact </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> audi </td>
+   <td style="text-align:left;"> a4 </td>
+   <td style="text-align:right;"> 2.8 </td>
+   <td style="text-align:right;"> 1999 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:left;"> auto(l5) </td>
+   <td style="text-align:center;"> f </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:right;"> 26 </td>
+   <td style="text-align:center;"> p </td>
+   <td style="text-align:left;"> compact </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> audi </td>
+   <td style="text-align:left;"> a4 </td>
+   <td style="text-align:right;"> 2.8 </td>
+   <td style="text-align:right;"> 1999 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:left;"> manual(m5) </td>
+   <td style="text-align:center;"> f </td>
+   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:right;"> 26 </td>
+   <td style="text-align:center;"> p </td>
+   <td style="text-align:left;"> compact </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<p>The kableExtra package includes some standard themes that you can use to format your tables: <code>kable_classic(),</code> <code>kable_classic_2</code>, <code>kable_minimal()</code>, <code>kable_material()</code>, <code>kable_material_dark()</code>, and <code>kable_paper()</code>. Here’s the same table to which we apply the classic theme.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>(<span class="at">caption =</span> <span class="st">"This is the caption of the table"</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">align=</span><span class="fu">c</span>(<span class="st">"l"</span>,<span class="st">"l"</span>,<span class="st">"r"</span>,<span class="st">"r"</span>,<span class="st">"r"</span>,<span class="st">"l"</span>,<span class="st">"c"</span>,<span class="st">"r"</span>,<span class="st">"r"</span>,<span class="st">"c"</span>,<span class="st">"l"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+<caption>This is the caption of the table</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> manufacturer </th>
+   <th style="text-align:left;"> model </th>
+   <th style="text-align:right;"> displ </th>
+   <th style="text-align:right;"> year </th>
+   <th style="text-align:right;"> cyl </th>
+   <th style="text-align:left;"> trans </th>
+   <th style="text-align:center;"> drv </th>
+   <th style="text-align:right;"> cty </th>
+   <th style="text-align:right;"> hwy </th>
+   <th style="text-align:center;"> fl </th>
+   <th style="text-align:left;"> class </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> audi </td>
+   <td style="text-align:left;"> a4 </td>
+   <td style="text-align:right;"> 1.8 </td>
+   <td style="text-align:right;"> 1999 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:left;"> auto(l5) </td>
+   <td style="text-align:center;"> f </td>
+   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:right;"> 29 </td>
+   <td style="text-align:center;"> p </td>
+   <td style="text-align:left;"> compact </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> audi </td>
+   <td style="text-align:left;"> a4 </td>
+   <td style="text-align:right;"> 1.8 </td>
+   <td style="text-align:right;"> 1999 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:left;"> manual(m5) </td>
+   <td style="text-align:center;"> f </td>
+   <td style="text-align:right;"> 21 </td>
+   <td style="text-align:right;"> 29 </td>
+   <td style="text-align:center;"> p </td>
+   <td style="text-align:left;"> compact </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> audi </td>
+   <td style="text-align:left;"> a4 </td>
+   <td style="text-align:right;"> 2.0 </td>
+   <td style="text-align:right;"> 2008 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:left;"> manual(m6) </td>
+   <td style="text-align:center;"> f </td>
+   <td style="text-align:right;"> 20 </td>
+   <td style="text-align:right;"> 31 </td>
+   <td style="text-align:center;"> p </td>
+   <td style="text-align:left;"> compact </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> audi </td>
+   <td style="text-align:left;"> a4 </td>
+   <td style="text-align:right;"> 2.0 </td>
+   <td style="text-align:right;"> 2008 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:left;"> auto(av) </td>
+   <td style="text-align:center;"> f </td>
+   <td style="text-align:right;"> 21 </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:center;"> p </td>
+   <td style="text-align:left;"> compact </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> audi </td>
+   <td style="text-align:left;"> a4 </td>
+   <td style="text-align:right;"> 2.8 </td>
+   <td style="text-align:right;"> 1999 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:left;"> auto(l5) </td>
+   <td style="text-align:center;"> f </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:right;"> 26 </td>
+   <td style="text-align:center;"> p </td>
+   <td style="text-align:left;"> compact </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> audi </td>
+   <td style="text-align:left;"> a4 </td>
+   <td style="text-align:right;"> 2.8 </td>
+   <td style="text-align:right;"> 1999 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:left;"> manual(m5) </td>
+   <td style="text-align:center;"> f </td>
+   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:right;"> 26 </td>
+   <td style="text-align:center;"> p </td>
+   <td style="text-align:left;"> compact </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</section>
+<section id="keeping-it-simple" class="level3" data-number="5.4.2">
+<h3 data-number="5.4.2" class="anchored" data-anchor-id="keeping-it-simple"><span class="header-section-number">5.4.2</span> keeping it simple</h3>
+<p>My main advice with tables is to keep them clean, simple, and informative. Usually, simple tables are enough to convey the message efficiently. If you want to impress with fancy tables, this can certainly be done with kableExtra or some other table packages (an overview of some of the main packages is available on this <a href="https://rfortherestofus.com/2019/11/how-to-make-beautiful-tables-in-r/">website</a>).</p>
+</section>
+</section>
+<section id="summary" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="summary"><span class="header-section-number">5.5</span> Summary</h2>
+<p>Quarto documents combine the data processing, analysis and reporting elements of the data science workflow in a single location. And the visual tool brings the R Markdown document writing experience closer to writing in Word or by hiding the code and letting you visualize the format of your document as you write them.</p>
+<p>To get you used to Quarto, we will use it for the remaining course labs. You are also encouraged to use it for your project.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-wilke2019" class="csl-entry" role="doc-biblioentry">
+Wilke, C. 2019. <em>Fundamentals of Data Visualization: A Primer on Making Informative and Compelling Figures</em>. First edition. Sebastopol, CA: O’Reilly Media.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./working_with_strings.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with strings</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./summarizing_data.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summarizing data</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

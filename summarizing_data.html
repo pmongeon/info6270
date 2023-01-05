@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Introduction to Data Science - 6&nbsp; Summarizing data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./visualizing_data.html" rel="next">
+<link href="./publishing_with_r.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summarizing data</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introduction to Data Science</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Course overview</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">What is data science?</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./getting_started_with_R.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting started with R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reading_and_tidying_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Reading and tidying data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./working_with_strings.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with strings</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./publishing_with_r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Publishing with R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summarizing_data.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summarizing data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visualizing_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualizing data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./topic_modelling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Topic Modelling</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="toc-section-number">6.1</span>  Learning objectives</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><span class="toc-section-number">6.2</span>  Introduction</a></li>
+  <li><a href="#types-of-variable" id="toc-types-of-variable" class="nav-link" data-scroll-target="#types-of-variable"><span class="toc-section-number">6.3</span>  Types of variable</a>
+  <ul class="collapse">
+  <li><a href="#categorical-variable" id="toc-categorical-variable" class="nav-link" data-scroll-target="#categorical-variable"><span class="toc-section-number">6.3.1</span>  Categorical variable</a></li>
+  <li><a href="#numerical-variables" id="toc-numerical-variables" class="nav-link" data-scroll-target="#numerical-variables"><span class="toc-section-number">6.3.2</span>  Numerical variables</a></li>
+  </ul></li>
+  <li><a href="#summarizing-categorical-data" id="toc-summarizing-categorical-data" class="nav-link" data-scroll-target="#summarizing-categorical-data"><span class="toc-section-number">6.4</span>  Summarizing categorical data</a>
+  <ul class="collapse">
+  <li><a href="#frequency" id="toc-frequency" class="nav-link" data-scroll-target="#frequency"><span class="toc-section-number">6.4.1</span>  Frequency</a></li>
+  <li><a href="#relative-frequency" id="toc-relative-frequency" class="nav-link" data-scroll-target="#relative-frequency"><span class="toc-section-number">6.4.2</span>  Relative frequency</a></li>
+  <li><a href="#adding-a-total" id="toc-adding-a-total" class="nav-link" data-scroll-target="#adding-a-total"><span class="toc-section-number">6.4.3</span>  Adding a total</a></li>
+  </ul></li>
+  <li><a href="#summarizing-numerical-data" id="toc-summarizing-numerical-data" class="nav-link" data-scroll-target="#summarizing-numerical-data"><span class="toc-section-number">6.5</span>  Summarizing numerical data</a>
+  <ul class="collapse">
+  <li><a href="#measures-of-centrality" id="toc-measures-of-centrality" class="nav-link" data-scroll-target="#measures-of-centrality"><span class="toc-section-number">6.5.1</span>  Measures of centrality</a></li>
+  <li><a href="#measures-of-dispersion" id="toc-measures-of-dispersion" class="nav-link" data-scroll-target="#measures-of-dispersion"><span class="toc-section-number">6.5.2</span>  Measures of dispersion</a></li>
+  <li><a href="#measures-of-symmetry" id="toc-measures-of-symmetry" class="nav-link" data-scroll-target="#measures-of-symmetry"><span class="toc-section-number">6.5.3</span>  Measures of symmetry</a></li>
+  </ul></li>
+  <li><a href="#creating-a-descriptive-statistics-summary" id="toc-creating-a-descriptive-statistics-summary" class="nav-link" data-scroll-target="#creating-a-descriptive-statistics-summary"><span class="toc-section-number">6.6</span>  Creating a descriptive statistics summary</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summarizing data</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="cell">
+
+</div>
+<section id="learning-objectives" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">6.1</span> Learning objectives</h2>
+<ul>
+<li>Frequency tables</li>
+<li>Descriptive statistics</li>
+</ul>
+</section>
+<section id="introduction" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="introduction"><span class="header-section-number">6.2</span> Introduction</h2>
+<p>In this chapter, we use numbers and tables to summarize our dataset. These summaries can sometimes suffice to fulfill the goals of our analysis when these goals are descriptive. The summaries also help us (and our readers) get to know more about our data and help us ensure that our data is adequate to perform the intended analyses. First we will consider what types of variables we have in our dataset (this is related, but not the same as the R data types), and then we will go through the process of generating useful summaries for variables of different types.</p>
+</section>
+<section id="types-of-variable" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="types-of-variable"><span class="header-section-number">6.3</span> Types of variable</h2>
+<section id="categorical-variable" class="level3" data-number="6.3.1">
+<h3 data-number="6.3.1" class="anchored" data-anchor-id="categorical-variable"><span class="header-section-number">6.3.1</span> Categorical variable</h3>
+<p>Categorical variables are groups or categories. They can be represented by characters or numbers</p>
+<ul>
+<li><p><strong>Nominal</strong> variables represent categories or groups (e.g., gender, occupation, course, programs, university) and where there is no logical order between the different categories.</p></li>
+<li><p><strong>Ordinal</strong> variables represent categories or groups that have a logical order (e.g., age groups)</p></li>
+</ul>
+</section>
+<section id="numerical-variables" class="level3" data-number="6.3.2">
+<h3 data-number="6.3.2" class="anchored" data-anchor-id="numerical-variables"><span class="header-section-number">6.3.2</span> Numerical variables</h3>
+<p>Numerical variables are represented by numbers</p>
+<ul>
+<li><p><strong>discrete</strong> numerical variables can only take a certain number of values (like the numbers on a die or the number of pets a person has). Another way to think about those is that they are things that can be <strong>counted</strong> (number of cars, number of students, number of pets).</p></li>
+<li><p><strong>Continuous</strong> variables can be measured and can theoretically take any value (e.g., the weight or height of a person, the distance between two cities, a price). They are things that can be <strong>measured</strong>.</p></li>
+</ul>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Categories represented with numbers
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It is important to look at your data to understand what the values represent. Sometimes you may have groups that are represented with numbers. When deciding what type of statistical analysis is adequate for a given variable, you most likely will want to consider treating those variables as categorical and not numerical..</p>
+</div>
+</div>
+<p>The following code creates a table that describes the variables included in the mpg dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">Variable =</span> <span class="fu">colnames</span>(mpg),</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Type =</span> <span class="fu">c</span>(<span class="st">"Nominal"</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Nominal"</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Continuous"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Discrete"</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Discrete"</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Nominal"</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Nominal"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Continuous"</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Continuous"</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Nominal"</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Nominal"</span>),</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">Description =</span> <span class="fu">c</span>(<span class="st">"Manufacturer name"</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Model name"</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Engine displacement, in litres"</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Year of manufacture"</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Number of cylinders"</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Type of transmission"</span>,</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Type of drive train"</span>,</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>             <span class="st">"City miles per gallon"</span>,</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Highway miles per gallon"</span>,</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Fuel type"</span>,</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Type of car"</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kbl</span>(</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Variables in the mpg dataset."</span>,</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">align =</span> <span class="fu">c</span>(<span class="st">"l"</span>,<span class="st">"l"</span>,<span class="st">"l"</span>)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+<caption>Variables in the mpg dataset.</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Variable </th>
+   <th style="text-align:left;"> Type </th>
+   <th style="text-align:left;"> Description </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> manufacturer </td>
+   <td style="text-align:left;"> Nominal </td>
+   <td style="text-align:left;"> Manufacturer name </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> model </td>
+   <td style="text-align:left;"> Nominal </td>
+   <td style="text-align:left;"> Model name </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> displ </td>
+   <td style="text-align:left;"> Continuous </td>
+   <td style="text-align:left;"> Engine displacement, in litres </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> year </td>
+   <td style="text-align:left;"> Discrete </td>
+   <td style="text-align:left;"> Year of manufacture </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> cyl </td>
+   <td style="text-align:left;"> Discrete </td>
+   <td style="text-align:left;"> Number of cylinders </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> trans </td>
+   <td style="text-align:left;"> Nominal </td>
+   <td style="text-align:left;"> Type of transmission </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> drv </td>
+   <td style="text-align:left;"> Nominal </td>
+   <td style="text-align:left;"> Type of drive train </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> cty </td>
+   <td style="text-align:left;"> Continuous </td>
+   <td style="text-align:left;"> City miles per gallon </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> hwy </td>
+   <td style="text-align:left;"> Continuous </td>
+   <td style="text-align:left;"> Highway miles per gallon </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> fl </td>
+   <td style="text-align:left;"> Nominal </td>
+   <td style="text-align:left;"> Fuel type </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> class </td>
+   <td style="text-align:left;"> Nominal </td>
+   <td style="text-align:left;"> Type of car </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</section>
+</section>
+<section id="summarizing-categorical-data" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="summarizing-categorical-data"><span class="header-section-number">6.4</span> Summarizing categorical data</h2>
+<p>There is not a lot that you can do with a single categorical variable other than reporting the frequency (number) and relative frequency (percentage) of observations for each category.</p>
+<section id="frequency" class="level3" data-number="6.4.1">
+<h3 data-number="6.4.1" class="anchored" data-anchor-id="frequency"><span class="header-section-number">6.4.1</span> Frequency</h3>
+<p>We can use the <code>summarize()</code>&nbsp;and <code>n()</code> functions of the dplyr package (included in the tidyverse) to create a table of frequencies for the manufacturer variable. the <code>group_by()</code> function specifies which categorical variable I want to summarize. If we don’t use the <code>group_by()</code> function, we obtain the number of observations (rows) in the whole tibble.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">%&gt;%</span> </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(manufacturer) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">freq =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> <span class="co"># n() counts the number of observations for each group.</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> manufacturer </th>
+   <th style="text-align:right;"> freq </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> audi </td>
+   <td style="text-align:right;"> 18 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> chevrolet </td>
+   <td style="text-align:right;"> 19 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> dodge </td>
+   <td style="text-align:right;"> 37 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> ford </td>
+   <td style="text-align:right;"> 25 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> honda </td>
+   <td style="text-align:right;"> 9 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> hyundai </td>
+   <td style="text-align:right;"> 14 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> jeep </td>
+   <td style="text-align:right;"> 8 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> land rover </td>
+   <td style="text-align:right;"> 4 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> lincoln </td>
+   <td style="text-align:right;"> 3 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> mercury </td>
+   <td style="text-align:right;"> 4 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> nissan </td>
+   <td style="text-align:right;"> 13 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> pontiac </td>
+   <td style="text-align:right;"> 5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> subaru </td>
+   <td style="text-align:right;"> 14 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> toyota </td>
+   <td style="text-align:right;"> 34 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> volkswagen </td>
+   <td style="text-align:right;"> 27 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</section>
+<section id="relative-frequency" class="level3" data-number="6.4.2">
+<h3 data-number="6.4.2" class="anchored" data-anchor-id="relative-frequency"><span class="header-section-number">6.4.2</span> Relative frequency</h3>
+<p>The relative frequency is simply the frequency represented as a percentage rather than count. It is obtained by first computing the frequency and then calculating the relative frequency by dividing each counts by the sum of the counts: <code>mutate(rel_freq = freq/sum(freq))</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(manufacturer) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">freq =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> <span class="co"># n() counts the number of observations for each group.</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rel_freq =</span> freq<span class="sc">/</span><span class="fu">sum</span>(freq)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> manufacturer </th>
+   <th style="text-align:right;"> freq </th>
+   <th style="text-align:right;"> rel_freq </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> audi </td>
+   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:right;"> 0.0769231 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> chevrolet </td>
+   <td style="text-align:right;"> 19 </td>
+   <td style="text-align:right;"> 0.0811966 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> dodge </td>
+   <td style="text-align:right;"> 37 </td>
+   <td style="text-align:right;"> 0.1581197 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> ford </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:right;"> 0.1068376 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> honda </td>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:right;"> 0.0384615 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> hyundai </td>
+   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:right;"> 0.0598291 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> jeep </td>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:right;"> 0.0341880 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> land rover </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 0.0170940 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> lincoln </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 0.0128205 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> mercury </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 0.0170940 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> nissan </td>
+   <td style="text-align:right;"> 13 </td>
+   <td style="text-align:right;"> 0.0555556 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> pontiac </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 0.0213675 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> subaru </td>
+   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:right;"> 0.0598291 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> toyota </td>
+   <td style="text-align:right;"> 34 </td>
+   <td style="text-align:right;"> 0.1452991 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> volkswagen </td>
+   <td style="text-align:right;"> 27 </td>
+   <td style="text-align:right;"> 0.1153846 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<section id="rounding-the-values" class="level4" data-number="6.4.2.1">
+<h4 data-number="6.4.2.1" class="anchored" data-anchor-id="rounding-the-values"><span class="header-section-number">6.4.2.1</span> Rounding the values</h4>
+<p>When we calculate the relative frequency, we obtain numbers with a lot of decimals. We can used the <code>round()</code> function to specify the number of decimals we want. The syntax is <code>round(value, number of decimals)</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">%&gt;%</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(manufacturer) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">freq =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> <span class="co"># n() counts the number of observations for each group.</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rel_freq =</span> <span class="fu">round</span>(freq<span class="sc">/</span><span class="fu">sum</span>(freq),<span class="dv">3</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> manufacturer </th>
+   <th style="text-align:right;"> freq </th>
+   <th style="text-align:right;"> rel_freq </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> audi </td>
+   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:right;"> 0.077 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> chevrolet </td>
+   <td style="text-align:right;"> 19 </td>
+   <td style="text-align:right;"> 0.081 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> dodge </td>
+   <td style="text-align:right;"> 37 </td>
+   <td style="text-align:right;"> 0.158 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> ford </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:right;"> 0.107 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> honda </td>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:right;"> 0.038 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> hyundai </td>
+   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:right;"> 0.060 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> jeep </td>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:right;"> 0.034 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> land rover </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 0.017 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> lincoln </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 0.013 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> mercury </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 0.017 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> nissan </td>
+   <td style="text-align:right;"> 13 </td>
+   <td style="text-align:right;"> 0.056 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> pontiac </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 0.021 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> subaru </td>
+   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:right;"> 0.060 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> toyota </td>
+   <td style="text-align:right;"> 34 </td>
+   <td style="text-align:right;"> 0.145 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> volkswagen </td>
+   <td style="text-align:right;"> 27 </td>
+   <td style="text-align:right;"> 0.115 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</section>
+<section id="converting-the-relative-frequency-to-percentages" class="level4" data-number="6.4.2.2">
+<h4 data-number="6.4.2.2" class="anchored" data-anchor-id="converting-the-relative-frequency-to-percentages"><span class="header-section-number">6.4.2.2</span> Converting the relative frequency to percentages</h4>
+<p>Another thing we might want to do is show the relative frequency as a percentage. This can be done by multiplying the relative frequency by 100.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(manufacturer) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">freq =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> <span class="co"># n() counts the number of observations for each group.</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct =</span> <span class="fu">round</span>(freq<span class="sc">/</span><span class="fu">sum</span>(freq)<span class="sc">*</span><span class="dv">100</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> manufacturer </th>
+   <th style="text-align:right;"> freq </th>
+   <th style="text-align:right;"> pct </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> audi </td>
+   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:right;"> 7.7 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> chevrolet </td>
+   <td style="text-align:right;"> 19 </td>
+   <td style="text-align:right;"> 8.1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> dodge </td>
+   <td style="text-align:right;"> 37 </td>
+   <td style="text-align:right;"> 15.8 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> ford </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:right;"> 10.7 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> honda </td>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:right;"> 3.8 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> hyundai </td>
+   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:right;"> 6.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> jeep </td>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:right;"> 3.4 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> land rover </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 1.7 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> lincoln </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 1.3 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> mercury </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 1.7 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> nissan </td>
+   <td style="text-align:right;"> 13 </td>
+   <td style="text-align:right;"> 5.6 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> pontiac </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 2.1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> subaru </td>
+   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:right;"> 6.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> toyota </td>
+   <td style="text-align:right;"> 34 </td>
+   <td style="text-align:right;"> 14.5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> volkswagen </td>
+   <td style="text-align:right;"> 27 </td>
+   <td style="text-align:right;"> 11.5 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</section>
+<section id="ordering-the-categories" class="level4" data-number="6.4.2.3">
+<h4 data-number="6.4.2.3" class="anchored" data-anchor-id="ordering-the-categories"><span class="header-section-number">6.4.2.3</span> Ordering the categories</h4>
+<p>I can use <code>arrange()</code> to reorder my table using alphabetical order or frequency. The syntax of the arrange function is <code>arrange(x, variable to use for ordering)</code>. The variables are ordered in ascending order by default. To arrange your variable in descending order, you use <code>desc()</code> like this <code>arrange(x, desc(variable to use for ordering))</code> . You can use arrange with numeric values or characters.</p>
+<section id="order-by-frequency-ascending" class="level5" data-number="6.4.2.3.1">
+<h5 data-number="6.4.2.3.1" class="anchored" data-anchor-id="order-by-frequency-ascending"><span class="header-section-number">6.4.2.3.1</span> Order by frequency (ascending)</h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(manufacturer) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">freq =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> <span class="co"># n() counts the number of observations for each group.</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct =</span> <span class="fu">round</span>(freq<span class="sc">/</span><span class="fu">sum</span>(freq)<span class="sc">*</span><span class="dv">100</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(freq) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> manufacturer </th>
+   <th style="text-align:right;"> freq </th>
+   <th style="text-align:right;"> pct </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> lincoln </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 1.3 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> land rover </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 1.7 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> mercury </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 1.7 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> pontiac </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 2.1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> jeep </td>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:right;"> 3.4 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> honda </td>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:right;"> 3.8 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> nissan </td>
+   <td style="text-align:right;"> 13 </td>
+   <td style="text-align:right;"> 5.6 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> hyundai </td>
+   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:right;"> 6.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> subaru </td>
+   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:right;"> 6.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> audi </td>
+   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:right;"> 7.7 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> chevrolet </td>
+   <td style="text-align:right;"> 19 </td>
+   <td style="text-align:right;"> 8.1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> ford </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:right;"> 10.7 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> volkswagen </td>
+   <td style="text-align:right;"> 27 </td>
+   <td style="text-align:right;"> 11.5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> toyota </td>
+   <td style="text-align:right;"> 34 </td>
+   <td style="text-align:right;"> 14.5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> dodge </td>
+   <td style="text-align:right;"> 37 </td>
+   <td style="text-align:right;"> 15.8 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</section>
+<section id="order-by-frequency-decreasing" class="level5" data-number="6.4.2.3.2">
+<h5 data-number="6.4.2.3.2" class="anchored" data-anchor-id="order-by-frequency-decreasing"><span class="header-section-number">6.4.2.3.2</span> Order by frequency (decreasing)</h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(manufacturer) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">freq =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> <span class="co"># n() counts the number of observations for each group.</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct =</span> <span class="fu">round</span>(freq<span class="sc">/</span><span class="fu">sum</span>(freq)<span class="sc">*</span><span class="dv">100</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(freq)) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> manufacturer </th>
+   <th style="text-align:right;"> freq </th>
+   <th style="text-align:right;"> pct </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> dodge </td>
+   <td style="text-align:right;"> 37 </td>
+   <td style="text-align:right;"> 15.8 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> toyota </td>
+   <td style="text-align:right;"> 34 </td>
+   <td style="text-align:right;"> 14.5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> volkswagen </td>
+   <td style="text-align:right;"> 27 </td>
+   <td style="text-align:right;"> 11.5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> ford </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:right;"> 10.7 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> chevrolet </td>
+   <td style="text-align:right;"> 19 </td>
+   <td style="text-align:right;"> 8.1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> audi </td>
+   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:right;"> 7.7 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> hyundai </td>
+   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:right;"> 6.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> subaru </td>
+   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:right;"> 6.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> nissan </td>
+   <td style="text-align:right;"> 13 </td>
+   <td style="text-align:right;"> 5.6 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> honda </td>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:right;"> 3.8 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> jeep </td>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:right;"> 3.4 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> pontiac </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 2.1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> land rover </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 1.7 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> mercury </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 1.7 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> lincoln </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 1.3 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="adding-a-total" class="level3" data-number="6.4.3">
+<h3 data-number="6.4.3" class="anchored" data-anchor-id="adding-a-total"><span class="header-section-number">6.4.3</span> Adding a total</h3>
+<p>In chapter 3 we learned about the <code>bind_rows()</code> function that can be used to append a tibble to combine two tibbles. So the process for adding a new row with a total is:</p>
+<ol type="1">
+<li>Store you frequency table in an object</li>
+<li>Create a new tibble that contains the totals. (<strong>important:</strong> make sure that the column names of this tibble are exactly the same as your frequency table, otherwise, <code>bind_rows()</code> will create new columns).</li>
+<li>Use <code>bind_rows()</code> to add the tibble with the total to the frequency table.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Store you frequency table in an object</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>table <span class="ot">&lt;-</span> mpg <span class="sc">%&gt;%</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(manufacturer) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">freq =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> <span class="co"># n() counts the number of observations for each group.</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct =</span> <span class="fu">round</span>(freq<span class="sc">/</span><span class="fu">sum</span>(freq)<span class="sc">*</span><span class="dv">100</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(freq))</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new tibble that contains the totals.</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>totals <span class="ot">&lt;-</span> table <span class="sc">%&gt;%</span> </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">freq =</span> <span class="fu">sum</span>(freq),</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">pct =</span> <span class="fu">sum</span>(pct)) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">manufacturer =</span> <span class="st">"Total"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(manufacturer, freq, pct)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Use bind_rows() to combine the tibbles</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>table <span class="sc">%&gt;%</span> </span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(totals) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> manufacturer </th>
+   <th style="text-align:right;"> freq </th>
+   <th style="text-align:right;"> pct </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> dodge </td>
+   <td style="text-align:right;"> 37 </td>
+   <td style="text-align:right;"> 15.8 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> toyota </td>
+   <td style="text-align:right;"> 34 </td>
+   <td style="text-align:right;"> 14.5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> volkswagen </td>
+   <td style="text-align:right;"> 27 </td>
+   <td style="text-align:right;"> 11.5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> ford </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:right;"> 10.7 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> chevrolet </td>
+   <td style="text-align:right;"> 19 </td>
+   <td style="text-align:right;"> 8.1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> audi </td>
+   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:right;"> 7.7 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> hyundai </td>
+   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:right;"> 6.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> subaru </td>
+   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:right;"> 6.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> nissan </td>
+   <td style="text-align:right;"> 13 </td>
+   <td style="text-align:right;"> 5.6 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> honda </td>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:right;"> 3.8 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> jeep </td>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:right;"> 3.4 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> pontiac </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 2.1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> land rover </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 1.7 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> mercury </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 1.7 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> lincoln </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 1.3 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Total </td>
+   <td style="text-align:right;"> 234 </td>
+   <td style="text-align:right;"> 99.9 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</section>
+</section>
+<section id="summarizing-numerical-data" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="summarizing-numerical-data"><span class="header-section-number">6.5</span> Summarizing numerical data</h2>
+<p>Summarizing numerical data is not done with frequency tables but with statistical summaries that include various measures that can be divided into three groups:</p>
+<ol type="1">
+<li>Measures of centrality</li>
+<li>Measures of dispersion</li>
+<li>Measures of skewness</li>
+</ol>
+<section id="measures-of-centrality" class="level3" data-number="6.5.1">
+<h3 data-number="6.5.1" class="anchored" data-anchor-id="measures-of-centrality"><span class="header-section-number">6.5.1</span> Measures of centrality</h3>
+<table class="table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 51%">
+<col style="width: 27%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Statistic</th>
+<th>description</th>
+<th>formula</th>
+<th>R function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mean</td>
+<td>The sum of values divided by the number of observations</td>
+<td><span class="math display">\[
+\overline{X}  = \frac{\sum{X}}{n}
+\]</span></td>
+<td><code>mean(x)</code></td>
+</tr>
+<tr class="even">
+<td>Median</td>
+<td>the middle value of the variable once sorted in ascending or descending order</td>
+<td><p>If n is odd:</p>
+<p><span class="math display">\[
+M_x = x_\frac{n + 1}{2}
+\]</span></p>
+<p>If <em>n</em> is even:</p>
+<p><span class="math display">\[
+M_x = \frac{x_{(n/2)} + x_{(n/2)+1}}{2}
+\]</span></p></td>
+<td><code>median(x)</code></td>
+</tr>
+<tr class="odd">
+<td>Mode</td>
+<td>Most frequent value(s) of a variable</td>
+<td>N/A</td>
+<td>N/A (see below)</td>
+</tr>
+</tbody>
+</table>
+<p>While there are no functions in R to calculate the mode, you can create your own function. source: <a href="https://stackoverflow.com/questions/2547402/how-to-find-the-statistical-mode" class="uri">https://stackoverflow.com/questions/2547402/how-to-find-the-statistical-mode</a></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>modes <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  ux <span class="ot">&lt;-</span> <span class="fu">unique</span>(x)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  tab <span class="ot">&lt;-</span> <span class="fu">tabulate</span>(<span class="fu">match</span>(x, ux))</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  ux[tab <span class="sc">==</span> <span class="fu">max</span>(tab)]</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">modes</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4 5</code></pre>
+</div>
+</div>
+</section>
+<section id="measures-of-dispersion" class="level3" data-number="6.5.2">
+<h3 data-number="6.5.2" class="anchored" data-anchor-id="measures-of-dispersion"><span class="header-section-number">6.5.2</span> Measures of dispersion</h3>
+<table class="table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 55%">
+<col style="width: 21%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Statistic</th>
+<th>Definition</th>
+<th>Formula</th>
+<th>R function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Variance (Var)</td>
+<td>Expected squared deviation from the mean. Measures how far numbers spread around the average</td>
+<td><span class="math display">\[
+Var = \frac{\sum{(x_i-\overline{x})^2}}{N}
+\]</span></td>
+<td><code>var(x)</code></td>
+</tr>
+<tr class="even">
+<td>Standard deviation (SD</td>
+<td>Square root of the vVariance.</td>
+<td><span class="math display">\[
+SD = \sqrt{\frac{\sum{(x_i-\overline{x})^2}}{N}}
+\]</span></td>
+<td><code>sd(x)</code></td>
+</tr>
+<tr class="odd">
+<td>Minimum (Min)</td>
+<td>Minimum value of a variable</td>
+<td>N/A</td>
+<td><code>min(x)</code></td>
+</tr>
+<tr class="even">
+<td>Maximum (Max)</td>
+<td>Maximum value of a variable</td>
+<td>N/A</td>
+<td><code>max(x)</code></td>
+</tr>
+<tr class="odd">
+<td>Quartiles</td>
+<td>The value under which 25% (Q1), 50% (Q2, also the median), and 75% (Q3) data points are found when arranged in increasing order.</td>
+<td></td>
+<td><p><code>Q1 = uantile(x, 0.25)</code></p>
+<p><code>Q2 = quantile(x, 0.5)</code></p>
+<p><code>Q3 = quantile(x, 0.75)</code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="measures-of-symmetry" class="level3" data-number="6.5.3">
+<h3 data-number="6.5.3" class="anchored" data-anchor-id="measures-of-symmetry"><span class="header-section-number">6.5.3</span> Measures of symmetry</h3>
+<p>The <strong>psych</strong> package includes two functions to calculate the skewness (<code>skew()</code>) and the kurtosis (<code>kurtosi()</code>). These measures tell you if the values deviate from the normal distribution. A skewness above 1 or below –1 indicates a skewed distribution to the right or the left, respectively. A kurtosis above 1 or below -1 indicates a distribution that is too peaked or too flat, respectively.</p>
+</section>
+</section>
+<section id="creating-a-descriptive-statistics-summary" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="creating-a-descriptive-statistics-summary"><span class="header-section-number">6.6</span> Creating a descriptive statistics summary</h2>
+<p>We can easily create a table with the descriptive statistics summary for as many numerical variables as we want using the <code>pivot_longer()</code>, <code>group_by()</code> and <code>summarize()</code> functions that you already learned about. In the code below, I reduce the size of the fonts in my table with <code>kable_style(font_size = 10)</code> so that the table can fit on the page.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych) <span class="co"># Load the psych library for the skew() and kurtosi() functions</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">%&gt;%</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(<span class="st">"displ"</span>,<span class="st">"hwy"</span>,<span class="st">"cty"</span>), <span class="co"># this is where we specify which variables to include</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"variable"</span>, </span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"value"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(variable) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean =</span> <span class="fu">mean</span>(value),</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(value),</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">var =</span> <span class="fu">var</span>(value),</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">q1 =</span> <span class="fu">quantile</span>(value,<span class="fl">0.25</span>),</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">median =</span> <span class="fu">median</span>(value),</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">q3 =</span> <span class="fu">quantile</span>(value,<span class="fl">0.75</span>),</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>            <span class="at">min =</span> <span class="fu">min</span>(value),</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(value),</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>            <span class="at">skew =</span> <span class="fu">skew</span>(value),</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>            <span class="at">kurtosis =</span> <span class="fu">kurtosi</span>(value)</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>            ) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">font_size =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<table class="table" style="font-size: 10px; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> variable </th>
+   <th style="text-align:right;"> n </th>
+   <th style="text-align:right;"> mean </th>
+   <th style="text-align:right;"> sd </th>
+   <th style="text-align:right;"> var </th>
+   <th style="text-align:right;"> q1 </th>
+   <th style="text-align:right;"> median </th>
+   <th style="text-align:right;"> q3 </th>
+   <th style="text-align:right;"> min </th>
+   <th style="text-align:right;"> max </th>
+   <th style="text-align:right;"> skew </th>
+   <th style="text-align:right;"> kurtosis </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> cty </td>
+   <td style="text-align:right;"> 234 </td>
+   <td style="text-align:right;"> 16.858974 </td>
+   <td style="text-align:right;"> 4.255946 </td>
+   <td style="text-align:right;"> 18.113074 </td>
+   <td style="text-align:right;"> 14.0 </td>
+   <td style="text-align:right;"> 17.0 </td>
+   <td style="text-align:right;"> 19.0 </td>
+   <td style="text-align:right;"> 9.0 </td>
+   <td style="text-align:right;"> 35 </td>
+   <td style="text-align:right;"> 0.7863773 </td>
+   <td style="text-align:right;"> 1.4305385 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> displ </td>
+   <td style="text-align:right;"> 234 </td>
+   <td style="text-align:right;"> 3.471795 </td>
+   <td style="text-align:right;"> 1.291959 </td>
+   <td style="text-align:right;"> 1.669158 </td>
+   <td style="text-align:right;"> 2.4 </td>
+   <td style="text-align:right;"> 3.3 </td>
+   <td style="text-align:right;"> 4.6 </td>
+   <td style="text-align:right;"> 1.6 </td>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:right;"> 0.4386361 </td>
+   <td style="text-align:right;"> -0.9105615 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> hwy </td>
+   <td style="text-align:right;"> 234 </td>
+   <td style="text-align:right;"> 23.440171 </td>
+   <td style="text-align:right;"> 5.954643 </td>
+   <td style="text-align:right;"> 35.457779 </td>
+   <td style="text-align:right;"> 18.0 </td>
+   <td style="text-align:right;"> 24.0 </td>
+   <td style="text-align:right;"> 27.0 </td>
+   <td style="text-align:right;"> 12.0 </td>
+   <td style="text-align:right;"> 44 </td>
+   <td style="text-align:right;"> 0.3645158 </td>
+   <td style="text-align:right;"> 0.1369447 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./publishing_with_r.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Publishing with R</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./visualizing_data.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualizing data</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

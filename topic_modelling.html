@@ -1,0 +1,1755 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Introduction to Data Science - 8&nbsp; Topic Modelling</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<link href="./visualizing_data.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Topic Modelling</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introduction to Data Science</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Course overview</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">What is data science?</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./getting_started_with_R.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting started with R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reading_and_tidying_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Reading and tidying data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./working_with_strings.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with strings</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./publishing_with_r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Publishing with R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summarizing_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summarizing data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visualizing_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualizing data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./topic_modelling.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Topic Modelling</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="toc-section-number">8.1</span>  Learning objectives</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><span class="toc-section-number">8.2</span>  Introduction</a></li>
+  <li><a href="#the-dataset" id="toc-the-dataset" class="nav-link" data-scroll-target="#the-dataset"><span class="toc-section-number">8.3</span>  The dataset</a></li>
+  <li><a href="#data-formats-for-text-mining" id="toc-data-formats-for-text-mining" class="nav-link" data-scroll-target="#data-formats-for-text-mining"><span class="toc-section-number">8.4</span>  Data formats for text mining</a>
+  <ul class="collapse">
+  <li><a href="#tidy-text" id="toc-tidy-text" class="nav-link" data-scroll-target="#tidy-text"><span class="toc-section-number">8.4.1</span>  Tidy text</a></li>
+  <li><a href="#document-term-matrix" id="toc-document-term-matrix" class="nav-link" data-scroll-target="#document-term-matrix"><span class="toc-section-number">8.4.2</span>  Document-term matrix</a></li>
+  </ul></li>
+  <li><a href="#tokenizing" id="toc-tokenizing" class="nav-link" data-scroll-target="#tokenizing"><span class="toc-section-number">8.5</span>  Tokenizing</a>
+  <ul class="collapse">
+  <li><a href="#words" id="toc-words" class="nav-link" data-scroll-target="#words"><span class="toc-section-number">8.5.1</span>  Words</a></li>
+  <li><a href="#sentences" id="toc-sentences" class="nav-link" data-scroll-target="#sentences"><span class="toc-section-number">8.5.2</span>  Sentences</a></li>
+  <li><a href="#n-grams" id="toc-n-grams" class="nav-link" data-scroll-target="#n-grams"><span class="toc-section-number">8.5.3</span>  N-grams</a></li>
+  </ul></li>
+  <li><a href="#removing-stop-words" id="toc-removing-stop-words" class="nav-link" data-scroll-target="#removing-stop-words"><span class="toc-section-number">8.6</span>  Removing stop words</a></li>
+  <li><a href="#stemming-and-lemmatization" id="toc-stemming-and-lemmatization" class="nav-link" data-scroll-target="#stemming-and-lemmatization"><span class="toc-section-number">8.7</span>  Stemming and lemmatization</a></li>
+  <li><a href="#term-frequency" id="toc-term-frequency" class="nav-link" data-scroll-target="#term-frequency"><span class="toc-section-number">8.8</span>  Term frequency</a>
+  <ul class="collapse">
+  <li><a href="#overall-term-frequency" id="toc-overall-term-frequency" class="nav-link" data-scroll-target="#overall-term-frequency"><span class="toc-section-number">8.8.1</span>  Overall term frequency</a></li>
+  <li><a href="#term-frequency-by-journal" id="toc-term-frequency-by-journal" class="nav-link" data-scroll-target="#term-frequency-by-journal"><span class="toc-section-number">8.8.2</span>  Term frequency by journal</a></li>
+  <li><a href="#term-frequency-by-document" id="toc-term-frequency-by-document" class="nav-link" data-scroll-target="#term-frequency-by-document"><span class="toc-section-number">8.8.3</span>  Term frequency by document</a></li>
+  <li><a href="#word-clouds" id="toc-word-clouds" class="nav-link" data-scroll-target="#word-clouds"><span class="toc-section-number">8.8.4</span>  Word clouds</a></li>
+  <li><a href="#tf-idf" id="toc-tf-idf" class="nav-link" data-scroll-target="#tf-idf"><span class="toc-section-number">8.8.5</span>  TF-IDF</a></li>
+  </ul></li>
+  <li><a href="#topic-modelling" id="toc-topic-modelling" class="nav-link" data-scroll-target="#topic-modelling"><span class="toc-section-number">8.9</span>  Topic modelling</a></li>
+  <li><a href="#other-resources" id="toc-other-resources" class="nav-link" data-scroll-target="#other-resources"><span class="toc-section-number">8.10</span>  Other resources</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Topic Modelling</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="cell">
+
+</div>
+<section id="learning-objectives" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">8.1</span> Learning objectives</h2>
+<ul>
+<li>Tidytext</li>
+<li>Tokenization</li>
+<li>Stop words</li>
+<li>Sentiment analysis</li>
+<li>TF-IDF</li>
+<li>Topic modelling</li>
+</ul>
+</section>
+<section id="introduction" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="introduction"><span class="header-section-number">8.2</span> Introduction</h2>
+<p>Text-mining could be a course of it’s own. This short introduction introduces a few of the most important concepts and provides examples of of to perform a range of text mining tasks. We will introduce a few new packages:</p>
+<ul>
+<li><strong>tidytext</strong>: a package that contains a lot of function to work with text in a tidy format.</li>
+<li><strong>textstem</strong>: to perform stemming and lemmatization on tokens</li>
+<li><strong>wordcloud2</strong>: to make word clouds</li>
+<li><strong>vader</strong>: to perform sentiment analysis</li>
+<li><strong>topicmodels</strong>: to do topic modelling</li>
+</ul>
+</section>
+<section id="the-dataset" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="the-dataset"><span class="header-section-number">8.3</span> The dataset</h2>
+<p>The dataset that we will use in this chapter consists of the the abstracts of 1672 open access scientific articles published between 2019 and 2020 in 10 journals from different fields of research.</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+<caption>Journals included in the dataset</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Journal </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> American Journal of International Law </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Food Security </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Journal of Business Economics and Management </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Journal of Child Psychology and Psychiatry </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Journal of Mathematics </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Journal of the Association for Information Science and Technology </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Nature Astronomy </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Organic &amp; Biomolecular Chemistry </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Public Health </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Solar Energy </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="cell">
+
+</div>
+<p>The dataset is available here, or can loaded into R directly from the URL like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>abstracts <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"https://pmongeon.github.io/info6270/files/abstracts.txt"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(journal <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>,<span class="st">"D"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="data-formats-for-text-mining" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="data-formats-for-text-mining"><span class="header-section-number">8.4</span> Data formats for text mining</h2>
+<p>The two formats that we will consider in this chapter ar the tidy text format and the document-term matrix. Let’s start with a tibble that contain 2 documents with their text.</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Document </th>
+   <th style="text-align:left;"> Text </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> I love bananas </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> B </td>
+   <td style="text-align:left;"> I hate potatoes </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<section id="tidy-text" class="level3" data-number="8.4.1">
+<h3 data-number="8.4.1" class="anchored" data-anchor-id="tidy-text"><span class="header-section-number">8.4.1</span> Tidy text</h3>
+<p>The tidy text format follows the same tidy principles that were introduced earlier in the course. It simply means that each row contains one token. A token is a <strong>meaningful units of text</strong>. Most often the tokens are individual words, but they can be sentences, paragraphs, groups of characters or words of a fixed length <em>n</em> (also known as n-grams), etc.</p>
+<p>In principle the tibble above with the text of our two documents is already in a tidy text format where each row is a meaningful unit of text (the token, here would be the entire text). But if we chose words as our tokens, then it would look like this:</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> document </th>
+   <th style="text-align:left;"> words </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> i </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> love </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> bananas </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> B </td>
+   <td style="text-align:left;"> i </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> B </td>
+   <td style="text-align:left;"> hate </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> B </td>
+   <td style="text-align:left;"> potatoes </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</section>
+<section id="document-term-matrix" class="level3" data-number="8.4.2">
+<h3 data-number="8.4.2" class="anchored" data-anchor-id="document-term-matrix"><span class="header-section-number">8.4.2</span> Document-term matrix</h3>
+<p>Document-term matrices are matrices that contain all documents in a set as rows and all tokens as columns. The cells typically containing the frequency of the term in the document. Here is a document-term matrix for our two documents</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;"> bananas </th>
+   <th style="text-align:right;"> hate </th>
+   <th style="text-align:right;"> i </th>
+   <th style="text-align:right;"> love </th>
+   <th style="text-align:right;"> potatoes </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> B </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 1 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<p>The topicmodels package requires data to be formatted in a document-term matrix, but all the other tasks that we will perform in the rest of the chapter are working with the tidy text format.</p>
+</section>
+</section>
+<section id="tokenizing" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="tokenizing"><span class="header-section-number">8.5</span> Tokenizing</h2>
+<p>Tokenizing is the process of dividing the text of our documents in our chosen unit. The <code>unnest_tokens()</code> function of the tidytext package can be used for task. Three main arguments are required:</p>
+<ul>
+<li><strong>output</strong>: the name of the column that will contain the tokens.</li>
+<li><strong>input</strong>: the name of the column that currently contain the text.</li>
+<li><strong>token</strong>: the desired type of token (possible values are “words”,“sentences”, “ngrams”)</li>
+<li><strong>n</strong>: this specifies the value of n for n-grams.</li>
+</ul>
+<p>Note that you could perform write a code that does the exact same thing as the <code>unnest_tokens()</code> function with the set of functions that you learned in chapter 3 and 4. The <code>unnest_tokens()</code> function simply makes that code much, much more efficient.</p>
+<section id="words" class="level3" data-number="8.5.1">
+<h3 data-number="8.5.1" class="anchored" data-anchor-id="words"><span class="header-section-number">8.5.1</span> Words</h3>
+<p>The following code divides the abstract into individual words with <code>token  = "words"</code> .</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>abstracts_words <span class="ot">&lt;-</span> abstracts <span class="sc">%&gt;%</span> </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(<span class="at">output =</span> word,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">input =</span> abstract,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">token =</span> <span class="st">"words"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(abstracts_words) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:right;"> id </th>
+   <th style="text-align:left;"> journal </th>
+   <th style="text-align:left;"> word </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> parenting </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> behaviors </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> have </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> been </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> shown </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> to </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</section>
+<section id="sentences" class="level3" data-number="8.5.2">
+<h3 data-number="8.5.2" class="anchored" data-anchor-id="sentences"><span class="header-section-number">8.5.2</span> Sentences</h3>
+<p>You can tokenize by sentence with <code>token = "sentences"</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>abstracts_sentences <span class="ot">&lt;-</span> abstracts <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(<span class="at">output =</span> sentence,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">input =</span> abstract,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">token =</span> <span class="st">"sentences"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(abstracts_sentences) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:right;"> id </th>
+   <th style="text-align:left;"> journal </th>
+   <th style="text-align:left;"> sentence </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> parenting behaviors have been shown to moderate the association between sensation seeking and antisocial behaviors. </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> data were obtained from the boricua youth study, a longitudinal study of 2,491 puerto rican youth living in the south bronx, new york, and the metropolitan area of san juan, puerto rico. </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> first, we examined the prospective relationship between sensation seeking and antisocial behaviors across 3 yearly waves and whether this relationship varied by sociodemographic factors. </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> second, we examined the moderating role of parenting behaviors-including parental monitoring, warmth, and coercive discipline-on the prospective relationship between sensation seeking and antisocial behaviors. </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> sensation seeking was a strong predictor of antisocial behaviors for youth across two different sociocultural contexts. </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> high parental monitoring buffered the association between sensation seeking and antisocial behaviors, protecting individuals with this trait. </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</section>
+<section id="n-grams" class="level3" data-number="8.5.3">
+<h3 data-number="8.5.3" class="anchored" data-anchor-id="n-grams"><span class="header-section-number">8.5.3</span> N-grams</h3>
+<p>You can tokenize by groups of words of size N with <code>token = "ngrams"</code> and the specifying how many words you want in each groups with <code>n=N.</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>abstracts_bigrams <span class="ot">&lt;-</span> abstracts <span class="sc">%&gt;%</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(<span class="at">output =</span> bigram,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">input =</span> abstract,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">token =</span> <span class="st">"ngrams"</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">n =</span> <span class="dv">2</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(abstracts_bigrams) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:right;"> id </th>
+   <th style="text-align:left;"> journal </th>
+   <th style="text-align:left;"> bigram </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> parenting behaviors </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> behaviors have </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> have been </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> been shown </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> shown to </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> to moderate </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<p>For the rest of the chapter, we’ll use the abstracts_words tibble, in which our tokens are individual words.</p>
+</section>
+</section>
+<section id="removing-stop-words" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="removing-stop-words"><span class="header-section-number">8.6</span> Removing stop words</h2>
+<p>The English language is full of words that carry little to no meanings, and that tend to be the most frequent terms we use. To illustrate this, let’s look at the ten most frequent terms in the abstracts dataset.</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> word </th>
+   <th style="text-align:right;"> n </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> the </td>
+   <td style="text-align:right;"> 5626 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> of </td>
+   <td style="text-align:right;"> 4463 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> and </td>
+   <td style="text-align:right;"> 4049 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> in </td>
+   <td style="text-align:right;"> 2519 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> to </td>
+   <td style="text-align:right;"> 2427 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> a </td>
+   <td style="text-align:right;"> 1932 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> with </td>
+   <td style="text-align:right;"> 1217 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> for </td>
+   <td style="text-align:right;"> 1106 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> that </td>
+   <td style="text-align:right;"> 1087 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> is </td>
+   <td style="text-align:right;"> 893 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<p>We can see that the dataset is dominated by terms that don’t carry much meaning, such as “a”, “of”, “the”, and “and”. These are called stop words and, fortunately, the tidytext package includes a a dataset called <strong>stop_words</strong> that we can use to eliminate these words from our data. Let’s look at a few rows from the stop_words dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(stop_words) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> word </th>
+   <th style="text-align:left;"> lexicon </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> a </td>
+   <td style="text-align:left;"> SMART </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> a's </td>
+   <td style="text-align:left;"> SMART </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> able </td>
+   <td style="text-align:left;"> SMART </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> about </td>
+   <td style="text-align:left;"> SMART </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> above </td>
+   <td style="text-align:left;"> SMART </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> according </td>
+   <td style="text-align:left;"> SMART </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<p>We can use the <code>anti_join()</code> function to remove any row in a tibble that matches another tibble on a specified variable. In this case, we want to remove all the words that are in the stop_words tibble.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>abstracts_words <span class="ot">&lt;-</span> abstracts_words <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(stop_words, <span class="at">by=</span><span class="st">"word"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If we take a look at the most frequent terms again, we see that most of those little meaningless words are gone.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>abstracts_words <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">10</span>)  <span class="sc">%&gt;%</span> </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> word </th>
+   <th style="text-align:right;"> n </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> food </td>
+   <td style="text-align:right;"> 555 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> children </td>
+   <td style="text-align:right;"> 292 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> study </td>
+   <td style="text-align:right;"> 267 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> symptoms </td>
+   <td style="text-align:right;"> 266 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:right;"> 248 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> age </td>
+   <td style="text-align:right;"> 230 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> adhd </td>
+   <td style="text-align:right;"> 215 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> risk </td>
+   <td style="text-align:right;"> 208 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> data </td>
+   <td style="text-align:right;"> 207 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2 </td>
+   <td style="text-align:right;"> 179 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</section>
+<section id="stemming-and-lemmatization" class="level2" data-number="8.7">
+<h2 data-number="8.7" class="anchored" data-anchor-id="stemming-and-lemmatization"><span class="header-section-number">8.7</span> Stemming and lemmatization</h2>
+<p>The next issue that we typically face with text mining is the presence of word variations that are considered distinct tokens. These variation can include plural and singular terms, verb conjugations, etc. Here is an example of a set of tokens from our dataset.</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> word </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> study </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> studies </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> students </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> student </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> study's </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> studied </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> understudied </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> studying </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<p><a href="https://en.wikipedia.org/wiki/Stemming">Stemming</a> and <a href="https://en.wikipedia.org/wiki/Lemmatisation">lemmatization</a> are two ways of normalizing words by reducing words to their base called stem and lemma, respectively. Here are the stems and the lemmas of the words containing the string “stud”.</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> word </th>
+   <th style="text-align:left;"> stem </th>
+   <th style="text-align:left;"> lemma </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> study </td>
+   <td style="text-align:left;"> studi </td>
+   <td style="text-align:left;"> study </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> studies </td>
+   <td style="text-align:left;"> studi </td>
+   <td style="text-align:left;"> study </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> students </td>
+   <td style="text-align:left;"> student </td>
+   <td style="text-align:left;"> student </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> student </td>
+   <td style="text-align:left;"> student </td>
+   <td style="text-align:left;"> student </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> study's </td>
+   <td style="text-align:left;"> study' </td>
+   <td style="text-align:left;"> study's </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> studied </td>
+   <td style="text-align:left;"> studi </td>
+   <td style="text-align:left;"> study </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<p>Understanding how stemming and lemmatization works is beyond the scope of this course, but you should know that:</p>
+<ul>
+<li><p>both methods work well for eliminating the plural form.</p></li>
+<li><p>Stems are not always an actual word but the root of a word (ex. “moder” is the stem of “moderate”), while Lemmas are always actual words.</p></li>
+<li><p>Stemming usually produces a lower number of unique words than than lemmatization.</p></li>
+</ul>
+<p>We can easily add the stem and the lemma of words in our tibble using the <code>stem_words()</code> and <code>lemmatize_words()</code> functions from the <strong>textstem</strong> package, which also includes <code>stem_strings()</code> and <code>lemmatize_strings()</code> functions when dealing with tokens that are more than one word.</p>
+<p>For this chapter, I will use the lemmatization to normalize my words. I do so by replacing my words with their lemma with the following code.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(textstem)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>abstracts_words <span class="ot">&lt;-</span> abstracts_words <span class="sc">%&gt;%</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">lemmatize_words</span>(word))</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(abstracts_words, <span class="at">n=</span><span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:right;"> id </th>
+   <th style="text-align:left;"> journal </th>
+   <th style="text-align:left;"> word </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> parenting </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> behavior </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> show </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> moderate </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> association </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> sensation </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> seek </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> antisocial </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> behavior </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> datum </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</section>
+<section id="term-frequency" class="level2" data-number="8.8">
+<h2 data-number="8.8" class="anchored" data-anchor-id="term-frequency"><span class="header-section-number">8.8</span> Term frequency</h2>
+<p>A first exploration of our data is to calculate the frequency of each terms for the whole set of documents, for each journals, and for each individual document.</p>
+<section id="overall-term-frequency" class="level3" data-number="8.8.1">
+<h3 data-number="8.8.1" class="anchored" data-anchor-id="overall-term-frequency"><span class="header-section-number">8.8.1</span> Overall term frequency</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>abstracts_words <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">20</span>) <span class="sc">%&gt;%</span> <span class="co"># same has head(n=20) </span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> word </th>
+   <th style="text-align:right;"> n </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> food </td>
+   <td style="text-align:right;"> 584 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> child </td>
+   <td style="text-align:right;"> 441 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> study </td>
+   <td style="text-align:right;"> 375 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> age </td>
+   <td style="text-align:right;"> 316 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> model </td>
+   <td style="text-align:right;"> 303 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> report </td>
+   <td style="text-align:right;"> 295 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> star </td>
+   <td style="text-align:right;"> 293 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> symptom </td>
+   <td style="text-align:right;"> 293 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> system </td>
+   <td style="text-align:right;"> 293 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1 </td>
+   <td style="text-align:right;"> 248 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> low </td>
+   <td style="text-align:right;"> 239 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> risk </td>
+   <td style="text-align:right;"> 228 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> adhd </td>
+   <td style="text-align:right;"> 215 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> increase </td>
+   <td style="text-align:right;"> 208 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> datum </td>
+   <td style="text-align:right;"> 207 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> household </td>
+   <td style="text-align:right;"> 201 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> mass </td>
+   <td style="text-align:right;"> 201 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> effect </td>
+   <td style="text-align:right;"> 199 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> measure </td>
+   <td style="text-align:right;"> 198 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> result </td>
+   <td style="text-align:right;"> 194 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</section>
+<section id="term-frequency-by-journal" class="level3" data-number="8.8.2">
+<h3 data-number="8.8.2" class="anchored" data-anchor-id="term-frequency-by-journal"><span class="header-section-number">8.8.2</span> Term frequency by journal</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>abstracts_words <span class="sc">%&gt;%</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(journal) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>n, <span class="at">y=</span><span class="fu">reorder</span>(word,n)) <span class="sc">+</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="at">facet =</span> <span class="sc">~</span>journal, </span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">ncol=</span><span class="dv">2</span>, </span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">scale=</span><span class="st">"free"</span>) <span class="sc">+</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Word"</span>, <span class="at">x=</span><span class="st">"Frequency"</span>) <span class="sc">+</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_reordered</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="topic_modelling_files/figure-html/8.18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="term-frequency-by-document" class="level3" data-number="8.8.3">
+<h3 data-number="8.8.3" class="anchored" data-anchor-id="term-frequency-by-document"><span class="header-section-number">8.8.3</span> Term frequency by document</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>abstracts_words <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(id <span class="sc">&lt;=</span> <span class="dv">4</span>) <span class="sc">%&gt;%</span> <span class="co"># I select papers with ID 1 to  4</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span> <span class="co"># I chose the papers as my unit of analysis</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>) <span class="sc">%&gt;%</span>  <span class="co"># get the 8 most frequent terms for each document</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> n, </span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="fu">reorder</span>(word, n)) <span class="sc">+</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="at">facet =</span> <span class="sc">~</span>id, <span class="co"># here I use the papers_id for the facet</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">ncol=</span><span class="dv">2</span>, </span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">scale=</span><span class="st">"free"</span>) <span class="sc">+</span> </span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Word"</span>, <span class="at">x =</span> <span class="st">"Freqency"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="topic_modelling_files/figure-html/8.19-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="word-clouds" class="level3" data-number="8.8.4">
+<h3 data-number="8.8.4" class="anchored" data-anchor-id="word-clouds"><span class="header-section-number">8.8.4</span> Word clouds</h3>
+<p>While word clouds are not more informative than term frequency tables, they are a space-efficient means to show a larger number of words and their relative frequency in a set. the <strong>wordcloud</strong> and <strong>wordcloud2</strong> packages can be used to generate word clouds. Let’s look at the word cloud for the 100 most frequent terms for each journal.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wordcloud2)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>abstracts_words <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(journal <span class="sc">==</span> <span class="st">"A"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, <span class="at">sort=</span><span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> <span class="co"># adds a column n with the frequency of the word.</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wordcloud2</span>(<span class="at">size =</span> <span class="fl">0.3</span>, <span class="co"># Size of the text (default is 1)</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">minRotation =</span> <span class="sc">-</span>pi<span class="sc">/</span><span class="dv">2</span>, <span class="co"># Min roation is 90 degrees</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">maxRotation =</span> <span class="sc">-</span>pi<span class="sc">/</span><span class="dv">2</span>, <span class="co"># Max rotation is 90 degrees</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">rotateRatio =</span> <span class="dv">0</span>, <span class="co"># percentage of words to rotate (none, in this case)</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">shape =</span> <span class="st">"circle"</span>,</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">color=</span><span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="files/wrod_cloud.jpg" class="img-fluid"></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wordcloud2)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>abstracts_words <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(journal <span class="sc">==</span> <span class="st">"B"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, <span class="at">sort=</span><span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> <span class="co"># adds a column n with the frequency of the word.</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wordcloud2</span>(<span class="at">size =</span> <span class="fl">0.3</span>, <span class="co"># Size of the text (default is 1)</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">minRotation =</span> <span class="sc">-</span>pi<span class="sc">/</span><span class="dv">2</span>, <span class="co"># Min roation is 90 degrees</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">maxRotation =</span> <span class="sc">-</span>pi<span class="sc">/</span><span class="dv">2</span>, <span class="co"># Max rotation is 90 degrees</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">rotateRatio =</span> <span class="dv">0</span>, <span class="co"># percentage of words to rotate (none, in this case)</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">shape =</span> <span class="st">"circle"</span>,</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">color=</span><span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="files/word_cloud2.jpg" class="img-fluid"></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wordcloud2)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>abstracts_words <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(journal <span class="sc">==</span> <span class="st">"C"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, <span class="at">sort=</span><span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> <span class="co"># adds a column n with the frequency of the word.</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wordcloud2</span>(<span class="at">size =</span> <span class="fl">0.3</span>, <span class="co"># Size of the text (default is 1)</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">minRotation =</span> <span class="sc">-</span>pi<span class="sc">/</span><span class="dv">2</span>, <span class="co"># Min roation is 90 degrees</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">maxRotation =</span> <span class="sc">-</span>pi<span class="sc">/</span><span class="dv">2</span>, <span class="co"># Max rotation is 90 degrees</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">rotateRatio =</span> <span class="dv">0</span>, <span class="co"># percentage of words to rotate (none, in this case)</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">shape =</span> <span class="st">"circle"</span>,</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">color=</span><span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="files/word_cloud4.jpg" class="img-fluid"></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wordcloud2)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>abstracts_words <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(journal <span class="sc">==</span> <span class="st">"D"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, <span class="at">sort=</span><span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> <span class="co"># adds a column n with the frequency of the word.</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wordcloud2</span>(<span class="at">size =</span> <span class="fl">0.5</span>, <span class="co"># Size of the text (default is 1)</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">minRotation =</span> <span class="sc">-</span>pi<span class="sc">/</span><span class="dv">2</span>, <span class="co"># Min roation is 90 degrees</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">maxRotation =</span> <span class="sc">-</span>pi<span class="sc">/</span><span class="dv">2</span>, <span class="co"># Max rotation is 90 degrees</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">rotateRatio =</span> <span class="dv">0</span>, <span class="co"># percentage of words to rotate (none, in this case)</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">shape =</span> <span class="st">"circle"</span>,</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">color=</span><span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="files/word_cloud3.jpg" class="img-fluid"></p>
+<p>As you can see, the word clouds give us a pretty good idea of what fields the journal included in the dataset may be from.</p>
+</section>
+<section id="tf-idf" class="level3" data-number="8.8.5">
+<h3 data-number="8.8.5" class="anchored" data-anchor-id="tf-idf"><span class="header-section-number">8.8.5</span> TF-IDF</h3>
+<p>TF-IDF stands for term frequency * inverse document frequency. Essentially, it measures how important (frequent) a term is in a document, and how rare that term is in the corpus. The result is a value between 0 and 1. The highest the tf-idf value, the more the term is specific to a document and therefore indicative of its specific topic.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>abstracts_words <span class="ot">&lt;-</span> abstracts_words <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, <span class="at">sort=</span><span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_tf_idf</span>(<span class="at">term =</span> word, </span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">document =</span> id, </span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">n =</span> n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s look at the most important words in a set of 9 nine articles. These are the words with the highest tf-idf values for the</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>abstracts_words <span class="sc">%&gt;%</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(id <span class="sc">&lt;=</span> <span class="dv">9</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">8</span>) <span class="sc">%&gt;%</span>  </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>tf_idf, <span class="at">y=</span><span class="fu">reorder</span>(word, tf_idf)) <span class="sc">+</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>id, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">scales =</span> <span class="st">"free"</span>) <span class="sc">+</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Word"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="topic_modelling_files/figure-html/8.25-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>abstracts_words <span class="sc">%&gt;%</span> </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(id <span class="sc">&lt;=</span> <span class="dv">9</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">8</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>n, <span class="at">y=</span><span class="fu">reorder</span>(word, n)) <span class="sc">+</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>id, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">scales =</span> <span class="st">"free"</span>) <span class="sc">+</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Word"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="topic_modelling_files/figure-html/8.26-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>## Sentiment analysis</p>
+<p>As the name suggest, sentiment analysis is a technique use to identify sentiment in text. The most basic sentiment analysis methods use list of terms with an associated sentiment (positive or negative) or a numerical value representing the strength or the sentiment: -2 (very negative) to +2 (very positive), for instance. The tidytext package includes a few of those terms list with associated sentiments, which you can access with the <code>get_sentiments()</code> funciton. The following example import the bing list and the afinn list into two tibbles.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>sentiment_bing <span class="ot">&lt;-</span> <span class="fu">get_sentiments</span>(<span class="st">"bing"</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>sentiment_afinn <span class="ot">&lt;-</span> <span class="fu">get_sentiments</span>(<span class="st">"afinn"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s take a look.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sentiment_bing) <span class="sc">%&gt;%</span> </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> word </th>
+   <th style="text-align:left;"> sentiment </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> 2-faces </td>
+   <td style="text-align:left;"> negative </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> abnormal </td>
+   <td style="text-align:left;"> negative </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> abolish </td>
+   <td style="text-align:left;"> negative </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> abominable </td>
+   <td style="text-align:left;"> negative </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> abominably </td>
+   <td style="text-align:left;"> negative </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> abominate </td>
+   <td style="text-align:left;"> negative </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sentiment_afinn) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> word </th>
+   <th style="text-align:right;"> value </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> abandon </td>
+   <td style="text-align:right;"> -2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> abandoned </td>
+   <td style="text-align:right;"> -2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> abandons </td>
+   <td style="text-align:right;"> -2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> abducted </td>
+   <td style="text-align:right;"> -2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> abduction </td>
+   <td style="text-align:right;"> -2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> abductions </td>
+   <td style="text-align:right;"> -2 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<p>We can then assign a sentiment to the words in our abstracts with the <code>left_join()</code> function that we introduced in chapter 3. Let’s use the <strong>afinn</strong> list for this example.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>abstracts_words <span class="ot">&lt;-</span> abstracts_words <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(sentiment_afinn, <span class="at">by=</span><span class="st">"word"</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(abstracts_words) <span class="sc">%&gt;%</span> </span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:right;"> id </th>
+   <th style="text-align:left;"> word </th>
+   <th style="text-align:right;"> n </th>
+   <th style="text-align:right;"> tf </th>
+   <th style="text-align:right;"> idf </th>
+   <th style="text-align:right;"> tf_idf </th>
+   <th style="text-align:right;"> value </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:left;"> ccbt </td>
+   <td style="text-align:right;"> 20 </td>
+   <td style="text-align:right;"> 0.0847458 </td>
+   <td style="text-align:right;"> 6.228511 </td>
+   <td style="text-align:right;"> 0.5278399 </td>
+   <td style="text-align:right;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1276 </td>
+   <td style="text-align:left;"> yield </td>
+   <td style="text-align:right;"> 19 </td>
+   <td style="text-align:right;"> 0.1210191 </td>
+   <td style="text-align:right;"> 2.932674 </td>
+   <td style="text-align:right;"> 0.3549096 </td>
+   <td style="text-align:right;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 1598 </td>
+   <td style="text-align:left;"> food </td>
+   <td style="text-align:right;"> 19 </td>
+   <td style="text-align:right;"> 0.1043956 </td>
+   <td style="text-align:right;"> 1.706722 </td>
+   <td style="text-align:right;"> 0.1781743 </td>
+   <td style="text-align:right;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 244 </td>
+   <td style="text-align:left;"> sct </td>
+   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:right;"> 0.1011236 </td>
+   <td style="text-align:right;"> 6.228511 </td>
+   <td style="text-align:right;"> 0.6298494 </td>
+   <td style="text-align:right;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 256 </td>
+   <td style="text-align:left;"> anxiety </td>
+   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:right;"> 0.1208054 </td>
+   <td style="text-align:right;"> 2.794524 </td>
+   <td style="text-align:right;"> 0.3375935 </td>
+   <td style="text-align:right;"> -2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 20 </td>
+   <td style="text-align:left;"> sleep </td>
+   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:right;"> 0.0949721 </td>
+   <td style="text-align:right;"> 3.589454 </td>
+   <td style="text-align:right;"> 0.3408978 </td>
+   <td style="text-align:right;"> NA </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<p>Now let’s just sum the score for each abstract to have a single sentiment score for each article, and order abstracts from the highest sentiment score to the lowest.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>abstracts_sentiment <span class="ot">&lt;-</span> abstracts_words <span class="sc">%&gt;%</span> </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">sentiment =</span> <span class="fu">sum</span>(value, <span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(sentiment))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And then let’s look at the most positive abstracts and the most negative abstracts with <code>head()</code> and <code>tail()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>abstracts_sentiment <span class="sc">%&gt;%</span> </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(abstracts, <span class="at">by=</span><span class="st">"id"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id, journal, abstract, sentiment) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+     id journal abstract                                                 senti…¹
+  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;                                                      &lt;dbl&gt;
+1  1137 D       Rwanda has experienced significant economic growth foll…      16
+2  1284 D       Assessing progress towards healthier people, farms and …      15
+3  1138 D       This paper concerns Drought-Tolerant Maize (DTM) and Co…      13
+4   214 A       Care for children and adolescents with psychosocial pro…      12
+5  1451 D       Using survey dataset collected from nearly 9000 farmers…      12
+6    73 A       BackgroundChildren in the UK go through rigorous teache…      11
+# … with abbreviated variable name ¹​sentiment</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>abstracts_sentiment <span class="sc">%&gt;%</span> </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(abstracts, <span class="at">by=</span><span class="st">"id"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id, journal, abstract,sentiment) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tail</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+     id journal abstract                                                 senti…¹
+  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;                                                      &lt;dbl&gt;
+1   174 A       "Suicide is the second leading cause of death in young …     -14
+2  1598 D       "This opinion article results from a collective analysi…     -14
+3   248 A       "Only one-third of young people who experience suicidal…     -15
+4  1532 D       "Children who experience poor nutrition during the firs…     -16
+5    50 A       "Children with developmental disabilities are at height…     -21
+6   320 A       "Post-traumatic stress disorder (PTSD) is a common reac…     -22
+# … with abbreviated variable name ¹​sentiment</code></pre>
+</div>
+</div>
+<p>Let’s compare the average sentiment for the two journals in the dataset</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>abstracts_sentiment <span class="sc">%&gt;%</span> </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(abstracts, <span class="at">by=</span><span class="st">"id"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id, journal, abstract, sentiment) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(journal) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_sentiment =</span> <span class="fu">mean</span>(sentiment))  <span class="sc">%&gt;%</span> </span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> journal </th>
+   <th style="text-align:right;"> mean_sentiment </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:right;"> -2.268293 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> B </td>
+   <td style="text-align:right;"> -1.404255 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:right;"> 2.010638 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> D </td>
+   <td style="text-align:right;"> 1.527778 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<section id="the-vader-package" class="level4" data-number="8.8.5.1">
+<h4 data-number="8.8.5.1" class="anchored" data-anchor-id="the-vader-package"><span class="header-section-number">8.8.5.1</span> The vader package</h4>
+<p>Valence Aware Dictionary and sEntiment Reasoner (VADER) is a popular sentiment analysis tool, that takes the context of words into account so that good (a positive term) can be interpreted as negative when it is preceded by the word not (as in “not good”).</p>
+<p>You can calculate the sentiment and get a data frame with <code>vader_df()</code> function. This is an example for the first abstract in our dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vader)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">vader_df</span>(abstracts<span class="sc">$</span>abstract[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             text
+1 Parenting behaviors have been shown to moderate the association between sensation seeking and antisocial behaviors. Data were obtained from the Boricua Youth Study, a longitudinal study of 2,491 Puerto Rican youth living in the South Bronx, New York, and the metropolitan area of San Juan, Puerto Rico. First, we examined the prospective relationship between sensation seeking and antisocial behaviors across 3 yearly waves and whether this relationship varied by sociodemographic factors. Second, we examined the moderating role of parenting behaviors-including parental monitoring, warmth, and coercive discipline-on the prospective relationship between sensation seeking and antisocial behaviors. Sensation seeking was a strong predictor of antisocial behaviors for youth across two different sociocultural contexts. High parental monitoring buffered the association between sensation seeking and antisocial behaviors, protecting individuals with this trait. Low parental warmth was associated with high levels of antisocial behaviors, regardless of the sensation seeking level. Among those with high parental warmth, sensation seeking predicted antisocial behaviors, but the levels of antisocial behaviors were never as high as those of youth with low parental warmth. Study findings underscore the relevance of person-family context interactions in the development of antisocial behaviors. Future interventions should focus on the interplay between individual vulnerabilities and family context to prevent the unhealthy expression of a trait that is present in many individuals.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   word_scores
+1 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -0.55, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1.65, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -0.9, 0, 0, 0, 0, 0.15, 0, -3.6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+  compound   pos   neu   neg but_count
+1    0.153 0.058 0.896 0.047         1</code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="topic-modelling" class="level2" data-number="8.9">
+<h2 data-number="8.9" class="anchored" data-anchor-id="topic-modelling"><span class="header-section-number">8.9</span> Topic modelling</h2>
+<p>In this section we will use a very common topic modelling technique called <strong>L</strong>atent <strong>D</strong>irichlet <strong>A</strong>llocation (LDA). It is a dimensionality reduction technique that takes groups a large number of documents into a smaller number of topics.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>abstracts_dtm <span class="ot">&lt;-</span> abstracts_words <span class="sc">%&gt;%</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cast_dtm</span>(<span class="at">document =</span> id, <span class="co"># name of the column with your document id </span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">term =</span> word, <span class="co"># name of the column with your tokens</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">value =</span> n) <span class="co"># name of the column with your token frequencies</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="generate-topic-models" class="level4" data-number="8.9.0.1">
+<h4 data-number="8.9.0.1" class="anchored" data-anchor-id="generate-topic-models"><span class="header-section-number">8.9.0.1</span> Generate topic models</h4>
+<p>You can use the code below, and replace <em>abstracts_dtm</em> with the name of your document-term matrix object, and change the value of k to the number of topics that you want.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(topicmodels)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>abstracts_lda <span class="ot">&lt;-</span> abstracts_dtm <span class="sc">%&gt;%</span> </span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">LDA</span>(<span class="at">k =</span> <span class="dv">4</span>, <span class="co"># Number of topics desired</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">control =</span> <span class="fu">list</span>(<span class="at">seed =</span> <span class="dv">1234</span>)) <span class="co"># Just leave this on as is</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="create-a-tidy-text-tibble-with-the-topic-token-association" class="level4" data-number="8.9.0.2">
+<h4 data-number="8.9.0.2" class="anchored" data-anchor-id="create-a-tidy-text-tibble-with-the-topic-token-association"><span class="header-section-number">8.9.0.2</span> Create a tidy text tibble with the topic-token association</h4>
+<p>The beta value is the strength of the association of a token with a topic. The higher the beta, the most strongly the term is associated to the topic.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>topic_term_beta <span class="ot">&lt;-</span> abstracts_lda <span class="sc">%&gt;%</span> </span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tidy</span>(<span class="at">matrix =</span> <span class="st">"beta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>topic_term_beta <span class="sc">%&gt;%</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(beta, <span class="at">n =</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">term =</span> <span class="fu">reorder_within</span>(term, beta, topic)) <span class="sc">%&gt;%</span> </span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>beta, <span class="at">y=</span>term) <span class="sc">+</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>topic, <span class="at">scales =</span> <span class="st">"free"</span>) <span class="sc">+</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_reordered</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="topic_modelling_files/figure-html/8.39-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="create-a-tidy-text-tibble-with-abstract-topic-association" class="level4" data-number="8.9.0.3">
+<h4 data-number="8.9.0.3" class="anchored" data-anchor-id="create-a-tidy-text-tibble-with-abstract-topic-association"><span class="header-section-number">8.9.0.3</span> Create a tidy text tibble with abstract-topic association</h4>
+<p>The gamma value is the strength of the association of a document with a topic. The higher the beta, the most strongly the document is associated to the topic.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>abstracts_topic <span class="ot">&lt;-</span> abstracts_lda <span class="sc">%&gt;%</span> </span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tidy</span>(<span class="at">matrix =</span> <span class="st">"gamma"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>abstracts_topic <span class="sc">%&gt;%</span> </span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">as.numeric</span>(document) <span class="sc">&lt;=</span> <span class="dv">9</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(document) <span class="sc">%&gt;%</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(document, topic) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>gamma, <span class="at">y=</span><span class="fu">reorder</span>(topic, gamma)) <span class="sc">+</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>document, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">scales =</span> <span class="st">"free"</span>) <span class="sc">+</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Topic"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="topic_modelling_files/figure-html/8.41-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="other-resources" class="level2" data-number="8.10">
+<h2 data-number="8.10" class="anchored" data-anchor-id="other-resources"><span class="header-section-number">8.10</span> Other resources</h2>
+<ul>
+<li><p><em>Project gutenberg</em> (<a href="https://www.gutenberg.org/" class="uri">https://www.gutenberg.org/</a>) provides access to a large collection of free eBooks that can be downloaded in a plain text (.txt) format that is convenient for text-mining. the <strong>gutenbergr</strong> package allows you to search the project gutenberg collection and import books directly in R.</p></li>
+<li><p><em>Text mining with R</em> (<a href="https://www.tidytextmining.com/index.html" class="uri">https://www.tidytextmining.com/index.html</a>) by Julia Silge and David Robinson is a great resource for beginners with lots of R examples. The book includes several examples that use the gutenbergr package.</p></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./visualizing_data.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualizing data</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

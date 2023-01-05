@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Introduction to Data Science - 1&nbsp; What is data science?</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./getting_started_with_R.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">What is data science?</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introduction to Data Science</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Course overview</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">What is data science?</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./getting_started_with_R.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting started with R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reading_and_tidying_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Reading and tidying data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./working_with_strings.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with strings</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./publishing_with_r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Publishing with R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summarizing_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summarizing data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visualizing_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualizing data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./topic_modelling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Topic Modelling</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="toc-section-number">1.1</span>  Learning objectives</a></li>
+  <li><a href="#what-is-data-science" id="toc-what-is-data-science" class="nav-link" data-scroll-target="#what-is-data-science"><span class="toc-section-number">1.2</span>  What is data science?</a></li>
+  <li><a href="#the-data-science-process" id="toc-the-data-science-process" class="nav-link" data-scroll-target="#the-data-science-process"><span class="toc-section-number">1.3</span>  The data science process</a></li>
+  <li><a href="#writing-a-problem-statement" id="toc-writing-a-problem-statement" class="nav-link" data-scroll-target="#writing-a-problem-statement"><span class="toc-section-number">1.4</span>  Writing a problem statement</a>
+  <ul class="collapse">
+  <li><a href="#context" id="toc-context" class="nav-link" data-scroll-target="#context"><span class="toc-section-number">1.4.1</span>  Context</a></li>
+  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives"><span class="toc-section-number">1.4.2</span>  Objectives</a></li>
+  <li><a href="#research-questions" id="toc-research-questions" class="nav-link" data-scroll-target="#research-questions"><span class="toc-section-number">1.4.3</span>  Research questions</a></li>
+  </ul></li>
+  <li><a href="#getting-data" id="toc-getting-data" class="nav-link" data-scroll-target="#getting-data"><span class="toc-section-number">1.5</span>  Getting data</a>
+  <ul class="collapse">
+  <li><a href="#open-government-data" id="toc-open-government-data" class="nav-link" data-scroll-target="#open-government-data"><span class="toc-section-number">1.5.1</span>  Open government data</a></li>
+  <li><a href="#research-data" id="toc-research-data" class="nav-link" data-scroll-target="#research-data"><span class="toc-section-number">1.5.2</span>  Research data</a></li>
+  <li><a href="#bibliographic-records" id="toc-bibliographic-records" class="nav-link" data-scroll-target="#bibliographic-records"><span class="toc-section-number">1.5.3</span>  Bibliographic records</a></li>
+  <li><a href="#miscellaneous-datasets" id="toc-miscellaneous-datasets" class="nav-link" data-scroll-target="#miscellaneous-datasets"><span class="toc-section-number">1.5.4</span>  Miscellaneous datasets</a></li>
+  </ul></li>
+  <li><a href="#homework" id="toc-homework" class="nav-link" data-scroll-target="#homework"><span class="toc-section-number">1.6</span>  Homework</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">What is data science?</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="learning-objectives" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">1.1</span> Learning objectives</h2>
+<ul>
+<li>What is data science?</li>
+<li>How to draft a problem statement?</li>
+<li>Where to find data?</li>
+</ul>
+</section>
+<section id="what-is-data-science" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="what-is-data-science"><span class="header-section-number">1.2</span> What is data science?</h2>
+<p>According to a short perspective paper by <span class="citation" data-cites="blei2017">Blei and Smyth (<a href="references.html#ref-blei2017" role="doc-biblioref">2017</a>)</span>, which I recommend reading, data science:</p>
+<blockquote class="blockquote">
+<p>focuses on exploiting the modern deluge of data for prediction, exploration, understanding, and intervention. It emphasizes the value and necessity of approximation and simplification. It values effective communication of the results of a data analysis and of the understanding about the world that we glean from it. It prioritizes an understanding of the optimization algorithms and transparently managing the inevitable trade-off between accuracy and speed. It promotes domain-specific analyses, where data scientists and domain experts work together to balance appropriate assumptions with computationally efficient methods.</p>
+</blockquote>
+</section>
+<section id="the-data-science-process" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="the-data-science-process"><span class="header-section-number">1.3</span> The data science process</h2>
+<ul>
+<li><p><strong>Problem statement</strong>: The data science process is filled with decisions. And there is no better way to get lost and frustrated than to not have an adequate and shared understanding of the problem that needs to be solved or the knowledge gap that needs to be filled. Problems are all around us, but not all of them are good data science problems. Good data science problem are <strong>relevant</strong> (they have a clear purpose) and are solvable with <strong>available data</strong>. At the end of this step, you have a clear research objective and clear research questions.</p></li>
+<li><p><strong>Data collection</strong> involves a series of steps aimed at gathering all the data that you will need for your project, such as finding relevant data sources, importing the data, and assessing its suitability for the problem at hand. At the end of this step, you have at hand all the data pieces that you will need for your project.</p></li>
+<li><p><strong>Pre-processing (tidying)</strong> involves structuring your data in a format suitable for analysis, and cleaning your data to remove errors, duplicates, etc. At the end of this step, you have a data set that is ready to produce valid answers to your research questions.</p></li>
+<li><p><strong>Analysis</strong> is about describing, analyzing, and visualizing the data. At the end of this step, you have produced tables and graphs that</p></li>
+<li><p><strong>Interpretation</strong> is about assigning meaning to the analyzed data and draw conclusions from it. At the end of this step you have answers to your research questions.</p></li>
+<li><p><strong>Communication</strong> is about transferring the new knowledge to its intended audience(s). At the end of this step, you have a clear, transparent, and effective report.</p></li>
+</ul>
+</section>
+<section id="writing-a-problem-statement" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="writing-a-problem-statement"><span class="header-section-number">1.4</span> Writing a problem statement</h2>
+<p>In the context of this course, the problem statement encompasses the identification of a problem/knowledge gap that has some relevance, the project objectives, and the research questions.</p>
+<section id="context" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="context"><span class="header-section-number">1.4.1</span> Context</h3>
+<p>The context introduces the issue that needs to be solved or the knowledge gap that needs to be filled (what is it?) and an explanation of its relevance (why does it matter?).</p>
+<p>Here is an example:</p>
+<blockquote class="blockquote">
+<p>In Quebec, academic research is supported by national and provincial research councils that select, after peer review, the individuals or teams that receive funding. The number of researchers that are able to receive research funds is constrained by the limited funds available and the size of the grants. Past research showed that 20% to 45% of Quebec’s researchers had no external funding between 1999 and 2006, while 10% of researchers accumulated between 50% and 80% of the available funds. While we know how funding is distributed, we do not know how optimal that distribution is for producing research output and impact. Optimizing our funding policies and programs could increase the production of scientific knowledge required to solve local, national and global issues.</p>
+</blockquote>
+</section>
+<section id="objectives" class="level3" data-number="1.4.2">
+<h3 data-number="1.4.2" class="anchored" data-anchor-id="objectives"><span class="header-section-number">1.4.2</span> Objectives</h3>
+<p>The objective, of course, is to fix the problem or fill the gap identified in the problem statement. But here the goal is expressed <em>as</em> a research objective. It also provides information on the data set, and more details that help delineating the project. here is an example:</p>
+<blockquote class="blockquote">
+<p>The goal of this project is to help determine the optimal distribution of National research funds by applying data science methods to analyze data on the research funding, output and impact of Quebec researchers over a period of 15 years (1998-2012).</p>
+</blockquote>
+</section>
+<section id="research-questions" class="level3" data-number="1.4.3">
+<h3 data-number="1.4.3" class="anchored" data-anchor-id="research-questions"><span class="header-section-number">1.4.3</span> Research questions</h3>
+<p>The research questions are the expression The best research questions tend to start with the words “how, why, what, which”. Here is an example.</p>
+<blockquote class="blockquote">
+<p>1) What is the relationship between the amount of research funding of individual researchers and their research output?</p>
+<p>2) What is the relationship between the amount of research funding of individual researchers and their research output?</p>
+<p>3) How does the relationship between funding and research impact and output vary between research fields?</p>
+</blockquote>
+<p>Note that depending on your project, your questions may look quite different. For instance, in this example research funding and field are selected as predictors based on past knowledge and theory, while research output and research impact are the predicted variables. You should always know what you are trying to predict, but perhaps you have a lot of potential predictors in your data and your goal is to identify which ones are good predictors. In this case, you could have a question that looks like:</p>
+<blockquote class="blockquote">
+<p>What are the best predictors of X?</p>
+</blockquote>
+<p>What matters most is that:</p>
+<ol type="1">
+<li>Your questions are clear.</li>
+<li>Your questions can be answered with data</li>
+<li>You actually provide an answer to the questions in your report.</li>
+</ol>
+</section>
+</section>
+<section id="getting-data" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="getting-data"><span class="header-section-number">1.5</span> Getting data</h2>
+<p>If you are working for a company your client or employer will most likely have an internal database storing information related to its activities (e.g., clients, products, inventories, sales, employees, financial performance, etc.) which you may be using for your data science project.</p>
+<section id="open-government-data" class="level3" data-number="1.5.1">
+<h3 data-number="1.5.1" class="anchored" data-anchor-id="open-government-data"><span class="header-section-number">1.5.1</span> Open government data</h3>
+<p>Governments and public organizations are also increasingly making the data they collect openly accessible for the benefit of the public. Here are some sources:</p>
+<ul>
+<li>Canada (<a href="https://open.canada.ca/en/open-data" class="uri">https://open.canada.ca/en/open-data</a>)</li>
+<li>Nova Scotia (<a href="https://data.novascotia.ca/" class="uri">https://data.novascotia.ca/</a>)</li>
+<li>United States (<a href="https://www.data.gov/" class="uri">https://www.data.gov/</a>)</li>
+<li>World Bank (<a href="https://data.worldbank.org/" class="uri">https://data.worldbank.org</a>)</li>
+<li>Toronto Public Library (<a href="https://opendata.tpl.ca/" class="uri">https://opendata.tpl.ca/</a>)</li>
+</ul>
+</section>
+<section id="research-data" class="level3" data-number="1.5.2">
+<h3 data-number="1.5.2" class="anchored" data-anchor-id="research-data"><span class="header-section-number">1.5.2</span> Research data</h3>
+<p>The Open Science movement also emphasizes the importance for researchers to share the data that they used for their published work, which can be found in repositories such as:</p>
+<ul>
+<li>DataCite (<a href="https://datacite.org/" class="uri">https://datacite.org/</a>). This is an aggregator that allows you to search hundreds of research data repositories.</li>
+<li>Zenodo (<a href="https://zenodo.org/" class="uri">https://zenodo.org/</a>).</li>
+<li>Figshare (<a href="https://figshare.com/" class="uri">https://figshare.com/</a>).</li>
+</ul>
+</section>
+<section id="bibliographic-records" class="level3" data-number="1.5.3">
+<h3 data-number="1.5.3" class="anchored" data-anchor-id="bibliographic-records"><span class="header-section-number">1.5.3</span> Bibliographic records</h3>
+<p>Bibliographic records and other metadata related to different types of works can be used for data science projects. However, because of their enriched metadata and their inclusion of bibliometric indicators like citations, citation indices provide more opportunities. Examples of citation indices are:</p>
+<ul>
+<li><p>Scopus (available through the <a href="https://dal.ca.libguides.com/az.php?q=Scopus&amp;p=1">Dal libraries</a>)</p></li>
+<li><p><a href="https://app.dimensions.ai/discover/publication">Dimensions</a>.</p></li>
+<li><p><a href="http://explore.openalex.org/">OpenAlex</a>. The search engine does not allow you to easily download data, but there is a free API that can be used quite easily in R with the <a href="https://cran.r-project.org/web/packages/openalexR/vignettes/A_Brief_Introduction_to_openalexR.html">openalexR</a> package (we will learn how to use R and R packages in Chapter 2 and how to use an API in Chapter 3).</p></li>
+<li><p><a href="https://scholar.google.ca/">Google Scholar</a>. The easiest way to download data from Google Scholar is to use the <a href="https://harzing.com/resources/publish-or-perish">Publish or Perish software</a>.</p></li>
+</ul>
+</section>
+<section id="miscellaneous-datasets" class="level3" data-number="1.5.4">
+<h3 data-number="1.5.4" class="anchored" data-anchor-id="miscellaneous-datasets"><span class="header-section-number">1.5.4</span> Miscellaneous datasets</h3>
+<p>There is an overwhelming amount of data available on the Web, so here is a non-exhaustive list of data sources that you might fight useful.</p>
+<ul>
+<li>Kaggle (<a href="https://www.kaggle.com" class="uri">https://www.kaggle.com</a>)</li>
+<li>Awesome public datasets (<a href="https://github.com/awesomedata/awesome-public-datasets" class="uri">https://github.com/awesomedata/awesome-public-datasets</a>)</li>
+<li>Internet Movie Database (IMDb) (<a href="https://www.imdb.com/interfaces/" class="uri">https://www.imdb.com/interfaces/</a>)</li>
+</ul>
+<p>Please note that you are free to use any data you wish for this course, the only restriction being that you must be able to share the data with your instructor.</p>
+</section>
+</section>
+<section id="homework" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="homework"><span class="header-section-number">1.6</span> Homework</h2>
+<p>Your homework is to start gathering ideas and data for your research project proposal. This includes:</p>
+<ol type="1">
+<li><p>Thinking about a topic for your research project.</p></li>
+<li><p>Finding data sources that might be suitable for that topic.</p></li>
+<li><p>Starting a draft of your problem statement.</p></li>
+</ol>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-blei2017" class="csl-entry" role="doc-biblioentry">
+Blei, David M., and Padhraic Smyth. 2017. <span>“Science and Data Science.”</span> <em>Proceedings of the National Academy of Sciences</em> 114 (33): 8689–92. <a href="https://doi.org/10.1073/pnas.1702076114">https://doi.org/10.1073/pnas.1702076114</a>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Course overview</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./getting_started_with_R.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting started with R</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
