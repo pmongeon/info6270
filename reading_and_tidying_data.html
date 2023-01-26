@@ -850,7 +850,7 @@ Important note
 <p>The JSON format is very popular for exchanging information on the web, and is the typical format of the data that we retrieve from APIs (next). However the process for reading a JSON file and reading JSON data from an Application programming interface (API) are slightly different. This is how to convert a JSON file into a data frame using the <code>fromJSON()</code> function from the jsonlite package (included in the tidyverse).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="st">"https://pmongeon.github.io/info6270/files/data/public_houing_ns.json"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="st">"https://pmongeon.github.io/info6270/files/data/public_housing_ns.json"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Important note:</strong> importing and working with JSON files with simple structures is relatively easy. However, reading more complex JSON files might require a little more work. Reading complex JSON structures is beyond the scope of this chapter.</p>
 </section>
@@ -1009,9 +1009,9 @@ Important note
 <pre><code># A tibble: 3 × 4
   university SSHRC NSERC  CIHR
   &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1 DAL           91    20    51
-2 SMU           33    92    62
-3 SFX            5    38     6</code></pre>
+1 DAL           55     6    66
+2 SMU           28    11    71
+3 SFX          100    74    41</code></pre>
 </div>
 </div>
 <section id="pivot_longer" class="level4" data-number="3.5.1.1">
@@ -1025,15 +1025,15 @@ Important note
 <pre><code># A tibble: 9 × 3
   university funder funding_amount
   &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;
-1 DAL        SSHRC              91
-2 DAL        NSERC              20
-3 DAL        CIHR               51
-4 SMU        SSHRC              33
-5 SMU        NSERC              92
-6 SMU        CIHR               62
-7 SFX        SSHRC               5
-8 SFX        NSERC              38
-9 SFX        CIHR                6</code></pre>
+1 DAL        SSHRC              55
+2 DAL        NSERC               6
+3 DAL        CIHR               66
+4 SMU        SSHRC              28
+5 SMU        NSERC              11
+6 SMU        CIHR               71
+7 SFX        SSHRC             100
+8 SFX        NSERC              74
+9 SFX        CIHR               41</code></pre>
 </div>
 </div>
 </section>
@@ -1048,9 +1048,9 @@ Important note
 <pre><code># A tibble: 3 × 4
   university SSHRC NSERC  CIHR
   &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1 DAL           91    20    51
-2 SMU           33    92    62
-3 SFX            5    38     6</code></pre>
+1 DAL           55     6    66
+2 SMU           28    11    71
+3 SFX          100    74    41</code></pre>
 </div>
 </div>
 </section>
@@ -1068,13 +1068,13 @@ Important note
 <pre><code># A tibble: 7 × 3
   university funder n_grants
   &lt;chr&gt;      &lt;chr&gt;     &lt;dbl&gt;
-1 DAL        SSHRC        62
-2 DAL        NSERC        85
-3 DAL        CIHR         79
-4 SMU        SSHRC       100
-5 SMU        CIHR         72
-6 SFX        NSERC        49
-7 SFX        CIHR         45</code></pre>
+1 DAL        SSHRC        48
+2 DAL        NSERC        14
+3 DAL        CIHR         91
+4 SMU        SSHRC        25
+5 SMU        CIHR         17
+6 SFX        NSERC         4
+7 SFX        CIHR         90</code></pre>
 </div>
 </div>
 <section id="expand" class="level4" data-number="3.5.2.1">
@@ -1109,15 +1109,15 @@ Important note
 <pre><code># A tibble: 9 × 3
   university funder n_grants
   &lt;chr&gt;      &lt;chr&gt;     &lt;dbl&gt;
-1 DAL        CIHR         79
-2 DAL        NSERC        85
-3 DAL        SSHRC        62
-4 SFX        CIHR         45
-5 SFX        NSERC        49
+1 DAL        CIHR         91
+2 DAL        NSERC        14
+3 DAL        SSHRC        48
+4 SFX        CIHR         90
+5 SFX        NSERC         4
 6 SFX        SSHRC        NA
-7 SMU        CIHR         72
+7 SMU        CIHR         17
 8 SMU        NSERC        NA
-9 SMU        SSHRC       100</code></pre>
+9 SMU        SSHRC        25</code></pre>
 </div>
 </div>
 </section>
@@ -1135,13 +1135,13 @@ Important note
 <pre><code># A tibble: 7 × 3
   university funder n_grants
   &lt;chr&gt;      &lt;chr&gt;     &lt;dbl&gt;
-1 DAL        CIHR         79
-2 DAL        NSERC        85
-3 DAL        SSHRC        62
-4 SFX        CIHR         45
-5 SFX        NSERC        49
-6 SMU        CIHR         72
-7 SMU        SSHRC       100</code></pre>
+1 DAL        CIHR         91
+2 DAL        NSERC        14
+3 DAL        SSHRC        48
+4 SFX        CIHR         90
+5 SFX        NSERC         4
+6 SMU        CIHR         17
+7 SMU        SSHRC        25</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This would remove rows where the n_grants column is NA and leave NA values in other</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># columns.</span></span>
@@ -1150,13 +1150,13 @@ Important note
 <pre><code># A tibble: 7 × 3
   university funder n_grants
   &lt;chr&gt;      &lt;chr&gt;     &lt;dbl&gt;
-1 DAL        CIHR         79
-2 DAL        NSERC        85
-3 DAL        SSHRC        62
-4 SFX        CIHR         45
-5 SFX        NSERC        49
-6 SMU        CIHR         72
-7 SMU        SSHRC       100</code></pre>
+1 DAL        CIHR         91
+2 DAL        NSERC        14
+3 DAL        SSHRC        48
+4 SFX        CIHR         90
+5 SFX        NSERC         4
+6 SMU        CIHR         17
+7 SMU        SSHRC        25</code></pre>
 </div>
 </div>
 </section>
@@ -1169,15 +1169,15 @@ Important note
 <pre><code># A tibble: 9 × 3
   university funder n_grants
   &lt;chr&gt;      &lt;chr&gt;     &lt;dbl&gt;
-1 DAL        CIHR         79
-2 DAL        NSERC        85
-3 DAL        SSHRC        62
-4 SFX        CIHR         45
-5 SFX        NSERC        49
+1 DAL        CIHR         91
+2 DAL        NSERC        14
+3 DAL        SSHRC        48
+4 SFX        CIHR         90
+5 SFX        NSERC         4
 6 SFX        SSHRC         0
-7 SMU        CIHR         72
+7 SMU        CIHR         17
 8 SMU        NSERC         0
-9 SMU        SSHRC       100</code></pre>
+9 SMU        SSHRC        25</code></pre>
 </div>
 </div>
 <p>If we want to replace NAs in multiple columns, we simply need to put additional column names and values to replace NAs with in the list. The code below replaces the NAs with 0 in two columns of some tibble.</p>
