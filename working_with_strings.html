@@ -224,8 +224,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </ul></li>
   <li><a href="#the-stringr-package" id="toc-the-stringr-package" class="nav-link" data-scroll-target="#the-stringr-package"><span class="toc-section-number">4.3</span>  The stringr package</a>
   <ul class="collapse">
-  <li><a href="#transforming-strings" id="toc-transforming-strings" class="nav-link" data-scroll-target="#transforming-strings"><span class="toc-section-number">4.3.1</span>  Transforming strings</a></li>
-  <li><a href="#clean-up-a-string" id="toc-clean-up-a-string" class="nav-link" data-scroll-target="#clean-up-a-string"><span class="toc-section-number">4.3.2</span>  Clean up a string</a></li>
+  <li><a href="#tansforming-strings" id="toc-tansforming-strings" class="nav-link" data-scroll-target="#tansforming-strings"><span class="toc-section-number">4.3.1</span>  Tansforming strings</a></li>
+  <li><a href="#removing-extra-spaces" id="toc-removing-extra-spaces" class="nav-link" data-scroll-target="#removing-extra-spaces"><span class="toc-section-number">4.3.2</span>  Removing extra spaces</a></li>
   <li><a href="#combine-strings" id="toc-combine-strings" class="nav-link" data-scroll-target="#combine-strings"><span class="toc-section-number">4.3.3</span>  Combine strings</a></li>
   <li><a href="#splitting-strings" id="toc-splitting-strings" class="nav-link" data-scroll-target="#splitting-strings"><span class="toc-section-number">4.3.4</span>  Splitting strings</a></li>
   <li><a href="#subsetting-strings" id="toc-subsetting-strings" class="nav-link" data-scroll-target="#subsetting-strings"><span class="toc-section-number">4.3.5</span>  Subsetting strings</a></li>
@@ -272,7 +272,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="dealing-with-messy-or-unstructured-data" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="dealing-with-messy-or-unstructured-data"><span class="header-section-number">4.2</span> Dealing with messy or unstructured data</h2>
-<p>In the last chapter, we focused on how to import data into tibbles and then reshape them so that they fit the tidy data criteria. So in most cases, we had data with <strong>some</strong> structure which we transformed into a different structure. This week we look at working with strings for three reasons.</p>
+<p>In the last chapter, we focused on how to import data into tibbles and then reshape them so that they fit the tidy data criteria. In most cases, we had data with <strong>some</strong> structure which we transformed into a different structure. This week we look at working with strings for three reasons: cleaning messy data, filtering rows based on part of strings matches, and extracting data from text.</p>
 <section id="cleaning-messy-data" class="level3" data-number="4.2.1">
 <h3 data-number="4.2.1" class="anchored" data-anchor-id="cleaning-messy-data"><span class="header-section-number">4.2.1</span> Cleaning messy data</h3>
 <p>Sometimes you may be dealing with data that has the correct tidy structure, but the data itself is not clean and contains errors, unnecessary characters, or unwanted spelling or formatting variants. We need to clean that data before we conduct our analysis.</p>
@@ -317,18 +317,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <blockquote class="blockquote">
 <p>I am taking several courses offered at SIM this Winter. There is INFO6270 (Introduction to Data Science) and also INFO6540 and the information policy one, which I think has the course code INFO6610.</p>
 </blockquote>
-<p>Maybe you had the brilliant idea to use a free text field in a survey to collect information about the courses that students are taking this Winter, and you now have three thousands responses that look like this one. This is unstructured data that needs to be structured before it can be analyzed. And there are situations, such as this specific example, where R might be able to help at least a little bit. However, this kind of task can be simple in some cases but can also get very complex. In this course we are not going to do complex data extractions of this kind, but we will perform some analysis on full texts in Chapter 7 on topic modelling.</p>
+<p>Maybe you had the brilliant idea to use a free text field in a survey to collect information about the courses that students are taking this Winter, and you now have three thousands responses that look like this one. This is unstructured data that needs to be structured before it can be analyzed and in this specific example, R can help! This kind of task can be relatovely simple, but it can get qutie complex. In this chapter, we will not do very complex data extractions from strings.</p>
 </section>
 </section>
 <section id="the-stringr-package" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="the-stringr-package"><span class="header-section-number">4.3</span> The stringr package</h2>
 <p>The <strong>stringr</strong> package (<a href="https://stringr.tidyverse.org" class="uri">https://stringr.tidyverse.org</a>) is part of the tidyverse and contains a collection of functions that perform all kinds of operations on strings. Let’s go through some of those tasks and some code examples.</p>
-<p><strong>Important note</strong>: the stringr functions usually work best with vectors, so when you want to use them to modify strings in tibbles, they are often used in combination with the mutate() function that is used to add or update columns in a tibble. Below I will include examples that use both vectors and tibbles, when appropriate.</p>
-<section id="transforming-strings" class="level3" data-number="4.3.1">
-<h3 data-number="4.3.1" class="anchored" data-anchor-id="transforming-strings"><span class="header-section-number">4.3.1</span> Transforming strings</h3>
+<section id="tansforming-strings" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="tansforming-strings"><span class="header-section-number">4.3.1</span> Tansforming strings</h3>
 <section id="change-string-character-case" class="level4" data-number="4.3.1.1">
 <h4 data-number="4.3.1.1" class="anchored" data-anchor-id="change-string-character-case"><span class="header-section-number">4.3.1.1</span> change string character case</h4>
-<p>One of the simple transformation that you may want to perform on a string is changing its case. This is very easily done with the <strong>str_to_lower()</strong>, <strong>str_to_upper()</strong>, <strong>str_to_sentence()</strong>, and <strong>str_to_title()</strong> functions.</p>
+<p>One of the simple transformation that you may want to perform on a string is changing its case. This is very easily done with the <code>str_to_lower()</code>, <code>str_to_upper()</code>, <code>str_to_sentence()</code>, and <code>str_to_title()</code> functions.</p>
 <table class="table">
 <thead>
 <tr class="header">
@@ -342,7 +341,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td style="text-align: left;">hello world!</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">str_to_lower(“HeLlO WoRlD!”)</td>
+<td style="text-align: left;">str_to_upper(“HeLlO WoRlD!”)</td>
 <td style="text-align: left;">HELLO WORLD!</td>
 </tr>
 <tr class="odd">
@@ -373,26 +372,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h5 data-number="4.3.1.1.2" class="anchored" data-anchor-id="tibble-example"><span class="header-section-number">4.3.1.1.2</span> Tibble example</h5>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I create a tibble with inconsistent strings</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">messy =</span> <span class="fu">c</span>(<span class="st">"I like coding with R"</span>,<span class="st">"i like coding in R"</span>,<span class="st">"R IS AMAZING!"</span>,<span class="st">"I LoVe R"</span>))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">comments =</span> <span class="fu">c</span>(<span class="st">"I like coding with R"</span>,<span class="st">"i like coding in R"</span>,<span class="st">"R IS AMAZING!"</span>,<span class="st">"I LoVe R"</span>))</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># I use the mutate() function to create a new column (called clean) with the consistent case.</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># I use the mutate() and str_to_lower function to modify the messy column and make the strings consistent. </span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>t <span class="sc">%&gt;%</span> </span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">clean =</span> <span class="fu">str_to_lower</span>(messy))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 2
-  messy                clean               
-  &lt;chr&gt;                &lt;chr&gt;               
-1 I like coding with R i like coding with r
-2 i like coding in R   i like coding in r  
-3 R IS AMAZING!        r is amazing!       
-4 I LoVe R             i love r            </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I use the mutate() function to modify the messy column and make the strings consistent. </span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>t <span class="sc">%&gt;%</span> </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">messy =</span> <span class="fu">str_to_lower</span>(messy))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">comments =</span> <span class="fu">str_to_lower</span>(comments))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 1
-  messy               
+  comments            
   &lt;chr&gt;               
 1 i like coding with r
 2 i like coding in r  
@@ -404,125 +391,142 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="replacing-parts-of-strings" class="level4" data-number="4.3.1.2">
 <h4 data-number="4.3.1.2" class="anchored" data-anchor-id="replacing-parts-of-strings"><span class="header-section-number">4.3.1.2</span> Replacing parts of strings</h4>
-<p>The functions <strong>str_replace()</strong> and <strong>str_replace_all()</strong> can be used to modify strings by replacing some patterns with some other. The difference between the two is that str_replace() will only replace the first instance of the pattern in the string, while str_replace_all() will replace all the instances.</p>
+<p>The functions <code>str_replace()</code> and <code>str_replace_all()</code> modify strings by replacing a pattern with another. The difference between the two is that <code>str_replace()</code> will only replace the first instance of the pattern in the string, while <code>str_replace_all()</code> will replace all the instances.</p>
 <section id="vector-example-1" class="level5" data-number="4.3.1.2.1">
 <h5 data-number="4.3.1.2.1" class="anchored" data-anchor-id="vector-example-1"><span class="header-section-number">4.3.1.2.1</span> Vector example</h5>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I create a vector with two strings.</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"dr Mike Smit"</span>,<span class="st">"dr Sandra Toze"</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># I replace the first instance of the pattern "dr" with "doctor". </span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>names <span class="sc">%&gt;%</span> <span class="fu">str_replace</span>(<span class="st">"dr"</span>,<span class="st">"doctor"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I create a vector with two strings.</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"dr Mike Smit"</span>,<span class="st">"dr Sandra Toze"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># I replace the first instance of the pattern "dr" with "doctor". </span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>names <span class="sc">%&gt;%</span> </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_replace</span>(<span class="st">"dr"</span>,<span class="st">"doctor"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "doctor Mike Smit"   "doctor Sandra Toze"</code></pre>
 </div>
 </div>
-<p>Now let’s see what happens if I do the same example but use str_replace_all() instead of str_replace().</p>
+<p>Now let’s see what happens if I do the same example but use <code>str_replace_all()</code> instead of <code>str_replace()</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I create a vector with two strings.</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"dr Mike Smit"</span>,<span class="st">"dr Sandra Toze"</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># I replace ALL instances of the pattern "dr" with "doctor". </span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>names <span class="sc">%&gt;%</span> <span class="fu">str_replace_all</span>(<span class="st">"dr"</span>,<span class="st">"doctor"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I create a vector with two strings.</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"dr Mike Smit"</span>,<span class="st">"dr Sandra Toze"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># I replace ALL instances of the pattern "dr" with "doctor". </span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>names <span class="sc">%&gt;%</span> </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_replace_all</span>(<span class="st">"dr"</span>,<span class="st">"doctor"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "doctor Mike Smit"       "doctor Sandoctora Toze"</code></pre>
 </div>
 </div>
-<p>The second string got messed up because the second “dr” pattern in San<strong>dr</strong>a also got replaced.</p>
-<p>The <strong>str_remove()</strong> and <strong>str_remove_all()</strong> are the equivalent of str_replace(“some pattern”, ““) and str_replace_all(”some pattern”, ““), but they don’t require to provide a replacement string, which make the code a bit more clean.</p>
+<p>The second string got messed up because the second “dr” pattern in San<strong>dr</strong>a also got replaced with the pattern “doctor”.</p>
+</section>
+</section>
+<section id="removing-parts-of-strings" class="level4" data-number="4.3.1.3">
+<h4 data-number="4.3.1.3" class="anchored" data-anchor-id="removing-parts-of-strings"><span class="header-section-number">4.3.1.3</span> Removing parts of strings</h4>
+<p>The <code>str_remove()</code> and <code>str_remove_all()</code> are the equivalent of <code>str_replace("some pattern", "")</code> and <code>str_replace_all("some pattern", "")</code>. They can make our code a little cleaner by not requiring that we specify that we want to replace a given pattern with nothing.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I create a vector with names</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"dr Mike Smit"</span>,<span class="st">"dr Sandra Toze"</span>)</span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I create a vector with names</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"dr Mike Smit"</span>,<span class="st">"dr Sandra Toze"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># I remove the first instance of the pattern "dr" from the names.</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>names <span class="sc">%&gt;%</span> </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_remove</span>(<span class="st">"dr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] " Mike Smit"   " Sandra Toze"</code></pre>
+</div>
+</div>
+<section id="tibble-example-1" class="level5" data-number="4.3.1.3.1">
+<h5 data-number="4.3.1.3.1" class="anchored" data-anchor-id="tibble-example-1"><span class="header-section-number">4.3.1.3.1</span> Tibble example</h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I create a tibble with professor names.</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">names =</span> <span class="fu">c</span>(<span class="st">"dr Mike Smit"</span>,<span class="st">"dr Sandra Toze"</span>))</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># I remove the pattern "dr" from the names.</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>names <span class="sc">%&gt;%</span> <span class="fu">str_remove</span>(<span class="st">"dr "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Mike Smit"   "Sandra Toze"</code></pre>
-</div>
-</div>
-</section>
-<section id="tibble-example-1" class="level5" data-number="4.3.1.2.2">
-<h5 data-number="4.3.1.2.2" class="anchored" data-anchor-id="tibble-example-1"><span class="header-section-number">4.3.1.2.2</span> Tibble example</h5>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I create a tibble with professor names.</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">names =</span> <span class="fu">c</span>(<span class="st">"dr Mike Smit"</span>,<span class="st">"dr Sandra Toze"</span>))</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># I remove all instance of the pattern "dr" in the names. </span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>t <span class="sc">%&gt;%</span> </span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">names =</span> <span class="fu">str_remove_all</span>(names, <span class="st">"dr"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 1
-  names         
-  &lt;chr&gt;         
-1 dr Mike Smit  
-2 dr Sandra Toze</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I remove the first instance of the pattern "dr" in the names. </span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>t <span class="sc">%&gt;%</span> </span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">names =</span> <span class="fu">str_remove</span>(names, <span class="st">"dr"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 × 1
-  names         
-  &lt;chr&gt;         
-1 " Mike Smit"  
-2 " Sandra Toze"</code></pre>
+  names       
+  &lt;chr&gt;       
+1 " Mike Smit"
+2 " Sana Toze"</code></pre>
 </div>
 </div>
+<p>We can see that again removing all the “dr” patterns from the strings caused a problem because the pattern is also found in the name “San<strong>dr</strong>a”.</p>
 </section>
 </section>
 </section>
-<section id="clean-up-a-string" class="level3" data-number="4.3.2">
-<h3 data-number="4.3.2" class="anchored" data-anchor-id="clean-up-a-string"><span class="header-section-number">4.3.2</span> Clean up a string</h3>
+<section id="removing-extra-spaces" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="removing-extra-spaces"><span class="header-section-number">4.3.2</span> Removing extra spaces</h3>
 <p>The <strong>str_squish()</strong> function is a quick and easy way to remove unwanted spaces before or after a string, as well as consecutive spaces within a string.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>messy_string <span class="ot">&lt;-</span> <span class="st">"   My cat just    stepped on the spacebar  as I was writing this      "</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's print the string to see what it looks like</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>messy_string</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>messy_string <span class="ot">&lt;-</span> <span class="st">"   My cat just    stepped on the spacebar  as I was writing this      "</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's print the string to see what it looks like</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>messy_string</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "   My cat just    stepped on the spacebar  as I was writing this      "</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's squish it!</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str_squish</span>(messy_string)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's squish it!</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str_squish</span>(messy_string)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "My cat just stepped on the spacebar as I was writing this"</code></pre>
+</div>
+</div>
+<p>the <code>str_trim()</code>function is similar to <code>str_squish()</code> but allows you to specify which types of extra spaces you wish to remove. However, it only handles trailing spaces at the beginning or end of strings, and cannot remove extra spaces extra spaces in the middle of a string.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>string <span class="ot">&lt;-</span> <span class="st">"  hello   world    "</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># remove spaces at the beginning</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>string <span class="sc">%&gt;%</span> </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_trim</span>(<span class="st">"left"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "hello   world    "</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remove spaces at the end</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># remove spaces at the beginning</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>string <span class="sc">%&gt;%</span> </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_trim</span>(<span class="st">"right"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "  hello   world"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remove spaces at the beginning and at the end</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>string <span class="sc">%&gt;%</span> </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_trim</span>(<span class="st">"both"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "hello   world"</code></pre>
 </div>
 </div>
 </section>
 <section id="combine-strings" class="level3" data-number="4.3.3">
 <h3 data-number="4.3.3" class="anchored" data-anchor-id="combine-strings"><span class="header-section-number">4.3.3</span> Combine strings</h3>
-<section id="str_c" class="level4" data-number="4.3.3.1">
-<h4 data-number="4.3.3.1" class="anchored" data-anchor-id="str_c"><span class="header-section-number">4.3.3.1</span> str_c</h4>
 <p>We already learned how to use the <code>unite()</code> function of the tidyr package to concatenate multiple data frame columns into one. However, the <code>unite()</code> function works only with data frames as input, which can be limiting. The stringr package offers a <code>str_c()</code> function that works with vectors, so it’s good to know how to use both functions.</p>
-<section id="vector-example-2" class="level5" data-number="4.3.3.1.1">
-<h5 data-number="4.3.3.1.1" class="anchored" data-anchor-id="vector-example-2"><span class="header-section-number">4.3.3.1.1</span> Vector example</h5>
+<section id="vector-example-2" class="level5" data-number="4.3.3.0.1">
+<h5 data-number="4.3.3.0.1" class="anchored" data-anchor-id="vector-example-2"><span class="header-section-number">4.3.3.0.1</span> Vector example</h5>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I create a vector with first names</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>first_names <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Bertrum"</span>, <span class="st">"Colin"</span>, <span class="st">"Louise"</span>)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># I create a vector with last names</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>last_names <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"MacDonald"</span>, <span class="st">"Conrad"</span>, <span class="st">"Spiteri"</span>)</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co"># I combined my vectors into a new vector with full names</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>full_names <span class="ot">&lt;-</span> <span class="fu">str_c</span>(first_names, last_names, <span class="at">sep =</span> <span class="st">" "</span>)</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="co"># I print the vector</span></span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(full_names)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I create a vector with first names</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>first_names <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Bertrum"</span>, <span class="st">"Colin"</span>, <span class="st">"Louise"</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># I create a vector with last names</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>last_names <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"MacDonald"</span>, <span class="st">"Conrad"</span>, <span class="st">"Spiteri"</span>)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co"># I combined my vectors into a new vector with full names</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>full_names <span class="ot">&lt;-</span> <span class="fu">str_c</span>(first_names, last_names, <span class="at">sep =</span> <span class="st">" "</span>)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="co"># I print the vector</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(full_names)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Bertrum MacDonald" "Colin Conrad"      "Louise Spiteri"   </code></pre>
 </div>
 </div>
-</section>
-<section id="tibble-example-2" class="level5" data-number="4.3.3.1.2">
-<h5 data-number="4.3.3.1.2" class="anchored" data-anchor-id="tibble-example-2"><span class="header-section-number">4.3.3.1.2</span> Tibble example</h5>
+<p>Another advantage of the <code>str_c()</code> over the <code>unite()</code> function is that it is more flexible in terms of the strings that get concatenated. You could use it to combine the content of two vectors but also add any pattern you want to any string.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I create a tibble with two columsn containing first and last names.</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="ot">=</span> <span class="fu">tibble</span>(<span class="at">first_name =</span> <span class="fu">c</span>(<span class="st">"Bertrum"</span>, <span class="st">"Colin"</span>, <span class="st">"Louise"</span>),</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">last_name =</span> <span class="fu">c</span>(<span class="st">"MacDonald"</span>, <span class="st">"Conrad"</span>, <span class="st">"Spiteri"</span>))</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co"># I add a column to my tibble with full_names</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="ot">&lt;-</span> my_tibble <span class="sc">%&gt;%</span> </span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">full_name =</span> <span class="fu">str_c</span>(first_name, last_name, <span class="at">sep=</span><span class="st">" "</span>))</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="co"># I print my new tibble</span></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_tibble)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I create a tibble with two columsn containing first and last names.</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="ot">=</span> <span class="fu">tibble</span>(<span class="at">first_name =</span> <span class="fu">c</span>(<span class="st">"Bertrum"</span>, <span class="st">"Colin"</span>, <span class="st">"Louise"</span>),</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">last_name =</span> <span class="fu">c</span>(<span class="st">"MacDonald"</span>, <span class="st">"Conrad"</span>, <span class="st">"Spiteri"</span>))</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co"># I add a column to my tibble with full_names</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="sc">%&gt;%</span> </span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">full_name =</span> <span class="fu">str_c</span>(first_name, last_name, <span class="at">sep=</span><span class="st">" "</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 3
   first_name last_name full_name        
@@ -531,24 +535,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 2 Colin      Conrad    Colin Conrad     
 3 Louise     Spiteri   Louise Spiteri   </code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I add a column to my tibble with full_names and include the Dr. pattern at the beginning of the name.</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="sc">%&gt;%</span> </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">full_name =</span> <span class="fu">str_c</span>(<span class="st">"Dr."</span>, first_name, last_name, <span class="at">sep=</span><span class="st">" "</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  first_name last_name full_name            
+  &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;                
+1 Bertrum    MacDonald Dr. Bertrum MacDonald
+2 Colin      Conrad    Dr. Colin Conrad     
+3 Louise     Spiteri   Dr. Louise Spiteri   </code></pre>
 </div>
-</section>
+</div>
 </section>
 </section>
 <section id="splitting-strings" class="level3" data-number="4.3.4">
 <h3 data-number="4.3.4" class="anchored" data-anchor-id="splitting-strings"><span class="header-section-number">4.3.4</span> Splitting strings</h3>
-<section id="str_split" class="level4" data-number="4.3.4.1">
-<h4 data-number="4.3.4.1" class="anchored" data-anchor-id="str_split"><span class="header-section-number">4.3.4.1</span> str_split</h4>
-<p>The <code>str_split()</code> function does the same thing than the <strong>separate()</strong> function that we learned about in chapter 3. They have slightly different syntax and arguments, but the main difference between the two functions is that <code>str_split()</code> works with <strong>vectors</strong> and returns a list, while <code>separate()</code> works with <strong>dara frames</strong> and returns a data frame. In other words, if you want to split a string contained in a dataframe column, you need to use <code>separate()</code>, and if we want to split a character vector into a list of character vectors. the <strong>n</strong> argument of <code>str_split()</code> allows us to specify the length of the returned vector. The basic syntax is <code>str_split(character_vector, separator)</code>.</p>
+<p>The <code>str_split()</code> function does the same thing as the <code>separate()</code> function that we learned about in chapter 3. They have slightly different syntax and arguments, but the main difference between the two functions is that <code>str_split()</code> works with <strong>vectors</strong> and returns a list, while <code>separate()</code> works with <strong>dara frames</strong> and returns a data frame. In other words, if you want to split a string contained in a dataframe column, you need to use <code>separate()</code>, and if we want to split a character vector into a list of character vectors. the <strong>n</strong> argument of <code>str_split()</code> allows us to specify the length of the returned vector. The basic syntax is <code>str_split(character_vector, separator)</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>courses <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"INFO5500, INFO6540, INFO6270"</span>,</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>            <span class="st">"INFO5500"</span>,</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>            <span class="st">"INFO5530, INFO5520"</span>)</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co"># str_split seperates the vectors based on a specified delimiter.</span></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co"># the outcome is a list of three vectors with 3, 1 and 2 elements.</span></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>courses <span class="sc">%&gt;%</span> </span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_split</span>(<span class="st">", "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>courses <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"INFO5500, INFO6540, INFO6270"</span>,</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>            <span class="st">"INFO5500"</span>,</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>            <span class="st">"INFO5530, INFO5520"</span>)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co"># str_split seperates the vectors based on a specified delimiter.</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co"># the outcome is a list of three vectors with 3, 1 and 2 elements.</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>courses <span class="sc">%&gt;%</span> </span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_split</span>(<span class="st">", "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
 [1] "INFO5500" "INFO6540" "INFO6270"
@@ -562,9 +574,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>We can also specify the <strong>maximum</strong> number of pieces we want to split the string into.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here I split the courses vector into a list of vectors that can have a maximum of 2 elements.</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>courses <span class="sc">%&gt;%</span> </span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_split</span>(<span class="st">", "</span>,<span class="at">n=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here I split the courses vector into a list of vectors that can have a maximum of 2 elements.</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>courses <span class="sc">%&gt;%</span> </span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_split</span>(<span class="st">", "</span>,<span class="at">n=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
 [1] "INFO5500"           "INFO6540, INFO6270"
@@ -576,11 +588,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 [1] "INFO5530" "INFO5520"</code></pre>
 </div>
 </div>
-<p>We can also specify the <strong>exact</strong> number of pieces we want to split the string into with str_split_fixed(). This function does not return a vector but a matrix.</p>
+<p>We can also specify the <strong>exact</strong> number of pieces we want to split the string into with <code>str_split_fixed()</code>. This function does not return a vector but a matrix.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I split the courses vector into a matrix with 4 columns.</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>courses <span class="sc">%&gt;%</span> </span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_split_fixed</span>(<span class="st">", "</span>,<span class="at">n=</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I split the courses vector into a matrix with 4 columns.</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>courses <span class="sc">%&gt;%</span> </span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_split_fixed</span>(<span class="st">", "</span>,<span class="at">n=</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1]       [,2]       [,3]       [,4]
 [1,] "INFO5500" "INFO6540" "INFO6270" ""  
@@ -588,29 +600,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 [3,] "INFO5530" "INFO5520" ""         ""  </code></pre>
 </div>
 </div>
-</section>
-<section id="str_flatten" class="level4" data-number="4.3.4.2">
-<h4 data-number="4.3.4.2" class="anchored" data-anchor-id="str_flatten"><span class="header-section-number">4.3.4.2</span> str_flatten</h4>
+<section id="str_flatten" class="level4" data-number="4.3.4.1">
+<h4 data-number="4.3.4.1" class="anchored" data-anchor-id="str_flatten"><span class="header-section-number">4.3.4.1</span> str_flatten</h4>
 <p>The <code>str_flatten()</code> function takes a character vector of length <em>x</em> and concatenates all the elements into a character vector of length 1 (a single string) with a specified separator between the elements. In a sense, it is the opposite of a <code>str_split()</code>. It’s basic syntax is <code>str_flatten(vector, separator)</code></p>
-<section id="vector-example-3" class="level5" data-number="4.3.4.2.1">
-<h5 data-number="4.3.4.2.1" class="anchored" data-anchor-id="vector-example-3"><span class="header-section-number">4.3.4.2.1</span> Vector example</h5>
+<section id="vector-example-3" class="level5" data-number="4.3.4.1.1">
+<h5 data-number="4.3.4.1.1" class="anchored" data-anchor-id="vector-example-3"><span class="header-section-number">4.3.4.1.1</span> Vector example</h5>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>)</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str_flatten</span>(x,<span class="st">"|"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str_flatten</span>(x,<span class="st">"|"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "a|b|c"</code></pre>
 </div>
 </div>
 </section>
-<section id="tibble-example-3" class="level5" data-number="4.3.4.2.2">
-<h5 data-number="4.3.4.2.2" class="anchored" data-anchor-id="tibble-example-3"><span class="header-section-number">4.3.4.2.2</span> tibble example</h5>
-<p>Using <code>str_flatten()</code> in a tibble is tricky (we need to use the <code>group_by()</code> function that we briefly mentioned in the previous chapter but haven’t thoroughly explored yet), but also counter-intuitive, since it likely means that we are taking a tibble in a tidy format and making it untidy. Still, I’m providing an example in case you are curious.</p>
+<section id="tibble-example-2" class="level5" data-number="4.3.4.1.2">
+<h5 data-number="4.3.4.1.2" class="anchored" data-anchor-id="tibble-example-2"><span class="header-section-number">4.3.4.1.2</span> tibble example</h5>
+<p>Using <code>str_flatten()</code> in a tibble is tricky (we need to use the <code>group_by()</code> function that we briefly mentioned in the previous chapter but haven’t thoroughly explored yet), but also counter-intuitive, since it likely means that we are taking a tibble in a tidy format and making it untidy.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here is a tibble</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">instructor =</span> <span class="fu">c</span>(<span class="st">"Mongeon, Philippe"</span>, <span class="st">"Mongeon, Philippe"</span>, <span class="st">"Mongeon, Philippe"</span>,<span class="st">"Spiteri, Louise"</span>,<span class="st">"Spiteri, Louise"</span>),</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">course =</span> <span class="fu">c</span>(<span class="st">"INFO5500"</span>,<span class="st">"INO6540"</span>,<span class="st">"INFO6270"</span>,<span class="st">"INFO6350"</span>,<span class="st">"INFO6480"</span>))</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_tibble)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here is a tibble</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">instructor =</span> <span class="fu">c</span>(<span class="st">"Mongeon, Philippe"</span>, <span class="st">"Mongeon, Philippe"</span>, <span class="st">"Mongeon, Philippe"</span>,<span class="st">"Spiteri, Louise"</span>,<span class="st">"Spiteri, Louise"</span>),</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">course =</span> <span class="fu">c</span>(<span class="st">"INFO5500"</span>,<span class="st">"INO6540"</span>,<span class="st">"INFO6270"</span>,<span class="st">"INFO6350"</span>,<span class="st">"INFO6480"</span>))</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_tibble)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 2
   instructor        course  
@@ -624,10 +635,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Now I want to flatten my course column so that I have all the courses taught by the same instructor in a single row and separated with a “|”.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="sc">%&gt;%</span> </span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(instructor) <span class="sc">%&gt;%</span> </span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">course =</span> <span class="fu">str_flatten</span>(course, <span class="st">" | "</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="sc">%&gt;%</span> </span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(instructor) <span class="sc">%&gt;%</span> </span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">course =</span> <span class="fu">str_flatten</span>(course, <span class="st">" | "</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 2
 # Groups:   instructor [2]
@@ -637,7 +648,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 2 Spiteri, Louise   INFO6350 | INFO6480          </code></pre>
 </div>
 </div>
-<p><strong>Important</strong>: the <code>unique()</code> function at the end of the previous code removes the duplicates that are typically created with the <code>str_flatten()</code> function. You can try it yourself and see what happens when you don’t include the <code>unique()</code> step at the end.</p>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <code>unique()</code> function at the end of the previous code removes the duplicates that are typically created with the <code>str_flatten()</code> function. You can try it yourself and see what happens when you don’t include the <code>unique()</code> step at the end.</p>
+</div>
+</div>
 </section>
 </section>
 </section>
@@ -649,36 +672,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="vector-example-4" class="level5" data-number="4.3.5.1.1">
 <h5 data-number="4.3.5.1.1" class="anchored" data-anchor-id="vector-example-4"><span class="header-section-number">4.3.5.1.1</span> Vector example</h5>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>postal_code <span class="ot">&lt;-</span> <span class="st">"B3H 4R2"</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>?<span class="fu">str_sub</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>starting httpd help server ... done</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the first three characters of the postal code</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>postal_code <span class="sc">%&gt;%</span> </span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_sub</span>(<span class="dv">1</span>,<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>postal_code <span class="ot">&lt;-</span> <span class="st">"B3H 4R2"</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="co"># get the first three characters of the postal code</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>postal_code <span class="sc">%&gt;%</span> </span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_sub</span>(<span class="dv">1</span>,<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "B3H"</code></pre>
 </div>
 </div>
 <p>You can also retrieve the last characters of the string using negative numbers. Let’s get the last three characters of the postal code.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>postal_code <span class="sc">%&gt;%</span> </span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_sub</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="sc">-</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>postal_code <span class="sc">%&gt;%</span> </span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_sub</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="sc">-</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "4R2"</code></pre>
 </div>
 </div>
 </section>
-<section id="tibble-example-4" class="level5" data-number="4.3.5.1.2">
-<h5 data-number="4.3.5.1.2" class="anchored" data-anchor-id="tibble-example-4"><span class="header-section-number">4.3.5.1.2</span> Tibble example</h5>
+<section id="tibble-example-3" class="level5" data-number="4.3.5.1.2">
+<h5 data-number="4.3.5.1.2" class="anchored" data-anchor-id="tibble-example-3"><span class="header-section-number">4.3.5.1.2</span> Tibble example</h5>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I create my tibble </span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">postal_code =</span> <span class="fu">c</span>(<span class="st">"B3H 4R2"</span>, <span class="st">"B3H 7K7"</span>))</span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="co"># I print my tibble</span></span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I create my tibble </span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">postal_code =</span> <span class="fu">c</span>(<span class="st">"B3H 4R2"</span>, <span class="st">"B3H 7K7"</span>))</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="co"># I print my tibble</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 1
   postal_code
@@ -686,13 +705,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 1 B3H 4R2    
 2 B3H 7K7    </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I add two new columms with the first three digits and the last 3 digits of the postal code. </span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> t <span class="sc">%&gt;%</span> </span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">first_three_digits =</span> <span class="fu">str_sub</span>(postal_code, <span class="dv">1</span>, <span class="dv">3</span>),</span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">last_three_digits =</span> <span class="fu">str_sub</span>(postal_code, <span class="sc">-</span><span class="dv">3</span>, <span class="sc">-</span><span class="dv">1</span>)) </span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="co"># I print my new tibble</span></span>
-<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I add two new columms with the first three digits and the last 3 digits of the postal code. </span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> t <span class="sc">%&gt;%</span> </span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">first_three_digits =</span> <span class="fu">str_sub</span>(postal_code, <span class="dv">1</span>, <span class="dv">3</span>),</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">last_three_digits =</span> <span class="fu">str_sub</span>(postal_code, <span class="sc">-</span><span class="dv">3</span>, <span class="sc">-</span><span class="dv">1</span>)) </span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="co"># I print my new tibble</span></span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>t</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 3
   postal_code first_three_digits last_three_digits
@@ -701,36 +720,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 2 B3H 7K7     B3H                7K7              </code></pre>
 </div>
 </div>
-<p>Noticed how I created two new columns with the same mutate()? You can mutate as many things as you want in a mutate() function, just need to add a comma to separate each mutation.</p>
+<p>Noticed how I created two new columns with the same <code>mutate()</code>? You can mutate as many things as you want in a single <code>mutate()</code> function. You simply need to add a comma to separate each mutation.</p>
 </section>
 </section>
 <section id="str_subset" class="level4" data-number="4.3.5.2">
 <h4 data-number="4.3.5.2" class="anchored" data-anchor-id="str_subset"><span class="header-section-number">4.3.5.2</span> str_subset</h4>
 <p>The <code>str_sub()</code> function should not be confused with the <code>str_subset()</code> functions that returns the element of a vector that contain a string. It’s basic syntax is <code>str_subset(character_vector, string_to_find)</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I create a vector with course codes</span></span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>course_codes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"INFO5500"</span>, <span class="st">"BUSI6500"</span>, <span class="st">"MGMT5000"</span>, <span class="st">"INFO6270"</span>)</span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="co"># I print a vector of course codes that contain the pattern "INFO"</span></span>
-<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str_subset</span>(course_codes, <span class="st">"INFO"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I create a vector with course codes</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>course_codes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"INFO5500"</span>, <span class="st">"BUSI6500"</span>, <span class="st">"MGMT5000"</span>, <span class="st">"INFO6270"</span>)</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="co"># I print a vector of course codes that contain the pattern "INFO"</span></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str_subset</span>(course_codes, <span class="st">"INFO"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><strong>Important note:</strong> You should not try to use the <code>str_subset()</code> function with a tibble. It is possible, but requires the combination of multiple functions, and it’s not something that you are likely to need to do anyways.</p>
+<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Danger
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note that you should not try to use the <code>str_subset()</code> function with a tibble. It is possible, but requires the combination of multiple functions, and it’s not something that you are likely to need to do anyways.</p>
+</div>
+</div>
 </section>
 </section>
 <section id="locating-a-pattern-in-a-string" class="level3" data-number="4.3.6">
 <h3 data-number="4.3.6" class="anchored" data-anchor-id="locating-a-pattern-in-a-string"><span class="header-section-number">4.3.6</span> Locating a pattern in a string</h3>
-<section id="str_locate" class="level4" data-number="4.3.6.1">
-<h4 data-number="4.3.6.1" class="anchored" data-anchor-id="str_locate"><span class="header-section-number">4.3.6.1</span> str_locate</h4>
 <p>The <code>str_locate()</code> function allows you to find the position of a pattern in a string. This can be useful, for instance, in combination with <code>str_sub()</code> if you want to extract the part of a string that comes before or after the pattern. Let’s explore the <code>str_locate()</code> function with a few examples.</p>
-<section id="vector-examples" class="level5" data-number="4.3.6.1.1">
-<h5 data-number="4.3.6.1.1" class="anchored" data-anchor-id="vector-examples"><span class="header-section-number">4.3.6.1.1</span> Vector examples</h5>
+<section id="vector-examples" class="level5" data-number="4.3.6.0.1">
+<h5 data-number="4.3.6.0.1" class="anchored" data-anchor-id="vector-examples"><span class="header-section-number">4.3.6.0.1</span> Vector examples</h5>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I create a string with an email</span></span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>email <span class="ot">&lt;-</span> <span class="st">"info@somewebsite.ca"</span></span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="co"># I locat the @ character</span></span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>email <span class="sc">%&gt;%</span> </span>
-<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_locate</span>(<span class="st">"@"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I create a string with an email</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>email <span class="ot">&lt;-</span> <span class="st">"info@somewebsite.ca"</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="co"># I locat the @ character</span></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>email <span class="sc">%&gt;%</span> </span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_locate</span>(<span class="st">"@"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     start end
 [1,]     5   5</code></pre>
@@ -738,38 +767,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>You can see that the str_locate() returns a matrix with the beginning and the end of the “@” pattern in the email. If we want to get the part of the strings that come before the “@”, then we can do this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I get the first part of the email</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str_sub</span>(email, <span class="dv">1</span>,<span class="fu">str_locate</span>(email,<span class="st">"@"</span>)[,<span class="dv">1</span>]<span class="sc">-</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I get the first part of the email</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str_sub</span>(email, <span class="dv">1</span>,<span class="fu">str_locate</span>(email,<span class="st">"@"</span>)[,<span class="dv">1</span>]<span class="sc">-</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "info"</code></pre>
 </div>
 </div>
 <p>We did three things there:</p>
 <ol type="1">
-<li>We used 1 as the first argument of str_sub() to specify that we want to extract a subset of the email starting with the 1st character.</li>
+<li>We used 1 as the first argument of <code>str_sub()</code> to specify that we want to extract a subset of the email starting with the 1st character.</li>
 <li>We used [,1] to obtain the first column in the matrix which is where our pattern starts (the 5th position).</li>
 <li>We substracted 1 because we don’t want to print characters 1 to 5, which would be “info@” but charachters 1 to 4.</li>
 </ol>
-<p>So our statement, in English, would read like this: extract the subset of the email string that starts at the first position and ends one position before the “@” pattern is located.</p>
-<p>So I can get the part that comes after the pattern “@” like this:</p>
+<p>So our statement, in English, would read like this: extract the subset of the email string that starts at the first position and ends one position before where the “@” pattern is located.</p>
+<p>We can get the part that comes <strong>after</strong> the pattern “@” like this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>email <span class="sc">%&gt;%</span> </span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_sub</span>(<span class="fu">str_locate</span>(email,<span class="st">"@"</span>)[,<span class="dv">2</span>]<span class="sc">+</span><span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>email <span class="sc">%&gt;%</span> </span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_sub</span>(<span class="fu">str_locate</span>(email,<span class="st">"@"</span>)[,<span class="dv">2</span>]<span class="sc">+</span><span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "somewebsite.ca"</code></pre>
 </div>
 </div>
 <p>This reads as give me the subset of the email string that starts one position after the location of the “@” pattern (<code>str_locate(email,"@")[,2]+1</code>), and ends with the last character of the string (-1). Note that the “,-1” part is optional since by default the <code>str_sub()</code> function will output the rest of the string when not end position is provide.</p>
 </section>
-<section id="tibble-example-5" class="level5" data-number="4.3.6.1.2">
-<h5 data-number="4.3.6.1.2" class="anchored" data-anchor-id="tibble-example-5"><span class="header-section-number">4.3.6.1.2</span> Tibble example</h5>
+<section id="tibble-example-4" class="level5" data-number="4.3.6.0.2">
+<h5 data-number="4.3.6.0.2" class="anchored" data-anchor-id="tibble-example-4"><span class="header-section-number">4.3.6.0.2</span> Tibble example</h5>
 <p>Let’s just repeat the same example but working with a tibble.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We create a tibble than contains some emails</span></span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">emails =</span> <span class="fu">c</span>(<span class="st">"info@somewebsite.ca"</span>,<span class="st">"support@datascienceisfun.com"</span>))</span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="co"># We print the tibble</span></span>
-<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_tibble)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We create a tibble than contains some emails</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">emails =</span> <span class="fu">c</span>(<span class="st">"info@somewebsite.ca"</span>,<span class="st">"support@datascienceisfun.com"</span>))</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="co"># We print the tibble</span></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_tibble)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 1
   emails                      
@@ -777,9 +806,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 1 info@somewebsite.ca         
 2 support@datascienceisfun.com</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We remove the part of the emails after the @</span></span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="sc">%&gt;%</span> </span>
-<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">emails =</span> <span class="fu">str_sub</span>(emails, <span class="dv">1</span>, <span class="fu">str_locate</span>(emails,<span class="st">"@"</span>)[,<span class="dv">1</span>]<span class="sc">-</span><span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We remove the part of the emails after the @</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="sc">%&gt;%</span> </span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">emails =</span> <span class="fu">str_sub</span>(emails, <span class="dv">1</span>, <span class="fu">str_locate</span>(emails,<span class="st">"@"</span>)[,<span class="dv">1</span>]<span class="sc">-</span><span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 1
   emails 
@@ -787,9 +816,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 1 info   
 2 support</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We remove the part of the emails before the @</span></span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="sc">%&gt;%</span> </span>
-<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">emails =</span> <span class="fu">str_sub</span>(emails, <span class="fu">str_locate</span>(emails,<span class="st">"@"</span>)[,<span class="dv">2</span>]<span class="sc">+</span><span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We remove the part of the emails before the @</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="sc">%&gt;%</span> </span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">emails =</span> <span class="fu">str_sub</span>(emails, <span class="fu">str_locate</span>(emails,<span class="st">"@"</span>)[,<span class="dv">2</span>]<span class="sc">+</span><span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 1
   emails              
@@ -797,11 +826,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 1 somewebsite.ca      
 2 datascienceisfun.com</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's make this a bit more complex, and print only the part between the "@" and the "."</span></span>
-<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="sc">%&gt;%</span> </span>
-<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">emails =</span> <span class="fu">str_sub</span>(emails, <span class="co"># strint to subset</span></span>
-<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">str_locate</span>(emails,<span class="st">"@"</span>)[,<span class="dv">2</span>]<span class="sc">+</span><span class="dv">1</span>, <span class="co"># starting position</span></span>
-<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">str_locate</span>(emails,<span class="st">"</span><span class="sc">\\</span><span class="st">."</span>)[,<span class="dv">1</span>]<span class="sc">-</span><span class="dv">1</span>)) <span class="co"># ending position</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's make this a bit more complex, and print only the part between the "@" and the "."</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="sc">%&gt;%</span> </span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">emails =</span> <span class="fu">str_sub</span>(emails, <span class="co"># strint to subset</span></span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">str_locate</span>(emails,<span class="st">"@"</span>)[,<span class="dv">2</span>]<span class="sc">+</span><span class="dv">1</span>, <span class="co"># starting position</span></span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">str_locate</span>(emails,<span class="st">"</span><span class="sc">\\</span><span class="st">."</span>)[,<span class="dv">1</span>]<span class="sc">-</span><span class="dv">1</span>)) <span class="co"># ending position</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 1
   emails          
@@ -810,7 +839,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 2 datascienceisfun</code></pre>
 </div>
 </div>
-</section>
 </section>
 </section>
 <section id="testing-strings" class="level3" data-number="4.3.7">
@@ -822,23 +850,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="vector-example-5" class="level5" data-number="4.3.7.1.1">
 <h5 data-number="4.3.7.1.1" class="anchored" data-anchor-id="vector-example-5"><span class="header-section-number">4.3.7.1.1</span> Vector example</h5>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>postal_code <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"B3H 1H5"</span>,<span class="st">"B3H 382"</span>,<span class="st">"H2T 1H2"</span>,<span class="st">"J8P 9R2"</span>)</span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(postal_code, <span class="st">"B3H"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>postal_code <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"B3H 1H5"</span>,<span class="st">"B3H 382"</span>,<span class="st">"H2T 1H2"</span>,<span class="st">"J8P 9R2"</span>)</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(postal_code, <span class="st">"B3H"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  TRUE  TRUE FALSE FALSE</code></pre>
 </div>
 </div>
 <p>This can be useful if we want to filter a tibble based on pattern matches. Here’s an example where we have a list of postal codes and would like to keep only those who are in Halifax.</p>
 </section>
-<section id="tibble-example-6" class="level5" data-number="4.3.7.1.2">
-<h5 data-number="4.3.7.1.2" class="anchored" data-anchor-id="tibble-example-6"><span class="header-section-number">4.3.7.1.2</span> Tibble example</h5>
+<section id="tibble-example-5" class="level5" data-number="4.3.7.1.2">
+<h5 data-number="4.3.7.1.2" class="anchored" data-anchor-id="tibble-example-5"><span class="header-section-number">4.3.7.1.2</span> Tibble example</h5>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I create a tibble with postal codes</span></span>
-<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">postal_code =</span> <span class="fu">c</span>(<span class="st">"B3H 1H5"</span>,<span class="st">"B3H 382"</span>,<span class="st">"H2T 1H2"</span>,<span class="st">"J8P 9R2"</span>))</span>
-<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a><span class="co"># I print the rows that for which the postal code contains the pattern "B3H"</span></span>
-<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="sc">%&gt;%</span> </span>
-<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(postal_code,<span class="st">"B3H"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I create a tibble with postal codes</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">postal_code =</span> <span class="fu">c</span>(<span class="st">"B3H 1H5"</span>,<span class="st">"B3H 382"</span>,<span class="st">"H2T 1H2"</span>,<span class="st">"J8P 9R2"</span>))</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a><span class="co"># I print the rows that for which the postal code contains the pattern "B3H"</span></span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="sc">%&gt;%</span> </span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(postal_code,<span class="st">"B3H"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 1
   postal_code
@@ -851,14 +879,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="str_starts-and-str_ends" class="level4" data-number="4.3.7.2">
 <h4 data-number="4.3.7.2" class="anchored" data-anchor-id="str_starts-and-str_ends"><span class="header-section-number">4.3.7.2</span> str_starts and str_ends</h4>
-<p>The str_starts() and str_ends() functions do the same thing as str_detect(), but look fpr the pattern specifically at the beginning or the end of the strings.</p>
+<p>The <code>str_starts()</code> and <code>str_ends()</code> functions do the same thing as <code>str_detect()</code>, but look fpr the pattern specifically at the beginning or the end of the strings.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I create a tibble with postal codes</span></span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">postal_code =</span> <span class="fu">c</span>(<span class="st">"B3H 1H5"</span>,<span class="st">"B3H 382"</span>,<span class="st">"H2T 1H2"</span>,<span class="st">"J8P 9R2"</span>))</span>
-<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a><span class="co"># I print the postal codes that begin with "B3H"</span></span>
-<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>t <span class="sc">%&gt;%</span> </span>
-<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_starts</span>(postal_code, <span class="st">"B3H"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I create a tibble with postal codes</span></span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">postal_code =</span> <span class="fu">c</span>(<span class="st">"B3H 1H5"</span>,<span class="st">"B3H 382"</span>,<span class="st">"H2T 1H2"</span>,<span class="st">"J8P 9R2"</span>))</span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a><span class="co"># I print the postal codes that begin with "B3H"</span></span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>t <span class="sc">%&gt;%</span> </span>
+<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_starts</span>(postal_code, <span class="st">"B3H"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 1
   postal_code
@@ -866,9 +894,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 1 B3H 1H5    
 2 B3H 382    </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I print the postal codes that end with "1H2"</span></span>
-<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>t <span class="sc">%&gt;%</span> </span>
-<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_ends</span>(postal_code, <span class="st">"1H2"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I print the postal codes that end with "1H2"</span></span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>t <span class="sc">%&gt;%</span> </span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_ends</span>(postal_code, <span class="st">"1H2"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 1
   postal_code
@@ -892,10 +920,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h5 data-number="4.3.8.2.1" class="anchored" data-anchor-id="example-remove-unwanted-characters-from-strings"><span class="header-section-number">4.3.8.2.1</span> Example: remove unwanted characters from strings</h5>
 <p>You can use regular expressions to filter out of a string all the non-alphanumeric characters like this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>messy_string <span class="ot">&lt;-</span> <span class="st">" what-is%going*on/with!my(keyboard)"</span></span>
-<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>messy_string <span class="sc">%&gt;%</span> </span>
-<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_replace_all</span>(<span class="st">"[^[:alnum:]]"</span>,<span class="st">" "</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>messy_string <span class="ot">&lt;-</span> <span class="st">" what-is%going*on/with!my(keyboard)"</span></span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>messy_string <span class="sc">%&gt;%</span> </span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_replace_all</span>(<span class="st">"[^[:alnum:]]"</span>,<span class="st">" "</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] " what is going on with my keyboard "</code></pre>
 </div>
@@ -904,19 +932,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol type="1">
 <li>[:alnum:] is a character class containing all characters that are alphabetical or numerical (letters and numbers).</li>
 <li>[^] means <strong>everything but</strong>.</li>
-<li>So the statement reads: replace everything but alphanumeric characters with a space.</li>
 </ol>
+<p>So the statement reads: replace everything but alphanumeric characters with a space.</p>
 </section>
 <section id="example-find-sequences-of-character-belonging-to-specific-classes" class="level5" data-number="4.3.8.2.2">
 <h5 data-number="4.3.8.2.2" class="anchored" data-anchor-id="example-find-sequences-of-character-belonging-to-specific-classes"><span class="header-section-number">4.3.8.2.2</span> Example: find sequences of character belonging to specific classes</h5>
 <p>We can search for specific sequences of character classes, which can be useful to retrieve things like postal codes from a string.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We create a vector with an address</span></span>
-<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>address <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"5058 King St, Halifax, NS H2T 1J2"</span>,<span class="st">"427 Queen Avernue, Halifax, NS, B3H1H4"</span>) </span>
-<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a><span class="co"># We extract the postal code from the address  </span></span>
-<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a>address <span class="sc">%&gt;%</span> </span>
-<span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_extract</span>(<span class="st">"[:alpha:][:digit:][:alpha:] ?[:digit:][:alpha:][:digit:]"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We create a vector with an address</span></span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>address <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"5058 King St, Halifax, NS H2T 1J2"</span>,<span class="st">"427 Queen Avernue, Halifax, NS, B3H1H4"</span>) </span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a><span class="co"># We extract the postal code from the address  </span></span>
+<span id="cb74-5"><a href="#cb74-5" aria-hidden="true" tabindex="-1"></a>address <span class="sc">%&gt;%</span> </span>
+<span id="cb74-6"><a href="#cb74-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_extract</span>(<span class="st">"[:alpha:][:digit:][:alpha:] ?[:digit:][:alpha:][:digit:]"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "H2T 1J2" "B3H1H4" </code></pre>
 </div>
@@ -928,11 +956,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h5 data-number="4.3.8.2.3" class="anchored" data-anchor-id="example-search-for-spelling-variants"><span class="header-section-number">4.3.8.2.3</span> Example: search for spelling variants</h5>
 <p>Another convenient way of using character classes is when you want to match a word in a text that is or isn’t capitalized. Here’s an example.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We create a tibble with 2 strings</span></span>
-<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">text =</span> <span class="fu">c</span>(<span class="st">"Information management is great"</span>, <span class="st">"I love information management"</span>, <span class="st">"Wayne Gretzy was the best hockey player of all times"</span>))</span>
-<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a><span class="co"># We print the tibble</span></span>
-<span id="cb74-5"><a href="#cb74-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_tibble)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We create a tibble with 2 strings</span></span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">text =</span> <span class="fu">c</span>(<span class="st">"Information management is great"</span>, <span class="st">"I love information management"</span>, <span class="st">"Wayne Gretzy was the best hockey player of all times"</span>))</span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a><span class="co"># We print the tibble</span></span>
+<span id="cb76-5"><a href="#cb76-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_tibble)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 1
   text                                                
@@ -941,9 +969,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 2 I love information management                       
 3 Wayne Gretzy was the best hockey player of all times</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We select the texts that contain "information management" or "Information management".</span></span>
-<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="sc">%&gt;%</span> </span>
-<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(text, <span class="st">"[Ii]nformation management"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We select the texts that contain "information management" or "Information management".</span></span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="sc">%&gt;%</span> </span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(text, <span class="st">"[Ii]nformation management"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 1
   text                           
@@ -957,8 +985,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h5 data-number="4.3.8.2.4" class="anchored" data-anchor-id="example-combining-mutliple-search-terms-with-boolean-or"><span class="header-section-number">4.3.8.2.4</span> Example: combining mutliple search terms with “|” (boolean OR)</h5>
 <p>Instead of using character classes, we could combine multiple search teams with the “|” that represents the Boolean operator OR.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="sc">%&gt;%</span> </span>
-<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(text, <span class="st">"information management|Information management"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="sc">%&gt;%</span> </span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(text, <span class="st">"information management|Information management"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 1
   text                           
@@ -972,12 +1000,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="example-searching-for-a-range-of-character" class="level5" data-number="4.3.8.2.5">
 <h5 data-number="4.3.8.2.5" class="anchored" data-anchor-id="example-searching-for-a-range-of-character"><span class="header-section-number">4.3.8.2.5</span> Example: searching for a range of character</h5>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I create a tibble containing letters from a to g</span></span>
-<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">letters =</span> <span class="fu">c</span>(<span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>,<span class="st">"d"</span>,<span class="st">"e"</span>,<span class="st">"f"</span>,<span class="st">"g"</span>))</span>
-<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a><span class="co"># I retrieve rows that contain letters from a to f</span></span>
-<span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="sc">%&gt;%</span> </span>
-<span id="cb80-6"><a href="#cb80-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(letters,<span class="st">"[a-f]"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I create a tibble containing letters from a to g</span></span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">letters =</span> <span class="fu">c</span>(<span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>,<span class="st">"d"</span>,<span class="st">"e"</span>,<span class="st">"f"</span>,<span class="st">"g"</span>))</span>
+<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-4"><a href="#cb82-4" aria-hidden="true" tabindex="-1"></a><span class="co"># I retrieve rows that contain letters from a to f</span></span>
+<span id="cb82-5"><a href="#cb82-5" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="sc">%&gt;%</span> </span>
+<span id="cb82-6"><a href="#cb82-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(letters,<span class="st">"[a-f]"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 1
   letters
@@ -992,13 +1020,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Again, we could have used “a|b|c|d|e|f” but this is less efficient. Here’s a similar example where we have lowercase and uppercase letters.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I create a tibble containing letters from a to g in lowercase and uppercase.</span></span>
-<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">letters =</span> <span class="fu">c</span>(<span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>,<span class="st">"d"</span>,<span class="st">"e"</span>,<span class="st">"f"</span>,<span class="st">"g"</span>,</span>
-<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>,<span class="st">"D"</span>,<span class="st">"E"</span>,<span class="st">"F"</span>,<span class="st">"G"</span>))</span>
-<span id="cb82-4"><a href="#cb82-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-5"><a href="#cb82-5" aria-hidden="true" tabindex="-1"></a><span class="co"># I retrieve rows that contain the letters a to d in lowercase or uppercase</span></span>
-<span id="cb82-6"><a href="#cb82-6" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="sc">%&gt;%</span> </span>
-<span id="cb82-7"><a href="#cb82-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(letters, <span class="st">"[a-dA-D]"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I create a tibble containing letters from a to g in lowercase and uppercase.</span></span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">letters =</span> <span class="fu">c</span>(<span class="st">"a"</span>,<span class="st">"b"</span>,<span class="st">"c"</span>,<span class="st">"d"</span>,<span class="st">"e"</span>,<span class="st">"f"</span>,<span class="st">"g"</span>,</span>
+<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>,<span class="st">"D"</span>,<span class="st">"E"</span>,<span class="st">"F"</span>,<span class="st">"G"</span>))</span>
+<span id="cb84-4"><a href="#cb84-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-5"><a href="#cb84-5" aria-hidden="true" tabindex="-1"></a><span class="co"># I retrieve rows that contain the letters a to d in lowercase or uppercase</span></span>
+<span id="cb84-6"><a href="#cb84-6" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="sc">%&gt;%</span> </span>
+<span id="cb84-7"><a href="#cb84-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(letters, <span class="st">"[a-dA-D]"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 8 × 1
   letters
@@ -1019,16 +1047,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h4 data-number="4.3.8.3" class="anchored" data-anchor-id="beware-of-the-dot-its-a-wild-card"><span class="header-section-number">4.3.8.3</span> Beware of the dot, it’s a wild card</h4>
 <p>When matching character patterns, the “.” means <strong>any character</strong>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>string <span class="ot">&lt;-</span> <span class="st">"This is a string"</span> </span>
-<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a><span class="co"># I extract every character</span></span>
-<span id="cb84-4"><a href="#cb84-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str_extract_all</span>(string, <span class="st">"."</span>)[[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>string <span class="ot">&lt;-</span> <span class="st">"This is a string"</span> </span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a><span class="co"># I extract every character</span></span>
+<span id="cb86-4"><a href="#cb86-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str_extract_all</span>(string, <span class="st">"."</span>)[[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "T" "h" "i" "s" " " "i" "s" " " "a" " " "s" "t" "r" "i" "n" "g"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I replace every character with a space</span></span>
-<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>string <span class="sc">%&gt;%</span> </span>
-<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_replace_all</span>(<span class="st">"."</span>,<span class="st">" "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I replace every character with a space</span></span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>string <span class="sc">%&gt;%</span> </span>
+<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_replace_all</span>(<span class="st">"."</span>,<span class="st">" "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "                "</code></pre>
 </div>
@@ -1116,17 +1144,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 <p>Here are just a few example to so you can see how R deals with these special characters.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>string <span class="ot">&lt;-</span> <span class="st">"Dear diary</span><span class="sc">\n</span><span class="st">What is wrong with me</span><span class="sc">\n</span><span class="st">My code never works as I entend"</span></span>
-<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a><span class="co"># If we just print the string, we see it exactly as written.</span></span>
-<span id="cb88-4"><a href="#cb88-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(string)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>string <span class="ot">&lt;-</span> <span class="st">"Dear diary</span><span class="sc">\n</span><span class="st">What is wrong with me</span><span class="sc">\n</span><span class="st">My code never works as I entend"</span></span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a><span class="co"># If we just print the string, we see it exactly as written.</span></span>
+<span id="cb90-4"><a href="#cb90-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(string)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Dear diary\nWhat is wrong with me\nMy code never works as I entend"</code></pre>
 </div>
 </div>
 <p>The <code>writeLines()</code> function can be used to print the string where escaped characters are interpreted.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">writeLines</span>(string)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">writeLines</span>(string)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Dear diary
 What is wrong with me
@@ -1135,23 +1163,23 @@ My code never works as I entend</code></pre>
 </div>
 <p>Let’s read a text file (.txt) in R and see what happens.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://pmongeon.github.io/info6270/files/boring_story.txt"</span></span>
-<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a><span class="co"># reads the file and produces a vector with one element for each line</span></span>
-<span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a><span class="fu">read_lines</span>(url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://pmongeon.github.io/info6270/files/boring_story.txt"</span></span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a><span class="co"># reads the file and produces a vector with one element for each line</span></span>
+<span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a><span class="fu">read_lines</span>(url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "This is a \"story\" that I wrote just for the INFO6270 course."               
 [2] "It's a bit of a boring story, but it's just an example. So please forgive me."
 [3] "...and they were happy ever after.\tThe end."                                 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reads the file and procudes a vector with a single element containing the entire content</span></span>
-<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="fu">read_file</span>(url) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reads the file and procudes a vector with a single element containing the entire content</span></span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="fu">read_file</span>(url) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "This is a \"story\" that I wrote just for the INFO6270 course.\nIt's a bit of a boring story, but it's just an example. So please forgive me.\n...and they were happy ever after.\tThe end."</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's read the whole file and print it with writeLines()</span></span>
-<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="fu">read_file</span>(url) <span class="sc">%&gt;%</span> </span>
-<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">writeLines</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's read the whole file and print it with writeLines()</span></span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a><span class="fu">read_file</span>(url) <span class="sc">%&gt;%</span> </span>
+<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">writeLines</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>This is a "story" that I wrote just for the INFO6270 course.
 It's a bit of a boring story, but it's just an example. So please forgive me.
@@ -1161,7 +1189,7 @@ It's a bit of a boring story, but it's just an example. So please forgive me.
 </section>
 <section id="summary" class="level3" data-number="4.3.10">
 <h3 data-number="4.3.10" class="anchored" data-anchor-id="summary"><span class="header-section-number">4.3.10</span> Summary</h3>
-<p>This chapter introduced you to the stringr package and the general principles of manipulating and matching character patterns in R. The goal was to give you enough of the basics so that you can fix small issues with strings in the data that you might encounter in this course, and in your professional or personal lives.</p>
+<p>This chapter introduced you to the <strong>stringr</strong> package and the general principles of manipulating and matching character patterns in R. The goal was to give you enough of the basics so that you can fix small issues with strings in the data that you might encounter in this course, and in your professional or personal lives.</p>
 
 
 </section>
