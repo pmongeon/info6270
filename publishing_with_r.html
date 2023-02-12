@@ -286,23 +286,23 @@ div.csl-indent {
 </section>
 <section id="introduction" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="introduction"><span class="header-section-number">5.2</span> Introduction</h2>
-<p>So far, we learned how to import data in all kinds of format into R, convert it into a tibble that follow the the first two tidy principles (one observation per row, one variable per column), and clean up messy strings with the stringr package. These steps are the 80 in the 80/20 rules of data science, which states that 80% of the time is spent preparing the data, and 20% is spent analyzing it.</p>
-<p>We are embark on our journal to draw insights from the data and write clear and compelling data stories. This chapter introduces Quarto, a suite of tools that will enable you to perform all the data processing AND produce beautiful reports in one simple, yet powerful, interface: RStudio.</p>
+<p>So far, we have learned how to import data in all kinds of format into R, convert it into a tibble that follow the first two tidy principles (one observation per row, one variable per column), and clean up messy strings with the stringr package. These steps are the 80 in the 80/20 rules of data science, which states that 80% of the time is spent preparing the data, and 20% is spent analyzing it.</p>
+<p>We are embarking on our journal to draw insights from the data and write clear and compelling data stories. This chapter introduces Quarto, a suite of tools that will enable you to perform all the data processing AND produce beautiful reports in one simple yet powerful interface: RStudio.</p>
 </section>
 <section id="quarto-documents" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="quarto-documents"><span class="header-section-number">5.3</span> Quarto documents</h2>
-<p>So far we have been working with R scripts (.r files, like the ones we used for Labs 1 to 3). In R scripts, everything is interpreted by R as code unless we specify that we are writing a comment with #. This works fine and there is no limit to what we can do with these kinds of R scripts in terms of data processing and analysis. However, R scripts are not a great tool for making sharing our data stories with the world.</p>
-<p><a href="https://quarto.org/docs/computations/r.html">Quarto</a> brings coding, writing, and formatting together by allowing you to write nicely formatted HTML, Word or PDF documents, with embedded chunks of code that are executed to process the data and create beautiful tables and figures for your document. It uses the <strong>markdown</strong> (<a href="https://en.wikipedia.org/wiki/Markdown" class="uri">https://en.wikipedia.org/wiki/Markdown</a>) syntax. This course website is an example of the type of output that you can produce with Quarto. It’s actually a <a href="https://quarto.org/docs/books/">Quarto book</a>.</p>
-<p>There is a lot that you can do with Quarto that is beyond the scope of this course, but if you want to explore the possibilities I recommend that you consult the Quarto website, which contains plenty of documentation.</p>
+<p>So far, we have been working with R scripts (.r files, like the ones we used for Labs 1 to 3). In R scripts, everything is interpreted by R as code unless we specify that we are writing a comment with #. This works fine, and there is no limit to what we can do with these kinds of R scripts regarding data processing and analysis. However, R scripts are not a great tool for making sharing our data stories with the world.</p>
+<p><a href="https://quarto.org/docs/computations/r.html">Quarto</a> brings coding, writing, and formatting together by allowing you to write nicely formatted HTML, Word or PDF documents, with embedded chunks of code that are executed to process the data and create beautiful tables and figures for your document. It uses the <strong>markdown</strong> (<a href="https://en.wikipedia.org/wiki/Markdown" class="uri">https://en.wikipedia.org/wiki/Markdown</a>) syntax. This course website is an example of the type of output that you can produce with Quarto. It’s a <a href="https://quarto.org/docs/books/">Quarto book</a>.</p>
+<p>There is a lot that you can do with Quarto that is beyond the scope of this course, but if you want to explore the possibilities, I recommend that you consult the Quarto website, which contains plenty of documentation.</p>
 <section id="creating-a-quarto-document-in-rstudio" class="level3" data-number="5.3.1">
 <h3 data-number="5.3.1" class="anchored" data-anchor-id="creating-a-quarto-document-in-rstudio"><span class="header-section-number">5.3.1</span> Creating a Quarto document in RStudio</h3>
-<p>To create a new Quarto document (.qmd), you can click on file, then new file, then select the second option (Quarto Document…). Then RStudio will give you an opportunity to provide some information about the document you are creating.</p>
+<p>To create a new Quarto document (.qmd), you can click on file, then new file, then select the second option (Quarto Document…). Then RStudio will allow you to provide some information about the document you are creating.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="files/create_quarto_doc.jpg" class="img-fluid figure-img" width="505"></p>
 </figure>
 </div>
-<p>You can select different types of outputs, like documents, presentations, and Shiny applications. In this course, we will use R Markdown to make <strong>documents</strong>. You can choose to output an HTML document, a PDF document, or a Word document. I recommend sticking with the default (HTML). Word is also a good option if you want to be able to modify the format or add text in Word. The PDF format requires additional packages and a LaTeX installation, so I recommend sticking to HTML documents and Word documents for this course.</p>
+<p>You can select different types of outputs, like documents, presentations, and Shiny applications. In this course, we will use R Markdown to make <strong>documents</strong>. You can choose to output an HTML document, a PDF document, or a Word document. I recommend sticking with the default (HTML). Word is also a good option if you want to be able to modify the format or add text in Word. The PDF format is awesome but can sometimes be a little buggy as it requires additional packages and a LaTeX installation, so if you are struggling with PDF rendering, I recommend sticking to HTML documents and Word documents for this course.</p>
 <p>When you create a new Quarto document, it comes with some content that can get you started with the components of the document and the syntax. This can give you a quick overview of Quarto and the markdown syntax.</p>
 </section>
 <section id="three-components-of-a-quarto-document" class="level3" data-number="5.3.2">
@@ -317,7 +317,7 @@ author: "Philippe Mongeon"
 format: html
 editor: visual
 ---</code></pre>
-<p>To change the type of output to a PDF or a word document, we simply need to replace <code>html</code> with <code>docx</code> or <code>pdf</code>. We can also add features such as a table of content, and specify where on the page we want it to appear. Note that <code>toc-location</code> does not work for PDFs and Word documents, which always put the table of content on top of the document in the main body of the document. The <code>number-sections: true</code> numbers the sections. Here’s what this looks like.</p>
+<p>To change the output type to a PDF or a Word document, we simply need to replace <code>html</code> with <code>docx</code> or <code>pdf</code>. We can also add features such as a table of content and specify where on the page we want it to appear. Note that <code>toc-location</code> does not work for PDFs and Word documents, that always put the table of content in the main body of the document. The <code>number-sections: true</code> numbers sections. Here’s what this looks like.</p>
 <pre><code>---
 title: "My document"
 author: "Philippe Mongeon"
@@ -328,11 +328,23 @@ format:
     number-sections: true
 editor: visual
 ---</code></pre>
-<p><strong>Important</strong>: note the <code>html</code> tag was moved to a new line and is now followed by a colon. Also, pay attention to the indentation of the different parts, which is essential to follow. When facing errors, it is always a good idea to fall back on a working example like the one above or to consult the Quarto documentation.</p>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<strong>Important</strong>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note the <code>html</code> tag was moved to a new line and is now followed by a colon. Also, pay attention to the indentation of the different parts, which is essential to follow. When facing errors, it is always a good idea to fall back on a working example like the one above or to consult the Quarto documentation.</p>
+</div>
+</div>
 </section>
 <section id="text" class="level4" data-number="5.3.2.2">
 <h4 data-number="5.3.2.2" class="anchored" data-anchor-id="text"><span class="header-section-number">5.3.2.2</span> Text</h4>
-<p>What ever you write after the metadata statement is text, which can be formatted using markdown syntax. Here is an example, with the code on the left and the HTML output on the right.</p>
+<p>Whatever you write after the metadata statement is text, which can be formatted using markdown syntax. Here is an example, with the code on the left and the HTML output on the right.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="files/markdown.jpg" class="img-fluid figure-img"></p>
@@ -341,7 +353,7 @@ editor: visual
 </section>
 <section id="code" class="level4" data-number="5.3.2.3">
 <h4 data-number="5.3.2.3" class="anchored" data-anchor-id="code"><span class="header-section-number">5.3.2.3</span> Code</h4>
-<p>What makes Quarto so great is that we can embed code chunks into our document. We have seen a lot of those code chunks throughout this website so far. They start with three back ticks (<code>`</code>) followed by curly brackets with the coding language used in the chunk, and end with three back ticks.</p>
+<p>What makes Quarto so great is that we can embed code chunks into our document. We have seen a lot of those code chunks throughout this website so far. They start with three backticks (<code>`</code>) followed by curly brackets with the coding language used in the chunk and end with three backticks.</p>
 <p><code>```{r}</code></p>
 <p><code>some r code</code></p>
 <p><code>```</code></p>
@@ -351,12 +363,12 @@ editor: visual
 <p><img src="files/code_chunks.jpg" class="img-fluid figure-img"></p>
 </figure>
 </div>
-<p>Other useful code chunks options are <code>#| message : FALSE</code>, <code>#| message : FALSE</code>, and <code>#| message : FALSE</code>. Sometimes your code will produce error messages, warnings, or other messages. Typically, we do not want these to show in our documents, so setting these options to FALSE is the way to go.</p>
+<p>Other useful code chunk options are <code>#| message : FALSE</code>, <code>#| warning : FALSE</code>, and <code>#| error : FALSE</code>. Sometimes your code will produce error messages, warnings, or other messages. Typically, we do not want these to show in our documents, so setting these options to FALSE is the way to go.</p>
 </section>
 </section>
 <section id="visual-mode" class="level3" data-number="5.3.3">
 <h3 data-number="5.3.3" class="anchored" data-anchor-id="visual-mode"><span class="header-section-number">5.3.3</span> Visual mode</h3>
-<p>The visual mode provides an interface and tools to make writing and formatting your Quarto document easier. Here is the same Rmd file edited in normal mode (left) and visual mode (right).</p>
+<p>The visual mode provides an interface and tools to make writing and formatting your Quarto document easier. Here is the same .qmd file edited in normal mode (left) and visual mode (right).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="files/visual_mode_dual.jpg" class="img-fluid figure-img"></p>
@@ -724,7 +736,7 @@ editor: visual
 </section>
 <section id="summary" class="level2" data-number="5.5">
 <h2 data-number="5.5" class="anchored" data-anchor-id="summary"><span class="header-section-number">5.5</span> Summary</h2>
-<p>Quarto documents combine the data processing, analysis and reporting elements of the data science workflow in a single location. And the visual tool brings the R Markdown document writing experience closer to writing in Word or by hiding the code and letting you visualize the format of your document as you write them.</p>
+<p>Quarto documents combine the data processing, analysis and reporting elements of the data science workflow in a single location. And the visual tool brings the Quarto document writing experience closer to writing in Word or by hiding the code and letting you visualize the format of your document as you write them.</p>
 <p>To get you used to Quarto, we will use it for the remaining course labs. You are also encouraged to use it for your project.</p>
 
 
