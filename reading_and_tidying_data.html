@@ -225,6 +225,21 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./logistic_regression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Logistic regression</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./linear_regression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Linear regression</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./shinyapps.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Shiny apps</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
   </div>
 </li>
@@ -1009,9 +1024,9 @@ Important note
 <pre><code># A tibble: 3 × 4
   university SSHRC NSERC  CIHR
   &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1 DAL           55     6    66
-2 SMU           28    11    71
-3 SFX          100    74    41</code></pre>
+1 DAL           16     8    95
+2 SMU           69    19    50
+3 SFX           97    24    62</code></pre>
 </div>
 </div>
 <section id="pivot_longer" class="level4" data-number="3.5.1.1">
@@ -1025,15 +1040,15 @@ Important note
 <pre><code># A tibble: 9 × 3
   university funder funding_amount
   &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;
-1 DAL        SSHRC              55
-2 DAL        NSERC               6
-3 DAL        CIHR               66
-4 SMU        SSHRC              28
-5 SMU        NSERC              11
-6 SMU        CIHR               71
-7 SFX        SSHRC             100
-8 SFX        NSERC              74
-9 SFX        CIHR               41</code></pre>
+1 DAL        SSHRC              16
+2 DAL        NSERC               8
+3 DAL        CIHR               95
+4 SMU        SSHRC              69
+5 SMU        NSERC              19
+6 SMU        CIHR               50
+7 SFX        SSHRC              97
+8 SFX        NSERC              24
+9 SFX        CIHR               62</code></pre>
 </div>
 </div>
 </section>
@@ -1048,9 +1063,9 @@ Important note
 <pre><code># A tibble: 3 × 4
   university SSHRC NSERC  CIHR
   &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1 DAL           55     6    66
-2 SMU           28    11    71
-3 SFX          100    74    41</code></pre>
+1 DAL           16     8    95
+2 SMU           69    19    50
+3 SFX           97    24    62</code></pre>
 </div>
 </div>
 </section>
@@ -1068,13 +1083,13 @@ Important note
 <pre><code># A tibble: 7 × 3
   university funder n_grants
   &lt;chr&gt;      &lt;chr&gt;     &lt;dbl&gt;
-1 DAL        SSHRC        48
-2 DAL        NSERC        14
+1 DAL        SSHRC        61
+2 DAL        NSERC        75
 3 DAL        CIHR         91
-4 SMU        SSHRC        25
-5 SMU        CIHR         17
-6 SFX        NSERC         4
-7 SFX        CIHR         90</code></pre>
+4 SMU        SSHRC        48
+5 SMU        CIHR         83
+6 SFX        NSERC        52
+7 SFX        CIHR         64</code></pre>
 </div>
 </div>
 <section id="expand" class="level4" data-number="3.5.2.1">
@@ -1110,14 +1125,14 @@ Important note
   university funder n_grants
   &lt;chr&gt;      &lt;chr&gt;     &lt;dbl&gt;
 1 DAL        CIHR         91
-2 DAL        NSERC        14
-3 DAL        SSHRC        48
-4 SFX        CIHR         90
-5 SFX        NSERC         4
+2 DAL        NSERC        75
+3 DAL        SSHRC        61
+4 SFX        CIHR         64
+5 SFX        NSERC        52
 6 SFX        SSHRC        NA
-7 SMU        CIHR         17
+7 SMU        CIHR         83
 8 SMU        NSERC        NA
-9 SMU        SSHRC        25</code></pre>
+9 SMU        SSHRC        48</code></pre>
 </div>
 </div>
 </section>
@@ -1136,12 +1151,12 @@ Important note
   university funder n_grants
   &lt;chr&gt;      &lt;chr&gt;     &lt;dbl&gt;
 1 DAL        CIHR         91
-2 DAL        NSERC        14
-3 DAL        SSHRC        48
-4 SFX        CIHR         90
-5 SFX        NSERC         4
-6 SMU        CIHR         17
-7 SMU        SSHRC        25</code></pre>
+2 DAL        NSERC        75
+3 DAL        SSHRC        61
+4 SFX        CIHR         64
+5 SFX        NSERC        52
+6 SMU        CIHR         83
+7 SMU        SSHRC        48</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This would remove rows where the n_grants column is NA and leave NA values in other</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># columns.</span></span>
@@ -1151,12 +1166,12 @@ Important note
   university funder n_grants
   &lt;chr&gt;      &lt;chr&gt;     &lt;dbl&gt;
 1 DAL        CIHR         91
-2 DAL        NSERC        14
-3 DAL        SSHRC        48
-4 SFX        CIHR         90
-5 SFX        NSERC         4
-6 SMU        CIHR         17
-7 SMU        SSHRC        25</code></pre>
+2 DAL        NSERC        75
+3 DAL        SSHRC        61
+4 SFX        CIHR         64
+5 SFX        NSERC        52
+6 SMU        CIHR         83
+7 SMU        SSHRC        48</code></pre>
 </div>
 </div>
 </section>
@@ -1170,14 +1185,14 @@ Important note
   university funder n_grants
   &lt;chr&gt;      &lt;chr&gt;     &lt;dbl&gt;
 1 DAL        CIHR         91
-2 DAL        NSERC        14
-3 DAL        SSHRC        48
-4 SFX        CIHR         90
-5 SFX        NSERC         4
+2 DAL        NSERC        75
+3 DAL        SSHRC        61
+4 SFX        CIHR         64
+5 SFX        NSERC        52
 6 SFX        SSHRC         0
-7 SMU        CIHR         17
+7 SMU        CIHR         83
 8 SMU        NSERC         0
-9 SMU        SSHRC        25</code></pre>
+9 SMU        SSHRC        48</code></pre>
 </div>
 </div>
 <p>If we want to replace NAs in multiple columns, we simply need to put additional column names and values to replace NAs with in the list. The code below replaces the NAs with 0 in two columns of some tibble.</p>
