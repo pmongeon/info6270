@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.2.335">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -241,6 +241,11 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./shinyapps_part2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">ShinyApps part 2</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
   </div>
 </li>
@@ -301,14 +306,14 @@ div.csl-indent {
 <p><span class="math display">\[ y = β_0 + βx \]</span></p>
 <p>And if we have multiple independent variables, the formula becomes:</p>
 <p><span class="math display">\[ y = β_0 + β_1x_1 + β_2x_2 .... β_nx_n \]</span></p>
-<p>To determine how well the model fits the data (how well does <code>x</code> predict <code>y</code>. the linear model uses the square of the residuals (<strong>r<sup>2</sup></strong>). The residuals are the difference between the predicted values and the real data, measured by the vertical distance between the line and the data points. Here’s a figure from <span class="citation" data-cites="rhys2020">Rhys (<a href="references.html#ref-rhys2020" role="doc-biblioref">2020</a>)</span> to help you visualize this.</p>
+<p>To determine how well the model fits the data (how well does <code>x</code> predict <code>y</code>. the linear model uses the square of the residuals (<strong>r<sup>2</sup></strong>). The residuals are the difference between the predicted values and the real data, measured by the vertical distance between the line and the data points. Here’s a figure from <span class="citation" data-cites="rhys2020">Rhys (<a href="#ref-rhys2020" role="doc-biblioref">2020</a>)</span> to help you visualize this.</p>
 <div class="quarto-figure quarto-figure-center" style="text-align:center">
 <figure class="figure">
 <p><img src="files/linear_regression_1.jpg" class="img-fluid figure-img" width="343"></p>
 </figure>
 </div>
 <p>We can see in this figure that the intercept is where the line crosses the y-axis. The slope is calculated by dividing the difference in the predicted value of y by the difference in the value of x.</p>
-<p>When working with categorical predictors, the intercept is the mean value of the base category, and the slope is the difference between the means of each category. Here’s an example taken again from <span class="citation" data-cites="rhys2020">Rhys (<a href="references.html#ref-rhys2020" role="doc-biblioref">2020</a>)</span>.</p>
+<p>When working with categorical predictors, the intercept is the mean value of the base category, and the slope is the difference between the means of each category. Here’s an example taken again from <span class="citation" data-cites="rhys2020">Rhys (<a href="#ref-rhys2020" role="doc-biblioref">2020</a>)</span>.</p>
 <div class="quarto-figure quarto-figure-center" style="text-align:center">
 <figure class="figure">
 <p><img src="files/linear_regression_2.jpg" class="img-fluid figure-img" width="343"></p>
@@ -670,7 +675,7 @@ F-statistic: 247.7 on 5 and 494 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>For this week’s lab, your task is to complete lab 8 (the template is available on BrightSpace). In this lab, you will build a linear regression model on a dataset of your choice. I encourage you to use the dataset that you will be using for your individual project, if it contains a numerical variable that you can try to predict using other variables in your dataset.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
 <div id="ref-rhys2020" class="csl-entry" role="doc-biblioentry">
 Rhys, Hefin. 2020. <em>Machine Learning with r, the Tidyverse, and Mlr</em>. Shelter Island, NY: Manning publications.
 </div>

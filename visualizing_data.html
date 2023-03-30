@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.2.335">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -240,6 +240,11 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./shinyapps_part2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">ShinyApps part 2</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
   </div>
 </li>
@@ -304,7 +309,7 @@ div.csl-indent {
 </div>
 <section id="introduction" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">7.1</span> Introduction</h2>
-<p>One of the most widely used package for data visualization in R is called <strong>ggplot2</strong> (<a href="https://ggplot2.tidyverse.org/">https://ggplot2.tidyverse.org</a>). It has a bit of a learning curve but it is extremely powerful and can visualize almost anything. The <em>R for data science</em> book by <span class="citation" data-cites="wickham2016">Wickham and Grolemund (<a href="references.html#ref-wickham2016" role="doc-biblioref">2016</a>)</span> has a chapter on ggplot2, and the same author also wrote an entire book on ggplot2 <span class="citation" data-cites="wickham2016a">(<a href="references.html#ref-wickham2016a" role="doc-biblioref">Wickham 2016</a>)</span> , which I also recommend. The book <em>Data visualization: a practical introduction</em> book by <span class="citation" data-cites="healy2018">Healy (<a href="references.html#ref-healy2018" role="doc-biblioref">2018</a>)</span> is another good resource. These books cover a lot of ground on how to write code to visualize data in R, but ultimately, an understanding of of the fundamentals of data visualization (what does a good visualization look like?) is also an invaluable asset for you as a data scientist. For that, I recommend the <em>Fundamentals of data visualization</em> book by <span class="citation" data-cites="wilke2019">Wilke (<a href="references.html#ref-wilke2019" role="doc-biblioref">2019</a>)</span>. Another wonderful resource is the <a href="https://r-graph-gallery.com/">R Graph Gallery</a> website, which contains a large collection of ggplot graph examples that include the code so you can easily use it in your own scripts.</p>
+<p>One of the most widely used package for data visualization in R is called <strong>ggplot2</strong> (<a href="https://ggplot2.tidyverse.org/">https://ggplot2.tidyverse.org</a>). It has a bit of a learning curve but it is extremely powerful and can visualize almost anything. The <em>R for data science</em> book by <span class="citation" data-cites="wickham2016">Wickham and Grolemund (<a href="#ref-wickham2016" role="doc-biblioref">2016</a>)</span> has a chapter on ggplot2, and the same author also wrote an entire book on ggplot2 <span class="citation" data-cites="wickham2016a">(<a href="#ref-wickham2016a" role="doc-biblioref">Wickham 2016</a>)</span> , which I also recommend. The book <em>Data visualization: a practical introduction</em> book by <span class="citation" data-cites="healy2018">Healy (<a href="#ref-healy2018" role="doc-biblioref">2018</a>)</span> is another good resource. These books cover a lot of ground on how to write code to visualize data in R, but ultimately, an understanding of of the fundamentals of data visualization (what does a good visualization look like?) is also an invaluable asset for you as a data scientist. For that, I recommend the <em>Fundamentals of data visualization</em> book by <span class="citation" data-cites="wilke2019">Wilke (<a href="#ref-wilke2019" role="doc-biblioref">2019</a>)</span>. Another wonderful resource is the <a href="https://r-graph-gallery.com/">R Graph Gallery</a> website, which contains a large collection of ggplot graph examples that include the code so you can easily use it in your own scripts.</p>
 <p>This chapter draws from these resources to provide a short introduction to visualizing data with ggplot2. First, we will explore the ggplot syntax, and then explore different types of visualizations with some examples and some exercises. Like most of the other packages that we used so far, there is a <a href="https://github.com/rstudio/cheatsheets/blob/main/data-visualization-2.1.pdf">ggplot 2 cheatsheet</a> that can be useful for a quick reference.</p>
 </section>
 <section id="the-ggplot-syntax" class="level2" data-number="7.2">
@@ -543,7 +548,7 @@ div.csl-indent {
 <li><p>How many variables do I want to visualize?</p></li>
 <li><p>What type of variables do I want to visualize?</p></li>
 </ol>
-<p>The <a href="https://clauswilke.com/dataviz/directory-of-visualizations.html">directory of visualizations</a> proposed by <span class="citation" data-cites="wilke2019">Wilke (<a href="references.html#ref-wilke2019" role="doc-biblioref">2019</a>)</span> is a great resource to help you think about this. You can also use the following table that lists geoms based on the number and types of data to be plotted.</p>
+<p>The <a href="https://clauswilke.com/dataviz/directory-of-visualizations.html">directory of visualizations</a> proposed by <span class="citation" data-cites="wilke2019">Wilke (<a href="#ref-wilke2019" role="doc-biblioref">2019</a>)</span> is a great resource to help you think about this. You can also use the following table that lists geoms based on the number and types of data to be plotted.</p>
 <p><strong>Mapping of graph types to data number and types</strong></p>
 <table class="table">
 <colgroup>
@@ -826,7 +831,7 @@ div.csl-indent {
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
 <div id="ref-healy2018" class="csl-entry" role="doc-biblioentry">
 Healy, Kieran. 2018. <em>Data Visualization: A Practical Introduction</em>. Princeton, NJ: Princeton University Press.
 </div>
