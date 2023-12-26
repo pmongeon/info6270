@@ -138,5 +138,40 @@
     "title": "References",
     "section": "",
     "text": "Blei, David M., and Padhraic Smyth. 2017. “Science and Data\nScience.” Proceedings of the National Academy of\nSciences 114 (33): 8689–92. https://doi.org/10.1073/pnas.1702076114.\n\n\nHealy, Kieran. 2018. Data Visualization: A Practical\nIntroduction. Princeton, NJ: Princeton University Press.\n\n\nRhys, Hefin. 2020. Machine Learning with r, the Tidyverse, and\nMlr. Shelter Island, NY: Manning publications.\n\n\nWickham, Hadley. 2014. “Tidy Data.” Journal of\nStatistical Software 59 (September): 1–23. https://doi.org/10.18637/jss.v059.i10.\n\n\n———. 2016. Ggplot2. Springer International Publishing. https://doi.org/10.1007/978-3-319-24277-4.\n\n\nWickham, Hadley, and Garrett Grolemund. 2016. R for Data Science:\nImport, Tidy, Transform, Visualize, and Model Data. First edition.\nSebastopol, CA: O’Reilly.\n\n\nWilke, C. 2019. Fundamentals of Data Visualization: A Primer on\nMaking Informative and Compelling Figures. First edition.\nSebastopol, CA: O’Reilly Media."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Introduction to Data Science",
+    "section": "",
+    "text": "Course overview\nIntroduction to Data Science is a hands-on course for students with no or minimal coding experience. We will learn to use R to collect, manipulate, analyze, and visualize data."
+  },
+  {
+    "objectID": "index.html#schedule",
+    "href": "index.html#schedule",
+    "title": "Introduction to Data Science",
+    "section": "Schedule",
+    "text": "Schedule\nFor the Winter 2024 semester, the course will be online, with optional (but strongly recommended) lab times on Tuesday from 11:35 am to 2:25 pm in Rowe 3080.You can also book online assistance with me throughout the semester using this link.\n\n\n\n\n\nDate of Class\nTopics\nChapter\n\n\n\n\nWeek 1 (Jan 8-12)\nWhat is data science? + Getting started with R (part 1)\n1 + 2 (up to section 2.9 inclusively)\n\n\nWeek 2 (Jan 15-19)\nGetting started with R (part 2)\n2 (from section 2.10)\n\n\nWeek 3 (Jan 22-26)\nImporting and tidying data (part 1)\n3 (up to section 3.4 inclusively)\n\n\nWeek 4 (Jan 29-Feb 2)\nImporting and tidying data (part 2)\n3 (from section 3.5)\n\n\nWeek 5 (Feb 5-9)\nWorking with strings\n4\n\n\nWeek 6 (Feb 12-16)\nPublishing in R + Summarizing data\n5 + 6\n\n\nReading week (Feb 19-23)\n\n\n\n\nWeek 7 (Feb 26-Mar 1)\nVisualizing data\n7\n\n\nWeek 8 (Mar 4-8)\nTopic modelling\n8\n\n\nWeek 9 (Mar 11-15)\nLogistic regression\n9\n\n\nWeek 10 (Mar 18-22)\nLinear regression\n10\n\n\nWeek 11 (Mar 25-29)\nInteractive dashboards (part 1)\n11\n\n\nWeek 12 (Apr 1-5)\nInteractive dashboards (part 2)\n12"
+  },
+  {
+    "objectID": "index.html#assignments",
+    "href": "index.html#assignments",
+    "title": "Introduction to Data Science",
+    "section": "Assignments",
+    "text": "Assignments\n\n\n\n\n\n\nImportant\n\n\n\nImportant\nUse the course’s Brightspace to:\n\nAccess the detailed instructions and due dates for the assignments.\nSubmit your assignments."
+  },
+  {
+    "objectID": "index.html#bibliography",
+    "href": "index.html#bibliography",
+    "title": "Introduction to Data Science",
+    "section": "Bibliography",
+    "text": "Bibliography\nThe course website will contain everything you need, including references to resources that can be valuable to further develop your understanding and skills, most of which are all available online for free. They are all available in this Zotero library."
+  },
+  {
+    "objectID": "index.html#useful-resources",
+    "href": "index.html#useful-resources",
+    "title": "Introduction to Data Science",
+    "section": "Useful resources",
+    "text": "Useful resources\n\nTeams channel (only accessible to students currently registered in the course).\nCourse syllabus (in case of discrepancy, the course website and BrightSpace prevail)."
   }
 ]
