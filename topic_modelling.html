@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,43 +47,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -120,7 +91,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -134,11 +106,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Topic Modelling</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./topic_modelling.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Topic Modelling</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -146,124 +123,139 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Introduction to Data Science</a> 
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Course overview</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course overview</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">What is data science?</span></a>
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">What is data science?</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./getting_started_with_R.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting started with R</span></a>
+  <a href="./getting_started_with_R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting started with R</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./reading_and_tidying_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Reading and tidying data</span></a>
+  <a href="./reading_and_tidying_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Reading and tidying data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./working_with_strings.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with strings</span></a>
+  <a href="./working_with_strings.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with strings</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./publishing_with_r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Publishing with R</span></a>
+  <a href="./publishing_with_r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Publishing with R</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./summarizing_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summarizing data</span></a>
+  <a href="./summarizing_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summarizing data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./visualizing_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualizing data</span></a>
+  <a href="./visualizing_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualizing data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./topic_modelling.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Topic Modelling</span></a>
+  <a href="./topic_modelling.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Topic Modelling</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./logistic_regression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Logistic regression</span></a>
+  <a href="./logistic_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Logistic regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./linear_regression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Linear regression</span></a>
+  <a href="./linear_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Linear regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./shinyapps.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Shiny apps</span></a>
+  <a href="./shinyapps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Shiny apps</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./shinyapps_part2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">ShinyApps part 2</span></a>
+  <a href="./shinyapps_part2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">ShinyApps</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="toc-section-number">8.1</span>  Learning objectives</a></li>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><span class="toc-section-number">8.2</span>  Introduction</a></li>
-  <li><a href="#the-dataset" id="toc-the-dataset" class="nav-link" data-scroll-target="#the-dataset"><span class="toc-section-number">8.3</span>  The dataset</a></li>
-  <li><a href="#data-formats-for-text-mining" id="toc-data-formats-for-text-mining" class="nav-link" data-scroll-target="#data-formats-for-text-mining"><span class="toc-section-number">8.4</span>  Data formats for text mining</a>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">8.1</span> Learning objectives</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><span class="header-section-number">8.2</span> Introduction</a></li>
+  <li><a href="#the-dataset" id="toc-the-dataset" class="nav-link" data-scroll-target="#the-dataset"><span class="header-section-number">8.3</span> The dataset</a></li>
+  <li><a href="#data-formats-for-text-mining" id="toc-data-formats-for-text-mining" class="nav-link" data-scroll-target="#data-formats-for-text-mining"><span class="header-section-number">8.4</span> Data formats for text mining</a>
   <ul class="collapse">
-  <li><a href="#tidy-text" id="toc-tidy-text" class="nav-link" data-scroll-target="#tidy-text"><span class="toc-section-number">8.4.1</span>  Tidy text</a></li>
-  <li><a href="#document-term-matrix" id="toc-document-term-matrix" class="nav-link" data-scroll-target="#document-term-matrix"><span class="toc-section-number">8.4.2</span>  Document-term matrix</a></li>
+  <li><a href="#tidy-text" id="toc-tidy-text" class="nav-link" data-scroll-target="#tidy-text"><span class="header-section-number">8.4.1</span> Tidy text</a></li>
+  <li><a href="#document-term-matrix" id="toc-document-term-matrix" class="nav-link" data-scroll-target="#document-term-matrix"><span class="header-section-number">8.4.2</span> Document-term matrix</a></li>
   </ul></li>
-  <li><a href="#tokenizing" id="toc-tokenizing" class="nav-link" data-scroll-target="#tokenizing"><span class="toc-section-number">8.5</span>  Tokenizing</a>
+  <li><a href="#tokenizing" id="toc-tokenizing" class="nav-link" data-scroll-target="#tokenizing"><span class="header-section-number">8.5</span> Tokenizing</a>
   <ul class="collapse">
-  <li><a href="#words" id="toc-words" class="nav-link" data-scroll-target="#words"><span class="toc-section-number">8.5.1</span>  Words</a></li>
-  <li><a href="#sentences" id="toc-sentences" class="nav-link" data-scroll-target="#sentences"><span class="toc-section-number">8.5.2</span>  Sentences</a></li>
-  <li><a href="#n-grams" id="toc-n-grams" class="nav-link" data-scroll-target="#n-grams"><span class="toc-section-number">8.5.3</span>  N-grams</a></li>
+  <li><a href="#words" id="toc-words" class="nav-link" data-scroll-target="#words"><span class="header-section-number">8.5.1</span> Words</a></li>
+  <li><a href="#sentences" id="toc-sentences" class="nav-link" data-scroll-target="#sentences"><span class="header-section-number">8.5.2</span> Sentences</a></li>
+  <li><a href="#n-grams" id="toc-n-grams" class="nav-link" data-scroll-target="#n-grams"><span class="header-section-number">8.5.3</span> N-grams</a></li>
   </ul></li>
-  <li><a href="#removing-stop-words" id="toc-removing-stop-words" class="nav-link" data-scroll-target="#removing-stop-words"><span class="toc-section-number">8.6</span>  Removing stop words</a></li>
-  <li><a href="#stemming-and-lemmatization" id="toc-stemming-and-lemmatization" class="nav-link" data-scroll-target="#stemming-and-lemmatization"><span class="toc-section-number">8.7</span>  Stemming and lemmatization</a></li>
-  <li><a href="#term-frequency" id="toc-term-frequency" class="nav-link" data-scroll-target="#term-frequency"><span class="toc-section-number">8.8</span>  Term frequency</a>
+  <li><a href="#removing-stop-words" id="toc-removing-stop-words" class="nav-link" data-scroll-target="#removing-stop-words"><span class="header-section-number">8.6</span> Removing stop words</a></li>
+  <li><a href="#stemming-and-lemmatization" id="toc-stemming-and-lemmatization" class="nav-link" data-scroll-target="#stemming-and-lemmatization"><span class="header-section-number">8.7</span> Stemming and lemmatization</a></li>
+  <li><a href="#term-frequency" id="toc-term-frequency" class="nav-link" data-scroll-target="#term-frequency"><span class="header-section-number">8.8</span> Term frequency</a>
   <ul class="collapse">
-  <li><a href="#overall-term-frequency" id="toc-overall-term-frequency" class="nav-link" data-scroll-target="#overall-term-frequency"><span class="toc-section-number">8.8.1</span>  Overall term frequency</a></li>
-  <li><a href="#term-frequency-by-journal" id="toc-term-frequency-by-journal" class="nav-link" data-scroll-target="#term-frequency-by-journal"><span class="toc-section-number">8.8.2</span>  Term frequency by journal</a></li>
-  <li><a href="#term-frequency-by-document" id="toc-term-frequency-by-document" class="nav-link" data-scroll-target="#term-frequency-by-document"><span class="toc-section-number">8.8.3</span>  Term frequency by document</a></li>
-  <li><a href="#word-clouds" id="toc-word-clouds" class="nav-link" data-scroll-target="#word-clouds"><span class="toc-section-number">8.8.4</span>  Word clouds</a></li>
-  <li><a href="#tf-idf" id="toc-tf-idf" class="nav-link" data-scroll-target="#tf-idf"><span class="toc-section-number">8.8.5</span>  TF-IDF</a></li>
+  <li><a href="#overall-term-frequency" id="toc-overall-term-frequency" class="nav-link" data-scroll-target="#overall-term-frequency"><span class="header-section-number">8.8.1</span> Overall term frequency</a></li>
+  <li><a href="#term-frequency-by-journal" id="toc-term-frequency-by-journal" class="nav-link" data-scroll-target="#term-frequency-by-journal"><span class="header-section-number">8.8.2</span> Term frequency by journal</a></li>
+  <li><a href="#term-frequency-by-document" id="toc-term-frequency-by-document" class="nav-link" data-scroll-target="#term-frequency-by-document"><span class="header-section-number">8.8.3</span> Term frequency by document</a></li>
+  <li><a href="#word-clouds" id="toc-word-clouds" class="nav-link" data-scroll-target="#word-clouds"><span class="header-section-number">8.8.4</span> Word clouds</a></li>
+  <li><a href="#tf-idf" id="toc-tf-idf" class="nav-link" data-scroll-target="#tf-idf"><span class="header-section-number">8.8.5</span> TF-IDF</a></li>
   </ul></li>
-  <li><a href="#topic-modelling" id="toc-topic-modelling" class="nav-link" data-scroll-target="#topic-modelling"><span class="toc-section-number">8.9</span>  Topic modelling</a></li>
-  <li><a href="#other-resources" id="toc-other-resources" class="nav-link" data-scroll-target="#other-resources"><span class="toc-section-number">8.10</span>  Other resources</a></li>
+  <li><a href="#topic-modelling" id="toc-topic-modelling" class="nav-link" data-scroll-target="#topic-modelling"><span class="header-section-number">8.9</span> Topic modelling</a></li>
+  <li><a href="#other-resources" id="toc-other-resources" class="nav-link" data-scroll-target="#other-resources"><span class="header-section-number">8.10</span> Other resources</a></li>
   </ul>
 </nav>
     </div>
@@ -272,7 +264,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Topic Modelling</span></h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Topic Modelling</span></h1>
 </div>
 
 
@@ -287,9 +279,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<div class="cell">
-
-</div>
 <section id="learning-objectives" class="level2" data-number="8.1">
 <h2 data-number="8.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">8.1</span> Learning objectives</h2>
 <ul>
@@ -317,52 +306,49 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The dataset that we will use in this chapter consists of the the abstracts of 1672 open access scientific articles published between 2019 and 2020 in 10 journals from different fields of research.</p>
 <div class="cell">
 <div class="cell-output-display">
-
-<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
+<table class="lightable-classic table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Journals included in the dataset</caption>
- <thead>
-  <tr>
-   <th style="text-align:left;"> Journal </th>
-  </tr>
- </thead>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Journal</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> American Journal of International Law </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Food Security </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Journal of Business Economics and Management </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Journal of Child Psychology and Psychiatry </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Journal of Mathematics </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Journal of the Association for Information Science and Technology </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Nature Astronomy </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Organic &amp; Biomolecular Chemistry </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Public Health </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Solar Energy </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">American Journal of International Law</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Food Security</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Journal of Business Economics and Management</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Journal of Child Psychology and Psychiatry</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Journal of Mathematics</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Journal of the Association for Information Science and Technology</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Nature Astronomy</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Organic &amp; Biomolecular Chemistry</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Public Health</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Solar Energy</td>
+</tr>
 </tbody>
 </table>
 
-</div>
-</div>
-<div class="cell">
 
+</div>
 </div>
 <p>The dataset is available here, or can loaded into R directly from the URL like this:</p>
 <div class="cell">
@@ -375,25 +361,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The two formats that we will consider in this chapter ar the tidy text format and the document-term matrix. Let’s start with a tibble that contain 2 documents with their text.</p>
 <div class="cell">
 <div class="cell-output-display">
-
-<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;"> Document </th>
-   <th style="text-align:left;"> Text </th>
-  </tr>
- </thead>
+<table class="lightable-classic table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Document</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Text</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> I love bananas </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> B </td>
-   <td style="text-align:left;"> I hate potatoes </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">I love bananas</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">B</td>
+<td style="text-align: left;">I hate potatoes</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
@@ -403,41 +389,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In principle the tibble above with the text of our two documents is already in a tidy text format where each row is a meaningful unit of text (the token, here would be the entire text). But if we chose words as our tokens, then it would look like this:</p>
 <div class="cell">
 <div class="cell-output-display">
-
-<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;"> document </th>
-   <th style="text-align:left;"> words </th>
-  </tr>
- </thead>
+<table class="lightable-classic table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">document</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">words</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> i </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> love </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> bananas </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> B </td>
-   <td style="text-align:left;"> i </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> B </td>
-   <td style="text-align:left;"> hate </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> B </td>
-   <td style="text-align:left;"> potatoes </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">i</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">love</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">bananas</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">B</td>
+<td style="text-align: left;">i</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">B</td>
+<td style="text-align: left;">hate</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">B</td>
+<td style="text-align: left;">potatoes</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
@@ -447,37 +433,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Document-term matrices contain all documents in a set as rows and all tokens as columns. The cells typically containing the frequency of the term in the document. Here is a document-term matrix for our two documents</p>
 <div class="cell">
 <div class="cell-output-display">
-
-<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:right;"> bananas </th>
-   <th style="text-align:right;"> hate </th>
-   <th style="text-align:right;"> i </th>
-   <th style="text-align:right;"> love </th>
-   <th style="text-align:right;"> potatoes </th>
-  </tr>
- </thead>
+<table class="lightable-classic table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">bananas</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">hate</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">i</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">love</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">potatoes</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> B </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 1 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">A</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">B</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
@@ -507,48 +493,48 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-
-<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:right;"> id </th>
-   <th style="text-align:left;"> journal </th>
-   <th style="text-align:left;"> word </th>
-  </tr>
- </thead>
+<table class="lightable-classic table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">id</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">journal</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">word</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> parenting </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> behaviors </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> have </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> been </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> shown </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> to </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">parenting</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">behaviors</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">have</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">been</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">shown</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">to</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
@@ -566,48 +552,48 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-
-<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:right;"> id </th>
-   <th style="text-align:left;"> journal </th>
-   <th style="text-align:left;"> sentence </th>
-  </tr>
- </thead>
+<table class="lightable-classic table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">id</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">journal</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">sentence</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> parenting behaviors have been shown to moderate the association between sensation seeking and antisocial behaviors. </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> data were obtained from the boricua youth study, a longitudinal study of 2,491 puerto rican youth living in the south bronx, new york, and the metropolitan area of san juan, puerto rico. </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> first, we examined the prospective relationship between sensation seeking and antisocial behaviors across 3 yearly waves and whether this relationship varied by sociodemographic factors. </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> second, we examined the moderating role of parenting behaviors-including parental monitoring, warmth, and coercive discipline-on the prospective relationship between sensation seeking and antisocial behaviors. </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> sensation seeking was a strong predictor of antisocial behaviors for youth across two different sociocultural contexts. </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> high parental monitoring buffered the association between sensation seeking and antisocial behaviors, protecting individuals with this trait. </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">parenting behaviors have been shown to moderate the association between sensation seeking and antisocial behaviors.</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">data were obtained from the boricua youth study, a longitudinal study of 2,491 puerto rican youth living in the south bronx, new york, and the metropolitan area of san juan, puerto rico.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">first, we examined the prospective relationship between sensation seeking and antisocial behaviors across 3 yearly waves and whether this relationship varied by sociodemographic factors.</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">second, we examined the moderating role of parenting behaviors-including parental monitoring, warmth, and coercive discipline-on the prospective relationship between sensation seeking and antisocial behaviors.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">sensation seeking was a strong predictor of antisocial behaviors for youth across two different sociocultural contexts.</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">high parental monitoring buffered the association between sensation seeking and antisocial behaviors, protecting individuals with this trait.</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
@@ -626,48 +612,48 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-
-<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:right;"> id </th>
-   <th style="text-align:left;"> journal </th>
-   <th style="text-align:left;"> bigram </th>
-  </tr>
- </thead>
+<table class="lightable-classic table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">id</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">journal</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">bigram</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> parenting behaviors </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> behaviors have </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> have been </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> been shown </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> shown to </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> to moderate </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">parenting behaviors</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">behaviors have</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">have been</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">been shown</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">shown to</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">to moderate</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
@@ -679,57 +665,57 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The English language is full of words that carry little to no meanings, and that tend to be the most frequent terms we use. To illustrate this, let’s look at the ten most frequent terms in the abstracts dataset.</p>
 <div class="cell">
 <div class="cell-output-display">
-
-<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;"> word </th>
-   <th style="text-align:right;"> n </th>
-  </tr>
- </thead>
+<table class="lightable-classic table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">word</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">n</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> the </td>
-   <td style="text-align:right;"> 5626 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> of </td>
-   <td style="text-align:right;"> 4463 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> and </td>
-   <td style="text-align:right;"> 4049 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> in </td>
-   <td style="text-align:right;"> 2519 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> to </td>
-   <td style="text-align:right;"> 2427 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> a </td>
-   <td style="text-align:right;"> 1932 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> with </td>
-   <td style="text-align:right;"> 1217 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> for </td>
-   <td style="text-align:right;"> 1106 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> that </td>
-   <td style="text-align:right;"> 1087 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> is </td>
-   <td style="text-align:right;"> 893 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">the</td>
+<td style="text-align: right;">5626</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">of</td>
+<td style="text-align: right;">4463</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">and</td>
+<td style="text-align: right;">4049</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">in</td>
+<td style="text-align: right;">2519</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">to</td>
+<td style="text-align: right;">2427</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">a</td>
+<td style="text-align: right;">1932</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">with</td>
+<td style="text-align: right;">1217</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">for</td>
+<td style="text-align: right;">1106</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">that</td>
+<td style="text-align: right;">1087</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">is</td>
+<td style="text-align: right;">893</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
@@ -739,41 +725,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-
-<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;"> word </th>
-   <th style="text-align:left;"> lexicon </th>
-  </tr>
- </thead>
+<table class="lightable-classic table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">word</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">lexicon</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> a </td>
-   <td style="text-align:left;"> SMART </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> a's </td>
-   <td style="text-align:left;"> SMART </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> able </td>
-   <td style="text-align:left;"> SMART </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> about </td>
-   <td style="text-align:left;"> SMART </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> above </td>
-   <td style="text-align:left;"> SMART </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> according </td>
-   <td style="text-align:left;"> SMART </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">a</td>
+<td style="text-align: left;">SMART</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">a's</td>
+<td style="text-align: left;">SMART</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">able</td>
+<td style="text-align: left;">SMART</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">about</td>
+<td style="text-align: left;">SMART</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">above</td>
+<td style="text-align: left;">SMART</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">according</td>
+<td style="text-align: left;">SMART</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
@@ -790,57 +776,57 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-
-<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;"> word </th>
-   <th style="text-align:right;"> n </th>
-  </tr>
- </thead>
+<table class="lightable-classic table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">word</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">n</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> food </td>
-   <td style="text-align:right;"> 555 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> children </td>
-   <td style="text-align:right;"> 292 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> study </td>
-   <td style="text-align:right;"> 267 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> symptoms </td>
-   <td style="text-align:right;"> 266 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:right;"> 248 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> age </td>
-   <td style="text-align:right;"> 230 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> adhd </td>
-   <td style="text-align:right;"> 215 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> risk </td>
-   <td style="text-align:right;"> 208 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> data </td>
-   <td style="text-align:right;"> 207 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2 </td>
-   <td style="text-align:right;"> 179 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">food</td>
+<td style="text-align: right;">555</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">children</td>
+<td style="text-align: right;">292</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">study</td>
+<td style="text-align: right;">267</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">symptoms</td>
+<td style="text-align: right;">266</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">248</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">age</td>
+<td style="text-align: right;">230</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">adhd</td>
+<td style="text-align: right;">215</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">risk</td>
+<td style="text-align: right;">208</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">data</td>
+<td style="text-align: right;">207</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">179</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
@@ -850,88 +836,88 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The next issue that we typically face with text mining is the presence of word variations that are considered distinct tokens. These variation can include plural and singular terms, verb conjugations, etc. Here is an example of a set of tokens from our dataset.</p>
 <div class="cell">
 <div class="cell-output-display">
-
-<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;"> word </th>
-  </tr>
- </thead>
+<table class="lightable-classic table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">word</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> study </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> studies </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> students </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> student </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> study's </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> studied </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> understudied </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> studying </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">study</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">studies</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">students</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">student</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">study's</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">studied</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">understudied</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">studying</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
 <p><a href="https://en.wikipedia.org/wiki/Stemming">Stemming</a> and <a href="https://en.wikipedia.org/wiki/Lemmatisation">lemmatization</a> are two ways of normalizing words by reducing words to their base called stem and lemma, respectively. Here are the stems and the lemmas of the words containing the string “stud”.</p>
 <div class="cell">
 <div class="cell-output-display">
-
-<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;"> word </th>
-   <th style="text-align:left;"> stem </th>
-   <th style="text-align:left;"> lemma </th>
-  </tr>
- </thead>
+<table class="lightable-classic table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">word</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">stem</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">lemma</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> study </td>
-   <td style="text-align:left;"> studi </td>
-   <td style="text-align:left;"> study </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> studies </td>
-   <td style="text-align:left;"> studi </td>
-   <td style="text-align:left;"> study </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> students </td>
-   <td style="text-align:left;"> student </td>
-   <td style="text-align:left;"> student </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> student </td>
-   <td style="text-align:left;"> student </td>
-   <td style="text-align:left;"> student </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> study's </td>
-   <td style="text-align:left;"> study' </td>
-   <td style="text-align:left;"> study's </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> studied </td>
-   <td style="text-align:left;"> studi </td>
-   <td style="text-align:left;"> study </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">study</td>
+<td style="text-align: left;">studi</td>
+<td style="text-align: left;">study</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">studies</td>
+<td style="text-align: left;">studi</td>
+<td style="text-align: left;">study</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">students</td>
+<td style="text-align: left;">student</td>
+<td style="text-align: left;">student</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">student</td>
+<td style="text-align: left;">student</td>
+<td style="text-align: left;">student</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">study's</td>
+<td style="text-align: left;">study'</td>
+<td style="text-align: left;">study's</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">studied</td>
+<td style="text-align: left;">studi</td>
+<td style="text-align: left;">study</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
@@ -952,68 +938,68 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-
-<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:right;"> id </th>
-   <th style="text-align:left;"> journal </th>
-   <th style="text-align:left;"> word </th>
-  </tr>
- </thead>
+<table class="lightable-classic table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">id</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">journal</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">word</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> parenting </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> behavior </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> show </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> moderate </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> association </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> sensation </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> seek </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> antisocial </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> behavior </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> datum </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">parenting</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">behavior</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">show</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">moderate</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">association</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">sensation</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">seek</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">antisocial</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">behavior</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">datum</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
@@ -1030,97 +1016,97 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-
-<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;"> word </th>
-   <th style="text-align:right;"> n </th>
-  </tr>
- </thead>
+<table class="lightable-classic table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">word</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">n</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> food </td>
-   <td style="text-align:right;"> 584 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> child </td>
-   <td style="text-align:right;"> 441 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> study </td>
-   <td style="text-align:right;"> 375 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> age </td>
-   <td style="text-align:right;"> 316 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> model </td>
-   <td style="text-align:right;"> 303 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> report </td>
-   <td style="text-align:right;"> 295 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> star </td>
-   <td style="text-align:right;"> 293 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> symptom </td>
-   <td style="text-align:right;"> 293 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> system </td>
-   <td style="text-align:right;"> 293 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:right;"> 248 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> low </td>
-   <td style="text-align:right;"> 239 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> risk </td>
-   <td style="text-align:right;"> 228 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> adhd </td>
-   <td style="text-align:right;"> 215 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> increase </td>
-   <td style="text-align:right;"> 208 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> datum </td>
-   <td style="text-align:right;"> 207 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> household </td>
-   <td style="text-align:right;"> 201 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> mass </td>
-   <td style="text-align:right;"> 201 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> effect </td>
-   <td style="text-align:right;"> 199 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> measure </td>
-   <td style="text-align:right;"> 198 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> result </td>
-   <td style="text-align:right;"> 194 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">food</td>
+<td style="text-align: right;">584</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">child</td>
+<td style="text-align: right;">441</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">study</td>
+<td style="text-align: right;">375</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">age</td>
+<td style="text-align: right;">316</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">model</td>
+<td style="text-align: right;">303</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">report</td>
+<td style="text-align: right;">295</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">star</td>
+<td style="text-align: right;">293</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">symptom</td>
+<td style="text-align: right;">293</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">system</td>
+<td style="text-align: right;">293</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">248</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">low</td>
+<td style="text-align: right;">239</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">risk</td>
+<td style="text-align: right;">228</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">adhd</td>
+<td style="text-align: right;">215</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">increase</td>
+<td style="text-align: right;">208</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">datum</td>
+<td style="text-align: right;">207</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">household</td>
+<td style="text-align: right;">201</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">mass</td>
+<td style="text-align: right;">201</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">effect</td>
+<td style="text-align: right;">199</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">measure</td>
+<td style="text-align: right;">198</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">result</td>
+<td style="text-align: right;">194</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
@@ -1282,41 +1268,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-
-<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;"> word </th>
-   <th style="text-align:left;"> sentiment </th>
-  </tr>
- </thead>
+<table class="lightable-classic table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">word</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">sentiment</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> 2-faces </td>
-   <td style="text-align:left;"> negative </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> abnormal </td>
-   <td style="text-align:left;"> negative </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> abolish </td>
-   <td style="text-align:left;"> negative </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> abominable </td>
-   <td style="text-align:left;"> negative </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> abominably </td>
-   <td style="text-align:left;"> negative </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> abominate </td>
-   <td style="text-align:left;"> negative </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">2-faces</td>
+<td style="text-align: left;">negative</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">abnormal</td>
+<td style="text-align: left;">negative</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">abolish</td>
+<td style="text-align: left;">negative</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">abominable</td>
+<td style="text-align: left;">negative</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">abominably</td>
+<td style="text-align: left;">negative</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">abominate</td>
+<td style="text-align: left;">negative</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
@@ -1325,41 +1311,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-
-<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;"> word </th>
-   <th style="text-align:right;"> value </th>
-  </tr>
- </thead>
+<table class="lightable-classic table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">word</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">value</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> abandon </td>
-   <td style="text-align:right;"> -2 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> abandoned </td>
-   <td style="text-align:right;"> -2 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> abandons </td>
-   <td style="text-align:right;"> -2 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> abducted </td>
-   <td style="text-align:right;"> -2 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> abduction </td>
-   <td style="text-align:right;"> -2 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> abductions </td>
-   <td style="text-align:right;"> -2 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">abandon</td>
+<td style="text-align: right;">-2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">abandoned</td>
+<td style="text-align: right;">-2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">abandons</td>
+<td style="text-align: right;">-2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">abducted</td>
+<td style="text-align: right;">-2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">abduction</td>
+<td style="text-align: right;">-2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">abductions</td>
+<td style="text-align: right;">-2</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
@@ -1372,76 +1358,76 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-
-<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:right;"> id </th>
-   <th style="text-align:left;"> word </th>
-   <th style="text-align:right;"> n </th>
-   <th style="text-align:right;"> tf </th>
-   <th style="text-align:right;"> idf </th>
-   <th style="text-align:right;"> tf_idf </th>
-   <th style="text-align:right;"> value </th>
-  </tr>
- </thead>
+<table class="lightable-classic table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">id</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">word</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">n</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">tf</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">idf</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">tf_idf</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">value</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:right;"> 10 </td>
-   <td style="text-align:left;"> ccbt </td>
-   <td style="text-align:right;"> 20 </td>
-   <td style="text-align:right;"> 0.0847458 </td>
-   <td style="text-align:right;"> 6.228511 </td>
-   <td style="text-align:right;"> 0.5278399 </td>
-   <td style="text-align:right;"> NA </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1276 </td>
-   <td style="text-align:left;"> yield </td>
-   <td style="text-align:right;"> 19 </td>
-   <td style="text-align:right;"> 0.1210191 </td>
-   <td style="text-align:right;"> 2.932674 </td>
-   <td style="text-align:right;"> 0.3549096 </td>
-   <td style="text-align:right;"> NA </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1598 </td>
-   <td style="text-align:left;"> food </td>
-   <td style="text-align:right;"> 19 </td>
-   <td style="text-align:right;"> 0.1043956 </td>
-   <td style="text-align:right;"> 1.706722 </td>
-   <td style="text-align:right;"> 0.1781743 </td>
-   <td style="text-align:right;"> NA </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 244 </td>
-   <td style="text-align:left;"> sct </td>
-   <td style="text-align:right;"> 18 </td>
-   <td style="text-align:right;"> 0.1011236 </td>
-   <td style="text-align:right;"> 6.228511 </td>
-   <td style="text-align:right;"> 0.6298494 </td>
-   <td style="text-align:right;"> NA </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 256 </td>
-   <td style="text-align:left;"> anxiety </td>
-   <td style="text-align:right;"> 18 </td>
-   <td style="text-align:right;"> 0.1208054 </td>
-   <td style="text-align:right;"> 2.794524 </td>
-   <td style="text-align:right;"> 0.3375935 </td>
-   <td style="text-align:right;"> -2 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 20 </td>
-   <td style="text-align:left;"> sleep </td>
-   <td style="text-align:right;"> 17 </td>
-   <td style="text-align:right;"> 0.0949721 </td>
-   <td style="text-align:right;"> 3.589454 </td>
-   <td style="text-align:right;"> 0.3408978 </td>
-   <td style="text-align:right;"> NA </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">ccbt</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">0.0847458</td>
+<td style="text-align: right;">6.228511</td>
+<td style="text-align: right;">0.5278399</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1276</td>
+<td style="text-align: left;">yield</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">0.1210191</td>
+<td style="text-align: right;">2.932674</td>
+<td style="text-align: right;">0.3549096</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1598</td>
+<td style="text-align: left;">food</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">0.1043956</td>
+<td style="text-align: right;">1.706722</td>
+<td style="text-align: right;">0.1781743</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">244</td>
+<td style="text-align: left;">sct</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">0.1011236</td>
+<td style="text-align: right;">6.228511</td>
+<td style="text-align: right;">0.6298494</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">256</td>
+<td style="text-align: left;">anxiety</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">0.1208054</td>
+<td style="text-align: right;">2.794524</td>
+<td style="text-align: right;">0.3375935</td>
+<td style="text-align: right;">-2</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">20</td>
+<td style="text-align: left;">sleep</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">0.0949721</td>
+<td style="text-align: right;">3.589454</td>
+<td style="text-align: right;">0.3408978</td>
+<td style="text-align: right;">NA</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
@@ -1499,33 +1485,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-
-<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;"> journal </th>
-   <th style="text-align:right;"> mean_sentiment </th>
-  </tr>
- </thead>
+<table class="lightable-classic table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">journal</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">mean_sentiment</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:right;"> -2.268293 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> B </td>
-   <td style="text-align:right;"> -1.404255 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:right;"> 2.010638 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> D </td>
-   <td style="text-align:right;"> 1.527778 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">A</td>
+<td style="text-align: right;">-2.268293</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">B</td>
+<td style="text-align: right;">-1.404255</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">C</td>
+<td style="text-align: right;">2.010638</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">D</td>
+<td style="text-align: right;">1.527778</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
@@ -1650,9 +1636,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1717,6 +1717,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {

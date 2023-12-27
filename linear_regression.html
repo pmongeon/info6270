@@ -261,7 +261,6 @@ div.csl-indent {
   </ul></li>
   <li><a href="#building-the-multiple-linear-regression-model" id="toc-building-the-multiple-linear-regression-model" class="nav-link" data-scroll-target="#building-the-multiple-linear-regression-model"><span class="header-section-number">10.5</span> Building the multiple linear regression model</a></li>
   <li><a href="#homework" id="toc-homework" class="nav-link" data-scroll-target="#homework"><span class="header-section-number">10.6</span> Homework</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">10.7</span> References</a></li>
   </ul>
 </nav>
     </div>
@@ -607,19 +606,21 @@ lm(formula = arr_delay ~ distance + carrier + origin, data = sample_n(data,
 
 Residuals:
    Min     1Q Median     3Q    Max 
--49.38 -21.51 -11.36   8.56 389.84 
+-78.69 -28.36 -14.42   6.09 389.58 
 
 Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept)  5.940502   4.783997   1.242    0.215
-distance    -0.001224   0.002797  -0.438    0.662
-carrierAA    1.268149   5.397938   0.235    0.814
-originLGA   -4.043733   5.601622  -0.722    0.471
-originJFK   -4.313382   6.592651  -0.654    0.513
+              Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept) 12.9625267  5.8186783   2.228   0.0263 *
+distance    -0.0005263  0.0032042  -0.164   0.8696  
+carrierAA   -4.6999911  6.4827986  -0.725   0.4688  
+originLGA    2.2033532  6.8630179   0.321   0.7483  
+originJFK   -8.2434084  7.2785302  -1.133   0.2579  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 41.88 on 495 degrees of freedom
-Multiple R-squared:  0.00221,   Adjusted R-squared:  -0.005853 
-F-statistic: 0.274 on 4 and 495 DF,  p-value: 0.8947</code></pre>
+Residual standard error: 50.22 on 495 degrees of freedom
+Multiple R-squared:  0.01057,   Adjusted R-squared:  0.002579 
+F-statistic: 1.323 on 4 and 495 DF,  p-value: 0.2604</code></pre>
 </div>
 </div>
 <p>We see that the model still does a terrible job at predicting arrival delays, and that none of the predictors are statistically significant (at the p &lt; 0.05 level).</p>
@@ -638,22 +639,22 @@ lm(formula = arr_delay ~ distance + carrier + origin + dep_delay,
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--46.006 -12.700  -2.065  10.189 114.908 
+-49.860 -11.607  -1.231   9.120 104.131 
 
 Coefficients:
               Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -8.2412122  2.4406485  -3.377 0.000792 ***
-distance     0.0005649  0.0013474   0.419 0.675205    
-carrierAA   -5.8301483  2.3575512  -2.473 0.013735 *  
-originLGA    5.9789223  2.5359211   2.358 0.018778 *  
-originJFK    1.6888902  2.8233438   0.598 0.549989    
-dep_delay    0.9966280  0.0299545  33.271  &lt; 2e-16 ***
+(Intercept) -8.0518001  2.3909440  -3.368 0.000817 ***
+distance    -0.0007411  0.0013000  -0.570 0.568902    
+carrierAA   -2.1873939  2.3382136  -0.935 0.349989    
+originLGA   -0.5129079  2.4503477  -0.209 0.834284    
+originJFK    2.9417865  2.7888601   1.055 0.292017    
+dep_delay    0.9910595  0.0176231  56.236  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 20.05 on 494 degrees of freedom
-Multiple R-squared:  0.6975,    Adjusted R-squared:  0.6944 
-F-statistic: 227.8 on 5 and 494 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 18.87 on 494 degrees of freedom
+Multiple R-squared:  0.8662,    Adjusted R-squared:  0.8648 
+F-statistic: 639.4 on 5 and 494 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>We can see that when we consider the delay in the departure, we can more accurately predict the delay at arrival, with around 80% of the variance explained by our model!</p>
@@ -662,9 +663,6 @@ F-statistic: 227.8 on 5 and 494 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="homework" class="level2" data-number="10.6">
 <h2 data-number="10.6" class="anchored" data-anchor-id="homework"><span class="header-section-number">10.6</span> Homework</h2>
 <p>For this week’s lab, your task is to complete lab 8 (the template is available on BrightSpace). In this lab, you will build a linear regression model on a dataset of your choice. I encourage you to use the dataset that you will be using for your individual project, if it contains a numerical variable that you can try to predict using other variables in your dataset.</p>
-</section>
-<section id="references" class="level2" data-number="10.7">
-<h2 data-number="10.7" class="anchored" data-anchor-id="references"><span class="header-section-number">10.7</span> References</h2>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
