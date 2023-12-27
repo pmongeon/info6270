@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,48 +47,19 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -101,8 +73,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -139,13 +110,15 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
 <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
@@ -154,11 +127,16 @@ div.csl-indent {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Linear regression</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./linear_regression.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Linear regression</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -166,108 +144,124 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Introduction to Data Science</a> 
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Course overview</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course overview</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">What is data science?</span></a>
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">What is data science?</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./getting_started_with_R.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting started with R</span></a>
+  <a href="./getting_started_with_R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting started with R</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./reading_and_tidying_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Reading and tidying data</span></a>
+  <a href="./reading_and_tidying_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Reading and tidying data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./working_with_strings.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with strings</span></a>
+  <a href="./working_with_strings.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with strings</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./publishing_with_r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Publishing with R</span></a>
+  <a href="./publishing_with_r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Publishing with R</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./summarizing_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summarizing data</span></a>
+  <a href="./summarizing_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summarizing data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./visualizing_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualizing data</span></a>
+  <a href="./visualizing_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualizing data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./topic_modelling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Topic Modelling</span></a>
+  <a href="./topic_modelling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Topic Modelling</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./logistic_regression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Logistic regression</span></a>
+  <a href="./logistic_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Logistic regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./linear_regression.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Linear regression</span></a>
+  <a href="./linear_regression.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Linear regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./shinyapps.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Shiny apps</span></a>
+  <a href="./shinyapps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Shiny apps</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./shinyapps_part2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">ShinyApps part 2</span></a>
+  <a href="./shinyapps_part2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">ShinyApps</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="toc-section-number">10.1</span>  Introduction</a></li>
-  <li><a href="#linear-regression" id="toc-linear-regression" class="nav-link" data-scroll-target="#linear-regression"><span class="toc-section-number">10.2</span>  Linear regression</a></li>
-  <li><a href="#building-a-linear-regression-model" id="toc-building-a-linear-regression-model" class="nav-link" data-scroll-target="#building-a-linear-regression-model"><span class="toc-section-number">10.3</span>  Building a linear regression model</a></li>
-  <li><a href="#visualizing-the-relationship-between-the-variables" id="toc-visualizing-the-relationship-between-the-variables" class="nav-link" data-scroll-target="#visualizing-the-relationship-between-the-variables"><span class="toc-section-number">10.4</span>  Visualizing the relationship between the variables</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">10.1</span> Introduction</a></li>
+  <li><a href="#linear-regression" id="toc-linear-regression" class="nav-link" data-scroll-target="#linear-regression"><span class="header-section-number">10.2</span> Linear regression</a></li>
+  <li><a href="#building-a-linear-regression-model" id="toc-building-a-linear-regression-model" class="nav-link" data-scroll-target="#building-a-linear-regression-model"><span class="header-section-number">10.3</span> Building a linear regression model</a></li>
+  <li><a href="#visualizing-the-relationship-between-the-variables" id="toc-visualizing-the-relationship-between-the-variables" class="nav-link" data-scroll-target="#visualizing-the-relationship-between-the-variables"><span class="header-section-number">10.4</span> Visualizing the relationship between the variables</a>
   <ul class="collapse">
-  <li><a href="#continuous-independent-variables" id="toc-continuous-independent-variables" class="nav-link" data-scroll-target="#continuous-independent-variables"><span class="toc-section-number">10.4.1</span>  Continuous independent variables</a></li>
-  <li><a href="#categorical-independent-variables" id="toc-categorical-independent-variables" class="nav-link" data-scroll-target="#categorical-independent-variables"><span class="toc-section-number">10.4.2</span>  Categorical independent variables</a></li>
+  <li><a href="#continuous-independent-variables" id="toc-continuous-independent-variables" class="nav-link" data-scroll-target="#continuous-independent-variables"><span class="header-section-number">10.4.1</span> Continuous independent variables</a></li>
+  <li><a href="#categorical-independent-variables" id="toc-categorical-independent-variables" class="nav-link" data-scroll-target="#categorical-independent-variables"><span class="header-section-number">10.4.2</span> Categorical independent variables</a></li>
   </ul></li>
-  <li><a href="#building-the-multiple-linear-regression-model" id="toc-building-the-multiple-linear-regression-model" class="nav-link" data-scroll-target="#building-the-multiple-linear-regression-model"><span class="toc-section-number">10.5</span>  Building the multiple linear regression model</a></li>
-  <li><a href="#homework" id="toc-homework" class="nav-link" data-scroll-target="#homework"><span class="toc-section-number">10.6</span>  Homework</a></li>
+  <li><a href="#building-the-multiple-linear-regression-model" id="toc-building-the-multiple-linear-regression-model" class="nav-link" data-scroll-target="#building-the-multiple-linear-regression-model"><span class="header-section-number">10.5</span> Building the multiple linear regression model</a></li>
+  <li><a href="#homework" id="toc-homework" class="nav-link" data-scroll-target="#homework"><span class="header-section-number">10.6</span> Homework</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">10.7</span> References</a></li>
   </ul>
 </nav>
     </div>
@@ -276,7 +270,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Linear regression</span></h1>
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Linear regression</span></h1>
 </div>
 
 
@@ -291,9 +285,6 @@ div.csl-indent {
 
 </header>
 
-<div class="cell">
-
-</div>
 <section id="introduction" class="level2" data-number="10.1">
 <h2 data-number="10.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">10.1</span> Introduction</h2>
 <p>In the previous chapter, we learned that regression is a method used to determine the relationship between a dependent variable (the variable we want to predict) and one or more independent variables (the predictors available to make the prediction). In the last chapter, we used logistic regression to predict a dichotomous variable. In this chapter we will learn how to use <strong>linear regression</strong> to predict a continuous dependent variable.</p>
@@ -306,14 +297,14 @@ div.csl-indent {
 <p><span class="math display">\[ y = β_0 + βx \]</span></p>
 <p>And if we have multiple independent variables, the formula becomes:</p>
 <p><span class="math display">\[ y = β_0 + β_1x_1 + β_2x_2 .... β_nx_n \]</span></p>
-<p>To determine how well the model fits the data (how well does <code>x</code> predict <code>y</code>. the linear model uses the square of the residuals (<strong>r<sup>2</sup></strong>). The residuals are the difference between the predicted values and the real data, measured by the vertical distance between the line and the data points. Here’s a figure from <span class="citation" data-cites="rhys2020">Rhys (<a href="#ref-rhys2020" role="doc-biblioref">2020</a>)</span> to help you visualize this.</p>
+<p>To determine how well the model fits the data (how well does <code>x</code> predict <code>y</code>. the linear model uses the square of the residuals (<strong>r<sup>2</sup></strong>). The residuals are the difference between the predicted values and the real data, measured by the vertical distance between the line and the data points. Here’s a figure from <span class="citation" data-cites="rhys2020">Rhys (<a href="references.html#ref-rhys2020" role="doc-biblioref">2020</a>)</span> to help you visualize this.</p>
 <div class="quarto-figure quarto-figure-center" style="text-align:center">
 <figure class="figure">
 <p><img src="files/linear_regression_1.jpg" class="img-fluid figure-img" width="343"></p>
 </figure>
 </div>
 <p>We can see in this figure that the intercept is where the line crosses the y-axis. The slope is calculated by dividing the difference in the predicted value of y by the difference in the value of x.</p>
-<p>When working with categorical predictors, the intercept is the mean value of the base category, and the slope is the difference between the means of each category. Here’s an example taken again from <span class="citation" data-cites="rhys2020">Rhys (<a href="#ref-rhys2020" role="doc-biblioref">2020</a>)</span>.</p>
+<p>When working with categorical predictors, the intercept is the mean value of the base category, and the slope is the difference between the means of each category. Here’s an example taken again from <span class="citation" data-cites="rhys2020">Rhys (<a href="references.html#ref-rhys2020" role="doc-biblioref">2020</a>)</span>.</p>
 <div class="quarto-figure quarto-figure-center" style="text-align:center">
 <figure class="figure">
 <p><img src="files/linear_regression_2.jpg" class="img-fluid figure-img" width="343"></p>
@@ -343,62 +334,62 @@ div.csl-indent {
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-
-<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;"> origin </th>
-   <th style="text-align:left;"> carrier </th>
-   <th style="text-align:right;"> distance </th>
-   <th style="text-align:right;"> dep_delay </th>
-   <th style="text-align:right;"> arr_delay </th>
-  </tr>
- </thead>
+<table class="lightable-classic table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">origin</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">carrier</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">distance</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">dep_delay</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">arr_delay</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> EWR </td>
-   <td style="text-align:left;"> UA </td>
-   <td style="text-align:right;"> 1400 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 11 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> LGA </td>
-   <td style="text-align:left;"> UA </td>
-   <td style="text-align:right;"> 1416 </td>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 20 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> JFK </td>
-   <td style="text-align:left;"> AA </td>
-   <td style="text-align:right;"> 1089 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 33 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> EWR </td>
-   <td style="text-align:left;"> UA </td>
-   <td style="text-align:right;"> 719 </td>
-   <td style="text-align:right;"> -4 </td>
-   <td style="text-align:right;"> 12 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> LGA </td>
-   <td style="text-align:left;"> AA </td>
-   <td style="text-align:right;"> 733 </td>
-   <td style="text-align:right;"> -2 </td>
-   <td style="text-align:right;"> 8 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> JFK </td>
-   <td style="text-align:left;"> UA </td>
-   <td style="text-align:right;"> 2475 </td>
-   <td style="text-align:right;"> -2 </td>
-   <td style="text-align:right;"> 7 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">EWR</td>
+<td style="text-align: left;">UA</td>
+<td style="text-align: right;">1400</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">11</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LGA</td>
+<td style="text-align: left;">UA</td>
+<td style="text-align: right;">1416</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">20</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">JFK</td>
+<td style="text-align: left;">AA</td>
+<td style="text-align: right;">1089</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">33</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">EWR</td>
+<td style="text-align: left;">UA</td>
+<td style="text-align: right;">719</td>
+<td style="text-align: right;">-4</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">LGA</td>
+<td style="text-align: left;">AA</td>
+<td style="text-align: right;">733</td>
+<td style="text-align: right;">-2</td>
+<td style="text-align: right;">8</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">JFK</td>
+<td style="text-align: left;">UA</td>
+<td style="text-align: right;">2475</td>
+<td style="text-align: right;">-2</td>
+<td style="text-align: right;">7</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
@@ -409,12 +400,12 @@ div.csl-indent {
 <section id="continuous-independent-variables" class="level3" data-number="10.4.1">
 <h3 data-number="10.4.1" class="anchored" data-anchor-id="continuous-independent-variables"><span class="header-section-number">10.4.1</span> Continuous independent variables</h3>
 <p>For continuous independent variables, we do scatter plots with a fitted regression line. We can see in the plot below that there appears to be a linear relationship between the delay at departure and the delay at arrival (which is of course not so surprising). Here we used the <code>stat_poly_line()</code> and the <code>stat_poly_eq()</code> functions from the <strong>ggpmisc</strong> package to display the slope and the <strong>coefficient of determination</strong> <strong>(R<sup>2</sup>)</strong> of the regression line.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 The coefficient of determination (R<sup>2</sup>)
 </div>
 </div>
@@ -536,67 +527,67 @@ The coefficient of determination (R<sup>2</sup>)
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-
-<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:right;"> Estimate </th>
-   <th style="text-align:right;"> Std. Error </th>
-   <th style="text-align:right;"> t value </th>
-   <th style="text-align:right;"> Pr(&gt;|t|) </th>
-  </tr>
- </thead>
+<table class="lightable-classic table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Estimate</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Std. Error</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">t value</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Pr(&gt;|t|)</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:right;"> 4.6299672 </td>
-   <td style="text-align:right;"> 0.3577348 </td>
-   <td style="text-align:right;"> 12.942455 </td>
-   <td style="text-align:right;"> 0.0000000 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> distance </td>
-   <td style="text-align:right;"> -0.0007208 </td>
-   <td style="text-align:right;"> 0.0002005 </td>
-   <td style="text-align:right;"> -3.595645 </td>
-   <td style="text-align:right;"> 0.0003238 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> carrierAA </td>
-   <td style="text-align:right;"> -3.6699113 </td>
-   <td style="text-align:right;"> 0.3907133 </td>
-   <td style="text-align:right;"> -9.392849 </td>
-   <td style="text-align:right;"> 0.0000000 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> originLGA </td>
-   <td style="text-align:right;"> -0.7238011 </td>
-   <td style="text-align:right;"> 0.4052653 </td>
-   <td style="text-align:right;"> -1.785993 </td>
-   <td style="text-align:right;"> 0.0741037 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> originJFK </td>
-   <td style="text-align:right;"> 1.6725192 </td>
-   <td style="text-align:right;"> 0.4638028 </td>
-   <td style="text-align:right;"> 3.606100 </td>
-   <td style="text-align:right;"> 0.0003110 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">4.6299672</td>
+<td style="text-align: right;">0.3577348</td>
+<td style="text-align: right;">12.942455</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">distance</td>
+<td style="text-align: right;">-0.0007208</td>
+<td style="text-align: right;">0.0002005</td>
+<td style="text-align: right;">-3.595645</td>
+<td style="text-align: right;">0.0003238</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">carrierAA</td>
+<td style="text-align: right;">-3.6699113</td>
+<td style="text-align: right;">0.3907133</td>
+<td style="text-align: right;">-9.392849</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">originLGA</td>
+<td style="text-align: right;">-0.7238011</td>
+<td style="text-align: right;">0.4052653</td>
+<td style="text-align: right;">-1.785993</td>
+<td style="text-align: right;">0.0741037</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">originJFK</td>
+<td style="text-align: right;">1.6725192</td>
+<td style="text-align: right;">0.4638028</td>
+<td style="text-align: right;">3.606100</td>
+<td style="text-align: right;">0.0003110</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
 <p>The estimate coefficient represents the slope of the linear trend line for each predictor, so we can plug these values into our linear equation.</p>
 <p><span class="math display">\[ ArrDelay = 4.63 - 0.00distance - 3.67AA - 0.72LGA + 1.67JFK \]</span></p>
 <p>We can see that most coefficients are statistically significant, which appears to indicate that they are good predictors, but let’s hold on for a minute before drawing too hasty conclusions. Look at the Adjusted R-squared (r<sup>2</sup>). It has a value of 0.001663, which is extremely small and indicate that the model explains less than 1% of the variance in delays. In other words, our model does <strong>not</strong> at all allow us to make predictions about delays. How can almost all predictors in a model be statistically significant and still be very bad predictors?</p>
-<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Beware of too large sample
 </div>
 </div>
@@ -615,22 +606,20 @@ lm(formula = arr_delay ~ distance + carrier + origin, data = sample_n(data,
     500))
 
 Residuals:
-    Min      1Q  Median      3Q     Max 
--66.523 -20.923  -9.743   8.328 224.212 
+   Min     1Q Median     3Q    Max 
+-49.38 -21.51 -11.36   8.56 389.84 
 
 Coefficients:
-              Estimate Std. Error t value Pr(&gt;|t|)  
-(Intercept)   4.801122   4.473600   1.073   0.2837  
-distance     -0.001939   0.002469  -0.785   0.4327  
-carrierAA   -11.192016   4.638969  -2.413   0.0162 *
-originLGA     3.408138   4.707689   0.724   0.4694  
-originJFK     8.713014   5.472526   1.592   0.1120  
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+             Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)  5.940502   4.783997   1.242    0.215
+distance    -0.001224   0.002797  -0.438    0.662
+carrierAA    1.268149   5.397938   0.235    0.814
+originLGA   -4.043733   5.601622  -0.722    0.471
+originJFK   -4.313382   6.592651  -0.654    0.513
 
-Residual standard error: 37.64 on 495 degrees of freedom
-Multiple R-squared:  0.0122,    Adjusted R-squared:  0.004216 
-F-statistic: 1.528 on 4 and 495 DF,  p-value: 0.1927</code></pre>
+Residual standard error: 41.88 on 495 degrees of freedom
+Multiple R-squared:  0.00221,   Adjusted R-squared:  -0.005853 
+F-statistic: 0.274 on 4 and 495 DF,  p-value: 0.8947</code></pre>
 </div>
 </div>
 <p>We see that the model still does a terrible job at predicting arrival delays, and that none of the predictors are statistically significant (at the p &lt; 0.05 level).</p>
@@ -649,22 +638,22 @@ lm(formula = arr_delay ~ distance + carrier + origin + dep_delay,
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--54.782 -12.876  -2.747   9.520 134.130 
+-46.006 -12.700  -2.065  10.189 114.908 
 
 Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) -9.378338   2.406519  -3.897 0.000111 ***
-distance     0.001013   0.001358   0.746 0.456114    
-carrierAA   -2.352048   2.542714  -0.925 0.355410    
-originLGA    1.040475   2.713885   0.383 0.701596    
-originJFK    1.085992   2.998460   0.362 0.717370    
-dep_delay    0.994484   0.028659  34.701  &lt; 2e-16 ***
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -8.2412122  2.4406485  -3.377 0.000792 ***
+distance     0.0005649  0.0013474   0.419 0.675205    
+carrierAA   -5.8301483  2.3575512  -2.473 0.013735 *  
+originLGA    5.9789223  2.5359211   2.358 0.018778 *  
+originJFK    1.6888902  2.8233438   0.598 0.549989    
+dep_delay    0.9966280  0.0299545  33.271  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 20.5 on 494 degrees of freedom
-Multiple R-squared:  0.7149,    Adjusted R-squared:  0.712 
-F-statistic: 247.7 on 5 and 494 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 20.05 on 494 degrees of freedom
+Multiple R-squared:  0.6975,    Adjusted R-squared:  0.6944 
+F-statistic: 227.8 on 5 and 494 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>We can see that when we consider the delay in the departure, we can more accurately predict the delay at arrival, with around 80% of the variance explained by our model!</p>
@@ -673,10 +662,13 @@ F-statistic: 247.7 on 5 and 494 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="homework" class="level2" data-number="10.6">
 <h2 data-number="10.6" class="anchored" data-anchor-id="homework"><span class="header-section-number">10.6</span> Homework</h2>
 <p>For this week’s lab, your task is to complete lab 8 (the template is available on BrightSpace). In this lab, you will build a linear regression model on a dataset of your choice. I encourage you to use the dataset that you will be using for your individual project, if it contains a numerical variable that you can try to predict using other variables in your dataset.</p>
+</section>
+<section id="references" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="references"><span class="header-section-number">10.7</span> References</h2>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
-<div id="ref-rhys2020" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-rhys2020" class="csl-entry" role="listitem">
 Rhys, Hefin. 2020. <em>Machine Learning with r, the Tidyverse, and Mlr</em>. Shelter Island, NY: Manning publications.
 </div>
 </div>
@@ -710,9 +702,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -777,6 +783,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {

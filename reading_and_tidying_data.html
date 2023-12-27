@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,48 +47,19 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -101,8 +73,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -139,7 +110,8 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -153,11 +125,16 @@ div.csl-indent {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Reading and tidying data</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./reading_and_tidying_data.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Reading and tidying data</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -165,133 +142,149 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Introduction to Data Science</a> 
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Course overview</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course overview</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">What is data science?</span></a>
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">What is data science?</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./getting_started_with_R.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting started with R</span></a>
+  <a href="./getting_started_with_R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting started with R</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./reading_and_tidying_data.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Reading and tidying data</span></a>
+  <a href="./reading_and_tidying_data.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Reading and tidying data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./working_with_strings.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with strings</span></a>
+  <a href="./working_with_strings.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with strings</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./publishing_with_r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Publishing with R</span></a>
+  <a href="./publishing_with_r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Publishing with R</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./summarizing_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summarizing data</span></a>
+  <a href="./summarizing_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summarizing data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./visualizing_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualizing data</span></a>
+  <a href="./visualizing_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualizing data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./topic_modelling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Topic Modelling</span></a>
+  <a href="./topic_modelling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Topic Modelling</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./logistic_regression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Logistic regression</span></a>
+  <a href="./logistic_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Logistic regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./linear_regression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Linear regression</span></a>
+  <a href="./linear_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Linear regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./shinyapps.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Shiny apps</span></a>
+  <a href="./shinyapps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Shiny apps</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./shinyapps_part2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">ShinyApps part 2</span></a>
+  <a href="./shinyapps_part2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">ShinyApps part 2</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="toc-section-number">3.1</span>  Learning objectives</a></li>
-  <li><a href="#tidy-data" id="toc-tidy-data" class="nav-link" data-scroll-target="#tidy-data"><span class="toc-section-number">3.2</span>  Tidy data</a></li>
-  <li><a href="#the-tidyverse" id="toc-the-tidyverse" class="nav-link" data-scroll-target="#the-tidyverse"><span class="toc-section-number">3.3</span>  The tidyverse</a></li>
-  <li><a href="#import-data" id="toc-import-data" class="nav-link" data-scroll-target="#import-data"><span class="toc-section-number">3.4</span>  Import data</a>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">3.1</span> Learning objectives</a></li>
+  <li><a href="#tidy-data" id="toc-tidy-data" class="nav-link" data-scroll-target="#tidy-data"><span class="header-section-number">3.2</span> Tidy data</a></li>
+  <li><a href="#the-tidyverse" id="toc-the-tidyverse" class="nav-link" data-scroll-target="#the-tidyverse"><span class="header-section-number">3.3</span> The tidyverse</a></li>
+  <li><a href="#import-data" id="toc-import-data" class="nav-link" data-scroll-target="#import-data"><span class="header-section-number">3.4</span> Import data</a>
   <ul class="collapse">
-  <li><a href="#delimited-file-formats" id="toc-delimited-file-formats" class="nav-link" data-scroll-target="#delimited-file-formats"><span class="toc-section-number">3.4.1</span>  Delimited file formats</a></li>
-  <li><a href="#json-files" id="toc-json-files" class="nav-link" data-scroll-target="#json-files"><span class="toc-section-number">3.4.2</span>  JSON files</a></li>
-  <li><a href="#application-programming-interface-api" id="toc-application-programming-interface-api" class="nav-link" data-scroll-target="#application-programming-interface-api"><span class="toc-section-number">3.4.3</span>  Application programming interface (API)</a></li>
-  <li><a href="#xml-files" id="toc-xml-files" class="nav-link" data-scroll-target="#xml-files"><span class="toc-section-number">3.4.4</span>  XML files</a></li>
-  <li><a href="#connections" id="toc-connections" class="nav-link" data-scroll-target="#connections"><span class="toc-section-number">3.4.5</span>  Connections</a></li>
+  <li><a href="#delimited-file-formats" id="toc-delimited-file-formats" class="nav-link" data-scroll-target="#delimited-file-formats"><span class="header-section-number">3.4.1</span> Delimited file formats</a></li>
+  <li><a href="#json-files" id="toc-json-files" class="nav-link" data-scroll-target="#json-files"><span class="header-section-number">3.4.2</span> JSON files</a></li>
+  <li><a href="#application-programming-interface-api" id="toc-application-programming-interface-api" class="nav-link" data-scroll-target="#application-programming-interface-api"><span class="header-section-number">3.4.3</span> Application programming interface (API)</a></li>
+  <li><a href="#xml-files" id="toc-xml-files" class="nav-link" data-scroll-target="#xml-files"><span class="header-section-number">3.4.4</span> XML files</a></li>
+  <li><a href="#connections" id="toc-connections" class="nav-link" data-scroll-target="#connections"><span class="header-section-number">3.4.5</span> Connections</a></li>
   </ul></li>
-  <li><a href="#tidy-your-data" id="toc-tidy-your-data" class="nav-link" data-scroll-target="#tidy-your-data"><span class="toc-section-number">3.5</span>  Tidy your data</a>
+  <li><a href="#tidy-your-data" id="toc-tidy-your-data" class="nav-link" data-scroll-target="#tidy-your-data"><span class="header-section-number">3.5</span> Tidy your data</a>
   <ul class="collapse">
-  <li><a href="#reshape-data" id="toc-reshape-data" class="nav-link" data-scroll-target="#reshape-data"><span class="toc-section-number">3.5.1</span>  Reshape data</a></li>
-  <li><a href="#expand-tables" id="toc-expand-tables" class="nav-link" data-scroll-target="#expand-tables"><span class="toc-section-number">3.5.2</span>  Expand tables</a></li>
-  <li><a href="#handle-missing-values" id="toc-handle-missing-values" class="nav-link" data-scroll-target="#handle-missing-values"><span class="toc-section-number">3.5.3</span>  Handle missing values</a></li>
-  <li><a href="#merge-and-split-cells" id="toc-merge-and-split-cells" class="nav-link" data-scroll-target="#merge-and-split-cells"><span class="toc-section-number">3.5.4</span>  Merge and split cells</a></li>
-  <li><a href="#nested-data" id="toc-nested-data" class="nav-link" data-scroll-target="#nested-data"><span class="toc-section-number">3.5.5</span>  Nested data</a></li>
-  <li><a href="#combine-data-frames" id="toc-combine-data-frames" class="nav-link" data-scroll-target="#combine-data-frames"><span class="toc-section-number">3.5.6</span>  Combine data frames</a></li>
-  <li><a href="#join-data-frames" id="toc-join-data-frames" class="nav-link" data-scroll-target="#join-data-frames"><span class="toc-section-number">3.5.7</span>  Join data frames</a></li>
-  <li><a href="#rename-columns" id="toc-rename-columns" class="nav-link" data-scroll-target="#rename-columns"><span class="toc-section-number">3.5.8</span>  Rename columns</a></li>
-  <li><a href="#select-columns" id="toc-select-columns" class="nav-link" data-scroll-target="#select-columns"><span class="toc-section-number">3.5.9</span>  Select columns</a></li>
-  <li><a href="#filter-rows" id="toc-filter-rows" class="nav-link" data-scroll-target="#filter-rows"><span class="toc-section-number">3.5.10</span>  Filter rows</a></li>
-  <li><a href="#modify-or-create-new-variables" id="toc-modify-or-create-new-variables" class="nav-link" data-scroll-target="#modify-or-create-new-variables"><span class="toc-section-number">3.5.11</span>  Modify or create new variables</a></li>
+  <li><a href="#reshape-data" id="toc-reshape-data" class="nav-link" data-scroll-target="#reshape-data"><span class="header-section-number">3.5.1</span> Reshape data</a></li>
+  <li><a href="#expand-tables" id="toc-expand-tables" class="nav-link" data-scroll-target="#expand-tables"><span class="header-section-number">3.5.2</span> Expand tables</a></li>
+  <li><a href="#handle-missing-values" id="toc-handle-missing-values" class="nav-link" data-scroll-target="#handle-missing-values"><span class="header-section-number">3.5.3</span> Handle missing values</a></li>
+  <li><a href="#merge-and-split-cells" id="toc-merge-and-split-cells" class="nav-link" data-scroll-target="#merge-and-split-cells"><span class="header-section-number">3.5.4</span> Merge and split cells</a></li>
+  <li><a href="#nested-data" id="toc-nested-data" class="nav-link" data-scroll-target="#nested-data"><span class="header-section-number">3.5.5</span> Nested data</a></li>
+  <li><a href="#combine-data-frames" id="toc-combine-data-frames" class="nav-link" data-scroll-target="#combine-data-frames"><span class="header-section-number">3.5.6</span> Combine data frames</a></li>
+  <li><a href="#join-data-frames" id="toc-join-data-frames" class="nav-link" data-scroll-target="#join-data-frames"><span class="header-section-number">3.5.7</span> Join data frames</a></li>
+  <li><a href="#rename-columns" id="toc-rename-columns" class="nav-link" data-scroll-target="#rename-columns"><span class="header-section-number">3.5.8</span> Rename columns</a></li>
+  <li><a href="#select-columns" id="toc-select-columns" class="nav-link" data-scroll-target="#select-columns"><span class="header-section-number">3.5.9</span> Select columns</a></li>
+  <li><a href="#filter-rows" id="toc-filter-rows" class="nav-link" data-scroll-target="#filter-rows"><span class="header-section-number">3.5.10</span> Filter rows</a></li>
+  <li><a href="#modify-or-create-new-variables" id="toc-modify-or-create-new-variables" class="nav-link" data-scroll-target="#modify-or-create-new-variables"><span class="header-section-number">3.5.11</span> Modify or create new variables</a></li>
   </ul></li>
-  <li><a href="#export-data" id="toc-export-data" class="nav-link" data-scroll-target="#export-data"><span class="toc-section-number">3.6</span>  Export data</a>
+  <li><a href="#export-data" id="toc-export-data" class="nav-link" data-scroll-target="#export-data"><span class="header-section-number">3.6</span> Export data</a>
   <ul class="collapse">
-  <li><a href="#export-data-frames" id="toc-export-data-frames" class="nav-link" data-scroll-target="#export-data-frames"><span class="toc-section-number">3.6.1</span>  Export data frames</a></li>
-  <li><a href="#json" id="toc-json" class="nav-link" data-scroll-target="#json"><span class="toc-section-number">3.6.2</span>  JSON</a></li>
+  <li><a href="#export-data-frames" id="toc-export-data-frames" class="nav-link" data-scroll-target="#export-data-frames"><span class="header-section-number">3.6.1</span> Export data frames</a></li>
+  <li><a href="#json" id="toc-json" class="nav-link" data-scroll-target="#json"><span class="header-section-number">3.6.2</span> JSON</a></li>
   </ul></li>
-  <li><a href="#writing-readable-code" id="toc-writing-readable-code" class="nav-link" data-scroll-target="#writing-readable-code"><span class="toc-section-number">3.7</span>  Writing readable code</a>
+  <li><a href="#writing-readable-code" id="toc-writing-readable-code" class="nav-link" data-scroll-target="#writing-readable-code"><span class="header-section-number">3.7</span> Writing readable code</a>
   <ul class="collapse">
-  <li><a href="#the-pipe" id="toc-the-pipe" class="nav-link" data-scroll-target="#the-pipe"><span class="toc-section-number">3.7.1</span>  The pipe</a></li>
+  <li><a href="#the-pipe" id="toc-the-pipe" class="nav-link" data-scroll-target="#the-pipe"><span class="header-section-number">3.7.1</span> The pipe</a></li>
   </ul></li>
-  <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources"><span class="toc-section-number">3.8</span>  Additional resources</a></li>
+  <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources"><span class="header-section-number">3.8</span> Additional resources</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">3.9</span> References</a></li>
   </ul>
 </nav>
     </div>
@@ -300,7 +293,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Reading and tidying data</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Reading and tidying data</span></h1>
 </div>
 
 
@@ -315,9 +308,6 @@ div.csl-indent {
 
 </header>
 
-<div class="cell">
-
-</div>
 <section id="learning-objectives" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">3.1</span> Learning objectives</h2>
 <ul>
@@ -330,7 +320,7 @@ div.csl-indent {
 <section id="tidy-data" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="tidy-data"><span class="header-section-number">3.2</span> Tidy data</h2>
 <p>Data is stored in all kinds or places, can be accessed in many different ways, and comes in all kinds of shapes and forms. Therefore, much of the data scientist’s work is related to collecting, processing, and cleaning data to get it ready for analysis.</p>
-<p>Tidy data a set of principles adapted from the relational model (those of you who took my data management course will be familiar with the relational model). According to <span class="citation" data-cites="wickham2014">Wickham (<a href="#ref-wickham2014" role="doc-biblioref">2014</a>)</span>, those principles are:</p>
+<p>Tidy data a set of principles adapted from the relational model (those of you who took my data management course will be familiar with the relational model). According to <span class="citation" data-cites="wickham2014">Wickham (<a href="references.html#ref-wickham2014" role="doc-biblioref">2014</a>)</span>, those principles are:</p>
 <ol type="1">
 <li><p>Each variable forms a column.</p></li>
 <li><p>Each observation forms a row.</p></li>
@@ -340,76 +330,76 @@ div.csl-indent {
 <p>Here’s an example of what tidy data looks like taken from the Titanic dataset.</p>
 <div class="cell">
 <div class="cell-output-display">
-
-<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:right;"> PassengerId </th>
-   <th style="text-align:right;"> Survived </th>
-   <th style="text-align:right;"> Pclass </th>
-   <th style="text-align:left;"> Sex </th>
-   <th style="text-align:right;"> Age </th>
-   <th style="text-align:left;"> Ticket </th>
-   <th style="text-align:right;"> Fare </th>
-  </tr>
- </thead>
+<table class="lightable-classic table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">PassengerId</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Survived</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Pclass</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Sex</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Age</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Ticket</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Fare</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:left;"> male </td>
-   <td style="text-align:right;"> 22 </td>
-   <td style="text-align:left;"> A/5 21171 </td>
-   <td style="text-align:right;"> 7.2500 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> female </td>
-   <td style="text-align:right;"> 38 </td>
-   <td style="text-align:left;"> PC 17599 </td>
-   <td style="text-align:right;"> 71.2833 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:left;"> female </td>
-   <td style="text-align:right;"> 26 </td>
-   <td style="text-align:left;"> STON/O2. 3101282 </td>
-   <td style="text-align:right;"> 7.9250 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> female </td>
-   <td style="text-align:right;"> 35 </td>
-   <td style="text-align:left;"> 113803 </td>
-   <td style="text-align:right;"> 53.1000 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:left;"> male </td>
-   <td style="text-align:right;"> 35 </td>
-   <td style="text-align:left;"> 373450 </td>
-   <td style="text-align:right;"> 8.0500 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 6 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:left;"> male </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:left;"> 330877 </td>
-   <td style="text-align:right;"> 8.4583 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">male</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: left;">A/5 21171</td>
+<td style="text-align: right;">7.2500</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">female</td>
+<td style="text-align: right;">38</td>
+<td style="text-align: left;">PC 17599</td>
+<td style="text-align: right;">71.2833</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">female</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: left;">STON/O2. 3101282</td>
+<td style="text-align: right;">7.9250</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">female</td>
+<td style="text-align: right;">35</td>
+<td style="text-align: left;">113803</td>
+<td style="text-align: right;">53.1000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">male</td>
+<td style="text-align: right;">35</td>
+<td style="text-align: left;">373450</td>
+<td style="text-align: right;">8.0500</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">male</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">330877</td>
+<td style="text-align: right;">8.4583</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
@@ -417,371 +407,371 @@ div.csl-indent {
 <p>Now let’s take a look at a dataset that is <strong>not</strong> tidy.</p>
 <div class="cell">
 <div class="cell-output-display">
-
-<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;"> course </th>
-   <th style="text-align:left;"> students </th>
-   <th style="text-align:left;"> grades </th>
-  </tr>
- </thead>
+<table class="lightable-classic table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">course</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">students</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">grades</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> INFO6270 </td>
-   <td style="text-align:left;"> Francis, Sam, Amy </td>
-   <td style="text-align:left;"> 92 (A+), 86 (A), 84 (A-) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO6540 </td>
-   <td style="text-align:left;"> Francis, Sam, Amy </td>
-   <td style="text-align:left;"> 77 (B+), 100 (A+), 74(B) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO5500 </td>
-   <td style="text-align:left;"> Francis, Sam, Amy </td>
-   <td style="text-align:left;"> 86 (A), 70 (B-), 99 (A+) </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">INFO6270</td>
+<td style="text-align: left;">Francis, Sam, Amy</td>
+<td style="text-align: left;">92 (A+), 86 (A), 84 (A-)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INFO6540</td>
+<td style="text-align: left;">Francis, Sam, Amy</td>
+<td style="text-align: left;">77 (B+), 100 (A+), 74(B)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">INFO5500</td>
+<td style="text-align: left;">Francis, Sam, Amy</td>
+<td style="text-align: left;">86 (A), 70 (B-), 99 (A+)</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
 <p>We can see that for each course, students are listed in a single cell, and their grades as well. To make this data tidy, a first thing we might might to do is separate students and their grades so that they each occupy a row, and cells contains only one student or grade.</p>
 <div class="cell">
 <div class="cell-output-display">
-
-<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;"> course </th>
-   <th style="text-align:left;"> students </th>
-   <th style="text-align:left;"> grades </th>
-  </tr>
- </thead>
+<table class="lightable-classic table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">course</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">students</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">grades</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> INFO6270 </td>
-   <td style="text-align:left;"> Francis </td>
-   <td style="text-align:left;"> 92 (A+) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO6270 </td>
-   <td style="text-align:left;"> Francis </td>
-   <td style="text-align:left;"> 86 (A) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO6270 </td>
-   <td style="text-align:left;"> Francis </td>
-   <td style="text-align:left;"> 84 (A-) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO6270 </td>
-   <td style="text-align:left;"> Sam </td>
-   <td style="text-align:left;"> 92 (A+) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO6270 </td>
-   <td style="text-align:left;"> Sam </td>
-   <td style="text-align:left;"> 86 (A) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO6270 </td>
-   <td style="text-align:left;"> Sam </td>
-   <td style="text-align:left;"> 84 (A-) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO6270 </td>
-   <td style="text-align:left;"> Amy </td>
-   <td style="text-align:left;"> 92 (A+) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO6270 </td>
-   <td style="text-align:left;"> Amy </td>
-   <td style="text-align:left;"> 86 (A) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO6270 </td>
-   <td style="text-align:left;"> Amy </td>
-   <td style="text-align:left;"> 84 (A-) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO6540 </td>
-   <td style="text-align:left;"> Francis </td>
-   <td style="text-align:left;"> 77 (B+) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO6540 </td>
-   <td style="text-align:left;"> Francis </td>
-   <td style="text-align:left;"> 100 (A+) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO6540 </td>
-   <td style="text-align:left;"> Francis </td>
-   <td style="text-align:left;"> 74(B) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO6540 </td>
-   <td style="text-align:left;"> Sam </td>
-   <td style="text-align:left;"> 77 (B+) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO6540 </td>
-   <td style="text-align:left;"> Sam </td>
-   <td style="text-align:left;"> 100 (A+) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO6540 </td>
-   <td style="text-align:left;"> Sam </td>
-   <td style="text-align:left;"> 74(B) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO6540 </td>
-   <td style="text-align:left;"> Amy </td>
-   <td style="text-align:left;"> 77 (B+) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO6540 </td>
-   <td style="text-align:left;"> Amy </td>
-   <td style="text-align:left;"> 100 (A+) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO6540 </td>
-   <td style="text-align:left;"> Amy </td>
-   <td style="text-align:left;"> 74(B) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO5500 </td>
-   <td style="text-align:left;"> Francis </td>
-   <td style="text-align:left;"> 86 (A) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO5500 </td>
-   <td style="text-align:left;"> Francis </td>
-   <td style="text-align:left;"> 70 (B-) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO5500 </td>
-   <td style="text-align:left;"> Francis </td>
-   <td style="text-align:left;"> 99 (A+) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO5500 </td>
-   <td style="text-align:left;"> Sam </td>
-   <td style="text-align:left;"> 86 (A) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO5500 </td>
-   <td style="text-align:left;"> Sam </td>
-   <td style="text-align:left;"> 70 (B-) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO5500 </td>
-   <td style="text-align:left;"> Sam </td>
-   <td style="text-align:left;"> 99 (A+) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO5500 </td>
-   <td style="text-align:left;"> Amy </td>
-   <td style="text-align:left;"> 86 (A) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO5500 </td>
-   <td style="text-align:left;"> Amy </td>
-   <td style="text-align:left;"> 70 (B-) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO5500 </td>
-   <td style="text-align:left;"> Amy </td>
-   <td style="text-align:left;"> 99 (A+) </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">INFO6270</td>
+<td style="text-align: left;">Francis</td>
+<td style="text-align: left;">92 (A+)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INFO6270</td>
+<td style="text-align: left;">Francis</td>
+<td style="text-align: left;">86 (A)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">INFO6270</td>
+<td style="text-align: left;">Francis</td>
+<td style="text-align: left;">84 (A-)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INFO6270</td>
+<td style="text-align: left;">Sam</td>
+<td style="text-align: left;">92 (A+)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">INFO6270</td>
+<td style="text-align: left;">Sam</td>
+<td style="text-align: left;">86 (A)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INFO6270</td>
+<td style="text-align: left;">Sam</td>
+<td style="text-align: left;">84 (A-)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">INFO6270</td>
+<td style="text-align: left;">Amy</td>
+<td style="text-align: left;">92 (A+)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INFO6270</td>
+<td style="text-align: left;">Amy</td>
+<td style="text-align: left;">86 (A)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">INFO6270</td>
+<td style="text-align: left;">Amy</td>
+<td style="text-align: left;">84 (A-)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INFO6540</td>
+<td style="text-align: left;">Francis</td>
+<td style="text-align: left;">77 (B+)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">INFO6540</td>
+<td style="text-align: left;">Francis</td>
+<td style="text-align: left;">100 (A+)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INFO6540</td>
+<td style="text-align: left;">Francis</td>
+<td style="text-align: left;">74(B)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">INFO6540</td>
+<td style="text-align: left;">Sam</td>
+<td style="text-align: left;">77 (B+)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INFO6540</td>
+<td style="text-align: left;">Sam</td>
+<td style="text-align: left;">100 (A+)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">INFO6540</td>
+<td style="text-align: left;">Sam</td>
+<td style="text-align: left;">74(B)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INFO6540</td>
+<td style="text-align: left;">Amy</td>
+<td style="text-align: left;">77 (B+)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">INFO6540</td>
+<td style="text-align: left;">Amy</td>
+<td style="text-align: left;">100 (A+)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INFO6540</td>
+<td style="text-align: left;">Amy</td>
+<td style="text-align: left;">74(B)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">INFO5500</td>
+<td style="text-align: left;">Francis</td>
+<td style="text-align: left;">86 (A)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INFO5500</td>
+<td style="text-align: left;">Francis</td>
+<td style="text-align: left;">70 (B-)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">INFO5500</td>
+<td style="text-align: left;">Francis</td>
+<td style="text-align: left;">99 (A+)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INFO5500</td>
+<td style="text-align: left;">Sam</td>
+<td style="text-align: left;">86 (A)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">INFO5500</td>
+<td style="text-align: left;">Sam</td>
+<td style="text-align: left;">70 (B-)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INFO5500</td>
+<td style="text-align: left;">Sam</td>
+<td style="text-align: left;">99 (A+)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">INFO5500</td>
+<td style="text-align: left;">Amy</td>
+<td style="text-align: left;">86 (A)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INFO5500</td>
+<td style="text-align: left;">Amy</td>
+<td style="text-align: left;">70 (B-)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">INFO5500</td>
+<td style="text-align: left;">Amy</td>
+<td style="text-align: left;">99 (A+)</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
 <p>This is much better, although we still have the issue of the numeric and letter grades being lumped together in a cell. To make this data truly tidy, we want to separate the numeric and the letter grades, like this:</p>
 <div class="cell">
 <div class="cell-output-display">
-
-<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;"> course </th>
-   <th style="text-align:left;"> students </th>
-   <th style="text-align:left;"> grade_numeric </th>
-   <th style="text-align:left;"> grade_letter </th>
-  </tr>
- </thead>
+<table class="lightable-classic table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">course</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">students</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">grade_numeric</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">grade_letter</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> INFO6270 </td>
-   <td style="text-align:left;"> Francis </td>
-   <td style="text-align:left;"> 92 </td>
-   <td style="text-align:left;"> A+ </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO6270 </td>
-   <td style="text-align:left;"> Francis </td>
-   <td style="text-align:left;"> 86 </td>
-   <td style="text-align:left;"> A </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO6270 </td>
-   <td style="text-align:left;"> Francis </td>
-   <td style="text-align:left;"> 84 </td>
-   <td style="text-align:left;"> A- </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO6270 </td>
-   <td style="text-align:left;"> Sam </td>
-   <td style="text-align:left;"> 92 </td>
-   <td style="text-align:left;"> A+ </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO6270 </td>
-   <td style="text-align:left;"> Sam </td>
-   <td style="text-align:left;"> 86 </td>
-   <td style="text-align:left;"> A </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO6270 </td>
-   <td style="text-align:left;"> Sam </td>
-   <td style="text-align:left;"> 84 </td>
-   <td style="text-align:left;"> A- </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO6270 </td>
-   <td style="text-align:left;"> Amy </td>
-   <td style="text-align:left;"> 92 </td>
-   <td style="text-align:left;"> A+ </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO6270 </td>
-   <td style="text-align:left;"> Amy </td>
-   <td style="text-align:left;"> 86 </td>
-   <td style="text-align:left;"> A </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO6270 </td>
-   <td style="text-align:left;"> Amy </td>
-   <td style="text-align:left;"> 84 </td>
-   <td style="text-align:left;"> A- </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO6540 </td>
-   <td style="text-align:left;"> Francis </td>
-   <td style="text-align:left;"> 77 </td>
-   <td style="text-align:left;"> B+ </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO6540 </td>
-   <td style="text-align:left;"> Francis </td>
-   <td style="text-align:left;"> 100 </td>
-   <td style="text-align:left;"> A+ </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO6540 </td>
-   <td style="text-align:left;"> Francis </td>
-   <td style="text-align:left;"> 74 </td>
-   <td style="text-align:left;"> B </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO6540 </td>
-   <td style="text-align:left;"> Sam </td>
-   <td style="text-align:left;"> 77 </td>
-   <td style="text-align:left;"> B+ </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO6540 </td>
-   <td style="text-align:left;"> Sam </td>
-   <td style="text-align:left;"> 100 </td>
-   <td style="text-align:left;"> A+ </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO6540 </td>
-   <td style="text-align:left;"> Sam </td>
-   <td style="text-align:left;"> 74 </td>
-   <td style="text-align:left;"> B </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO6540 </td>
-   <td style="text-align:left;"> Amy </td>
-   <td style="text-align:left;"> 77 </td>
-   <td style="text-align:left;"> B+ </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO6540 </td>
-   <td style="text-align:left;"> Amy </td>
-   <td style="text-align:left;"> 100 </td>
-   <td style="text-align:left;"> A+ </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO6540 </td>
-   <td style="text-align:left;"> Amy </td>
-   <td style="text-align:left;"> 74 </td>
-   <td style="text-align:left;"> B </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO5500 </td>
-   <td style="text-align:left;"> Francis </td>
-   <td style="text-align:left;"> 86 </td>
-   <td style="text-align:left;"> A </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO5500 </td>
-   <td style="text-align:left;"> Francis </td>
-   <td style="text-align:left;"> 70 </td>
-   <td style="text-align:left;"> B- </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO5500 </td>
-   <td style="text-align:left;"> Francis </td>
-   <td style="text-align:left;"> 99 </td>
-   <td style="text-align:left;"> A+ </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO5500 </td>
-   <td style="text-align:left;"> Sam </td>
-   <td style="text-align:left;"> 86 </td>
-   <td style="text-align:left;"> A </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO5500 </td>
-   <td style="text-align:left;"> Sam </td>
-   <td style="text-align:left;"> 70 </td>
-   <td style="text-align:left;"> B- </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO5500 </td>
-   <td style="text-align:left;"> Sam </td>
-   <td style="text-align:left;"> 99 </td>
-   <td style="text-align:left;"> A+ </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO5500 </td>
-   <td style="text-align:left;"> Amy </td>
-   <td style="text-align:left;"> 86 </td>
-   <td style="text-align:left;"> A </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO5500 </td>
-   <td style="text-align:left;"> Amy </td>
-   <td style="text-align:left;"> 70 </td>
-   <td style="text-align:left;"> B- </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> INFO5500 </td>
-   <td style="text-align:left;"> Amy </td>
-   <td style="text-align:left;"> 99 </td>
-   <td style="text-align:left;"> A+ </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">INFO6270</td>
+<td style="text-align: left;">Francis</td>
+<td style="text-align: left;">92</td>
+<td style="text-align: left;">A+</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INFO6270</td>
+<td style="text-align: left;">Francis</td>
+<td style="text-align: left;">86</td>
+<td style="text-align: left;">A</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">INFO6270</td>
+<td style="text-align: left;">Francis</td>
+<td style="text-align: left;">84</td>
+<td style="text-align: left;">A-</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INFO6270</td>
+<td style="text-align: left;">Sam</td>
+<td style="text-align: left;">92</td>
+<td style="text-align: left;">A+</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">INFO6270</td>
+<td style="text-align: left;">Sam</td>
+<td style="text-align: left;">86</td>
+<td style="text-align: left;">A</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INFO6270</td>
+<td style="text-align: left;">Sam</td>
+<td style="text-align: left;">84</td>
+<td style="text-align: left;">A-</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">INFO6270</td>
+<td style="text-align: left;">Amy</td>
+<td style="text-align: left;">92</td>
+<td style="text-align: left;">A+</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INFO6270</td>
+<td style="text-align: left;">Amy</td>
+<td style="text-align: left;">86</td>
+<td style="text-align: left;">A</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">INFO6270</td>
+<td style="text-align: left;">Amy</td>
+<td style="text-align: left;">84</td>
+<td style="text-align: left;">A-</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INFO6540</td>
+<td style="text-align: left;">Francis</td>
+<td style="text-align: left;">77</td>
+<td style="text-align: left;">B+</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">INFO6540</td>
+<td style="text-align: left;">Francis</td>
+<td style="text-align: left;">100</td>
+<td style="text-align: left;">A+</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INFO6540</td>
+<td style="text-align: left;">Francis</td>
+<td style="text-align: left;">74</td>
+<td style="text-align: left;">B</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">INFO6540</td>
+<td style="text-align: left;">Sam</td>
+<td style="text-align: left;">77</td>
+<td style="text-align: left;">B+</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INFO6540</td>
+<td style="text-align: left;">Sam</td>
+<td style="text-align: left;">100</td>
+<td style="text-align: left;">A+</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">INFO6540</td>
+<td style="text-align: left;">Sam</td>
+<td style="text-align: left;">74</td>
+<td style="text-align: left;">B</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INFO6540</td>
+<td style="text-align: left;">Amy</td>
+<td style="text-align: left;">77</td>
+<td style="text-align: left;">B+</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">INFO6540</td>
+<td style="text-align: left;">Amy</td>
+<td style="text-align: left;">100</td>
+<td style="text-align: left;">A+</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INFO6540</td>
+<td style="text-align: left;">Amy</td>
+<td style="text-align: left;">74</td>
+<td style="text-align: left;">B</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">INFO5500</td>
+<td style="text-align: left;">Francis</td>
+<td style="text-align: left;">86</td>
+<td style="text-align: left;">A</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INFO5500</td>
+<td style="text-align: left;">Francis</td>
+<td style="text-align: left;">70</td>
+<td style="text-align: left;">B-</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">INFO5500</td>
+<td style="text-align: left;">Francis</td>
+<td style="text-align: left;">99</td>
+<td style="text-align: left;">A+</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INFO5500</td>
+<td style="text-align: left;">Sam</td>
+<td style="text-align: left;">86</td>
+<td style="text-align: left;">A</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">INFO5500</td>
+<td style="text-align: left;">Sam</td>
+<td style="text-align: left;">70</td>
+<td style="text-align: left;">B-</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INFO5500</td>
+<td style="text-align: left;">Sam</td>
+<td style="text-align: left;">99</td>
+<td style="text-align: left;">A+</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">INFO5500</td>
+<td style="text-align: left;">Amy</td>
+<td style="text-align: left;">86</td>
+<td style="text-align: left;">A</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INFO5500</td>
+<td style="text-align: left;">Amy</td>
+<td style="text-align: left;">70</td>
+<td style="text-align: left;">B-</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">INFO5500</td>
+<td style="text-align: left;">Amy</td>
+<td style="text-align: left;">99</td>
+<td style="text-align: left;">A+</td>
+</tr>
 </tbody>
 </table>
 
+
 </div>
 </div>
-<p>That’s it, now we have a tidy data set of grades! You can read more about tidy data the R for Data Science book <span class="citation" data-cites="wickham2016">Wickham and Grolemund (<a href="#ref-wickham2016" role="doc-biblioref">2016</a>)</span> , or the journal article by <span class="citation" data-cites="wickham2014">Wickham (<a href="#ref-wickham2014" role="doc-biblioref">2014</a>)</span>.</p>
+<p>That’s it, now we have a tidy data set of grades! You can read more about tidy data the R for Data Science book <span class="citation" data-cites="wickham2016">Wickham and Grolemund (<a href="references.html#ref-wickham2016" role="doc-biblioref">2016</a>)</span> , or the journal article by <span class="citation" data-cites="wickham2014">Wickham (<a href="references.html#ref-wickham2014" role="doc-biblioref">2014</a>)</span>.</p>
 </section>
 <section id="the-tidyverse" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="the-tidyverse"><span class="header-section-number">3.3</span> The tidyverse</h2>
@@ -790,14 +780,14 @@ div.csl-indent {
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tidyverse_packages</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "broom"         "cli"           "crayon"        "dbplyr"       
+<pre><code> [1] "broom"         "conflicted"    "cli"           "dbplyr"       
  [5] "dplyr"         "dtplyr"        "forcats"       "ggplot2"      
  [9] "googledrive"   "googlesheets4" "haven"         "hms"          
 [13] "httr"          "jsonlite"      "lubridate"     "magrittr"     
-[17] "modelr"        "pillar"        "purrr"         "readr"        
-[21] "readxl"        "reprex"        "rlang"         "rstudioapi"   
-[25] "rvest"         "stringr"       "tibble"        "tidyr"        
-[29] "xml2"          "tidyverse"    </code></pre>
+[17] "modelr"        "pillar"        "purrr"         "ragg"         
+[21] "readr"         "readxl"        "reprex"        "rlang"        
+[25] "rstudioapi"    "rvest"         "stringr"       "tibble"       
+[29] "tidyr"         "xml2"          "tidyverse"    </code></pre>
 </div>
 </div>
 <p>In the next sections, we will use a few of the tidyverse packages (but not exclusively) to import data into R from multiple types of source. Because the tidy format is pretty standard and not R-specific, you might often find that the data sets that you will work with are already respecting the tidy principles. But you’ll also come across different data structures and formats, and so we’ll learn how to tidy up data.</p>
@@ -805,12 +795,12 @@ div.csl-indent {
 <section id="import-data" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="import-data"><span class="header-section-number">3.4</span> Import data</h2>
 <p>The following sections show how to load data from different sources and format into R.</p>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Important note
 </div>
 </div>
@@ -1029,9 +1019,9 @@ Important note
 <pre><code># A tibble: 3 × 4
   university SSHRC NSERC  CIHR
   &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1 DAL           16     8    95
-2 SMU           69    19    50
-3 SFX           97    24    62</code></pre>
+1 DAL           20     6    43
+2 SMU           99    45    77
+3 SFX           47    26     4</code></pre>
 </div>
 </div>
 <section id="pivot_longer" class="level4" data-number="3.5.1.1">
@@ -1045,15 +1035,15 @@ Important note
 <pre><code># A tibble: 9 × 3
   university funder funding_amount
   &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;
-1 DAL        SSHRC              16
-2 DAL        NSERC               8
-3 DAL        CIHR               95
-4 SMU        SSHRC              69
-5 SMU        NSERC              19
-6 SMU        CIHR               50
-7 SFX        SSHRC              97
-8 SFX        NSERC              24
-9 SFX        CIHR               62</code></pre>
+1 DAL        SSHRC              20
+2 DAL        NSERC               6
+3 DAL        CIHR               43
+4 SMU        SSHRC              99
+5 SMU        NSERC              45
+6 SMU        CIHR               77
+7 SFX        SSHRC              47
+8 SFX        NSERC              26
+9 SFX        CIHR                4</code></pre>
 </div>
 </div>
 </section>
@@ -1068,9 +1058,9 @@ Important note
 <pre><code># A tibble: 3 × 4
   university SSHRC NSERC  CIHR
   &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1 DAL           16     8    95
-2 SMU           69    19    50
-3 SFX           97    24    62</code></pre>
+1 DAL           20     6    43
+2 SMU           99    45    77
+3 SFX           47    26     4</code></pre>
 </div>
 </div>
 </section>
@@ -1088,13 +1078,13 @@ Important note
 <pre><code># A tibble: 7 × 3
   university funder n_grants
   &lt;chr&gt;      &lt;chr&gt;     &lt;dbl&gt;
-1 DAL        SSHRC        61
-2 DAL        NSERC        75
-3 DAL        CIHR         91
-4 SMU        SSHRC        48
-5 SMU        CIHR         83
-6 SFX        NSERC        52
-7 SFX        CIHR         64</code></pre>
+1 DAL        SSHRC        89
+2 DAL        NSERC        95
+3 DAL        CIHR         69
+4 SMU        SSHRC        28
+5 SMU        CIHR         38
+6 SFX        NSERC        63
+7 SFX        CIHR         60</code></pre>
 </div>
 </div>
 <section id="expand" class="level4" data-number="3.5.2.1">
@@ -1129,15 +1119,15 @@ Important note
 <pre><code># A tibble: 9 × 3
   university funder n_grants
   &lt;chr&gt;      &lt;chr&gt;     &lt;dbl&gt;
-1 DAL        CIHR         91
-2 DAL        NSERC        75
-3 DAL        SSHRC        61
-4 SFX        CIHR         64
-5 SFX        NSERC        52
+1 DAL        CIHR         69
+2 DAL        NSERC        95
+3 DAL        SSHRC        89
+4 SFX        CIHR         60
+5 SFX        NSERC        63
 6 SFX        SSHRC        NA
-7 SMU        CIHR         83
+7 SMU        CIHR         38
 8 SMU        NSERC        NA
-9 SMU        SSHRC        48</code></pre>
+9 SMU        SSHRC        28</code></pre>
 </div>
 </div>
 </section>
@@ -1155,13 +1145,13 @@ Important note
 <pre><code># A tibble: 7 × 3
   university funder n_grants
   &lt;chr&gt;      &lt;chr&gt;     &lt;dbl&gt;
-1 DAL        CIHR         91
-2 DAL        NSERC        75
-3 DAL        SSHRC        61
-4 SFX        CIHR         64
-5 SFX        NSERC        52
-6 SMU        CIHR         83
-7 SMU        SSHRC        48</code></pre>
+1 DAL        CIHR         69
+2 DAL        NSERC        95
+3 DAL        SSHRC        89
+4 SFX        CIHR         60
+5 SFX        NSERC        63
+6 SMU        CIHR         38
+7 SMU        SSHRC        28</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This would remove rows where the n_grants column is NA and leave NA values in other</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># columns.</span></span>
@@ -1170,13 +1160,13 @@ Important note
 <pre><code># A tibble: 7 × 3
   university funder n_grants
   &lt;chr&gt;      &lt;chr&gt;     &lt;dbl&gt;
-1 DAL        CIHR         91
-2 DAL        NSERC        75
-3 DAL        SSHRC        61
-4 SFX        CIHR         64
-5 SFX        NSERC        52
-6 SMU        CIHR         83
-7 SMU        SSHRC        48</code></pre>
+1 DAL        CIHR         69
+2 DAL        NSERC        95
+3 DAL        SSHRC        89
+4 SFX        CIHR         60
+5 SFX        NSERC        63
+6 SMU        CIHR         38
+7 SMU        SSHRC        28</code></pre>
 </div>
 </div>
 </section>
@@ -1189,27 +1179,27 @@ Important note
 <pre><code># A tibble: 9 × 3
   university funder n_grants
   &lt;chr&gt;      &lt;chr&gt;     &lt;dbl&gt;
-1 DAL        CIHR         91
-2 DAL        NSERC        75
-3 DAL        SSHRC        61
-4 SFX        CIHR         64
-5 SFX        NSERC        52
+1 DAL        CIHR         69
+2 DAL        NSERC        95
+3 DAL        SSHRC        89
+4 SFX        CIHR         60
+5 SFX        NSERC        63
 6 SFX        SSHRC         0
-7 SMU        CIHR         83
+7 SMU        CIHR         38
 8 SMU        NSERC         0
-9 SMU        SSHRC        48</code></pre>
+9 SMU        SSHRC        28</code></pre>
 </div>
 </div>
 <p>If we want to replace NAs in multiple columns, we simply need to put additional column names and values to replace NAs with in the list. The code below replaces the NAs with 0 in two columns of some tibble.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">replace_na</span>(some_tibble, <span class="fu">list</span>(<span class="at">some_column =</span> <span class="dv">0</span>, <span class="at">some_other_column =</span> <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Caution
 </div>
 </div>
@@ -1305,21 +1295,18 @@ Caution
 4 boring article  Roberts, J.</code></pre>
 </div>
 </div>
-<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Choose your separator carefully
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Notice how our separator in the code above was not just a semi-colon, but a semi-colon followed by a space. That is because in the original tibble, there were two characters between the end of an author’s name and the beginning of the other: a semi-colon and a space. If we had just used the semi-colon as our separator in the <code>separate_rows()</code>, the space would have been kept as the first character of the names of all authors except the first one.</p>
 </div>
-</div>
-<div class="cell">
-
 </div>
 </section>
 </section>
@@ -1374,7 +1361,7 @@ Choose your separator carefully
  8 &lt;named list [22]&gt; row        
  9 &lt;named list [22]&gt; row        
 10 &lt;named list [22]&gt; row        
-# … with 332 more rows</code></pre>
+# ℹ 332 more rows</code></pre>
 </div>
 </div>
 <p>Now we’re making progress. We have 342 observations each occupying one line. This is one of the tidy criteria! However, the columns are not right. We can see that there are two columns. The first one appears to contain 342 list of 22 elements, which are probably the 22 variables that we want as our columns.</p>
@@ -1388,24 +1375,24 @@ Choose your separator carefully
 <span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(public_housing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 342 × 23
-   id     propert…¹ pid    name   address city   posta…² numbe…³ resid…⁴ housi…⁵
-   &lt;list&gt; &lt;list&gt;    &lt;list&gt; &lt;list&gt; &lt;list&gt;  &lt;list&gt; &lt;list&gt;  &lt;list&gt;  &lt;list&gt;  &lt;list&gt; 
- 1 &lt;list&gt; &lt;list&gt;    &lt;list&gt; &lt;list&gt; &lt;list&gt;  &lt;list&gt; &lt;list&gt;  &lt;list&gt;  &lt;list&gt;  &lt;list&gt; 
- 2 &lt;list&gt; &lt;list&gt;    &lt;list&gt; &lt;list&gt; &lt;list&gt;  &lt;list&gt; &lt;list&gt;  &lt;list&gt;  &lt;list&gt;  &lt;list&gt; 
- 3 &lt;list&gt; &lt;list&gt;    &lt;list&gt; &lt;list&gt; &lt;list&gt;  &lt;list&gt; &lt;NULL&gt;  &lt;list&gt;  &lt;list&gt;  &lt;list&gt; 
- 4 &lt;list&gt; &lt;list&gt;    &lt;list&gt; &lt;list&gt; &lt;list&gt;  &lt;list&gt; &lt;list&gt;  &lt;list&gt;  &lt;list&gt;  &lt;list&gt; 
- 5 &lt;list&gt; &lt;list&gt;    &lt;list&gt; &lt;list&gt; &lt;list&gt;  &lt;list&gt; &lt;list&gt;  &lt;list&gt;  &lt;list&gt;  &lt;list&gt; 
- 6 &lt;list&gt; &lt;list&gt;    &lt;list&gt; &lt;list&gt; &lt;NULL&gt;  &lt;list&gt; &lt;list&gt;  &lt;list&gt;  &lt;list&gt;  &lt;list&gt; 
- 7 &lt;list&gt; &lt;list&gt;    &lt;list&gt; &lt;list&gt; &lt;list&gt;  &lt;list&gt; &lt;list&gt;  &lt;list&gt;  &lt;list&gt;  &lt;list&gt; 
- 8 &lt;list&gt; &lt;list&gt;    &lt;list&gt; &lt;list&gt; &lt;list&gt;  &lt;list&gt; &lt;list&gt;  &lt;list&gt;  &lt;list&gt;  &lt;list&gt; 
- 9 &lt;list&gt; &lt;list&gt;    &lt;list&gt; &lt;list&gt; &lt;list&gt;  &lt;list&gt; &lt;list&gt;  &lt;list&gt;  &lt;list&gt;  &lt;list&gt; 
-10 &lt;list&gt; &lt;list&gt;    &lt;list&gt; &lt;list&gt; &lt;list&gt;  &lt;list&gt; &lt;list&gt;  &lt;list&gt;  &lt;list&gt;  &lt;list&gt; 
-# … with 332 more rows, 13 more variables: county &lt;list&gt;, elevator &lt;list&gt;,
-#   oil_heat &lt;list&gt;, electric_heat &lt;list&gt;, public_water &lt;list&gt;, well &lt;list&gt;,
-#   sewer &lt;list&gt;, onsite_septic &lt;list&gt;, municipality &lt;list&gt;, x_coordina &lt;list&gt;,
-#   y_coordina &lt;list&gt;, location &lt;lgl&gt;, response_id &lt;chr&gt;, and abbreviated
-#   variable names ¹​property_project, ²​postal_code, ³​number_of_floors,
-#   ⁴​residential_units, ⁵​housing_authority</code></pre>
+   id         property_project pid        name       address city   postal_code
+   &lt;list&gt;     &lt;list&gt;           &lt;list&gt;     &lt;list&gt;     &lt;list&gt;  &lt;list&gt; &lt;list&gt;     
+ 1 &lt;list [1]&gt; &lt;list [1]&gt;       &lt;list [1]&gt; &lt;list [1]&gt; &lt;list&gt;  &lt;list&gt; &lt;list [1]&gt; 
+ 2 &lt;list [1]&gt; &lt;list [1]&gt;       &lt;list [1]&gt; &lt;list [1]&gt; &lt;list&gt;  &lt;list&gt; &lt;list [1]&gt; 
+ 3 &lt;list [1]&gt; &lt;list [1]&gt;       &lt;list [1]&gt; &lt;list [1]&gt; &lt;list&gt;  &lt;list&gt; &lt;NULL&gt;     
+ 4 &lt;list [1]&gt; &lt;list [1]&gt;       &lt;list [1]&gt; &lt;list [1]&gt; &lt;list&gt;  &lt;list&gt; &lt;list [1]&gt; 
+ 5 &lt;list [1]&gt; &lt;list [1]&gt;       &lt;list [1]&gt; &lt;list [1]&gt; &lt;list&gt;  &lt;list&gt; &lt;list [1]&gt; 
+ 6 &lt;list [1]&gt; &lt;list [1]&gt;       &lt;list [1]&gt; &lt;list [1]&gt; &lt;NULL&gt;  &lt;list&gt; &lt;list [1]&gt; 
+ 7 &lt;list [1]&gt; &lt;list [1]&gt;       &lt;list [1]&gt; &lt;list [1]&gt; &lt;list&gt;  &lt;list&gt; &lt;list [1]&gt; 
+ 8 &lt;list [1]&gt; &lt;list [1]&gt;       &lt;list [1]&gt; &lt;list [1]&gt; &lt;list&gt;  &lt;list&gt; &lt;list [1]&gt; 
+ 9 &lt;list [1]&gt; &lt;list [1]&gt;       &lt;list [1]&gt; &lt;list [1]&gt; &lt;list&gt;  &lt;list&gt; &lt;list [1]&gt; 
+10 &lt;list [1]&gt; &lt;list [1]&gt;       &lt;list [1]&gt; &lt;list [1]&gt; &lt;list&gt;  &lt;list&gt; &lt;list [1]&gt; 
+# ℹ 332 more rows
+# ℹ 16 more variables: number_of_floors &lt;list&gt;, residential_units &lt;list&gt;,
+#   housing_authority &lt;list&gt;, county &lt;list&gt;, elevator &lt;list&gt;, oil_heat &lt;list&gt;,
+#   electric_heat &lt;list&gt;, public_water &lt;list&gt;, well &lt;list&gt;, sewer &lt;list&gt;,
+#   onsite_septic &lt;list&gt;, municipality &lt;list&gt;, x_coordina &lt;list&gt;,
+#   y_coordina &lt;list&gt;, location &lt;lgl&gt;, response_id &lt;chr&gt;</code></pre>
 </div>
 </div>
 <p>we can now see that each cell is a list of 1 element.</p>
@@ -1429,24 +1416,24 @@ Choose your separator carefully
 <span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(public_housing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 342 × 23
-   id        propert…¹ pid   name  address city  posta…² numbe…³ resid…⁴ housi…⁵
-   &lt;list&gt;    &lt;list&gt;    &lt;lis&gt; &lt;lis&gt; &lt;list&gt;  &lt;lis&gt; &lt;list&gt;  &lt;list&gt;  &lt;list&gt;  &lt;list&gt; 
- 1 &lt;chr [1]&gt; &lt;chr [1]&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
- 2 &lt;chr [1]&gt; &lt;chr [1]&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
- 3 &lt;chr [1]&gt; &lt;chr [1]&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;NULL&gt;  &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
- 4 &lt;chr [1]&gt; &lt;chr [1]&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
- 5 &lt;chr [1]&gt; &lt;chr [1]&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
- 6 &lt;chr [1]&gt; &lt;chr [1]&gt; &lt;chr&gt; &lt;chr&gt; &lt;NULL&gt;  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
- 7 &lt;chr [1]&gt; &lt;chr [1]&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
- 8 &lt;chr [1]&gt; &lt;chr [1]&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
- 9 &lt;chr [1]&gt; &lt;chr [1]&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
-10 &lt;chr [1]&gt; &lt;chr [1]&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
-# … with 332 more rows, 13 more variables: county &lt;list&gt;, elevator &lt;list&gt;,
-#   oil_heat &lt;list&gt;, electric_heat &lt;list&gt;, public_water &lt;list&gt;, well &lt;list&gt;,
-#   sewer &lt;list&gt;, onsite_septic &lt;list&gt;, municipality &lt;list&gt;, x_coordina &lt;list&gt;,
-#   y_coordina &lt;list&gt;, location &lt;lgl&gt;, response_id &lt;chr&gt;, and abbreviated
-#   variable names ¹​property_project, ²​postal_code, ³​number_of_floors,
-#   ⁴​residential_units, ⁵​housing_authority</code></pre>
+   id    property_project pid   name  address city  postal_code number_of_floors
+   &lt;lis&gt; &lt;list&gt;           &lt;lis&gt; &lt;lis&gt; &lt;list&gt;  &lt;lis&gt; &lt;list&gt;      &lt;list&gt;          
+ 1 &lt;chr&gt; &lt;chr [1]&gt;        &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr [1]&gt;   &lt;chr [1]&gt;       
+ 2 &lt;chr&gt; &lt;chr [1]&gt;        &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr [1]&gt;   &lt;chr [1]&gt;       
+ 3 &lt;chr&gt; &lt;chr [1]&gt;        &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;NULL&gt;      &lt;chr [1]&gt;       
+ 4 &lt;chr&gt; &lt;chr [1]&gt;        &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr [1]&gt;   &lt;chr [1]&gt;       
+ 5 &lt;chr&gt; &lt;chr [1]&gt;        &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr [1]&gt;   &lt;chr [1]&gt;       
+ 6 &lt;chr&gt; &lt;chr [1]&gt;        &lt;chr&gt; &lt;chr&gt; &lt;NULL&gt;  &lt;chr&gt; &lt;chr [1]&gt;   &lt;chr [1]&gt;       
+ 7 &lt;chr&gt; &lt;chr [1]&gt;        &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr [1]&gt;   &lt;chr [1]&gt;       
+ 8 &lt;chr&gt; &lt;chr [1]&gt;        &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr [1]&gt;   &lt;chr [1]&gt;       
+ 9 &lt;chr&gt; &lt;chr [1]&gt;        &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr [1]&gt;   &lt;chr [1]&gt;       
+10 &lt;chr&gt; &lt;chr [1]&gt;        &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr [1]&gt;   &lt;chr [1]&gt;       
+# ℹ 332 more rows
+# ℹ 15 more variables: residential_units &lt;list&gt;, housing_authority &lt;list&gt;,
+#   county &lt;list&gt;, elevator &lt;list&gt;, oil_heat &lt;list&gt;, electric_heat &lt;list&gt;,
+#   public_water &lt;list&gt;, well &lt;list&gt;, sewer &lt;list&gt;, onsite_septic &lt;list&gt;,
+#   municipality &lt;list&gt;, x_coordina &lt;list&gt;, y_coordina &lt;list&gt;, location &lt;lgl&gt;,
+#   response_id &lt;chr&gt;</code></pre>
 </div>
 </div>
 <p>We now have a tibble with 342 observation of 22 variables. Looks good! But the values in the cells still don’t look right. There’s just one more round of unnesting to apply to all the cell using the same code as in the last step.</p>
@@ -1456,24 +1443,24 @@ Choose your separator carefully
 <span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(public_housing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 342 × 23
-   id    property_pr…¹ pid   name  address city  posta…² numbe…³ resid…⁴ housi…⁵
-   &lt;chr&gt; &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
- 1 117   330101X       6503… Rive… 19/27/… Pict… B0K 1S0 2       20      Easter…
- 2 324   200214X       5006… Bell… 10 Gra… Gran… B0E 1L0 2       15      Cape B…
- 3 247   100215X       1511… Sydn… 77 Ain… Sydn… &lt;NA&gt;    1       2       Cape B…
- 4 337   390201X       2522… Elgi… 22 Elg… Spri… B0M 1X0 1       17      Cobequ…
- 5 224   100201X       1513… Will… 10 Wil… Sydn… B1N 1R4 2       20      Cape B…
- 6 289   150226X       1524… 198 … &lt;NA&gt;    Flor… B0C 1J0 2       15      Cape B…
- 7 214   612301        9021… Trin… 3 Trin… Yarm… B5A 1P3 2       16      Wester…
- 8 143   350801        2017… Youn… 130 Yo… Truro B2N 3X4 2       16      Cobequ…
- 9 104   740101        6018… Ritc… 3809 H… Rive… B0J 2W0 2       15      Wester…
-10 174   430901        4017… Dr. … 3792 N… Hali… B3K 3G5 9       135     Metrop…
-# … with 332 more rows, 13 more variables: county &lt;chr&gt;, elevator &lt;chr&gt;,
-#   oil_heat &lt;chr&gt;, electric_heat &lt;chr&gt;, public_water &lt;chr&gt;, well &lt;chr&gt;,
-#   sewer &lt;chr&gt;, onsite_septic &lt;chr&gt;, municipality &lt;chr&gt;, x_coordina &lt;chr&gt;,
-#   y_coordina &lt;chr&gt;, location &lt;lgl&gt;, response_id &lt;chr&gt;, and abbreviated
-#   variable names ¹​property_project, ²​postal_code, ³​number_of_floors,
-#   ⁴​residential_units, ⁵​housing_authority</code></pre>
+   id    property_project pid   name  address city  postal_code number_of_floors
+   &lt;chr&gt; &lt;chr&gt;            &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;           
+ 1 117   330101X          6503… Rive… 19/27/… Pict… B0K 1S0     2               
+ 2 324   200214X          5006… Bell… 10 Gra… Gran… B0E 1L0     2               
+ 3 247   100215X          1511… Sydn… 77 Ain… Sydn… &lt;NA&gt;        1               
+ 4 337   390201X          2522… Elgi… 22 Elg… Spri… B0M 1X0     1               
+ 5 224   100201X          1513… Will… 10 Wil… Sydn… B1N 1R4     2               
+ 6 289   150226X          1524… 198 … &lt;NA&gt;    Flor… B0C 1J0     2               
+ 7 214   612301           9021… Trin… 3 Trin… Yarm… B5A 1P3     2               
+ 8 143   350801           2017… Youn… 130 Yo… Truro B2N 3X4     2               
+ 9 104   740101           6018… Ritc… 3809 H… Rive… B0J 2W0     2               
+10 174   430901           4017… Dr. … 3792 N… Hali… B3K 3G5     9               
+# ℹ 332 more rows
+# ℹ 15 more variables: residential_units &lt;chr&gt;, housing_authority &lt;chr&gt;,
+#   county &lt;chr&gt;, elevator &lt;chr&gt;, oil_heat &lt;chr&gt;, electric_heat &lt;chr&gt;,
+#   public_water &lt;chr&gt;, well &lt;chr&gt;, sewer &lt;chr&gt;, onsite_septic &lt;chr&gt;,
+#   municipality &lt;chr&gt;, x_coordina &lt;chr&gt;, y_coordina &lt;chr&gt;, location &lt;lgl&gt;,
+#   response_id &lt;chr&gt;</code></pre>
 </div>
 </div>
 <p>Wow. Now it looks really good! But wait… there’s one more thing. Look at the data types of the columns. They are all characters, which doesn’t seem right because some of our columns appear to contain only numerical data. The <strong>readr</strong> package comes to the rescue with its easy to use <code>type_convert()</code> function.</p>
@@ -1483,24 +1470,24 @@ Choose your separator carefully
 <span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(public_housing)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 342 × 23
-      id property_p…¹    pid name  address city  posta…² numbe…³ resid…⁴ housi…⁵
-   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;  
- 1   117 330101X      6.50e7 Rive… 19/27/… Pict… B0K 1S0       2      20 Easter…
- 2   324 200214X      5.01e7 Bell… 10 Gra… Gran… B0E 1L0       2      15 Cape B…
- 3   247 100215X      1.51e7 Sydn… 77 Ain… Sydn… &lt;NA&gt;          1       2 Cape B…
- 4   337 390201X      2.52e7 Elgi… 22 Elg… Spri… B0M 1X0       1      17 Cobequ…
- 5   224 100201X      1.51e7 Will… 10 Wil… Sydn… B1N 1R4       2      20 Cape B…
- 6   289 150226X      1.52e7 198 … &lt;NA&gt;    Flor… B0C 1J0       2      15 Cape B…
- 7   214 612301       9.02e7 Trin… 3 Trin… Yarm… B5A 1P3       2      16 Wester…
- 8   143 350801       2.02e7 Youn… 130 Yo… Truro B2N 3X4       2      16 Cobequ…
- 9   104 740101       6.02e7 Ritc… 3809 H… Rive… B0J 2W0       2      15 Wester…
-10   174 430901       4.02e7 Dr. … 3792 N… Hali… B3K 3G5       9     135 Metrop…
-# … with 332 more rows, 13 more variables: county &lt;chr&gt;, elevator &lt;chr&gt;,
-#   oil_heat &lt;chr&gt;, electric_heat &lt;chr&gt;, public_water &lt;chr&gt;, well &lt;chr&gt;,
-#   sewer &lt;chr&gt;, onsite_septic &lt;chr&gt;, municipality &lt;chr&gt;, x_coordina &lt;dbl&gt;,
-#   y_coordina &lt;dbl&gt;, location &lt;lgl&gt;, response_id &lt;chr&gt;, and abbreviated
-#   variable names ¹​property_project, ²​postal_code, ³​number_of_floors,
-#   ⁴​residential_units, ⁵​housing_authority</code></pre>
+      id property_project      pid name                address city  postal_code
+   &lt;dbl&gt; &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt;               &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;      
+ 1   117 330101X          65032708 Riverton Heights I  19/27/… Pict… B0K 1S0    
+ 2   324 200214X          50067362 Bellevue            10 Gra… Gran… B0E 1L0    
+ 3   247 100215X          15113962 Sydney Senior Dupl… 77 Ain… Sydn… &lt;NA&gt;       
+ 4   337 390201X          25227687 Elgin Street Villa  22 Elg… Spri… B0M 1X0    
+ 5   224 100201X          15130651 William Street S/C  10 Wil… Sydn… B1N 1R4    
+ 6   289 150226X          15242738 198 Pitt Street     &lt;NA&gt;    Flor… B0C 1J0    
+ 7   214 612301           90212812 Trinity Place       3 Trin… Yarm… B5A 1P3    
+ 8   143 350801           20178653 Young St. Lodge     130 Yo… Truro B2N 3X4    
+ 9   104 740101           60187283 Ritcey's Cove Mano… 3809 H… Rive… B0J 2W0    
+10   174 430901           40177982 Dr. Prince Manor (… 3792 N… Hali… B3K 3G5    
+# ℹ 332 more rows
+# ℹ 16 more variables: number_of_floors &lt;dbl&gt;, residential_units &lt;dbl&gt;,
+#   housing_authority &lt;chr&gt;, county &lt;chr&gt;, elevator &lt;chr&gt;, oil_heat &lt;chr&gt;,
+#   electric_heat &lt;chr&gt;, public_water &lt;chr&gt;, well &lt;chr&gt;, sewer &lt;chr&gt;,
+#   onsite_septic &lt;chr&gt;, municipality &lt;chr&gt;, x_coordina &lt;dbl&gt;,
+#   y_coordina &lt;dbl&gt;, location &lt;lgl&gt;, response_id &lt;chr&gt;</code></pre>
 </div>
 </div>
 <p>We have now converted an XML document into an easy to use tidy dataset! Here is the entire process that we just went through in a single chunk of code.</p>
@@ -1908,13 +1895,16 @@ Choose your separator carefully
 <section id="additional-resources" class="level2" data-number="3.8">
 <h2 data-number="3.8" class="anchored" data-anchor-id="additional-resources"><span class="header-section-number">3.8</span> Additional resources</h2>
 <p>There are many <a href="https://www.rstudio.com/resources/cheatsheets/">cheatsheets</a> available for R packages that can be very useful to quickly see what the different functions of the packages can do.</p>
+</section>
+<section id="references" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="references"><span class="header-section-number">3.9</span> References</h2>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
-<div id="ref-wickham2014" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-wickham2014" class="csl-entry" role="listitem">
 Wickham, Hadley. 2014. <span>“Tidy Data.”</span> <em>Journal of Statistical Software</em> 59 (September): 1–23. <a href="https://doi.org/10.18637/jss.v059.i10">https://doi.org/10.18637/jss.v059.i10</a>.
 </div>
-<div id="ref-wickham2016" class="csl-entry" role="doc-biblioentry">
+<div id="ref-wickham2016" class="csl-entry" role="listitem">
 Wickham, Hadley, and Garrett Grolemund. 2016. <em>R for Data Science: Import, Tidy, Transform, Visualize, and Model Data</em>. First edition. Sebastopol, CA: O’Reilly.
 </div>
 </div>
@@ -1948,9 +1938,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -2015,6 +2019,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
