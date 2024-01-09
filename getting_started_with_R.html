@@ -396,7 +396,7 @@ Note
 </section>
 <section id="r-scripts" class="level3" data-number="2.3.2">
 <h3 data-number="2.3.2" class="anchored" data-anchor-id="r-scripts"><span class="header-section-number">2.3.2</span> R Scripts</h3>
-<p>The console (pane on the left) is where code gets executed and, depending on your code, where the output gets displayed. error messages and warnings are also displayed in the console. Note that code that you write in the console and execute will be saved in the session’s history but erased when close RStudio. To avoid losing your code and having to write it all over again every time you want to do something in R, it is recommended to use R scripts to write your code.</p>
+<p>The console (pane on the left) is where code gets executed and, depending on your code, where the output gets displayed. error messages and warnings are also displayed in the console. Note that code that you write in the console and execute will be saved in the session’s history but erased when you close RStudio. To avoid losing your code and having to write it all over again every time you want to do something in R, it is recommended to use R scripts to write your code.</p>
 <p>You can create a new script in RStudio by clicking on <em>File</em>, then <em>New File</em>, then <em>R Script</em>.</p>
 <p>R scripts are basic text file with a “.R” extension in which you can write code (that R can execute) and comments (that R will not execute and are meant to help you and others understand your code and script. The <strong>#</strong> character indicates the beginning of a comment.</p>
 <div class="cell">
@@ -426,7 +426,7 @@ Note
 </section>
 <section id="working-directory" class="level2" data-number="2.4">
 <h2 data-number="2.4" class="anchored" data-anchor-id="working-directory"><span class="header-section-number">2.4</span> Working directory</h2>
-<p>Your working directory is the default folder from your computer where R will read and save files. The default working directory will typically your R/ folder. You can change the default working directory in <em>Tools - Global options - General.</em> However, a better approach may be to explicitely specify the working directory for your project using the <em><code>setwd()</code></em> function.</p>
+<p>Your working directory is the default folder from your computer where R will read and save files. The default working directory will typically be your R/ folder. You can change the default working directory in <em>Tools - Global options - General.</em> However, a better approach may be to explicitly specify the working directory for your project using the <em><code>setwd()</code></em> function.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ***********************************************</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Project: Introduction to data science</span></span>
@@ -456,7 +456,7 @@ Note
 <p><img src="files/project_2.jpg" class="img-fluid figure-img"></p>
 </figure>
 </div>
-<p>If you choose to create a project in a new directory, you will be asked to choose what type of project you are creating. Choose “<strong>new project</strong>”, unless of course you are creating an R Package, Shiny Application, or Quarto Book (by the way, the book you are reading now is Quarto Book project that was entirely written in R Studio).</p>
+<p>If you choose to create a project in a new directory, you will be asked to choose what type of project you are creating. Choose “<strong>new project</strong>”, unless of course you are creating an R Package, Shiny Application, or Quarto Book (by the way, the book you are reading now is a Quarto Book project that was entirely written in R Studio).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="files/project_3.jpg" class="img-fluid figure-img"></p>
@@ -478,7 +478,7 @@ Note
 <section id="functions" class="level2" data-number="2.6">
 <h2 data-number="2.6" class="anchored" data-anchor-id="functions"><span class="header-section-number">2.6</span> Functions</h2>
 <p>R functions are called like this: <code>name_of_the_function(some argument, some argument, some other argument, some other argument, …)</code>. The arguments are placeholders for which you provide values when calling the functions. Some functions contain many arguments, and some functions contain none. Typically some functions will have default values for most of the arguments but require that you provide values for the other arguments that don’t have default values. In the code chunk above, <code>setwd(path)</code> is the function, and <code>"c:/courses/introduction-to-data-science/"</code> is the value passed to the argument <em>path.</em></p>
-<p>Arguments have a specific order, so you don’t have to enter the argument’s name if you know that order. It is common practice to not write the argument name for functions with a single argument and to not write the name of the first argument in multi-argument functions. Then example below is a script that uses the read_delim function</p>
+<p>Arguments have a specific order, so you don’t have to enter the argument’s name if you know that order. It is common practice to not write the argument name for functions with a single argument and to not write the name of the first argument in multi-argument functions. The example below is a script that uses the read_delim function</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This prints the string "hello world"</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="at">x=</span><span class="st">"hello world"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -529,7 +529,7 @@ R is case sensitive
 </section>
 <section id="writing-your-own-functions" class="level3" data-number="2.6.2">
 <h3 data-number="2.6.2" class="anchored" data-anchor-id="writing-your-own-functions"><span class="header-section-number">2.6.2</span> Writing your own functions</h3>
-<p>You can write your own functions and then use them in your code. Here’s and example of a simple, not so useful, function that returns a the square of a number.</p>
+<p>You can write your own functions and then use them in your code. Here’s an example of a simple, not so useful, function that returns the square of a number.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># square is the name of the function. </span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># x is the argument (information that the user of the function will need to provide.)</span></span>
@@ -560,7 +560,7 @@ R is case sensitive
 </div>
 <p>By the way, when you create a function it appears under your environment tab in RStudio.</p>
 <p><img src="files/functions.jpg" class="img-fluid" width="400"></p>
-<p>That’s it, now you know how to create a function and specify its arguments with their default value is any. There no limit to the number of statements that the body of your function, so you can make them as complex as you want.</p>
+<p>That’s it, now you know how to create a function and specify its arguments with their default value. There are no limits to the number of statements in the body of your function, so you can make them as complex as you want.</p>
 </section>
 </section>
 <section id="packages" class="level2" data-number="2.7">
@@ -569,7 +569,7 @@ R is case sensitive
 <p>Usually, a package contains a set of functions designed for specific purposes. Functions can use other functions from the same or from other packages, so don’t be surprised if you try to install one package but end up installing more than one. The tidyverse, which we will explore in the next chapter, is one of these “meta-packages” that installs and loads a collection of packages and their functions.</p>
 <section id="installing-packages" class="level3" data-number="2.7.1">
 <h3 data-number="2.7.1" class="anchored" data-anchor-id="installing-packages"><span class="header-section-number">2.7.1</span> Installing packages</h3>
-<p>Packages only need to be installed once for all your projects, as they are installed directly on your computer. However, if you are using Posit Cloud, then you will need to install the packages (other than the base R packages) once for each projects. To install a package, you can use the <code>install.packages()</code> function, with the name of the package in single or double quotes. The code below installs the tidyverse package.</p>
+<p>Packages only need to be installed once for all your projects, as they are installed directly on your computer. However, if you are using Posit Cloud, then you will need to install the packages (other than the base R packages) once for each project. To install a package, you can use the <code>install.packages()</code> function, with the name of the package in single or double quotes. The code below installs the tidyverse package.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -597,7 +597,7 @@ R is case sensitive
 </section>
 <section id="objects" class="level2" data-number="2.8">
 <h2 data-number="2.8" class="anchored" data-anchor-id="objects"><span class="header-section-number">2.8</span> Objects</h2>
-<p>Objects are containers of data with different data types and data structures. You can create as many object as you want and store any data that you want in them. Let’s create two objects containing numbers, and then write a command that multiplies the content of both objects.</p>
+<p>Objects are containers of data with different data types and data structures. You can create as many objects as you want and store any data that you want in them. Let’s create two objects containing numbers, and then write a command that multiplies the content of both objects.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create an object called "a" containing the value 2</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span> </span>
@@ -605,11 +605,12 @@ R is case sensitive
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># create an object caled "b" containing the value 4 </span></span>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>b <span class="ot">=</span> <span class="dv">4</span> </span>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co"># multiplies the value of object a and b and stores the results in object c</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> a<span class="sc">*</span>b </span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co"># prints the content of the object c</span></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(c) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co"># multiplies the value of object a and b and stores the results </span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co"># in object c</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> a<span class="sc">*</span>b </span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="co"># prints the content of the object c</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(c) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 8</code></pre>
 </div>
@@ -644,7 +645,7 @@ R is case sensitive
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
-<p>Let’s say we wanted to store the type of plane 747 into a object. This is not the number 747 as in after 746 and before 748. It is a string that represents the concept of the 747 plane. Therefore, we would logically want to store it has a string rather than a number. This can be done easily using quotation marks <code>plane &lt;- "747"</code>. However, if the number happens to be already stored in an object as a number, we can convert it into a string using the <code>as.character()</code> function that converts whatever is provided into a character string. Here’s the demo.</p>
+<p>Let’s say we wanted to store the type of plane 747 into a object. This is not the number 747 as in after 746 and before 748. It is a string that represents the concept of the 747 plane. Therefore, we would logically want to store it as a string rather than a number. This can be done easily using quotation marks <code>plane &lt;- "747"</code>. However, if the number happens to be already stored in an object as a number, we can convert it into a string using the <code>as.character()</code> function that converts whatever is provided into a character string. Here’s the demo.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>plane<span class="ot">&lt;-</span><span class="dv">747</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(plane)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -654,11 +655,14 @@ R is case sensitive
 </div>
 <p>We can see that the number 747 was stored in the plane object. Now let’s convert it into a string.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This code takes the content of the plane object (currently the number 747), converts it into a character string, and stores the result into an object called plane (it overwrites the the previous plane object).</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>plane <span class="ot">&lt;-</span> <span class="fu">as.character</span>(plane)</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Then we can check what data type the plane object now contains.</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(plane)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This code takes the content of the plane object (currently the</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co"># number 747), converts it into a character string, and stores</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co"># the result into an object called plane (it overwrites the </span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co"># previous plane object).</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>plane <span class="ot">&lt;-</span> <span class="fu">as.character</span>(plane)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Then we can check what data type the plane object now contains.</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(plane)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "character"</code></pre>
 </div>
@@ -743,8 +747,8 @@ Practice
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Let’s use the Pythagorean theorem to determine the length of the hypothenuse (c) of a square triangle, knowking that the two other sides (a and b) forming the 90 degree angle have lengths of 4 cm and 7 cm and knowing that a<sup>2</sup> + b<sup>2</sup> = c<sup>2</sup>. Use only the six arithmetic operators shown above (hint: the answer is 8.06225774829855).</p>
-<p>Here are recommended steps:</p>
+<p>Let’s use the Pythagorean theorem to determine the length of the hypothenuse (c) of a square triangle, knowkng that the two other sides (a and b) forming the 90 degree angle have lengths of 4 cm and 7 cm and knowing that a<sup>2</sup> + b<sup>2</sup> = c<sup>2</sup>. Use only the six arithmetic operators shown above (hint: the answer is 8.06225774829855).</p>
+<p>Here are the recommended steps:</p>
 <ol type="1">
 <li>Create an object called <strong>a</strong> that contains the value <strong>4</strong></li>
 <li>Create an object called <strong>b</strong> that contains the value <strong>7</strong></li>
@@ -759,11 +763,12 @@ Practice
 <h3 data-number="2.9.3" class="anchored" data-anchor-id="logical"><span class="header-section-number">2.9.3</span> Logical</h3>
 <p>Logical values are TRUE or FALSE (which are actually stored as the numbers 0 and 1). We can also use the shortcut T for TRUE and F for FALSE.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># these are different ways to creates an object containing a logical value (TRUE or FALSE).</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>my_logical_1 <span class="ot">=</span> <span class="cn">TRUE</span></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>my_logical_2 <span class="ot">=</span> <span class="cn">FALSE</span></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>my_logical_3 <span class="ot">=</span> T</span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>my_logical_4 <span class="ot">=</span> F</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># these are different ways to creates an object containing </span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="co"># a logical value (TRUE or FALSE).</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>my_logical_1 <span class="ot">=</span> <span class="cn">TRUE</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>my_logical_2 <span class="ot">=</span> <span class="cn">FALSE</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>my_logical_3 <span class="ot">=</span> T</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>my_logical_4 <span class="ot">=</span> F</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Again we can test whether an object or value is logical or not using the <code>class()</code> and <code>is.logical()</code> and we can convert non-logical values or objects to logical values or objects with <code>as.logical()</code>.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -779,11 +784,11 @@ Practice
 <ol type="1">
 <li>Create an object that contains the number 1, an object that contains the number 0, an object that contains the number 42, and an object that contains the number -1.</li>
 <li>Use the <code>as.logical()</code> function to convert each of the objects into a logical object and print them.</li>
-<li>Create objects that contains the character 1, the string “1”, the string “TRUE”, and the string “banana” converting them into logical objects and printing them.</li>
+<li>Create objects that contain the character 1, the string “1”, the string “TRUE”, and the string “banana” converting them into logical objects and printing them.</li>
 </ol>
 </div>
 </div>
-<p>As you might have realized while practicing. All numbers (negative or positive) other than 0 are equivalent to the logical TRUE, and only the number 0 is equivalent to the logical FALSE. You can also convert numbers or logical values stored as strings into logical values, but not other strings. That is why the conversion of the string “banana” to a logical value returns “NA”.</p>
+<p>As you might have realized while practicing, all numbers (negative or positive) other than 0 are equivalent to the logical TRUE, and only the number 0 is equivalent to the logical FALSE. You can also convert numbers or logical values stored as strings into logical values, but not other strings. That is why the conversion of the string “banana” to a logical value returns “NA”.</p>
 </section>
 <section id="na-values" class="level3" data-number="2.9.4">
 <h3 data-number="2.9.4" class="anchored" data-anchor-id="na-values"><span class="header-section-number">2.9.4</span> NA values</h3>
@@ -794,7 +799,7 @@ Practice
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>logical_na <span class="ot">&lt;-</span> <span class="fu">as.logical</span>(<span class="cn">NA</span>)</span>
 <span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>string_na <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="cn">NA</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Then we can confirm that the objects classes are as planned.</p>
+<p>Then we can confirm that the objects’ classes are as planned.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(numeric_na)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -832,7 +837,7 @@ Practice
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
-<p>Another important thing to remember about NAs is that whenever they are part of an mathematical operation, the result will be NA. Here’s an example:</p>
+<p>Another important thing to remember about NAs is that whenever they are part of a mathematical operation, the result will be NA. Here’s an example:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">+</span><span class="dv">1</span><span class="sc">+</span><span class="cn">NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -854,7 +859,7 @@ Practice
 <span id="cb61-7"><a href="#cb61-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Print today's date</span></span>
 <span id="cb61-8"><a href="#cb61-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(today)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2023-03-29"</code></pre>
+<pre><code>[1] "2024-01-09"</code></pre>
 </div>
 </div>
 <p>You can use several function to extract parts of dates.</p>
@@ -869,23 +874,23 @@ Practice
 <span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a><span class="co"># And now we print them.</span></span>
 <span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(week_day)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Wednesday"</code></pre>
+<pre><code>[1] "Tuesday"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(week)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 13</code></pre>
+<pre><code>[1] 2</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(day)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 29</code></pre>
+<pre><code>[1] 9</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(month)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3</code></pre>
+<pre><code>[1] 1</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2023</code></pre>
+<pre><code>[1] 2024</code></pre>
 </div>
 </div>
 <p>Just like other data types, we can use <code>class()</code> and <code>is.Date()</code> to test whether an object or value is a date.</p>
@@ -903,7 +908,7 @@ Practice
 </section>
 <section id="data-structures" class="level2" data-number="2.10">
 <h2 data-number="2.10" class="anchored" data-anchor-id="data-structures"><span class="header-section-number">2.10</span> Data structures</h2>
-<p>All the objects created in the last example are storing a single value. But objects can also contain multiple values organized in different kind of structures. Let’s go through those structures.</p>
+<p>All the objects created in the last example are storing a single value. But objects can also contain multiple values organized in different kinds of structures. Let’s go through those structures.</p>
 <section id="vectors" class="level3" data-number="2.10.1">
 <h3 data-number="2.10.1" class="anchored" data-anchor-id="vectors"><span class="header-section-number">2.10.1</span> Vectors</h3>
 <p>Vectors are the most basic structure in R and are simply sequences of values <strong>of the same type</strong>. You can create a vector with the function <code>c().</code></p>
@@ -990,7 +995,7 @@ Levels: automatic manual</code></pre>
 [1]  TRUE  TRUE FALSE FALSE
 
 [[5]]
-[1] "2023-03-29"
+[1] "2024-01-09"
 
 [[6]]
 [1] manual    manual    automatic automatic automatic manual   
