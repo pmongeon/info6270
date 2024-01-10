@@ -859,7 +859,7 @@ Practice
 <span id="cb61-7"><a href="#cb61-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Print today's date</span></span>
 <span id="cb61-8"><a href="#cb61-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(today)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2024-01-09"</code></pre>
+<pre><code>[1] "2024-01-10"</code></pre>
 </div>
 </div>
 <p>You can use several function to extract parts of dates.</p>
@@ -874,7 +874,7 @@ Practice
 <span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a><span class="co"># And now we print them.</span></span>
 <span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(week_day)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Tuesday"</code></pre>
+<pre><code>[1] "Wednesday"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(week)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -882,7 +882,7 @@ Practice
 </div>
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(day)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 9</code></pre>
+<pre><code>[1] 10</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(month)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -914,19 +914,20 @@ Practice
 <p>Vectors are the most basic structure in R and are simply sequences of values <strong>of the same type</strong>. You can create a vector with the function <code>c().</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This creates a character vector</span></span>
-<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>my_character_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Lucy"</span>,<span class="st">"Matthew"</span>,<span class="st">"Ricardo"</span>,<span class="st">"Adrian"</span>,<span class="st">"Mathilda"</span>, <span class="st">"Beyoncé"</span>)</span>
-<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a><span class="co"># This creates a numeric vector</span></span>
-<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a>my_numeric_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">42</span>,<span class="dv">25</span>,<span class="dv">4</span>)</span>
-<span id="cb77-6"><a href="#cb77-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-7"><a href="#cb77-7" aria-hidden="true" tabindex="-1"></a><span class="co"># This creates a integer vector</span></span>
-<span id="cb77-8"><a href="#cb77-8" aria-hidden="true" tabindex="-1"></a>my_integer_vector <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">42</span>,<span class="dv">25</span>,<span class="dv">4</span>))</span>
-<span id="cb77-9"><a href="#cb77-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-10"><a href="#cb77-10" aria-hidden="true" tabindex="-1"></a><span class="co"># This creates a logical vector</span></span>
-<span id="cb77-11"><a href="#cb77-11" aria-hidden="true" tabindex="-1"></a>my_logical_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>,T,<span class="cn">FALSE</span>,F)</span>
-<span id="cb77-12"><a href="#cb77-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-13"><a href="#cb77-13" aria-hidden="true" tabindex="-1"></a><span class="co"># This prints the character vector</span></span>
-<span id="cb77-14"><a href="#cb77-14" aria-hidden="true" tabindex="-1"></a>my_character_vector</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>my_character_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Lucy"</span>,<span class="st">"Matthew"</span>,<span class="st">"Ricardo"</span>,<span class="st">"Adrian"</span>,</span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"Mathilda"</span>, <span class="st">"Beyoncé"</span>)</span>
+<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a><span class="co"># This creates a numeric vector</span></span>
+<span id="cb77-6"><a href="#cb77-6" aria-hidden="true" tabindex="-1"></a>my_numeric_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">42</span>,<span class="dv">25</span>,<span class="dv">4</span>)</span>
+<span id="cb77-7"><a href="#cb77-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-8"><a href="#cb77-8" aria-hidden="true" tabindex="-1"></a><span class="co"># This creates a integer vector</span></span>
+<span id="cb77-9"><a href="#cb77-9" aria-hidden="true" tabindex="-1"></a>my_integer_vector <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">42</span>,<span class="dv">25</span>,<span class="dv">4</span>))</span>
+<span id="cb77-10"><a href="#cb77-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-11"><a href="#cb77-11" aria-hidden="true" tabindex="-1"></a><span class="co"># This creates a logical vector</span></span>
+<span id="cb77-12"><a href="#cb77-12" aria-hidden="true" tabindex="-1"></a>my_logical_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>,T,<span class="cn">FALSE</span>,F)</span>
+<span id="cb77-13"><a href="#cb77-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-14"><a href="#cb77-14" aria-hidden="true" tabindex="-1"></a><span class="co"># This prints the character vector</span></span>
+<span id="cb77-15"><a href="#cb77-15" aria-hidden="true" tabindex="-1"></a>my_character_vector</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Lucy"     "Matthew"  "Ricardo"  "Adrian"   "Mathilda" "Beyoncé" </code></pre>
 </div>
@@ -953,7 +954,7 @@ Practice
 </section>
 <section id="factors" class="level3" data-number="2.10.3">
 <h3 data-number="2.10.3" class="anchored" data-anchor-id="factors"><span class="header-section-number">2.10.3</span> Factors</h3>
-<p>Factors are another special type of vectors. Think of them as categorical variables that can have a distinct number of possible values (called levels). Say we have a vector of values representing the transmission type of cars. The two levels would be “automatic” and “manual”.</p>
+<p>Factors are another special type of vector. Think of them as categorical variables that can have a distinct number of possible values (called levels). Say we have a vector of values representing the transmission type of cars. The two levels would be “automatic” and “manual”.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This creates a factor object</span></span>
 <span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>transmission <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">c</span>(<span class="st">'manual'</span>,<span class="st">"manual"</span>,<span class="st">"automatic"</span>,<span class="st">"automatic"</span>,<span class="st">"automatic"</span>,<span class="st">"manual"</span>))</span>
@@ -974,7 +975,7 @@ Levels: automatic manual</code></pre>
 </section>
 <section id="lists" class="level3" data-number="2.10.4">
 <h3 data-number="2.10.4" class="anchored" data-anchor-id="lists"><span class="header-section-number">2.10.4</span> Lists</h3>
-<p>Unlike vectors that are combinations of values of the same type, lists are combinations of objects of <strong>any</strong> type (including vectors, matrices, data frames, factors or other lists). In the example, below, we create a list that contains some of the objects we created so far.</p>
+<p>Unlike vectors that are combinations of values of the same type, lists are combinations of objects of <strong>any</strong> type (including vectors, matrices, data frames, factors or other lists). In the example below, we create a list that contains some of the objects we created so far.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This creates a list</span></span>
 <span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>my_list <span class="ot">&lt;-</span> <span class="fu">list</span>(my_character_vector,my_numeric_vector,my_integer_vector,my_logical_vector,today, transmission)</span>
@@ -995,7 +996,7 @@ Levels: automatic manual</code></pre>
 [1]  TRUE  TRUE FALSE FALSE
 
 [[5]]
-[1] "2024-01-09"
+[1] "2024-01-10"
 
 [[6]]
 [1] manual    manual    automatic automatic automatic manual   
@@ -1005,7 +1006,7 @@ Levels: automatic manual</code></pre>
 </section>
 <section id="data-frames-and-tibbles" class="level3" data-number="2.10.5">
 <h3 data-number="2.10.5" class="anchored" data-anchor-id="data-frames-and-tibbles"><span class="header-section-number">2.10.5</span> Data frames and tibbles</h3>
-<p>Data frames (and tibbles, which are essentially data frames with improved features) are tabular structures (think of an Excel spreadsheet) that organize data in rows and columns. The columns of a data frame are essentially vectors. A single column must store data (or object) of the same type, but different columns can have different data types. In the code below, we create a data frame that will contain three vectors with different data types.</p>
+<p>Data frames (and tibbles, which are essentially data frames with improved features) are tabular structures (like Excel spreadsheets) that organize data in rows and columns. The columns of a data frame are essentially vectors. A single column must store data (or objects) of the same type, but different columns can have different data types. In the code below, we create a data frame that will contain three vectors with different data types.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A vector of first names</span></span>
 <span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>first_name <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Rob"</span>,<span class="st">"June"</span>,<span class="st">"Lise"</span>)</span>
@@ -1028,7 +1029,7 @@ Levels: automatic manual</code></pre>
 3       Lise    MacFly  34</code></pre>
 </div>
 </div>
-<p>As mentioned above, tibbles are essentially the same as data frame, but with of improvements) one of the main improvement is how the date gets displayed when printed in the console. Let’s convert the data frame we just created into a tibble and print it to see what happens.</p>
+<p>As mentioned above, tibbles are essentially the same as data frames, but with improvements) one of the main improvement is how the date gets displayed when printed in the console. Let’s convert the data frame we just created into a tibble and print it to see what happens.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the tibble library </span></span>
 <span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
@@ -1040,7 +1041,7 @@ Levels: automatic manual</code></pre>
 </section>
 <section id="subsetting-data" class="level2" data-number="2.11">
 <h2 data-number="2.11" class="anchored" data-anchor-id="subsetting-data"><span class="header-section-number">2.11</span> Subsetting data</h2>
-<p>You can one or multiple elements from an R object by providing its coordinates in brackets <code>[row number, column number]</code> . When the rows or columns have names, the elements can be called by name with the dollar sign (<code>$</code>) Here’s an example.</p>
+<p>You can select one or multiple elements from an R object by providing its coordinates in brackets <code>[row number, column number]</code>. When the rows or columns have names, the elements can be called by name with the dollar sign (<code>$</code>) Here’s an example.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's create a tibble called t</span></span>
 <span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">first_name =</span> <span class="fu">as.character</span>(<span class="fu">c</span>(<span class="st">"Rob"</span>,<span class="st">"June"</span>,<span class="st">"Lise"</span>)),</span>
@@ -1243,8 +1244,8 @@ Levels: automatic manual</code></pre>
 </section>
 <section id="conditional-statements" class="level2" data-number="2.13">
 <h2 data-number="2.13" class="anchored" data-anchor-id="conditional-statements"><span class="header-section-number">2.13</span> Conditional statements</h2>
-<p>Conditional statements allow you to tell R what to do <strong>if</strong> a condition is met. The syntax is <code>if (condition to test) {code to execute}</code>an <strong>if</strong> statement. The syntax is <code>if (condition to test) {code to execute}</code>. You can also tell R what to do if the condition is not met with <strong>else</strong>. The syntax is: <em><code>if (condition) {code to execute} else {code to execute}</code></em>.</p>
-<p>I recommend breaking the code over multiple lines, like in the code below. Note that the <em>else</em> must be on the same line as the closing curly bracket from the previous section of the statement.</p>
+<p>Conditional statements allow you to tell R what to do <strong>if</strong> a condition is met. The syntax of an <strong>if</strong> statement is <code>if (condition to test) {code to execute}</code>. You can also tell R what to do if the condition is not met with <strong>else</strong>. The syntax is: <em><code>if (condition) {code to execute} else {code to execute}</code></em>.</p>
+<p>I recommend breaking the code over multiple lines, like in the code below. Note that the <strong>else</strong> must be on the same line as the closing curly bracket from the previous section of the statement.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb132"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="dv">1</span><span class="sc">+</span><span class="dv">1</span><span class="sc">==</span><span class="dv">3</span>) {</span>
 <span id="cb132-2"><a href="#cb132-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"1 + 1 = equals 3"</span>)</span>
