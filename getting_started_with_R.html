@@ -396,9 +396,9 @@ Note
 </section>
 <section id="r-scripts" class="level3" data-number="2.3.2">
 <h3 data-number="2.3.2" class="anchored" data-anchor-id="r-scripts"><span class="header-section-number">2.3.2</span> R Scripts</h3>
-<p>The console (pane on the left) is where code gets executed and, depending on your code, where the output gets displayed. error messages and warnings are also displayed in the console. Note that code that you write in the console and execute will be saved in the session’s history but erased when you close RStudio. To avoid losing your code and having to write it all over again every time you want to do something in R, it is recommended to use R scripts to write your code.</p>
+<p>The console (pane on the left) is where code gets executed and, depending on your code, where the output gets displayed. Error messages and warnings are also displayed in the console. Note that code that you write in the console and execute will be saved in the session’s history but erased when you close RStudio. To avoid losing your code and having to write it all over again every time you want to do something in R, it is recommended to use R scripts to write your code.</p>
 <p>You can create a new script in RStudio by clicking on <em>File</em>, then <em>New File</em>, then <em>R Script</em>.</p>
-<p>R scripts are basic text file with a “.R” extension in which you can write code (that R can execute) and comments (that R will not execute and are meant to help you and others understand your code and script. The <strong>#</strong> character indicates the beginning of a comment.</p>
+<p>R scripts are basic text files with a “.R” extension in which you can write code (that R can execute) and comments (that R will not execute and are meant to help you and others understand your code and script). The <strong>#</strong> character indicates the beginning of a comment.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The following code tells R to calculate the value of 1 + 1 and return the result.</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">+</span><span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -420,7 +420,7 @@ Note
 </div>
 <section id="executing-code-in-a-script" class="level4" data-number="2.3.2.1">
 <h4 data-number="2.3.2.1" class="anchored" data-anchor-id="executing-code-in-a-script"><span class="header-section-number">2.3.2.1</span> Executing code in a script</h4>
-<p>When working with a script, you can write all your code and execute it only when you are ready. You can also execute only parts of your code. To execute the code, you can click the <strong>Run</strong> button at the top of the script pane, or you can use <kbd>Ctrl</kbd> + <kbd>Enter</kbd>. That will execute the code where your cursor is located and then move the cursor to the next line with code or a comment. If your cursor is in between codes, R will execute the next statement in the script and then move the cursor to the next line with code or a comment. You can also highlight section of your code and run only the selected code. If the code contains multiple statements R will still execute them one after the other, in the order in which they appear.</p>
+<p>When working with a script, you can write all your code and execute it only when you are ready. You can also execute only parts of your code. To execute the code, you can click the <strong>Run</strong> button at the top of the script pane, or you can use <kbd>Ctrl</kbd> + <kbd>Enter</kbd>. That will execute the code where your cursor is located and then move the cursor to the next line with code or a comment. If your cursor is in between codes, R will execute the next statement in the script and then move the cursor to the next line with code or a comment. You can also highlight a section of your code and run only the highlighted code. If the code contains multiple statements R will still execute them one after the other in the order in which they appear.</p>
 </section>
 </section>
 </section>
@@ -468,7 +468,7 @@ Note
 <p><img src="files/project_4.jpg" class="img-fluid figure-img"></p>
 </figure>
 </div>
-<p>You can see which project you are working on in the top right of the screen. You default working directory is the project folder, so you don’t have to specify your working directory with the <code>setwd()</code> function every time you switch to a new project.</p>
+<p>You can see which project you are working on in the top right of the screen. Your default working directory is the project folder, so you don’t have to specify your working directory with the <code>setwd()</code> function every time you switch to a new project.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="files/project_5.jpg" class="img-fluid figure-img"></p>
@@ -477,8 +477,8 @@ Note
 </section>
 <section id="functions" class="level2" data-number="2.6">
 <h2 data-number="2.6" class="anchored" data-anchor-id="functions"><span class="header-section-number">2.6</span> Functions</h2>
-<p>R functions are called like this: <code>name_of_the_function(some argument, some argument, some other argument, some other argument, …)</code>. The arguments are placeholders for which you provide values when calling the functions. Some functions contain many arguments, and some functions contain none. Typically some functions will have default values for most of the arguments but require that you provide values for the other arguments that don’t have default values. In the code chunk above, <code>setwd(path)</code> is the function, and <code>"c:/courses/introduction-to-data-science/"</code> is the value passed to the argument <em>path.</em></p>
-<p>Arguments have a specific order, so you don’t have to enter the argument’s name if you know that order. It is common practice to not write the argument name for functions with a single argument and to not write the name of the first argument in multi-argument functions. The example below is a script that uses the read_delim function</p>
+<p>R functions are called like this: <code>name_of_the_function(some argument, some argument, some other argument, some other argument, …)</code>. The arguments are placeholders for which you provide values when calling the functions. Some functions contain many arguments, and some functions contain none. Typically some functions will have default values for most of the arguments but require that you provide values for the other arguments that don’t have default values. In the code chunk above, <code>setwd(path)</code> is the function and <code>"c:/courses/introduction-to-data-science/"</code> is the value passed to the argument <em>path.</em></p>
+<p>Arguments have a specific order, so you don’t have to enter the argument’s name if you know that order. It is common practice to not write the argument name for functions with a single argument and to not write the name of the first argument in multi-argument functions. The example below is a script that uses the read_delim function.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This prints the string "hello world"</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="at">x=</span><span class="st">"hello world"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -538,7 +538,7 @@ R is case sensitive
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  x<span class="sc">^</span><span class="dv">2</span></span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Then we can call the function and see what happens</p>
+<p>Then we can call the function and see what happens.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the square of 5</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">square</span>(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -560,7 +560,7 @@ R is case sensitive
 </div>
 <p>By the way, when you create a function it appears under your environment tab in RStudio.</p>
 <p><img src="files/functions.jpg" class="img-fluid" width="400"></p>
-<p>That’s it, now you know how to create a function and specify its arguments with their default value. There are no limits to the number of statements in the body of your function, so you can make them as complex as you want.</p>
+<p>That’s it. Now you know how to create a function and specify its arguments with their default value. There are no limits to the number of statements in the body of your function, so you can make them as complex as you want.</p>
 </section>
 </section>
 <section id="packages" class="level2" data-number="2.7">
@@ -619,10 +619,10 @@ R is case sensitive
 </section>
 <section id="data-types" class="level2" data-number="2.9">
 <h2 data-number="2.9" class="anchored" data-anchor-id="data-types"><span class="header-section-number">2.9</span> Data types</h2>
-<p>There are four types of data that we will deal with in this course: <strong>strings</strong> and <strong>numbers</strong>, <strong>logical values</strong>, and <strong>dates</strong>. Let’s look at them one by one.</p>
+<p>There are four types of data that we will deal with in this course: <strong>strings</strong>, <strong>numbers</strong>, <strong>logical values</strong>, and <strong>dates</strong>. Let’s look at them one by one.</p>
 <section id="character-strings" class="level3" data-number="2.9.1">
 <h3 data-number="2.9.1" class="anchored" data-anchor-id="character-strings"><span class="header-section-number">2.9.1</span> Character strings</h3>
-<p>Chatacter strings (or strings) are sequences of any kind of symbols (including space and other non-printed characters like line breaks). They can easily be recognized because they are surrounded by single (<code>'</code>) or double (<code>"</code>) quotation marks. Let’s create an object called fruit and store the string “banana” inside it.</p>
+<p>Character strings (or strings) are sequences of any kind of symbols (including space and other non-printed characters like line breaks). They can easily be recognized because they are surrounded by single (<code>'</code>) or double (<code>"</code>) quotation marks. Let’s create an object called fruit and store the string “banana” inside it.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>fruit <span class="ot">&lt;-</span> <span class="st">"banana"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -645,7 +645,7 @@ R is case sensitive
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
-<p>Let’s say we wanted to store the type of plane 747 into a object. This is not the number 747 as in after 746 and before 748. It is a string that represents the concept of the 747 plane. Therefore, we would logically want to store it as a string rather than a number. This can be done easily using quotation marks <code>plane &lt;- "747"</code>. However, if the number happens to be already stored in an object as a number, we can convert it into a string using the <code>as.character()</code> function that converts whatever is provided into a character string. Here’s the demo.</p>
+<p>Let’s say we wanted to store the type of plane 747 into an object. This is not the number 747 as in after 746 and before 748. It is a string that represents the concept of the 747 plane. Therefore, we would logically want to store it as a string rather than a number. This can be done easily using quotation marks <code>plane &lt;- "747"</code>. However, if the number happens to be already stored in an object as a number, we can convert it into a string using the <code>as.character()</code> function that converts whatever is provided into a character string. Here’s the demo.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>plane<span class="ot">&lt;-</span><span class="dv">747</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(plane)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -670,7 +670,7 @@ R is case sensitive
 </section>
 <section id="numbers" class="level3" data-number="2.9.2">
 <h3 data-number="2.9.2" class="anchored" data-anchor-id="numbers"><span class="header-section-number">2.9.2</span> Numbers</h3>
-<p>As we saw in some of the previous examples, numbers are another common data type in R. In fact, there are three different number data types: numeric, integer, and complex. However, in this course, we will only consider the <strong>numeric</strong> and <strong>integer</strong> types. The only difference between the numeric and integer data types is that numeric can store decimals, but integers cannot. By default, R will use the numeric data type for any number. So if we want to use the integer data type to specify it.</p>
+<p>As we saw in some of the previous examples, numbers are another common data type in R. In fact, there are three different number data types: numeric, integer, and complex. However, in this course, we will only consider the <strong>numeric</strong> and <strong>integer</strong> types. The only difference between the numeric and integer data types is that numerics can store decimals, but integers cannot. By default, R will use the numeric data type for any number. So if we want to use the integer data type we need to specify it.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an numeric object</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>my_numeric <span class="ot">&lt;-</span> <span class="dv">42</span></span>
@@ -709,8 +709,8 @@ Practice
 <div class="callout-body-container callout-body">
 <p>Write some code to answer the following questions:</p>
 <ul>
-<li>Are all integers numeric in R?</li>
-<li>Are all numeric integers?</li>
+<li>Are all integers numerics in R?</li>
+<li>Are all numerics integers?</li>
 <li>What happens if you try to convert a number with decimals to an integer?</li>
 </ul>
 </div>
@@ -747,12 +747,12 @@ Practice
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Let’s use the Pythagorean theorem to determine the length of the hypothenuse (c) of a square triangle, knowkng that the two other sides (a and b) forming the 90 degree angle have lengths of 4 cm and 7 cm and knowing that a<sup>2</sup> + b<sup>2</sup> = c<sup>2</sup>. Use only the six arithmetic operators shown above (hint: the answer is 8.06225774829855).</p>
+<p>Let’s use the Pythagorean theorem to determine the length of the hypothenuse (c) of a square triangle, knowing that the two other sides (a and b) forming the 90 degree angle have lengths of 4 cm and 7 cm and knowing that a<sup>2</sup> + b<sup>2</sup> = c<sup>2</sup>. Use only the six arithmetic operators shown above (hint: the answer is 8.06225774829855).</p>
 <p>Here are the recommended steps:</p>
 <ol type="1">
-<li>Create an object called <strong>a</strong> that contains the value <strong>4</strong></li>
-<li>Create an object called <strong>b</strong> that contains the value <strong>7</strong></li>
-<li>Create an object called <strong>c</strong> that contains the calculated value of <strong>c</strong></li>
+<li>Create an object called <strong>a</strong> that contains the value <strong>4.</strong></li>
+<li>Create an object called <strong>b</strong> that contains the value <strong>7.</strong></li>
+<li>Create an object called <strong>c</strong> that contains the calculated value of <strong>c.</strong></li>
 <li>print the value of <strong>c</strong>.</li>
 </ol>
 </div>
@@ -792,7 +792,7 @@ Practice
 </section>
 <section id="na-values" class="level3" data-number="2.9.4">
 <h3 data-number="2.9.4" class="anchored" data-anchor-id="na-values"><span class="header-section-number">2.9.4</span> NA values</h3>
-<p>in R, NA is the absence of a value, or missing data. Still, it can be stored in an object like any other value, as any data type. Let’s give it a try by creating a few objects that contain NA.</p>
+<p>In R, NA is the absence of a value, or missing data. Still, it can be stored in an object like any other value, as any data type. Let’s give it a try by creating a few objects that contain NA.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>numeric_na <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="cn">NA</span>)</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>integer_na <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(<span class="cn">NA</span>)</span>
@@ -859,10 +859,10 @@ Practice
 <span id="cb61-7"><a href="#cb61-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Print today's date</span></span>
 <span id="cb61-8"><a href="#cb61-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(today)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2024-01-10"</code></pre>
+<pre><code>[1] "2024-01-25"</code></pre>
 </div>
 </div>
-<p>You can use several function to extract parts of dates.</p>
+<p>You can use several functions to extract parts of dates.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here we create several objects that contain different parts of the date</span></span>
 <span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>week_day <span class="ot">&lt;-</span> <span class="fu">weekdays</span>(today)</span>
@@ -874,15 +874,15 @@ Practice
 <span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a><span class="co"># And now we print them.</span></span>
 <span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(week_day)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Wednesday"</code></pre>
+<pre><code>[1] "Thursday"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(week)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
+<pre><code>[1] 4</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(day)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 10</code></pre>
+<pre><code>[1] 25</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(month)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -996,7 +996,7 @@ Levels: automatic manual</code></pre>
 [1]  TRUE  TRUE FALSE FALSE
 
 [[5]]
-[1] "2024-01-10"
+[1] "2024-01-25"
 
 [[6]]
 [1] manual    manual    automatic automatic automatic manual   
@@ -1006,7 +1006,7 @@ Levels: automatic manual</code></pre>
 </section>
 <section id="data-frames-and-tibbles" class="level3" data-number="2.10.5">
 <h3 data-number="2.10.5" class="anchored" data-anchor-id="data-frames-and-tibbles"><span class="header-section-number">2.10.5</span> Data frames and tibbles</h3>
-<p>Data frames (and tibbles, which are essentially data frames with improved features) are tabular structures (like Excel spreadsheets) that organize data in rows and columns. The columns of a data frame are essentially vectors. A single column must store data (or objects) of the same type, but different columns can have different data types. In the code below, we create a data frame that will contain three vectors with different data types.</p>
+<p>Data frames (and tibbles, which are essentially data frames with improved features) are tabular structures (like Excel spreadsheets) that organize data in rows and columns. The columns of a data frame are essentially vectors. A single column must store data (or objects) of the same type, but since different columns can have different data types, then a single row can contain data of different types. In the code below, we create a data frame that will contain three vectors with different data types.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A vector of first names</span></span>
 <span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>first_name <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Rob"</span>,<span class="st">"June"</span>,<span class="st">"Lise"</span>)</span>
@@ -1191,7 +1191,7 @@ Levels: automatic manual</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Let’s give them a try</p>
+<p>Let’s give them a try.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="st">"apples"</span> <span class="sc">==</span> <span class="st">"oranges"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1331,14 +1331,14 @@ Beware of the dreaded infinite loop
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>If your code is written in such a way that the condition is never met, you will end up with an infinite loop and the process will just keep running until you stop it manually or your computer explodes. (Don’t worry, your computer is not actually going to explode, no matter how terrible your code might be).</p>
+<p>If your code is written in such a way that the condition is never met, you will end up with an infinite loop and the process will just keep running until you stop it manually or your computer explodes. (Don’t worry, your computer is not actually going to explode, no matter how terrible your code might be.)</p>
 </div>
 </div>
 </section>
 </section>
 <section id="vectorization" class="level2" data-number="2.15">
 <h2 data-number="2.15" class="anchored" data-anchor-id="vectorization"><span class="header-section-number">2.15</span> Vectorization</h2>
-<p>Almost every object in R is actually a vector or a collection of vectors, and R makes coding and computing more efficient by performing the computation for all elements of the objects. This makes loop (especially the for loop) less useful when the same simple operation needs to be performed for an entire vector. Here’s how we can print “I love apples”, “I love bananas”, and “I love pears” with a leaner and quicker than in the for loop example above.</p>
+<p>Almost every object in R is actually a vector or a collection of vectors, and R makes coding and computing more efficient by performing the computation for all elements of the objects. This makes loop (especially the for loop) less useful when the same simple operation needs to be performed for an entire vector. Here’s how we can print “I love apples”, “I love bananas”, and “I love pears” with a leaner and quicker code than in the for loop example above.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb140"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb140-1"><a href="#cb140-1" aria-hidden="true" tabindex="-1"></a>fruits <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"apples"</span>,<span class="st">"bananas"</span>,<span class="st">"pears"</span>)</span>
 <span id="cb140-2"><a href="#cb140-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"I love"</span>,fruits))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
