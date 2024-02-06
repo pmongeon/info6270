@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,43 +47,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -120,7 +91,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -131,11 +103,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with strings</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./working_with_strings.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with strings</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -143,117 +120,132 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Introduction to Data Science</a> 
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Course overview</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course overview</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">What is data science?</span></a>
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">What is data science?</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./getting_started_with_R.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting started with R</span></a>
+  <a href="./getting_started_with_R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting started with R</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./reading_and_tidying_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Reading and tidying data</span></a>
+  <a href="./reading_and_tidying_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Reading and tidying data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./working_with_strings.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with strings</span></a>
+  <a href="./working_with_strings.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with strings</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./publishing_with_r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Publishing with R</span></a>
+  <a href="./publishing_with_r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Publishing with R</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./summarizing_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summarizing data</span></a>
+  <a href="./summarizing_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summarizing data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./visualizing_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualizing data</span></a>
+  <a href="./visualizing_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Visualizing data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./topic_modelling.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Topic Modelling</span></a>
+  <a href="./topic_modelling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Topic Modelling</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./logistic_regression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Logistic regression</span></a>
+  <a href="./logistic_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Logistic regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./linear_regression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Linear regression</span></a>
+  <a href="./linear_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Linear regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./shinyapps.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Shiny apps</span></a>
+  <a href="./shinyapps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Shiny apps</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./shinyapps_part2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">ShinyApps part 2</span></a>
+  <a href="./shinyapps_part2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">ShinyApps</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="toc-section-number">4.1</span>  Learning objectives</a></li>
-  <li><a href="#dealing-with-messy-or-unstructured-data" id="toc-dealing-with-messy-or-unstructured-data" class="nav-link" data-scroll-target="#dealing-with-messy-or-unstructured-data"><span class="toc-section-number">4.2</span>  Dealing with messy or unstructured data</a>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">4.1</span> Learning objectives</a></li>
+  <li><a href="#dealing-with-messy-or-unstructured-data" id="toc-dealing-with-messy-or-unstructured-data" class="nav-link" data-scroll-target="#dealing-with-messy-or-unstructured-data"><span class="header-section-number">4.2</span> Dealing with messy or unstructured data</a>
   <ul class="collapse">
-  <li><a href="#cleaning-messy-data" id="toc-cleaning-messy-data" class="nav-link" data-scroll-target="#cleaning-messy-data"><span class="toc-section-number">4.2.1</span>  Cleaning messy data</a></li>
-  <li><a href="#filtering-rows-based-on-string-matches" id="toc-filtering-rows-based-on-string-matches" class="nav-link" data-scroll-target="#filtering-rows-based-on-string-matches"><span class="toc-section-number">4.2.2</span>  Filtering rows based on string matches</a></li>
-  <li><a href="#extracting-data-from-text" id="toc-extracting-data-from-text" class="nav-link" data-scroll-target="#extracting-data-from-text"><span class="toc-section-number">4.2.3</span>  Extracting data from text</a></li>
+  <li><a href="#cleaning-messy-data" id="toc-cleaning-messy-data" class="nav-link" data-scroll-target="#cleaning-messy-data"><span class="header-section-number">4.2.1</span> Cleaning messy data</a></li>
+  <li><a href="#filtering-rows-based-on-string-matches" id="toc-filtering-rows-based-on-string-matches" class="nav-link" data-scroll-target="#filtering-rows-based-on-string-matches"><span class="header-section-number">4.2.2</span> Filtering rows based on string matches</a></li>
+  <li><a href="#extracting-data-from-text" id="toc-extracting-data-from-text" class="nav-link" data-scroll-target="#extracting-data-from-text"><span class="header-section-number">4.2.3</span> Extracting data from text</a></li>
   </ul></li>
-  <li><a href="#the-stringr-package" id="toc-the-stringr-package" class="nav-link" data-scroll-target="#the-stringr-package"><span class="toc-section-number">4.3</span>  The stringr package</a>
+  <li><a href="#the-stringr-package" id="toc-the-stringr-package" class="nav-link" data-scroll-target="#the-stringr-package"><span class="header-section-number">4.3</span> The stringr package</a>
   <ul class="collapse">
-  <li><a href="#tansforming-strings" id="toc-tansforming-strings" class="nav-link" data-scroll-target="#tansforming-strings"><span class="toc-section-number">4.3.1</span>  Tansforming strings</a></li>
-  <li><a href="#removing-extra-spaces" id="toc-removing-extra-spaces" class="nav-link" data-scroll-target="#removing-extra-spaces"><span class="toc-section-number">4.3.2</span>  Removing extra spaces</a></li>
-  <li><a href="#combine-strings" id="toc-combine-strings" class="nav-link" data-scroll-target="#combine-strings"><span class="toc-section-number">4.3.3</span>  Combine strings</a></li>
-  <li><a href="#splitting-strings" id="toc-splitting-strings" class="nav-link" data-scroll-target="#splitting-strings"><span class="toc-section-number">4.3.4</span>  Splitting strings</a></li>
-  <li><a href="#subsetting-strings" id="toc-subsetting-strings" class="nav-link" data-scroll-target="#subsetting-strings"><span class="toc-section-number">4.3.5</span>  Subsetting strings</a></li>
-  <li><a href="#locating-a-pattern-in-a-string" id="toc-locating-a-pattern-in-a-string" class="nav-link" data-scroll-target="#locating-a-pattern-in-a-string"><span class="toc-section-number">4.3.6</span>  Locating a pattern in a string</a></li>
-  <li><a href="#testing-strings" id="toc-testing-strings" class="nav-link" data-scroll-target="#testing-strings"><span class="toc-section-number">4.3.7</span>  Testing strings</a></li>
-  <li><a href="#regular-expressions-regex" id="toc-regular-expressions-regex" class="nav-link" data-scroll-target="#regular-expressions-regex"><span class="toc-section-number">4.3.8</span>  Regular expressions (regex)</a></li>
-  <li><a href="#dealing-with-special-characters-in-strings" id="toc-dealing-with-special-characters-in-strings" class="nav-link" data-scroll-target="#dealing-with-special-characters-in-strings"><span class="toc-section-number">4.3.9</span>  Dealing with special characters in strings</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="toc-section-number">4.3.10</span>  Summary</a></li>
+  <li><a href="#transforming-strings" id="toc-transforming-strings" class="nav-link" data-scroll-target="#transforming-strings"><span class="header-section-number">4.3.1</span> Transforming strings</a></li>
+  <li><a href="#removing-extra-spaces" id="toc-removing-extra-spaces" class="nav-link" data-scroll-target="#removing-extra-spaces"><span class="header-section-number">4.3.2</span> Removing extra spaces</a></li>
+  <li><a href="#combine-strings" id="toc-combine-strings" class="nav-link" data-scroll-target="#combine-strings"><span class="header-section-number">4.3.3</span> Combine strings</a></li>
+  <li><a href="#splitting-strings" id="toc-splitting-strings" class="nav-link" data-scroll-target="#splitting-strings"><span class="header-section-number">4.3.4</span> Splitting strings</a></li>
+  <li><a href="#subsetting-strings" id="toc-subsetting-strings" class="nav-link" data-scroll-target="#subsetting-strings"><span class="header-section-number">4.3.5</span> Subsetting strings</a></li>
+  <li><a href="#locating-a-pattern-in-a-string" id="toc-locating-a-pattern-in-a-string" class="nav-link" data-scroll-target="#locating-a-pattern-in-a-string"><span class="header-section-number">4.3.6</span> Locating a pattern in a string</a></li>
+  <li><a href="#testing-strings" id="toc-testing-strings" class="nav-link" data-scroll-target="#testing-strings"><span class="header-section-number">4.3.7</span> Testing strings</a></li>
+  <li><a href="#regular-expressions-regex" id="toc-regular-expressions-regex" class="nav-link" data-scroll-target="#regular-expressions-regex"><span class="header-section-number">4.3.8</span> Regular expressions (regex)</a></li>
+  <li><a href="#dealing-with-special-characters-in-strings" id="toc-dealing-with-special-characters-in-strings" class="nav-link" data-scroll-target="#dealing-with-special-characters-in-strings"><span class="header-section-number">4.3.9</span> Dealing with special characters in strings</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">4.3.10</span> Summary</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -263,7 +255,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with strings</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with strings</span></h1>
 </div>
 
 
@@ -278,9 +270,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<div class="cell">
-
-</div>
 <section id="learning-objectives" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">4.1</span> Learning objectives</h2>
 <ul>
@@ -292,10 +281,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="dealing-with-messy-or-unstructured-data" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="dealing-with-messy-or-unstructured-data"><span class="header-section-number">4.2</span> Dealing with messy or unstructured data</h2>
-<p>In the last chapter, we focused on how to import data into tibbles and then reshape them so that they fit the tidy data criteria. In most cases, we had data with <strong>some</strong> structure which we transformed into a different structure. This week we look at working with strings for three reasons: cleaning messy data, filtering rows based on part of strings matches, and extracting data from text.</p>
+<p>In the last chapter, we focused on importing data into tibbles and then reshaping them to fit the tidy data criteria. In most cases, we had data with <strong>some</strong> structure, which we transformed into a different structure. This week, we look at working with strings for three reasons: cleaning messy data, filtering rows based on part of string matches, and extracting data from text.</p>
 <section id="cleaning-messy-data" class="level3" data-number="4.2.1">
 <h3 data-number="4.2.1" class="anchored" data-anchor-id="cleaning-messy-data"><span class="header-section-number">4.2.1</span> Cleaning messy data</h3>
-<p>Sometimes you may be dealing with data that has the correct tidy structure, but the data itself is not clean and contains errors, unnecessary characters, or unwanted spelling or formatting variants. We need to clean that data before we conduct our analysis.</p>
+<p>Sometimes, you may have data with a correct tidy structure, but the data itself is not clean and contains errors, unnecessary characters, or unwanted spelling or formatting variants. We need to clean that data before we can produce our analysis or report. Here is an example:</p>
 <table class="table">
 <thead>
 <tr class="header">
@@ -329,25 +318,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="filtering-rows-based-on-string-matches" class="level3" data-number="4.2.2">
 <h3 data-number="4.2.2" class="anchored" data-anchor-id="filtering-rows-based-on-string-matches"><span class="header-section-number">4.2.2</span> Filtering rows based on string matches</h3>
-<p>In the last chapter, we learned how to filter rows of a tibble based on the value contained in a cell or based on the row number. This week we will add to our toolbox some string matching functions that check if a string of characters is found within a larger string of character. One example could be retrieving a set of course codes starting with INFO or MGMT in a vector containing the course codes of all offerings of Dalhousie University.</p>
+<p>In the last chapter, we learned how to filter rows of a tibble based on the value contained in a cell or based on the row number. This week, we will add to our toolbox some string matching functions that check if a string of characters is found within a larger string of characters. One example could be retrieving a set of course codes starting with INFO or MGMT in a vector containing the course codes of all offerings of Dalhousie University.</p>
 </section>
 <section id="extracting-data-from-text" class="level3" data-number="4.2.3">
 <h3 data-number="4.2.3" class="anchored" data-anchor-id="extracting-data-from-text"><span class="header-section-number">4.2.3</span> Extracting data from text</h3>
-<p>Sometimes you may have to deal with unstructured data, for example a long character string, that contain data elements that we wish to extract. Take this character string for example:</p>
+<p>Sometimes, you may have to deal with unstructured data such as a long character string containing data elements we wish to extract. This string, for example:</p>
 <blockquote class="blockquote">
 <p>I am taking several courses offered at SIM this Winter. There is INFO6270 (Introduction to Data Science) and also INFO6540 and the information policy one, which I think has the course code INFO6610.</p>
 </blockquote>
-<p>Maybe you had the brilliant idea to use a free text field in a survey to collect information about the courses that students are taking this Winter, and you now have three thousands responses that look like this one. This is unstructured data that needs to be structured before it can be analyzed and in this specific example, R can help! This kind of task can be relatovely simple, but it can get qutie complex. In this chapter, we will not do very complex data extractions from strings.</p>
+<p>Maybe you had the brilliant idea to use a free text field in a survey to collect information about the courses that students are taking this Winter, and you now have three thousand responses that look like this one. This unstructured data needs to be structured before it can be analyzed, and in this specific example, and R can help! This kind of task can be relatively simple but can get quite complex. In this chapter, we will not do very complex data extractions from strings.</p>
 </section>
 </section>
 <section id="the-stringr-package" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="the-stringr-package"><span class="header-section-number">4.3</span> The stringr package</h2>
 <p>The <strong>stringr</strong> package (<a href="https://stringr.tidyverse.org" class="uri">https://stringr.tidyverse.org</a>) is part of the tidyverse and contains a collection of functions that perform all kinds of operations on strings. Let’s go through some of those tasks and some code examples.</p>
-<section id="tansforming-strings" class="level3" data-number="4.3.1">
-<h3 data-number="4.3.1" class="anchored" data-anchor-id="tansforming-strings"><span class="header-section-number">4.3.1</span> Tansforming strings</h3>
+<section id="transforming-strings" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="transforming-strings"><span class="header-section-number">4.3.1</span> Transforming strings</h3>
 <section id="change-string-character-case" class="level4" data-number="4.3.1.1">
 <h4 data-number="4.3.1.1" class="anchored" data-anchor-id="change-string-character-case"><span class="header-section-number">4.3.1.1</span> change string character case</h4>
-<p>One of the simple transformation that you may want to perform on a string is changing its case. This is very easily done with the <code>str_to_lower()</code>, <code>str_to_upper()</code>, <code>str_to_sentence()</code>, and <code>str_to_title()</code> functions.</p>
+<p>One simple transformation you may want to perform on a string is changing its case. This is very easily done with the <code>str_to_lower()</code>, <code>str_to_upper()</code>, <code>str_to_sentence()</code>, and <code>str_to_title()</code> functions.</p>
 <table class="table">
 <thead>
 <tr class="header">
@@ -425,7 +414,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>[1] "doctor Mike Smit"   "doctor Sandra Toze"</code></pre>
 </div>
 </div>
-<p>Now let’s see what happens if I do the same example but use <code>str_replace_all()</code> instead of <code>str_replace()</code>.</p>
+<p>Let’s see what happens if I use the same example but use <code>str_replace_all()</code> instead of <code>str_replace()</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I create a vector with two strings.</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"dr Mike Smit"</span>,<span class="st">"dr Sandra Toze"</span>)</span>
@@ -492,7 +481,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>[1] "My cat just stepped on the spacebar as I was writing this"</code></pre>
 </div>
 </div>
-<p>the <code>str_trim()</code>function is similar to <code>str_squish()</code> but allows you to specify which types of extra spaces you wish to remove. However, it only handles trailing spaces at the beginning or end of strings, and cannot remove extra spaces extra spaces in the middle of a string.</p>
+<p>The <code>str_trim()</code>function is similar to <code>str_squish()</code> but allows you to specify which types of extra spaces you wish to remove. However, it only handles trailing spaces at the beginning or end of strings and cannot remove extra spaces extra spaces in the middle of a string.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>string <span class="ot">&lt;-</span> <span class="st">"  hello   world    "</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -538,9 +527,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>[1] "Bertrum MacDonald" "Colin Conrad"      "Louise Spiteri"   </code></pre>
 </div>
 </div>
-<p>Another advantage of the <code>str_c()</code> over the <code>unite()</code> function is that it is more flexible in terms of the strings that get concatenated. You could use it to combine the content of two vectors but also add any pattern you want to any string.</p>
+<p>Another advantage of the <code>str_c()</code> over the <code>unite()</code> function is that it is more flexible in terms of the strings that get concatenated. You could combine the content of two vectors and add any pattern you want to any string.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I create a tibble with two columsn containing first and last names.</span></span>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I create a tibble with two columns containing first and last names.</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="ot">=</span> <span class="fu">tibble</span>(<span class="at">first_name =</span> <span class="fu">c</span>(<span class="st">"Bertrum"</span>, <span class="st">"Colin"</span>, <span class="st">"Louise"</span>),</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">last_name =</span> <span class="fu">c</span>(<span class="st">"MacDonald"</span>, <span class="st">"Conrad"</span>, <span class="st">"Spiteri"</span>))</span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -571,13 +560,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="splitting-strings" class="level3" data-number="4.3.4">
 <h3 data-number="4.3.4" class="anchored" data-anchor-id="splitting-strings"><span class="header-section-number">4.3.4</span> Splitting strings</h3>
-<p>The <code>str_split()</code> function does the same thing as the <code>separate()</code> function that we learned about in chapter 3. They have slightly different syntax and arguments, but the main difference between the two functions is that <code>str_split()</code> works with <strong>vectors</strong> and returns a list, while <code>separate()</code> works with <strong>dara frames</strong> and returns a data frame. In other words, if you want to split a string contained in a dataframe column, you need to use <code>separate()</code>, and if we want to split a character vector into a list of character vectors. the <strong>n</strong> argument of <code>str_split()</code> allows us to specify the length of the returned vector. The basic syntax is <code>str_split(character_vector, separator)</code>.</p>
+<p>The <code>str_split()</code> function does the same thing as the <code>separate()</code> function that we learned about in chapter 3. They have slightly different syntax and arguments, but the main difference between the two functions is that <code>str_split()</code> works with <strong>vectors</strong> and returns a list, while <code>separate()</code> works with <strong>data frames</strong> and returns a data frame. In other words, if you want to split a string contained in a data frame column, you need to use separate(), and if you want to split a character vector into a list of character vectors. the <strong>n</strong> argument of <code>str_split()</code> allows us to specify the length of the returned vector. The basic syntax is <code>str_split(character_vector, separator)</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>courses <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"INFO5500, INFO6540, INFO6270"</span>,</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>            <span class="st">"INFO5500"</span>,</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>            <span class="st">"INFO5530, INFO5520"</span>)</span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co"># str_split seperates the vectors based on a specified delimiter.</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co"># str_split separates the vectors based on a specified delimiter.</span></span>
 <span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co"># the outcome is a list of three vectors with 3, 1 and 2 elements.</span></span>
 <span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>courses <span class="sc">%&gt;%</span> </span>
 <span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_split</span>(<span class="st">", "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -635,7 +624,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="tibble-example-2" class="level5" data-number="4.3.4.1.2">
 <h5 data-number="4.3.4.1.2" class="anchored" data-anchor-id="tibble-example-2"><span class="header-section-number">4.3.4.1.2</span> tibble example</h5>
-<p>Using <code>str_flatten()</code> in a tibble is tricky (we need to use the <code>group_by()</code> function that we briefly mentioned in the previous chapter but haven’t thoroughly explored yet), but also counter-intuitive, since it likely means that we are taking a tibble in a tidy format and making it untidy.</p>
+<p>Using <code>str_flatten()</code> in a tibble is tricky (we need to use the <code>group_by()</code> function that we briefly mentioned in the previous chapter but haven’t thoroughly explored yet) but also counterintuitive since it likely means that we are taking a tibble in a tidy format and making it untidy.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here is a tibble</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">instructor =</span> <span class="fu">c</span>(<span class="st">"Mongeon, Philippe"</span>, <span class="st">"Mongeon, Philippe"</span>, <span class="st">"Mongeon, Philippe"</span>,<span class="st">"Spiteri, Louise"</span>,<span class="st">"Spiteri, Louise"</span>),</span>
@@ -668,12 +657,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 2 Spiteri, Louise   INFO6350 | INFO6480          </code></pre>
 </div>
 </div>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Important
 </div>
 </div>
@@ -688,7 +677,7 @@ Important
 <h3 data-number="4.3.5" class="anchored" data-anchor-id="subsetting-strings"><span class="header-section-number">4.3.5</span> Subsetting strings</h3>
 <section id="str_sub" class="level4" data-number="4.3.5.1">
 <h4 data-number="4.3.5.1" class="anchored" data-anchor-id="str_sub"><span class="header-section-number">4.3.5.1</span> str_sub</h4>
-<p>Say we want to retrieve the first three characters of string. A postal code, for instance. We can do that with the <code>str_sub()</code> function. It’s basic syntax is <code>str_sub(string, start, end)</code></p>
+<p>We can retrieve, for example, the first three characters of a string (e.g., a postal code) with the <code>str_sub()</code> function. It’s basic syntax is <code>str_sub(string, start, end)</code></p>
 <section id="vector-example-4" class="level5" data-number="4.3.5.1.1">
 <h5 data-number="4.3.5.1.1" class="anchored" data-anchor-id="vector-example-4"><span class="header-section-number">4.3.5.1.1</span> Vector example</h5>
 <div class="cell">
@@ -753,13 +742,13 @@ Important
 <span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="co"># I print a vector of course codes that contain the pattern "INFO"</span></span>
 <span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str_subset</span>(course_codes, <span class="st">"INFO"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-Danger
+<div class="callout-title-container flex-fill">
+Caution
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -785,7 +774,7 @@ Danger
 [1,]     5   5</code></pre>
 </div>
 </div>
-<p>You can see that the str_locate() returns a matrix with the beginning and the end of the “@” pattern in the email. If we want to get the part of the strings that come before the “@”, then we can do this:</p>
+<p>You can see that <code>str_locate()</code> returns a matrix with the beginning and the end of the “@” pattern in the email. If we want to get the part of the strings that come before the “@”, then we can do this:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I get the first part of the email</span></span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str_sub</span>(email, <span class="dv">1</span>,<span class="fu">str_locate</span>(email,<span class="st">"@"</span>)[,<span class="dv">1</span>]<span class="sc">-</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -796,10 +785,10 @@ Danger
 <p>We did three things there:</p>
 <ol type="1">
 <li>We used 1 as the first argument of <code>str_sub()</code> to specify that we want to extract a subset of the email starting with the 1st character.</li>
-<li>We used [,1] to obtain the first column in the matrix which is where our pattern starts (the 5th position).</li>
-<li>We substracted 1 because we don’t want to print characters 1 to 5, which would be “info@” but charachters 1 to 4.</li>
+<li>We used [,1] to obtain the first column in the matrix, which is where our pattern starts (the 5th position).</li>
+<li>We subtracted 1 because we don’t want to print characters 1 to 5, which would be “info@” but characters 1 to 4.</li>
 </ol>
-<p>So our statement, in English, would read like this: extract the subset of the email string that starts at the first position and ends one position before where the “@” pattern is located.</p>
+<p>So our statement, in English, would read like this: “extract the subset of the email string that starts at the first position and ends one position before where the”@” pattern is located”.</p>
 <p>We can get the part that comes <strong>after</strong> the pattern “@” like this:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>email <span class="sc">%&gt;%</span> </span>
@@ -808,7 +797,7 @@ Danger
 <pre><code>[1] "somewebsite.ca"</code></pre>
 </div>
 </div>
-<p>This reads as give me the subset of the email string that starts one position after the location of the “@” pattern (<code>str_locate(email,"@")[,2]+1</code>), and ends with the last character of the string (-1). Note that the “,-1” part is optional since by default the <code>str_sub()</code> function will output the rest of the string when not end position is provide.</p>
+<p>This reads as “give me the subset of the email string that starts one position after the location of the”@” pattern (<code>str_locate(email,"@")[,2]+1</code>), and ends with the last character of the string (-1)“. Note that the”,-1” part is optional since, by default, the str_sub() function will output the rest of the string when no end position is provided.</p>
 </section>
 <section id="tibble-example-4" class="level5" data-number="4.3.6.0.2">
 <h5 data-number="4.3.6.0.2" class="anchored" data-anchor-id="tibble-example-4"><span class="header-section-number">4.3.6.0.2</span> Tibble example</h5>
@@ -866,7 +855,7 @@ Danger
 <p>Rather than extracting parts of strings, or modifying strings, you may just want to test to see if a strings contains a specific pattern and get a logical (TRUE, FALSE) in return.</p>
 <section id="str_detect" class="level4" data-number="4.3.7.1">
 <h4 data-number="4.3.7.1" class="anchored" data-anchor-id="str_detect"><span class="header-section-number">4.3.7.1</span> str_detect</h4>
-<p>The <code>str_detect()</code> functions allows us to identify strings that contain a certain pattern. It’s syntax is <code>str_detect(character_vector, string_to_detec)</code>.</p>
+<p>The <code>str_detect()</code> function allows us to identify strings that contain a specific pattern. It’s syntax is <code>str_detect(character_vector, string_to_detec)</code>.</p>
 <section id="vector-example-5" class="level5" data-number="4.3.7.1.1">
 <h5 data-number="4.3.7.1.1" class="anchored" data-anchor-id="vector-example-5"><span class="header-section-number">4.3.7.1.1</span> Vector example</h5>
 <div class="cell">
@@ -899,7 +888,7 @@ Danger
 </section>
 <section id="str_starts-and-str_ends" class="level4" data-number="4.3.7.2">
 <h4 data-number="4.3.7.2" class="anchored" data-anchor-id="str_starts-and-str_ends"><span class="header-section-number">4.3.7.2</span> str_starts and str_ends</h4>
-<p>The <code>str_starts()</code> and <code>str_ends()</code> functions do the same thing as <code>str_detect()</code>, but look fpr the pattern specifically at the beginning or the end of the strings.</p>
+<p>The <code>str_starts()</code> and <code>str_ends()</code> functions do the same thing as <code>str_detect()</code>, but look for the pattern specifically at the beginning or the end of the strings.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I create a tibble with postal codes</span></span>
 <span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">postal_code =</span> <span class="fu">c</span>(<span class="st">"B3H 1H5"</span>,<span class="st">"B3H 382"</span>,<span class="st">"H2T 1H2"</span>,<span class="st">"J8P 9R2"</span>))</span>
@@ -935,7 +924,7 @@ Danger
 </section>
 <section id="character-classes" class="level4" data-number="4.3.8.2">
 <h4 data-number="4.3.8.2" class="anchored" data-anchor-id="character-classes"><span class="header-section-number">4.3.8.2</span> Character classes</h4>
-<p>Character classes allow you to search for a range of characters or types of patterns using <strong>character classes</strong> (e.g., numbers, punctuations, symbols, letters, or a user specified set or range of characters). These classes are represented by square brackets “[ ]”.</p>
+<p>Character classes allow you to search for a range of characters or types of patterns using <strong>character classes</strong> (e.g., numbers, punctuation, symbols, letters, or a user specified set or range of characters). These classes are represented by square brackets “[ ]”.</p>
 <section id="example-remove-unwanted-characters-from-strings" class="level5" data-number="4.3.8.2.1">
 <h5 data-number="4.3.8.2.1" class="anchored" data-anchor-id="example-remove-unwanted-characters-from-strings"><span class="header-section-number">4.3.8.2.1</span> Example: remove unwanted characters from strings</h5>
 <p>You can use regular expressions to filter out of a string all the non-alphanumeric characters like this:</p>
@@ -969,8 +958,8 @@ Danger
 <pre><code>[1] "H2T 1J2" "B3H1H4" </code></pre>
 </div>
 </div>
-<p>The pattern <code>[:alpha:][:digit:][:alpha:]</code> reads as: any letter, followed by any number, followed by any letter. The <code>[:digit:][:alpha:][:digit:]</code> patters reads as any number, followed by any letter, followed by any number.</p>
-<p>You might have noticed that then there is a space and a question mark in between my two sets of three character classes. This reads as 0 or 1 space (see the quantifiers section in the stringr cheatsheet). This allows query to extract postal codes that are written with no space in between the two sets of three characters.</p>
+<p>The pattern <code>[:alpha:][:digit:][:alpha:]</code> reads as “any letter, followed by any number, followed by any letter”. The <code>[:digit:][:alpha:][:digit:]</code> patters reads as any number, followed by any letter, followed by any number.</p>
+<p>You might have noticed that then there is a space and a question mark between my two sets of three character classes. This reads as 0 or 1 space (see the quantifiers section in the stringr cheatsheet). This allows queries to extract postal codes that are written with no space between the two sets of three characters.</p>
 </section>
 <section id="example-search-for-spelling-variants" class="level5" data-number="4.3.8.2.3">
 <h5 data-number="4.3.8.2.3" class="anchored" data-anchor-id="example-search-for-spelling-variants"><span class="header-section-number">4.3.8.2.3</span> Example: search for spelling variants</h5>
@@ -1001,8 +990,8 @@ Danger
 </div>
 </div>
 </section>
-<section id="example-combining-mutliple-search-terms-with-boolean-or" class="level5" data-number="4.3.8.2.4">
-<h5 data-number="4.3.8.2.4" class="anchored" data-anchor-id="example-combining-mutliple-search-terms-with-boolean-or"><span class="header-section-number">4.3.8.2.4</span> Example: combining mutliple search terms with “|” (boolean OR)</h5>
+<section id="example-combining-multiple-search-terms-with-boolean-or" class="level5" data-number="4.3.8.2.4">
+<h5 data-number="4.3.8.2.4" class="anchored" data-anchor-id="example-combining-multiple-search-terms-with-boolean-or"><span class="header-section-number">4.3.8.2.4</span> Example: combining multiple search terms with “|” (boolean OR)</h5>
 <p>Instead of using character classes, we could combine multiple search teams with the “|” that represents the Boolean operator OR.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>my_tibble <span class="sc">%&gt;%</span> </span>
@@ -1085,7 +1074,7 @@ Danger
 </section>
 <section id="dealing-with-special-characters-in-strings" class="level3" data-number="4.3.9">
 <h3 data-number="4.3.9" class="anchored" data-anchor-id="dealing-with-special-characters-in-strings"><span class="header-section-number">4.3.9</span> Dealing with special characters in strings</h3>
-<p>Here a some of the characters that you might come across when working with strings in R. When you want to insert these characters a string, you need to precede them with the escape character “\”. Here is a table adapted from the <a href="https://github.com/rstudio/cheatsheets/blob/main/strings.pdf">stringr cheatsheet</a>.</p>
+<p>Here are some of the characters that you might come across when working with strings in R. When you want to insert these characters in a string, you need to precede them with the escape character “\”. Here is a table adapted from the <a href="https://github.com/rstudio/cheatsheets/blob/main/strings.pdf">stringr cheatsheet</a>.</p>
 <table class="table">
 <thead>
 <tr class="header">
@@ -1243,9 +1232,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1310,6 +1313,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
