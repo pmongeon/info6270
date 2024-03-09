@@ -254,7 +254,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#word-clouds" id="toc-word-clouds" class="nav-link" data-scroll-target="#word-clouds"><span class="header-section-number">8.8.4</span> Word clouds</a></li>
   <li><a href="#tf-idf" id="toc-tf-idf" class="nav-link" data-scroll-target="#tf-idf"><span class="header-section-number">8.8.5</span> TF-IDF</a></li>
   </ul></li>
-  <li><a href="#topic-modelling" id="toc-topic-modelling" class="nav-link" data-scroll-target="#topic-modelling"><span class="header-section-number">8.9</span> Topic modelling</a></li>
+  <li><a href="#topic-modelling" id="toc-topic-modelling" class="nav-link" data-scroll-target="#topic-modelling"><span class="header-section-number">8.9</span> Topic modelling</a>
+  <ul class="collapse">
+  <li><a href="#generate-topic-models" id="toc-generate-topic-models" class="nav-link" data-scroll-target="#generate-topic-models"><span class="header-section-number">8.9.1</span> Generate topic models</a></li>
+  <li><a href="#create-a-tidy-text-tibble-with-the-topic-token-association" id="toc-create-a-tidy-text-tibble-with-the-topic-token-association" class="nav-link" data-scroll-target="#create-a-tidy-text-tibble-with-the-topic-token-association"><span class="header-section-number">8.9.2</span> Create a tidy text tibble with the topic-token association</a></li>
+  <li><a href="#create-a-tidy-text-tibble-with-abstract-topic-association" id="toc-create-a-tidy-text-tibble-with-abstract-topic-association" class="nav-link" data-scroll-target="#create-a-tidy-text-tibble-with-abstract-topic-association"><span class="header-section-number">8.9.3</span> Create a tidy text tibble with abstract-topic association</a></li>
+  </ul></li>
   <li><a href="#other-resources" id="toc-other-resources" class="nav-link" data-scroll-target="#other-resources"><span class="header-section-number">8.10</span> Other resources</a></li>
   </ul>
 </nav>
@@ -1446,15 +1451,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 4
-     id journal abstract                                                 senti…¹
+     id journal abstract                                               sentiment
   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;                                                      &lt;dbl&gt;
-1  1137 D       Rwanda has experienced significant economic growth foll…      16
-2  1284 D       Assessing progress towards healthier people, farms and …      15
-3  1138 D       This paper concerns Drought-Tolerant Maize (DTM) and Co…      13
-4   214 A       Care for children and adolescents with psychosocial pro…      12
-5  1451 D       Using survey dataset collected from nearly 9000 farmers…      12
-6    73 A       BackgroundChildren in the UK go through rigorous teache…      11
-# … with abbreviated variable name ¹​sentiment</code></pre>
+1  1137 D       Rwanda has experienced significant economic growth fo…        16
+2  1284 D       Assessing progress towards healthier people, farms an…        15
+3  1138 D       This paper concerns Drought-Tolerant Maize (DTM) and …        13
+4   214 A       Care for children and adolescents with psychosocial p…        12
+5  1451 D       Using survey dataset collected from nearly 9000 farme…        12
+6    73 A       BackgroundChildren in the UK go through rigorous teac…        11</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -1464,15 +1468,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tail</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 4
-     id journal abstract                                                 senti…¹
+     id journal abstract                                               sentiment
   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;                                                      &lt;dbl&gt;
-1   174 A       "Suicide is the second leading cause of death in young …     -14
-2  1598 D       "This opinion article results from a collective analysi…     -14
-3   248 A       "Only one-third of young people who experience suicidal…     -15
-4  1532 D       "Children who experience poor nutrition during the firs…     -16
-5    50 A       "Children with developmental disabilities are at height…     -21
-6   320 A       "Post-traumatic stress disorder (PTSD) is a common reac…     -22
-# … with abbreviated variable name ¹​sentiment</code></pre>
+1   174 A       "Suicide is the second leading cause of death in youn…       -14
+2  1598 D       "This opinion article results from a collective analy…       -14
+3   248 A       "Only one-third of young people who experience suicid…       -15
+4  1532 D       "Children who experience poor nutrition during the fi…       -16
+5    50 A       "Children with developmental disabilities are at heig…       -21
+6   320 A       "Post-traumatic stress disorder (PTSD) is a common re…       -22</code></pre>
 </div>
 </div>
 <p>Let’s compare the average sentiment for the two journals in the dataset</p>
@@ -1543,8 +1546,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">term =</span> word, <span class="co"># name of the column with your tokens</span></span>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">value =</span> n) <span class="co"># name of the column with your token frequencies</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="generate-topic-models" class="level4" data-number="8.9.0.1">
-<h4 data-number="8.9.0.1" class="anchored" data-anchor-id="generate-topic-models"><span class="header-section-number">8.9.0.1</span> Generate topic models</h4>
+<section id="generate-topic-models" class="level3" data-number="8.9.1">
+<h3 data-number="8.9.1" class="anchored" data-anchor-id="generate-topic-models"><span class="header-section-number">8.9.1</span> Generate topic models</h3>
 <p>You can use the code below, and replace <em>abstracts_dtm</em> with the name of your document-term matrix object, and change the value of k to the number of topics that you want.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(topicmodels)</span>
@@ -1553,8 +1556,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">control =</span> <span class="fu">list</span>(<span class="at">seed =</span> <span class="dv">1234</span>)) <span class="co"># Just leave this on as is</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="create-a-tidy-text-tibble-with-the-topic-token-association" class="level4" data-number="8.9.0.2">
-<h4 data-number="8.9.0.2" class="anchored" data-anchor-id="create-a-tidy-text-tibble-with-the-topic-token-association"><span class="header-section-number">8.9.0.2</span> Create a tidy text tibble with the topic-token association</h4>
+<section id="create-a-tidy-text-tibble-with-the-topic-token-association" class="level3" data-number="8.9.2">
+<h3 data-number="8.9.2" class="anchored" data-anchor-id="create-a-tidy-text-tibble-with-the-topic-token-association"><span class="header-section-number">8.9.2</span> Create a tidy text tibble with the topic-token association</h3>
 <p>The beta value is the strength of the association of a token with a topic. The higher the beta, the most strongly the term is associated to the topic.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>topic_term_beta <span class="ot">&lt;-</span> abstracts_lda <span class="sc">%&gt;%</span> </span>
@@ -1575,8 +1578,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="create-a-tidy-text-tibble-with-abstract-topic-association" class="level4" data-number="8.9.0.3">
-<h4 data-number="8.9.0.3" class="anchored" data-anchor-id="create-a-tidy-text-tibble-with-abstract-topic-association"><span class="header-section-number">8.9.0.3</span> Create a tidy text tibble with abstract-topic association</h4>
+<section id="create-a-tidy-text-tibble-with-abstract-topic-association" class="level3" data-number="8.9.3">
+<h3 data-number="8.9.3" class="anchored" data-anchor-id="create-a-tidy-text-tibble-with-abstract-topic-association"><span class="header-section-number">8.9.3</span> Create a tidy text tibble with abstract-topic association</h3>
 <p>The gamma value is the strength of the association of a document with a topic. The higher the beta, the most strongly the document is associated to the topic.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>abstracts_topic <span class="ot">&lt;-</span> abstracts_lda <span class="sc">%&gt;%</span> </span>
